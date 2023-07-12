@@ -40,9 +40,6 @@
 }
 
 .avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 100px;
     margin-left: 24px;
 }
 
@@ -82,7 +79,23 @@
 }
 
 .rating {
+    display: flex;
+    gap: 4px;
+    margin: 16px 0 0 0;
+}
 
+.mark {
+    font-family: 'Inter', serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #0C0F12;
+}
+
+.reviews {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #3E4C5B;
 }
 
 .language, .user-info, .location, .time {
@@ -92,6 +105,33 @@
     line-height: 24px;
     color: #0C0F12;
     margin: 16px 0 0 0;
+}
+
+.show-more {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #216C5E;
+
+}
+
+.local-time {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #0C0F12;
+    margin-left: 8px;
+}
+
+.gmt {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #3E4C5B;
+    margin-left: 8px;
 }
 
 .secondary-button {
@@ -221,7 +261,7 @@ input:checked + .slider:before {
     margin-top: 16px;
 }
 
-.location, .status {
+.location, .status, .time {
     display: flex;
 }
 
@@ -248,3 +288,4 @@ input:checked + .slider:before {
     line-height: 35px;
     color: #0C0F12;
 }
+
