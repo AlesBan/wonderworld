@@ -12,9 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wonderworld.Domain", "Wonde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wonderworld.Application", "Wonderworld.Application\Wonderworld.Application.csproj", "{F5AAAA7B-7B5C-41CF-BE99-818983CC8D42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wonderworld.Persistance", "Wonderworld.Persistance\Wonderworld.Persistance.csproj", "{FB6CADA8-60E4-4EC7-B996-264104D2F7D1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wonderworld.API", "Wonderworld.API\Wonderworld.API.csproj", "{3E953732-B7CB-4744-8A9E-6A8ADFB8A718}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wonderworld.Infrastructure", "Wonderworld.Infrastructure\Wonderworld.Infrastructure.csproj", "{80D721DE-4066-46CC-A5AE-F9251C20C615}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wonderworld.Persistence", "Wonderworld.Persistence\Wonderworld.Persistence.csproj", "{A1511EAA-C0F7-4E93-9F7D-65734AA44B44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,8 +26,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{18195AC2-EB07-4A91-AA48-40A0F9AAC117} = {926C883C-35CA-4DDF-8AA2-CDC0BAEB50B6}
 		{F5AAAA7B-7B5C-41CF-BE99-818983CC8D42} = {926C883C-35CA-4DDF-8AA2-CDC0BAEB50B6}
-		{FB6CADA8-60E4-4EC7-B996-264104D2F7D1} = {189A2EC7-BA48-430D-B0CD-CCB9EDB696A3}
 		{3E953732-B7CB-4744-8A9E-6A8ADFB8A718} = {A8EDC854-CD1E-4E4E-A40F-DB1C20F7E883}
+		{80D721DE-4066-46CC-A5AE-F9251C20C615} = {189A2EC7-BA48-430D-B0CD-CCB9EDB696A3}
+		{A1511EAA-C0F7-4E93-9F7D-65734AA44B44} = {189A2EC7-BA48-430D-B0CD-CCB9EDB696A3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{18195AC2-EB07-4A91-AA48-40A0F9AAC117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -36,13 +39,17 @@ Global
 		{F5AAAA7B-7B5C-41CF-BE99-818983CC8D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5AAAA7B-7B5C-41CF-BE99-818983CC8D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5AAAA7B-7B5C-41CF-BE99-818983CC8D42}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB6CADA8-60E4-4EC7-B996-264104D2F7D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB6CADA8-60E4-4EC7-B996-264104D2F7D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB6CADA8-60E4-4EC7-B996-264104D2F7D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB6CADA8-60E4-4EC7-B996-264104D2F7D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E953732-B7CB-4744-8A9E-6A8ADFB8A718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E953732-B7CB-4744-8A9E-6A8ADFB8A718}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E953732-B7CB-4744-8A9E-6A8ADFB8A718}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E953732-B7CB-4744-8A9E-6A8ADFB8A718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D721DE-4066-46CC-A5AE-F9251C20C615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D721DE-4066-46CC-A5AE-F9251C20C615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D721DE-4066-46CC-A5AE-F9251C20C615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D721DE-4066-46CC-A5AE-F9251C20C615}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1511EAA-C0F7-4E93-9F7D-65734AA44B44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1511EAA-C0F7-4E93-9F7D-65734AA44B44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1511EAA-C0F7-4E93-9F7D-65734AA44B44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1511EAA-C0F7-4E93-9F7D-65734AA44B44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
