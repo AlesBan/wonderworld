@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Wonderworld.Domain.Entities.Job;
+using Wonderworld.Domain.Entities.Location;
 
-namespace Wonderworld.Persistence.EntityTypeConfiguration.Job.Place;
+namespace Wonderworld.Persistence.EntityTypeConfiguration.Location;
 
 public class CountryConfiguration: IEntityTypeConfiguration<Country>
 {

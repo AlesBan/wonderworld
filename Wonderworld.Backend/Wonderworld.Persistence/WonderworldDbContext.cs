@@ -4,13 +4,14 @@ using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Job;
+using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Persistence.EntityTypeConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
 using Wonderworld.Persistence.EntityTypeConfiguration.Interface;
 using Wonderworld.Persistence.EntityTypeConfiguration.Job;
-using Wonderworld.Persistence.EntityTypeConfiguration.Job.Place;
+using Wonderworld.Persistence.EntityTypeConfiguration.Location;
 using Wonderworld.Persistence.EntityTypeConfiguration.Main;
 using Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
 

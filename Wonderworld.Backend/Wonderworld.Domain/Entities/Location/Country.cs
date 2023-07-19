@@ -1,4 +1,4 @@
-namespace Wonderworld.Domain.Entities.Job;
+namespace Wonderworld.Domain.Entities.Location;
 
 public class Country
 {
