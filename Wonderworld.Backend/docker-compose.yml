@@ -1,0 +1,32 @@
+version: "3.9"
+networks:
+  wonderworld-dev:
+    driver: bridge
+services:
+  wonderworld:
+    image: wonderworld:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "12193:12193"
+      - "5170:5170"
+    networks:
+      - wonderworld-dev
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    networks:
+      - wonderworld-dev
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_DB=wonderworld
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:

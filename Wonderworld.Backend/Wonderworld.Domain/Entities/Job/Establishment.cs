@@ -1,4 +1,6 @@
-namespace Wonderworld.Domain.Entities;
+using Wonderworld.Domain.Entities.Main;
+
+namespace Wonderworld.Domain.Entities.Job;
 
 public class Establishment
 {
@@ -8,4 +10,8 @@ public class Establishment
     public string FullTitle { get; set; }
 
     public Guid CityId { get; set; }
+    public City City { get; set; }
+    
+    public ICollection<Teacher> Teachers { get; set; }
+
 }

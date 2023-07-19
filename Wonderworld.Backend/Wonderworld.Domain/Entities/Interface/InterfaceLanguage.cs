@@ -1,12 +1,13 @@
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Domain.Entities.Job;
+namespace Wonderworld.Domain.Entities.Interface;
 
-public class Appointment
+public class InterfaceLanguage
 {
-    public Guid AppointmentId { get; set; }
+    public Guid LanguageId { get; set; }
     
     public string Title { get; set; }
     
     public ICollection<Teacher> Teachers { get; set; }
+
 }

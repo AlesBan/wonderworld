@@ -1,4 +1,7 @@
-namespace Wonderworld.Domain.Entities;
+using Wonderworld.Domain.ConnectionEntities;
+using Wonderworld.Domain.Entities.Main;
+
+namespace Wonderworld.Domain.Entities.Education;
 
 public class Language
 {
@@ -6,5 +9,7 @@ public class Language
     
     public string Title { get; set; }
     
-    public bool CanBeInterfaceLanguage { get; set; }
+    public ICollection<TeacherLanguage> TeacherLanguages { get; set; }
+    public ICollection<ClassLanguage> ClassLanguages { get; set; }
+    
 }
