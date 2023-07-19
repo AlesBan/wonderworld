@@ -1,3 +1,4 @@
+using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Domain.Entities.Job;

@@ -3,6 +3,7 @@ using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Job;
+using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Interfaces;

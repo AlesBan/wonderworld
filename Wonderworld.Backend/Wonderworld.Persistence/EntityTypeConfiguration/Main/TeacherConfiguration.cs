@@ -28,10 +28,18 @@ public class TeacherConfiguration : IEntityTypeConfiguration<Teacher>
             .HasMaxLength(100)
             .IsRequired();
 
-        builder.HasOne(t => t.Appointment)
-            .WithMany(a => a.Teachers)
-            .HasForeignKey(t => t.AppointmentId)
-            .OnDelete(DeleteBehavior.SetNull);
+
+        builder.HasOne(t => t.InterfaceLanguage)
+            .WithMany(il => il.Teachers)
+            .HasForeignKey(t => t.InterfaceLanguageId)
+            .OnDelete(DeleteBehavior.SetNull)
+            .IsRequired();
+        
+        builder.HasOne(t=>t.CityLocation)
+            .WithMany(cl=>cl.Teachers)
+            .HasForeignKey(t=>t.CityLocationId)
+            .OnDelete(DeleteBehavior.SetNull)
+            .IsRequired();
 
         builder.HasOne(t => t.Establishment)
             .WithMany(e => e.Teachers)
@@ -42,13 +50,12 @@ public class TeacherConfiguration : IEntityTypeConfiguration<Teacher>
             .HasMaxLength(255);
         builder.Property(t => t.Description)
             .HasMaxLength(300);
-
-        builder.HasOne(t => t.InterfaceLanguage)
-            .WithMany(il => il.Teachers)
-            .HasForeignKey(t => t.InterfaceLanguageId)
-            .OnDelete(DeleteBehavior.SetNull)
-            .IsRequired();
-
+        
+        builder.HasOne(t => t.Appointment)
+            .WithMany(a => a.Teachers)
+            .HasForeignKey(t => t.AppointmentId)
+            .OnDelete(DeleteBehavior.SetNull);
+        
         builder.Property(t => t.PhotoUrl)
             .HasMaxLength(255);
         builder.Property(t => t.BannerPhotoUrl)
