@@ -12,7 +12,7 @@ public static class DependencyInjection
     {
         var connection = configuration.GetConnectionString("DefaultConnection");
         services.AddEntityFrameworkNpgsql()
-            .AddDbContext<ServiceDbContext>(options =>
+            .AddDbContext<SharedLessonContext>(options =>
                 options.UseNpgsql(connection
                 ));
         return services;

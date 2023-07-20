@@ -17,28 +17,29 @@ using Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
 
 namespace Wonderworld.Persistence;
 
-public class ServiceDbContext : DbContext, IServiceDbContext
+public class SharedLessonContext : DbContext, ISharedLessonContext
 {
-    public ServiceDbContext()
+    public SharedLessonContext()
     {
     }
 
-    public ServiceDbContext(DbContextOptions<ServiceDbContext> options) :
+    public SharedLessonContext(DbContextOptions<SharedLessonContext> options) :
         base(options)
     {
     }
 
-    public DbSet<User>? Users { get; set; }
-    public DbSet<Class>? Classes { get; set; }
-    public DbSet<Discipline>? Disciplines { get; set; }
-    public DbSet<Language>? Languages { get; set; }
-    public DbSet<InterfaceLanguage>? InterfaceLanguages { get; set; }
-    public DbSet<Appointment>? Appointments { get; set; }
-    public DbSet<Establishment>? Establishments { get; set; }
-    public DbSet<City>? Cities { get; set; }
-    public DbSet<Country>? Countries { get; set; }
-    public DbSet<Feedback>? Feedbacks { get; set; }
-    public DbSet<Invitation>? Invitations { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Class> Classes { get; set; }
+    public DbSet<Discipline> Disciplines { get; set; }
+    public DbSet<Language> Languages { get; set; }
+    public DbSet<InterfaceLanguage> InterfaceLanguages { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<Establishment> Establishments { get; set; }
+    public DbSet<City> Cities { get; set; }
+    public DbSet<Country> Countries { get; set; }
+    public DbSet<Feedback> Feedbacks { get; set; }
+    public DbSet<Invitation> Invitations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

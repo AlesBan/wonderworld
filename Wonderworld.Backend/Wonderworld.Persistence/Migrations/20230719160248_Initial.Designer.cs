@@ -11,7 +11,7 @@ using Wonderworld.Persistence;
 
 namespace Wonderworld.Persistence.Migrations
 {
-    [DbContext(typeof(ServiceDbContext))]
+    [DbContext(typeof(SharedLessonContext))]
     [Migration("20230719160248_Initial")]
     partial class Initial
     {

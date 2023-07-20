@@ -8,9 +8,9 @@ namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.DeleteU
 
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
 {
-    private readonly IServiceDbContext _context;
+    private readonly ISharedLessonContext _context;
 
-    public DeleteUserCommandHandler(IServiceDbContext context)
+    public DeleteUserCommandHandler(ISharedLessonContext context)
     {
         _context = context;
     }

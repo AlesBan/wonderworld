@@ -10,7 +10,7 @@ using Wonderworld.Persistence;
 
 namespace Wonderworld.Persistence.Migrations
 {
-    [DbContext(typeof(ServiceDbContext))]
+    [DbContext(typeof(SharedLessonContext))]
     partial class WonderworldDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
