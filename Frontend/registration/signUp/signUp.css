@@ -1,0 +1,71 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 68px 0 68px;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.company-logo {
+    height: 40px;
+}
+
+.header-right {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.english {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #3E4C5B;
+}
+
+.english {
+    display: flex;
+    gap: 8px;
+}
+
+.content {
+
+}
+
+.title-and-subtle {
+
+}
+
+.title {
+    font-family: 'Georgia', serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 44px;
+    color: #252E37;
+}
+
+.label-and-CTA {
+    display: flex;
+    gap: 8px;
+}
+
+.label {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #0C0F12;
+}
+
+.CTA-button {
+    background-color: #FFFFFF;
+    border: none;
+    font-family: 'Inter', serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #216C5E;
+}
+
