@@ -8,23 +8,23 @@ namespace Wonderworld.Domain.Entities.Main;
 
 public class User 
 {
-    public Guid UserId { get; set; }
+    public Guid UserId { get; set; } = Guid.NewGuid();
     public string Email { get; set; }
     public string Password { get; set; }
     
     public ICollection<UserRole> UserRoles { get; set; }
 
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
 
     public ICollection<Class> Classes { get; set; }
 
-    public Guid? AppointmentId { get; set; }
+    public Guid AppointmentId { get; set; }
     public Appointment Appointment { get; set; }
 
-    public Guid? EstablishmentId { get; set; }
+    public Guid EstablishmentId { get; set; }
     public Establishment Establishment { get; set; }
 
     public Guid CityLocationId { get; set; }

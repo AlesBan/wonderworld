@@ -17,13 +17,13 @@ using Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
 
 namespace Wonderworld.Persistence;
 
-public class SharedLessonContext : DbContext, ISharedLessonContext
+public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
 {
-    public SharedLessonContext()
+    public SharedLessonDbContext()
     {
     }
 
-    public SharedLessonContext(DbContextOptions<SharedLessonContext> options) :
+    public SharedLessonDbContext(DbContextOptions options) :
         base(options)
     {
     }

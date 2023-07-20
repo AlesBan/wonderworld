@@ -9,10 +9,10 @@ namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.CreateU
 
 public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccountCommand>
 {
-    private readonly ISharedLessonContext? _context;
+    private readonly ISharedLessonDbContext? _context;
     private readonly IMapper? _mapper;
 
-    public CreateUserAccountCommandHandler(ISharedLessonContext? serviceDbContext, IMapper? mapper)
+    public CreateUserAccountCommandHandler(ISharedLessonDbContext? serviceDbContext, IMapper? mapper)
     {
         _context = serviceDbContext;
         _mapper = mapper;

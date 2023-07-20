@@ -8,7 +8,7 @@ public class Establishment
     public Guid EstablishmentId { get; set; }
     
     public string Type { get; set; }
-    public string FullTitle { get; set; }
+    public string Title { get; set; }
 
     public Guid CityId { get; set; }
     public City City { get; set; }

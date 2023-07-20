@@ -8,7 +8,7 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Interfaces;
 
-public interface ISharedLessonContext
+public interface ISharedLessonDbContext
 {
     DbSet<User> Users { get; set; }
     DbSet<Role> Roles { get; set; }

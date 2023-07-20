@@ -3,14 +3,14 @@ using MediatR;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.RegisterUser;
+namespace Wonderworld.Application.Handlers.UserHandlers.Commands.RegisterUser;
 
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Guid>
 {
-    private readonly ISharedLessonContext _context;
+    private readonly ISharedLessonDbContext _context;
     private readonly IMapper _mapper;
 
-    public RegisterUserCommandHandler(ISharedLessonContext context, IMapper mapper)
+    public RegisterUserCommandHandler(ISharedLessonDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
@@ -19,7 +19,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, G
     public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var user = _mapper.Map<User>(request);
-        
+
         await AddUser(user, cancellationToken);
 
         return await Task.FromResult(user.UserId);

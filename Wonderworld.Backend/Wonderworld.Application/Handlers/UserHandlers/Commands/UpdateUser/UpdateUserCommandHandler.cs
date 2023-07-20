@@ -9,10 +9,10 @@ namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.UpdateU
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
 {
-    private readonly ISharedLessonContext _context;
+    private readonly ISharedLessonDbContext _context;
     private readonly IMapper _mapper;
 
-    public UpdateUserCommandHandler(ISharedLessonContext context, IMapper mapper)
+    public UpdateUserCommandHandler(ISharedLessonDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;

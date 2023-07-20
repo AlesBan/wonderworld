@@ -20,7 +20,7 @@ public class EstablishmentConfiguration : IEntityTypeConfiguration<Establishment
             .HasMaxLength(20)
             .IsRequired();
 
-        builder.Property(e => e.FullTitle)
+        builder.Property(e => e.Title)
             .HasMaxLength(50)
             .IsRequired();
 

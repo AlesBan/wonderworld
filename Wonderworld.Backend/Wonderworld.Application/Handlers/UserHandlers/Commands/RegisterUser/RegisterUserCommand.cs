@@ -1,10 +1,9 @@
 using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Common.Mappings;
-using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.RegisterUser;
+namespace Wonderworld.Application.Handlers.UserHandlers.Commands.RegisterUser;
 
 public class RegisterUserCommand : IRequest<Guid>, IMapWith<User>
 {
