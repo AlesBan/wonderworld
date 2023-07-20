@@ -3,10 +3,10 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Domain.ConnectionEntities;
 
-public class TeacherLanguage
+public class UserLanguage
 {
-    public Guid TeacherId { get; set; }
-    public Teacher Teacher { get; set; }
+    public Guid UserId { get; set; }
+    public User User { get; set; }
 
     public Guid LanguageId { get; set; }
     public Language Language { get; set; }

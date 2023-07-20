@@ -4,16 +4,18 @@ using Wonderworld.Domain.ConnectionEntities;
 
 namespace Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
 
-public class TeacherLanguageConfiguration : IEntityTypeConfiguration<TeacherLanguage>
+public class UserLanguageConfiguration : IEntityTypeConfiguration<UserLanguage>
 {
-    public void Configure(EntityTypeBuilder<TeacherLanguage> builder)
+    public void Configure(EntityTypeBuilder<UserLanguage> builder)
     {
-        builder.HasKey(tl => new { tl.TeacherId, tl.LanguageId });
+        builder.HasKey(tl => new { TeacherId = tl.UserId, tl.LanguageId });
+        builder.HasIndex(tl => new { TeacherId = tl.UserId, tl.LanguageId }).IsUnique();
 
-        builder.HasOne(tl => tl.Teacher)
+        builder.HasOne(tl => tl.User)
             .WithMany(t => t.TeacherLanguages)
-            .HasForeignKey(tl => tl.TeacherId)
+            .HasForeignKey(tl => tl.UserId)
             .OnDelete(DeleteBehavior.Cascade);
+        
         builder.HasOne(tl => tl.Language)
             .WithMany(t => t.TeacherLanguages)
             .HasForeignKey(tl => tl.LanguageId)

@@ -11,6 +11,6 @@ public class City
     public Guid CountryId { get; set; }
     public Country Country { get; set; }
     
-    public ICollection<Teacher> Teachers { get; set; }
+    public ICollection<User> Teachers { get; set; }
     public ICollection<Establishment> Establishments { get; set; }
 }

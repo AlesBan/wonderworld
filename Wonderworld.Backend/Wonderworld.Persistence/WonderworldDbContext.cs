@@ -17,47 +17,52 @@ using Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
 
 namespace Wonderworld.Persistence;
 
-public class WonderworldDbContext : DbContext, IWonderworldDbContext
+public class ServiceDbContext : DbContext, IServiceDbContext
 {
-    public WonderworldDbContext()
+    public ServiceDbContext()
     {
     }
 
-    public WonderworldDbContext(DbContextOptions<WonderworldDbContext> options) :
+    public ServiceDbContext(DbContextOptions<ServiceDbContext> options) :
         base(options)
     {
     }
 
-    public DbSet<Teacher> Teachers { get; set; }
-    public DbSet<Class> Classes { get; set; }
-    public DbSet<Discipline> Disciplines { get; set; }
-    public DbSet<Language> Languages { get; set; }
-    public DbSet<InterfaceLanguage> InterfaceLanguages { get; set; }
-    public DbSet<Appointment> Appointments { get; set; }
-    public DbSet<Establishment> Establishments { get; set; }
-    public DbSet<City> Cities { get; set; }
-    public DbSet<Country> Countries { get; set; }
-    public DbSet<Feedback> Feedbacks { get; set; }
-    public DbSet<Invitation> Invitations { get; set; }
+    public DbSet<User>? Users { get; set; }
+    public DbSet<Class>? Classes { get; set; }
+    public DbSet<Discipline>? Disciplines { get; set; }
+    public DbSet<Language>? Languages { get; set; }
+    public DbSet<InterfaceLanguage>? InterfaceLanguages { get; set; }
+    public DbSet<Appointment>? Appointments { get; set; }
+    public DbSet<Establishment>? Establishments { get; set; }
+    public DbSet<City>? Cities { get; set; }
+    public DbSet<Country>? Countries { get; set; }
+    public DbSet<Feedback>? Feedbacks { get; set; }
+    public DbSet<Invitation>? Invitations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
+        
+        modelBuilder.ApplyConfiguration(new InterfaceLanguageConfiguration());
+
         modelBuilder.ApplyConfiguration(new ClassConfiguration());
         modelBuilder.ApplyConfiguration(new DisciplineConfiguration());
         modelBuilder.ApplyConfiguration(new LanguageConfiguration());
-        modelBuilder.ApplyConfiguration(new InterfaceLanguageConfiguration());
         modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
+        
         modelBuilder.ApplyConfiguration(new EstablishmentConfiguration());
         modelBuilder.ApplyConfiguration(new CityConfiguration());
         modelBuilder.ApplyConfiguration(new CountryConfiguration());
         modelBuilder.ApplyConfiguration(new FeedbackConfiguration());
         modelBuilder.ApplyConfiguration(new InvitationConfiguration());
 
-        modelBuilder.ApplyConfiguration(new TeacherDisciplineConfiguration());
-        modelBuilder.ApplyConfiguration(new TeacherLanguageConfiguration());
+        modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
+        modelBuilder.ApplyConfiguration(new UserDisciplineConfiguration());
+        modelBuilder.ApplyConfiguration(new UserLanguageConfiguration());
         modelBuilder.ApplyConfiguration(new ClassDisciplineConfiguration());
         modelBuilder.ApplyConfiguration(new ClassLanguageConfiguration());
     }

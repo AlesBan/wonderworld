@@ -26,12 +26,12 @@ public class ClassConfiguration : IEntityTypeConfiguration<Class>
             .HasDefaultValueSql("now()")
             .ValueGeneratedOnAdd();
         
-        builder.Property(c => c.TeacherId)
+        builder.Property(c => c.UserId)
             .IsRequired();
 
-        builder.HasOne(c => c.Teacher)
+        builder.HasOne(c => c.User)
             .WithMany(c => c.Classes)
-            .HasForeignKey(c => c.TeacherId)
+            .HasForeignKey(c => c.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

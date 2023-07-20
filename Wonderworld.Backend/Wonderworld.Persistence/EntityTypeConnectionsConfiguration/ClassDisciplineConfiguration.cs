@@ -9,6 +9,7 @@ public class ClassDisciplineConfiguration : IEntityTypeConfiguration<ClassDiscip
     public void Configure(EntityTypeBuilder<ClassDiscipline> builder)
     {
         builder.HasKey(cd => new { cd.ClassId, cd.DisciplineId });
+        builder.HasIndex(cd => new { cd.ClassId, cd.DisciplineId }).IsUnique();
 
         builder.HasOne(cd => cd.Class)
             .WithMany(c => c.ClassDisciplines)

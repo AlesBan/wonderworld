@@ -13,6 +13,6 @@ public class Establishment
     public Guid CityId { get; set; }
     public City City { get; set; }
     
-    public ICollection<Teacher> Teachers { get; set; }
+    public ICollection<User> Teachers { get; set; }
 
 }

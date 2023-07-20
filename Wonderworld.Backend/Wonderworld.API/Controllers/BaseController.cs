@@ -4,9 +4,9 @@ namespace Wonderworld.API.Controllers;
 
 public class BaseController
 {
-    private readonly IWonderworldDbContext _wonderworldDbContext;
+    private readonly IServiceDbContext _wonderworldDbContext;
 
-    public BaseController(IWonderworldDbContext wonderworldDbContext)
+    public BaseController(IServiceDbContext wonderworldDbContext)
     {
         _wonderworldDbContext = wonderworldDbContext;
     }

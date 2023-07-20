@@ -8,6 +8,6 @@ public class Discipline
     public string Title { get; set; }
     
     public ICollection<ClassDiscipline> ClassDisciplines { get; set; }
-    public ICollection<TeacherDiscipline> TeacherDisciplines { get; set; }
+    public ICollection<UserDiscipline> TeacherDisciplines { get; set; }
     
 }

@@ -2,7 +2,7 @@ namespace Wonderworld.Persistence;
 
 public static class DbInitializer
 {
-    public static void Initialize(WonderworldDbContext context)
+    public static void Initialize(ServiceDbContext context)
     {
         context.Database.EnsureCreated();
     }

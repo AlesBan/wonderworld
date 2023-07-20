@@ -15,14 +15,14 @@ public class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
 
-        builder.HasOne(f => f.TeacherFeedbackSender)
+        builder.HasOne(f => f.UserFeedbackSender)
             .WithMany(t => t.SentFeedbacks)
-            .HasForeignKey(f => f.TeacherFeedbackSenderId)
+            .HasForeignKey(f => f.UserFeedbackSenderId)
             .OnDelete(DeleteBehavior.ClientSetNull);
         
-        builder.HasOne(f => f.TeacherFeedbackRecipient)
+        builder.HasOne(f => f.UserFeedbackRecipient)
             .WithMany(t => t.RecievedFeedbacks)
-            .HasForeignKey(f => f.TeacherFeedbackRecipientId)
+            .HasForeignKey(f => f.UserFeedbackRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull);
 
         builder.Property(f => f.WasTheJointLesson)

@@ -8,23 +8,22 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Interfaces;
 
-public interface IWonderworldDbContext
+public interface IServiceDbContext
 {
+    DbSet<User>? Users { get; set; }
+    DbSet<Class>? Classes { get; set; }
     
-    DbSet<Teacher> Teachers { get; set; }
-    DbSet<Class> Classes { get; set; }
+    DbSet<Discipline>? Disciplines { get; set; }
+    DbSet<Language>? Languages { get; set; }
+    DbSet<InterfaceLanguage>? InterfaceLanguages { get; set; }
     
-    DbSet<Discipline> Disciplines { get; set; }
-    DbSet<Language> Languages { get; set; }
-    DbSet<InterfaceLanguage> InterfaceLanguages { get; set; }
+    DbSet<Appointment>? Appointments { get; set; }
+    DbSet<Establishment>? Establishments { get; set; }
+    DbSet<City>? Cities { get; set; }
+    DbSet<Country>? Countries { get; set; }
     
-    DbSet<Appointment> Appointments { get; set; }
-    DbSet<Establishment> Establishments { get; set; }
-    DbSet<City> Cities { get; set; }
-    DbSet<Country> Countries { get; set; }
-    
-    DbSet<Feedback> Feedbacks { get; set; }
-    DbSet<Invitation> Invitations { get; set; }
+    DbSet<Feedback>? Feedbacks { get; set; }
+    DbSet<Invitation>? Invitations { get; set; }
     
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

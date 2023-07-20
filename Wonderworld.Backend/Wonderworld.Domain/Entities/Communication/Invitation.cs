@@ -4,13 +4,13 @@ namespace Wonderworld.Domain.Entities.Communication;
 
 public class Invitation
 {
-    public Guid TeacherInvitationId { get; set; }
+    public Guid InvitationId { get; set; }
 
-    public Guid TeacherInvitationSenderId { get; set; }
-    public Teacher TeacherInvitationSender { get; set; }
+    public Guid UserInvitationSenderId { get; set; }
+    public User UserInvitationSender { get; set; }
     
-    public Guid TeacherInvitationRecipientId { get; set; }
-    public Teacher TeacherInvitationRecipient { get; set; }
+    public Guid UserInvitationRecipientId { get; set; }
+    public User UserInvitationRecipient { get; set; }
 
     public DateTime CreatedAt { get; set; }
     public DateTime DateOfInvitation { get; set; }

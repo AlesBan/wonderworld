@@ -9,7 +9,7 @@ public class Language
     
     public string Title { get; set; }
     
-    public ICollection<TeacherLanguage> TeacherLanguages { get; set; }
+    public ICollection<UserLanguage> TeacherLanguages { get; set; }
     public ICollection<ClassLanguage> ClassLanguages { get; set; }
     
 }

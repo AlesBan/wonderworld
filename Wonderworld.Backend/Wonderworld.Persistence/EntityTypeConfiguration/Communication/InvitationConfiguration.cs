@@ -8,21 +8,22 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 {
     public void Configure(EntityTypeBuilder<Invitation> builder)
     {
-        builder.HasKey(t => t.TeacherInvitationId);
-        builder.HasIndex(t => t.TeacherInvitationId)
+        builder.HasKey(t => t.InvitationId);
+        builder.HasIndex(t => t.InvitationId)
             .IsUnique();
-        builder.Property(t => t.TeacherInvitationId)
+        builder.Property(t => t.InvitationId)
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
 
-        builder.HasOne(t => t.TeacherInvitationSender)
+        builder.HasOne(t => t.UserInvitationSender)
             .WithMany(ti => ti.SentInvitations)
-            .HasForeignKey(ti => ti.TeacherInvitationSenderId)
+            .HasForeignKey(ti => ti.UserInvitationSenderId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
-        builder.HasOne(t => t.TeacherInvitationRecipient)
+        
+        builder.HasOne(t => t.UserInvitationRecipient)
             .WithMany(tr => tr.RecievedInvitations)
-            .HasForeignKey(t => t.TeacherInvitationRecipientId)
+            .HasForeignKey(t => t.UserInvitationRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
 

@@ -8,5 +8,5 @@ public class Appointment
     
     public string Title { get; set; }
     
-    public ICollection<Teacher> Teachers { get; set; }
+    public ICollection<User> Teachers { get; set; }
 }

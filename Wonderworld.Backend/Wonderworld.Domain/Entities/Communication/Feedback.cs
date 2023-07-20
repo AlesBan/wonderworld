@@ -6,10 +6,10 @@ public class Feedback
 {
     public Guid FeedbackId { get; set; }
     
-    public Guid? TeacherFeedbackSenderId { get; set; }
-    public Teacher TeacherFeedbackSender { get; set; }
-    public Guid? TeacherFeedbackRecipientId { get; set; }
-    public Teacher TeacherFeedbackRecipient { get; set; }
+    public Guid? UserFeedbackSenderId { get; set; }
+    public User UserFeedbackSender { get; set; }
+    public Guid? UserFeedbackRecipientId { get; set; }
+    public User UserFeedbackRecipient { get; set; }
     
     public bool WasTheJointLesson  { get; set; }
     public string? ReasonForNotConducting  { get; set; }
