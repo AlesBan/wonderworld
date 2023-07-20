@@ -55,8 +55,9 @@
 
 .user {
     width: 384px;
-    margin-left: 112px;
-
+    position: relative;
+    left: 5%;
+    top: -75px;
 }
 
 .user-avatar img {
@@ -291,6 +292,9 @@ input:checked + .slider:before {
 
 .main {
     width: 696px;
+    position: relative;
+    top: 55px;
+    right: 5%;
 }
 
 .main-header {

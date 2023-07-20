@@ -1,0 +1,76 @@
+body {
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 68px 0 68px;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+.company-logo {
+    height: 40px;
+}
+
+.header-right {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.about-us, .inspiration, .contact-us, .english {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #3E4C5B;
+}
+
+.english {
+    display: flex;
+    gap: 8px;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.secondary-button {
+    padding: 12px 20px 12px 20px;
+    width: 93px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #B2B7BD;
+    background-color: #FFFFFF;
+    font-family: 'Inter', serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #0C0F12;
+}
+
+
+.primary-button {
+    padding: 12px 20px 12px 20px;
+    width: 140px;
+    height: 48px;
+    border-radius: 10px;
+    border: none;
+    background-color: #216C5E;
+    font-family: 'Inter', serif;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+main {
+    background-color: #F7F8F8;
+}
+
