@@ -22,7 +22,7 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
             .IsRequired();
         
         builder.HasOne(t => t.UserInvitationRecipient)
-            .WithMany(tr => tr.RecievedInvitations)
+            .WithMany(tr => tr.ReceivedInvitations)
             .HasForeignKey(t => t.UserInvitationRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();

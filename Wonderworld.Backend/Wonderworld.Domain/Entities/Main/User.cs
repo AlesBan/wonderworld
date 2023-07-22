@@ -19,7 +19,7 @@ public class User
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
 
-    public ICollection<Class> Classes { get; set; }
+    public ICollection<Class> Classes { get; set; } = new List<Class>();
 
     public Guid AppointmentId { get; set; }
     public Appointment Appointment { get; set; }
@@ -30,14 +30,14 @@ public class User
     public Guid CityLocationId { get; set; }
     public City CityLocation { get; set; }
 
-    public ICollection<UserLanguage> TeacherLanguages { get; set; }
-    public ICollection<UserDiscipline> TeacherDisciplines { get; set; }
+    public ICollection<UserLanguage> TeacherLanguages { get; set; } = new List<UserLanguage>();
+    public ICollection<UserDiscipline> TeacherDisciplines { get; set; } = new List<UserDiscipline>();
 
-    public ICollection<Invitation> RecievedInvitations { get; set; }
-    public ICollection<Invitation> SentInvitations { get; set; }
+    public ICollection<Invitation> ReceivedInvitations { get; set; } = new List<Invitation>();
+    public ICollection<Invitation> SentInvitations { get; set; } = new List<Invitation>();
 
-    public ICollection<Feedback> RecievedFeedbacks { get; set; }
-    public ICollection<Feedback> SentFeedbacks { get; set; }
+    public ICollection<Feedback> ReceivedFeedbacks { get; set; } = new List<Feedback>();
+    public ICollection<Feedback> SentFeedbacks { get; set; } = new List<Feedback>();
 
     public string? Aims { get; set; }
     public string? Description { get; set; }
@@ -46,7 +46,7 @@ public class User
     public string? BannerPhotoUrl { get; set; }
 
     public Guid InterfaceLanguageId { get; set; }
-    public InterfaceLanguage InterfaceLanguage { get; set; }
+    public InterfaceLanguage? InterfaceLanguage { get; set; }
 
     public DateTime RegisteredAt { get; set; }
     public DateTime CreatedAt { get; set; }

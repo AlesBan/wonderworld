@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Persistence.EntityTypeConfiguration.Main;
@@ -21,7 +22,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(40);
 
         builder.HasOne(t => t.InterfaceLanguage)
-            .WithMany(il => il.Teachers)
+            .WithMany(il => il.Users)
             .HasForeignKey(t => t.InterfaceLanguageId)
             .OnDelete(DeleteBehavior.SetNull);
 

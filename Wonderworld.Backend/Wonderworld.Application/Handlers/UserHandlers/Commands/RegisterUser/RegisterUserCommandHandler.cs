@@ -8,21 +8,31 @@ namespace Wonderworld.Application.Handlers.UserHandlers.Commands.RegisterUser;
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Guid>
 {
     private readonly ISharedLessonDbContext _context;
-    private readonly IMapper _mapper;
 
-    public RegisterUserCommandHandler(ISharedLessonDbContext context, IMapper mapper)
+    public RegisterUserCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
-        _mapper = mapper;
     }
 
     public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var user = _mapper.Map<User>(request);
+        var user = MapUser(request);
 
         await AddUser(user, cancellationToken);
 
         return await Task.FromResult(user.UserId);
+    }
+
+    private User MapUser(RegisterUserCommand request)
+    {
+        var user = new User()
+        {
+            Email = request.Email,
+            Password = request.Password,
+            InterfaceLanguage = request.InterfaceLanguage
+        };
+
+        return user;
     }
 
     private async Task AddUser(User user, CancellationToken cancellationToken)

@@ -4,7 +4,7 @@ using Wonderworld.Domain.Entities.Interface;
 
 namespace Wonderworld.Persistence.EntityTypeConfiguration.Interface;
 
-public class InterfaceLanguageConfiguration: IEntityTypeConfiguration<InterfaceLanguage>
+public class InterfaceLanguageConfiguration : IEntityTypeConfiguration<InterfaceLanguage>
 {
     public void Configure(EntityTypeBuilder<InterfaceLanguage> builder)
     {
@@ -14,7 +14,7 @@ public class InterfaceLanguageConfiguration: IEntityTypeConfiguration<InterfaceL
         builder.Property(l => l.LanguageId)
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
-        
+
         builder.Property(l => l.Title)
             .HasMaxLength(30)
             .IsRequired();

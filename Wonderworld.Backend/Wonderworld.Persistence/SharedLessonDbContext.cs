@@ -19,10 +19,6 @@ namespace Wonderworld.Persistence;
 
 public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
 {
-    public SharedLessonDbContext()
-    {
-    }
-
     public SharedLessonDbContext(DbContextOptions options) :
         base(options)
     {
@@ -45,26 +41,8 @@ public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.ApplyConfiguration(new UserConfiguration());
-        modelBuilder.ApplyConfiguration(new RoleConfiguration());
-        
-        modelBuilder.ApplyConfiguration(new InterfaceLanguageConfiguration());
+        modelBuilder.AppendConfigurations();
 
-        modelBuilder.ApplyConfiguration(new ClassConfiguration());
-        modelBuilder.ApplyConfiguration(new DisciplineConfiguration());
-        modelBuilder.ApplyConfiguration(new LanguageConfiguration());
-        modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
-        
-        modelBuilder.ApplyConfiguration(new EstablishmentConfiguration());
-        modelBuilder.ApplyConfiguration(new CityConfiguration());
-        modelBuilder.ApplyConfiguration(new CountryConfiguration());
-        modelBuilder.ApplyConfiguration(new FeedbackConfiguration());
-        modelBuilder.ApplyConfiguration(new InvitationConfiguration());
-
-        modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
-        modelBuilder.ApplyConfiguration(new UserDisciplineConfiguration());
-        modelBuilder.ApplyConfiguration(new UserLanguageConfiguration());
-        modelBuilder.ApplyConfiguration(new ClassDisciplineConfiguration());
-        modelBuilder.ApplyConfiguration(new ClassLanguageConfiguration());
+        modelBuilder.SeedingDefaultData();
     }
 }

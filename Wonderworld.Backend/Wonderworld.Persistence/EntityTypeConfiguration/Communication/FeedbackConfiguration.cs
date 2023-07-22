@@ -21,7 +21,7 @@ public class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
             .OnDelete(DeleteBehavior.ClientSetNull);
         
         builder.HasOne(f => f.UserFeedbackRecipient)
-            .WithMany(t => t.RecievedFeedbacks)
+            .WithMany(t => t.ReceivedFeedbacks)
             .HasForeignKey(f => f.UserFeedbackRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull);
 

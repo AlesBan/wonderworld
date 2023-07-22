@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Domain.ConnectionEntities;
 using Wonderworld.Domain.Entities.Education;
+using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
+using Wonderworld.Domain.Enums;
 using Wonderworld.Persistence;
 
 namespace Application.UnitTests.Common;
@@ -18,9 +20,61 @@ public class SharedLessonDbContextFactory
 
         var context = new SharedLessonDbContext(options);
         context.Database.EnsureCreated();
+        // context.Users.AddRange(
+        //     new User()
+        //     {
+        //         UserId = new Guid("9D13C7FF-18E0-4C71-8DB0-B7F05B420CEA"),
+        //         Email = "registered@a.com",
+        //         Password = "12345reg"
+        //     });
+        context.Countries.AddRange(
+            new Country
+            {
+                CountryId = CountryForDeleteId,
+                Title = "CountryForDelete"
+            });
         context.SaveChanges();
         return context;
     }
+
+    public static Guid CountryForDeleteId = new Guid("5F1B352F-C153-4DB6-AB34-60B7916904B2");
+
+    public static User RegisteredUserA = new User
+    {
+        UserId = new Guid("9D13C7FF-18E0-4C71-8DB0-B7F05B420CEA"),
+        Email = "registered@a.com",
+        Password = "12345reg",
+        UserRoles = null,
+        FirstName = null,
+        LastName = null,
+        IsATeacher = false,
+        IsAnExpert = false,
+        Classes = null,
+        AppointmentId = default,
+        Appointment = null,
+        EstablishmentId = default,
+        Establishment = null,
+        CityLocationId = default,
+        CityLocation = null,
+        TeacherLanguages = null,
+        TeacherDisciplines = null,
+        ReceivedInvitations = null,
+        SentInvitations = null,
+        ReceivedFeedbacks = null,
+        SentFeedbacks = null,
+        Aims = null,
+        Description = null,
+        PhotoUrl = null,
+        BannerPhotoUrl = null,
+        InterfaceLanguageId = default,
+        InterfaceLanguage = null,
+        RegisteredAt = default,
+        CreatedAt = default,
+        IsVerified = false,
+        VerifiedAt = default,
+        LastOnlineAt = default,
+        DeletedAt = default
+    };
 
     public static User UserA = new User
     {
@@ -54,7 +108,6 @@ public class SharedLessonDbContextFactory
             CityId = new Guid("5DF18BD8-27FD-42C2-BC25-C1590E8D7CA0"),
             City = CityA
         },
-        CityLocationId = default,
         CityLocation = new City()
         {
             CityId = new Guid("A450594D-1A4B-4DB3-BC52-C8DE26BA26E9"),
@@ -62,16 +115,19 @@ public class SharedLessonDbContextFactory
         },
         TeacherLanguages = null,
         TeacherDisciplines = null,
-        RecievedInvitations = null,
+        ReceivedInvitations = null,
         SentInvitations = null,
-        RecievedFeedbacks = null,
+        ReceivedFeedbacks = null,
         SentFeedbacks = null,
-        Aims = null,
-        Description = null,
+        Aims = "Aims",
+        Description = "Description",
         PhotoUrl = null,
         BannerPhotoUrl = null,
-        InterfaceLanguageId = default,
-        InterfaceLanguage = null,
+        InterfaceLanguage = new InterfaceLanguage()
+        {
+            LanguageId = new Guid("BA377885-C448-4226-90B5-1040936A4350"),
+            Title = "InterfaceLanguage"
+        },
         RegisteredAt = default,
         CreatedAt = default,
         IsVerified = false,
@@ -101,15 +157,6 @@ public class SharedLessonDbContextFactory
     {
     };
 
-    public static Establishment EstablishmentA = new Establishment
-    {
-        EstablishmentId = new Guid("E4CD8C2E-0518-413D-92E3-EAFECA01AC8E"),
-        Type = "School",
-        Title = "EstablishmentA",
-        CityId = CityA.CityId,
-        City = CityA,
-        Teachers = null
-    };
 
     private static readonly Country CountryA = new Country()
     {
@@ -124,7 +171,6 @@ public class SharedLessonDbContextFactory
         CountryId = new Guid("EC64F4E6-199C-4F2E-BFF6-7970859636A1"),
         Country = CountryA
     };
-
 
     public static Language Language = new Language()
     {

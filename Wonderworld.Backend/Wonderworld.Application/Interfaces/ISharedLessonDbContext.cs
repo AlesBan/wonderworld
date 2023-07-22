@@ -19,7 +19,7 @@ public interface ISharedLessonDbContext
     DbSet<Appointment> Appointments { get; set; }
     DbSet<Establishment> Establishments { get; set; }
     DbSet<City> Cities { get; set; }
-    DbSet<Country> Countries { get; set; }
+    DbSet<Country>? Countries { get; set; }
     DbSet<Feedback> Feedbacks { get; set; }
     DbSet<Invitation> Invitations { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
