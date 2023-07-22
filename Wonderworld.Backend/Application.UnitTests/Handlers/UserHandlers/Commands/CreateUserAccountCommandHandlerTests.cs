@@ -69,16 +69,12 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
 
 
         // Act
-        var handler = new CreateUserAccountCommandHandler(Context, _mockMapper.Object);
+        var handler = new CreateUserAccountCommandHandler(Context);
         await handler.Handle(createUserAccountCommand,
             CancellationToken.None);
 
         // Assert
         var userN = await Context.Users.SingleOrDefaultAsync(u => u.UserId == UserId);
-        var a = await Context.Users.SingleOrDefaultAsync(u =>
-            u.UserId == UserId &&
-            u.FirstName == FirstName &&
-            u.LastName == LastName);
         Assert.NotNull(await Context.Users.SingleOrDefaultAsync(u =>
             u.UserId == UserId &&
             u.FirstName == FirstName &&

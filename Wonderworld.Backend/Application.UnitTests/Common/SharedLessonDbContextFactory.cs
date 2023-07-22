@@ -12,6 +12,12 @@ namespace Application.UnitTests.Common;
 
 public class SharedLessonDbContextFactory
 {
+    public static Guid CountryAId = new Guid("C669544B-65EB-4E82-B89D-2D765408E283");
+    public static Guid CountryBId = new Guid("4742865D-A051-46C9-8062-FC8860BAB382");
+    public static Guid CountryForDeleteId = new Guid("5F1B352F-C153-4DB6-AB34-60B7916904B2");
+
+    public static Guid CityAId = new Guid("3F83EA5F-137B-46A3-BE10-611E44312650");
+    public static Guid CityForDeleteId = new Guid("92CE4A95-71B2-4910-9F6A-186DF2676D9F");
     public static SharedLessonDbContext Create()
     {
         var options = new DbContextOptionsBuilder<SharedLessonDbContext>()
@@ -20,24 +26,52 @@ public class SharedLessonDbContextFactory
 
         var context = new SharedLessonDbContext(options);
         context.Database.EnsureCreated();
-        // context.Users.AddRange(
-        //     new User()
-        //     {
-        //         UserId = new Guid("9D13C7FF-18E0-4C71-8DB0-B7F05B420CEA"),
-        //         Email = "registered@a.com",
-        //         Password = "12345reg"
-        //     });
+        context.Users.AddRange(
+            new User()
+            {
+                UserId = new Guid("9D13C7FF-18E0-4C71-8DB0-B7F05B420CEA"),
+                Email = "registered@a.com",
+                Password = "12345reg"
+            });
+        
+        AppendCountries(context);
+        AppendCities(context);
+        
+        context.SaveChanges();
+        return context;
+    }
+
+    private static void AppendCountries(SharedLessonDbContext context)
+    {
         context.Countries.AddRange(
+            new Country()
+            {
+                CountryId = CountryAId,
+                Title = "CountryA"
+            },
             new Country
             {
                 CountryId = CountryForDeleteId,
                 Title = "CountryForDelete"
             });
-        context.SaveChanges();
-        return context;
     }
 
-    public static Guid CountryForDeleteId = new Guid("5F1B352F-C153-4DB6-AB34-60B7916904B2");
+    private static void AppendCities(SharedLessonDbContext context)
+    {
+        context.Cities.AddRange(
+            new City()
+            {
+                CityId = CityAId,
+                CountryId = CountryAId,
+                Title = "CityA"
+            },
+            new City
+            {
+                CityId = CityForDeleteId,
+                CountryId = CountryBId,
+                Title = "CityForDelete"
+            });
+    }
 
     public static User RegisteredUserA = new User
     {

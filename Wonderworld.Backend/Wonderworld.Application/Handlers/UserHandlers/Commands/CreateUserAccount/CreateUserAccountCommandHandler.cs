@@ -1,5 +1,3 @@
-using System.Diagnostics;
-using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
@@ -10,22 +8,15 @@ namespace Wonderworld.Application.Handlers.UserHandlers.Commands.CreateUserAccou
 
 public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccountCommand>
 {
-    private readonly ISharedLessonDbContext? _context;
-    private readonly IMapper? _mapper;
+    private readonly ISharedLessonDbContext _context;
 
-    public CreateUserAccountCommandHandler(ISharedLessonDbContext? serviceDbContext, IMapper? mapper)
+    public CreateUserAccountCommandHandler(ISharedLessonDbContext serviceDbContext)
     {
         _context = serviceDbContext;
-        _mapper = mapper;
     }
 
     public async Task<Unit> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
     {
-        if (_context?.Users == null)
-        {
-            throw new DbSetNullException(nameof(User));
-        }
-
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.UserId == request.UserId, cancellationToken);
 

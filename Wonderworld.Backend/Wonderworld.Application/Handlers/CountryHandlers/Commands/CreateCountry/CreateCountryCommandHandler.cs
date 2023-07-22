@@ -1,4 +1,5 @@
 using MediatR;
+using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Location;
 
@@ -26,7 +27,9 @@ public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand,
 
     private async Task AddCountry(Country country, CancellationToken cancellationToken)
     {
-        await _context.Countries.AddAsync(country, cancellationToken);
+
+        await _context.Countries!.AddAsync(country, cancellationToken);
+
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -18,12 +18,7 @@ public class DeleteCountryCommandHandler : IRequestHandler<DeleteCountryCommand>
 
     public async Task<Unit> Handle(DeleteCountryCommand request, CancellationToken cancellationToken)
     {
-        if (_context.Countries == null)
-        {
-            throw new DbSetNullException(nameof(User)); 
-        }
-
-        var country = await _context.Countries.FirstOrDefaultAsync(t =>
+        var country = await _context.Countries!.FirstOrDefaultAsync(t =>
                 t.CountryId == request.CountryId,
             cancellationToken: cancellationToken);
 
@@ -39,7 +34,7 @@ public class DeleteCountryCommandHandler : IRequestHandler<DeleteCountryCommand>
 
     private async Task RemoveCountry(Country country, CancellationToken cancellationToken)
     {
-        _context.Countries.Remove(country);
+        _context.Countries!.Remove(country);
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

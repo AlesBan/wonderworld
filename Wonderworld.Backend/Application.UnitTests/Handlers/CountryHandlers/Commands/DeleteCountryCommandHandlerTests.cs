@@ -37,18 +37,4 @@ public class DeleteCountryCommandHandlerTests : TestCommonBase
             await handler.Handle(new DeleteCountryCommand { CountryId = Guid.NewGuid() },
                 CancellationToken.None));
     }
-
-    [Fact]
-    public async Task DeleteCountryCommandHandler_Handle_FailOnNullDbSet()
-    {
-        // Arrange
-        Context.Countries = null;
-        var handler = new DeleteCountryCommandHandler(Context);
-
-        // Act
-        // Assert
-        await Assert.ThrowsAsync<DbSetNullException>(async () =>
-            await handler.Handle(new DeleteCountryCommand { CountryId = Guid.NewGuid() },
-                CancellationToken.None));
-    }
 }
