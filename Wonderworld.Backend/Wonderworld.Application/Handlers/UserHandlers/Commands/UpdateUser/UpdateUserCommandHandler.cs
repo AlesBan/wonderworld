@@ -5,7 +5,7 @@ using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.UpdateUser;
+namespace Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateUser;
 
 public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
 {
@@ -20,11 +20,6 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
 
     public async Task<Unit> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        if (_context.Users == null)
-        {
-            throw new DbSetNullException(nameof(User));
-        }
-
         var user = await _context.Users
             .FirstOrDefaultAsync(t =>
                     t.UserId == request.UserId,
@@ -35,7 +30,7 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
             throw new NotFoundException(nameof(User), request.UserId);
         }
 
-        user = _mapper.Map(source: request, destination: user);
+        user = _mapper.Map<User>(request);
 
         _context.Users.Update(user);
         await _context.SaveChangesAsync(cancellationToken);

@@ -1,13 +1,12 @@
 using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Common.Mappings;
-using Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.CreateUserAccount;
 using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.UpdateUser;
+namespace Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateUser;
 
 public class UpdateUserCommand : IRequest, IMapWith<User>
 {

@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Wonderworld.Application.MediatorHandlers.UserHandlers.Commands.DeleteUser;
+namespace Wonderworld.Application.Handlers.UserHandlers.Commands.DeleteUser;
 
 public class DeleteUserCommand : IRequest
 {
