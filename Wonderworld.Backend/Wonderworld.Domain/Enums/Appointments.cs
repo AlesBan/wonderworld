@@ -1,6 +1,6 @@
 namespace Wonderworld.Domain.Enums;
 
-public enum Appointments
+public enum AppointmentsTypes
 {
-    Teacher
+    Teacher, Director, Tutor
 }

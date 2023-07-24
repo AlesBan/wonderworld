@@ -1,6 +1,6 @@
 namespace Wonderworld.Domain.Enums;
 
-public enum InterfaceLanguages
+public enum InterfaceLanguagesTypes
 {
     English
 }

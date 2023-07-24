@@ -1,9 +1,11 @@
+using MediatR;
+using Wonderworld.Domain.Entities.Location;
 
 namespace Wonderworld.Application.Handlers.EstablishmentHandlers.Commands.CreateEstablishment;
 
-public class CreateEstablishmentCommand
+public class CreateEstablishmentCommand : IRequest<Guid>
 {
-    public Guid EstablishmentId { get; set; }
     public string Type { get; set; }
     public string Title { get; set; }
+    public City City { get; set; }
 }

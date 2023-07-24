@@ -11,13 +11,16 @@ public class CreateCityCommandHandlerTests : TestCommonBase
     public async Task CreateCityCommandHandler_Handle_ShouldCreateCity()
     {
         // Arrange
-        var countryId = SharedLessonDbContextFactory.CountryAId;
+        var country = Context.Countries
+            .SingleOrDefaultAsync(c =>
+                c.CountryId == SharedLessonDbContextFactory.CountryAId,
+                CancellationToken.None).Result;
         var handler = new CreateCityCommandHandler(Context);
 
         // Act
         var cityId = await handler.Handle(new CreateCityCommand()
         {
-            CountryId = countryId,
+            Country = country!,
             Title = "City"
         }, CancellationToken.None);
 
@@ -25,6 +28,6 @@ public class CreateCityCommandHandlerTests : TestCommonBase
         Assert.NotNull(await Context.Cities.SingleOrDefaultAsync(c =>
             c.CityId == cityId &&
             c.Title == "City" &&
-            c.CountryId == countryId));
+            c.Country == country));
     }
 }

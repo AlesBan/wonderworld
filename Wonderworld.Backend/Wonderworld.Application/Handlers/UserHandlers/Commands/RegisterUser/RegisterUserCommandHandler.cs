@@ -1,4 +1,3 @@
-using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
@@ -29,7 +28,6 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, G
         {
             Email = request.Email,
             Password = request.Password,
-            InterfaceLanguage = request.InterfaceLanguage
         };
 
         return user;

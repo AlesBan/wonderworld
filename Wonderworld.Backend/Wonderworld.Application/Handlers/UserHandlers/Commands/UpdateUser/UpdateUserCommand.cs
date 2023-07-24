@@ -1,7 +1,6 @@
 using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Common.Mappings;
-using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
@@ -19,12 +18,8 @@ public class UpdateUserCommand : IRequest, IMapWith<User>
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
 
-    public InterfaceLanguage InterfaceLanguage { get; set; }
-
     public City CityLocation { get; set; }
     public Establishment Establishment { get; set; }
-
-    public Appointment Appointment { get; set; }
 
     public string? PhotoUrl { get; set; }
     public string? BannerPhotoUrl { get; set; }
@@ -51,14 +46,10 @@ public class UpdateUserCommand : IRequest, IMapWith<User>
                 opt => opt.MapFrom(command => command.IsATeacher))
             .ForMember(user => user.IsAnExpert,
                 opt => opt.MapFrom(command => command.IsAnExpert))
-            .ForMember(user => user.InterfaceLanguage,
-                opt => opt.MapFrom(command => command.InterfaceLanguage))
             .ForMember(user => user.CityLocation,
                 opt => opt.MapFrom(command => command.CityLocation))
             .ForMember(user => user.Establishment,
                 opt => opt.MapFrom(command => command.Establishment))
-            .ForMember(user => user.Appointment,
-                opt => opt.MapFrom(command => command.Appointment))
             .ForMember(user => user.PhotoUrl,
                 opt => opt.MapFrom(command => command.PhotoUrl))
             .ForMember(user => user.Aims,

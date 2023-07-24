@@ -3,11 +3,8 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Wonderworld.Application.Handlers.UserHandlers.Commands.CreateUserAccount;
-using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
-using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Domain.Enums;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.UserHandlers.Commands;
@@ -30,11 +27,6 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
         const string LastName = "request.LastName";
         const bool IsATeacher = true;
         const bool IsAnExpert = false;
-        var InterfaceLanguage = new InterfaceLanguage()
-        {
-            Title = InterfaceLanguages.English.ToString(),
-            LanguageId = new Guid("6CF863C7-9989-4C93-AD01-5BDB9F7AFFDD")
-        };
         var CityLocation = new City()
         {
             CityId = new Guid("6CF863C7-9989-4C93-AD01-5BDB9F7AFFDD"),
@@ -46,11 +38,6 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             Title = "Establishment"
         };
 
-        var Appointment = new Appointment()
-        {
-            AppointmentId = new Guid("AA63B2BD-BC34-425D-B3C9-1C0353304374"),
-            Title = Appointments.Teacher.ToString()
-        };
         const string PhotoUrl = "request.PhotoUrl";
 
         var createUserAccountCommand = new CreateUserAccountCommand()
@@ -60,10 +47,8 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             LastName = LastName,
             IsATeacher = IsATeacher,
             IsAnExpert = IsAnExpert,
-            InterfaceLanguage = InterfaceLanguage,
             CityLocation = CityLocation,
             Establishment = Establishment,
-            Appointment = Appointment,
             PhotoUrl = PhotoUrl
         };
 
@@ -82,10 +67,8 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             u.IsATeacher == IsATeacher &&
             u.IsAnExpert == IsAnExpert &&
             u.PhotoUrl == PhotoUrl &&
-            u.InterfaceLanguage == InterfaceLanguage &&
             u.CityLocation == CityLocation &&
             u.Establishment == Establishment &&
-            u.Appointment == Appointment &&
             u.PhotoUrl == PhotoUrl));
     }
 }

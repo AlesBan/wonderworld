@@ -1,6 +1,5 @@
 using Wonderworld.Domain.ConnectionEntities;
 using Wonderworld.Domain.Entities.Communication;
-using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 
@@ -20,9 +19,6 @@ public class User
     public bool IsAnExpert { get; set; }
 
     public ICollection<Class> Classes { get; set; } = new List<Class>();
-
-    public Guid AppointmentId { get; set; }
-    public Appointment Appointment { get; set; }
 
     public Guid EstablishmentId { get; set; }
     public Establishment Establishment { get; set; }
@@ -44,9 +40,6 @@ public class User
 
     public string? PhotoUrl { get; set; }
     public string? BannerPhotoUrl { get; set; }
-
-    public Guid InterfaceLanguageId { get; set; }
-    public InterfaceLanguage? InterfaceLanguage { get; set; }
 
     public DateTime RegisteredAt { get; set; }
     public DateTime CreatedAt { get; set; }

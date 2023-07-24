@@ -1,11 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Domain.Entities.Interface;
 using Wonderworld.Domain.Enums;
 using Wonderworld.Persistence.EntityTypeConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
-using Wonderworld.Persistence.EntityTypeConfiguration.Interface;
-using Wonderworld.Persistence.EntityTypeConfiguration.Job;
 using Wonderworld.Persistence.EntityTypeConfiguration.Location;
 using Wonderworld.Persistence.EntityTypeConfiguration.Main;
 using Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
@@ -18,14 +15,11 @@ public static class ModelBuilderExtensions
     {
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
-        
-        modelBuilder.ApplyConfiguration(new InterfaceLanguageConfiguration());
 
         modelBuilder.ApplyConfiguration(new ClassConfiguration());
         modelBuilder.ApplyConfiguration(new DisciplineConfiguration());
         modelBuilder.ApplyConfiguration(new LanguageConfiguration());
-        modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
-        
+
         modelBuilder.ApplyConfiguration(new EstablishmentConfiguration());
         modelBuilder.ApplyConfiguration(new CityConfiguration());
         modelBuilder.ApplyConfiguration(new CountryConfiguration());
@@ -41,15 +35,7 @@ public static class ModelBuilderExtensions
 
     public static void SeedingDefaultData(this ModelBuilder modelBuilder)
     {
-        modelBuilder.SeedingInterfaceLanguages();
+        
     }
-    private static void SeedingInterfaceLanguages(this ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<InterfaceLanguage>().HasData(
-            new InterfaceLanguage
-            {
-                Title = InterfaceLanguages.English.ToString(),
-                LanguageId = new Guid("917C5094-980B-44EB-BD59-DBA478E5994A")
-            });
-    }
+
 }

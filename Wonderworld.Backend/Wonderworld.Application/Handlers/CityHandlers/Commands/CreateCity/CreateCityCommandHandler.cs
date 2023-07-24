@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Location;
@@ -16,12 +17,12 @@ public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Guid>
 
     public async Task<Guid> Handle(CreateCityCommand request, CancellationToken cancellationToken)
     {
-        var country = _context.Countries!.FirstOrDefault(t =>
-            t.CountryId == request.CountryId);
+        var country = await _context.Countries!.FirstOrDefaultAsync(t =>
+            t.CountryId == request.Country.CountryId, cancellationToken);
 
         if (country == null)
         {
-            throw new NotFoundException(nameof(Country), request.CountryId);
+            throw new NotFoundException(nameof(Country), request.Country.CountryId);
         }
 
         var city = new City()
