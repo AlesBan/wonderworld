@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Wonderworld.Domain.ConnectionEntities;
+using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
 
@@ -12,7 +12,7 @@ public class UserLanguageConfiguration : IEntityTypeConfiguration<UserLanguage>
         builder.HasIndex(tl => new { TeacherId = tl.UserId, tl.LanguageId }).IsUnique();
 
         builder.HasOne(tl => tl.User)
-            .WithMany(t => t.TeacherLanguages)
+            .WithMany(t => t.UserLanguages)
             .HasForeignKey(tl => tl.UserId)
             .OnDelete(DeleteBehavior.Cascade);
         

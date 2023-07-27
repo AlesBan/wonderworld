@@ -4,6 +4,7 @@ using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
+using Wonderworld.Domain.EntityConnections;
 using Wonderworld.Domain.Enums;
 using Wonderworld.Persistence;
 
@@ -11,18 +12,21 @@ namespace Application.UnitTests.Common;
 
 public class SharedLessonDbContextFactory
 {
-    public static Guid CountryAId = new Guid("C669544B-65EB-4E82-B89D-2D765408E283");
-    public static Guid CountryBId = new Guid("0A103BFC-E34E-49F1-AF43-F4E5203F5E38");
-    public static Guid CountryForDeleteId = new Guid("5F1B352F-C153-4DB6-AB34-60B7916904B2");
+    public static readonly Guid UserAId = Guid.NewGuid();
+    public static readonly Guid UserRegisteredId = Guid.NewGuid();
+    public static readonly Guid UserForDeleteId = Guid.NewGuid();
 
-    public static Guid CityAId = new Guid("3F83EA5F-137B-46A3-BE10-611E44312650");
-    public static Guid CityForDeleteId = new Guid("92CE4A95-71B2-4910-9F6A-186DF2676D9F");
+    public static readonly Guid CountryAId = Guid.NewGuid();
+    public static readonly Guid CountryBId = Guid.NewGuid();
+    public static readonly Guid CountryForDeleteId = Guid.NewGuid();
 
-    public static Guid EstablishmentAId = new Guid("3403F77F-90DB-48BD-B895-E9D459EEB5AC");
-    public static Guid EstablishmentForDeleteId = new Guid("DCC568BB-E09B-42A2-90DC-A0E3C4433AB6");
+    public static readonly Guid CityAId = Guid.NewGuid();
+    public static readonly Guid CityBId = Guid.NewGuid();
+    public static readonly Guid CityForDeleteId = Guid.NewGuid();
 
-    public static Guid LanguageAId = new Guid("2A918DF8-75C2-452E-BFF3-7B59E22E94C8");
-    public static Guid LanguageForDeleteId = new Guid("573A3A68-1809-4DEB-BD78-DEBB6D81A383");
+    public static readonly Guid EstablishmentAId = Guid.NewGuid();
+    public static readonly Guid EstablishmentBId = Guid.NewGuid();
+    public static readonly Guid EstablishmentForDeleteId = Guid.NewGuid();
 
     public static SharedLessonDbContext Create()
     {
@@ -32,21 +36,121 @@ public class SharedLessonDbContextFactory
 
         var context = new SharedLessonDbContext(options);
         context.Database.EnsureCreated();
-        context.Users.AddRange(
-            new User()
-            {
-                UserId = new Guid("9D13C7FF-18E0-4C71-8DB0-B7F05B420CEA"),
-                Email = "registered@a.com",
-                Password = "12345reg"
-            });
 
         AppendCountries(context);
         AppendCities(context);
         AppendEstablishments(context);
-        AppendLanguages(context);
+        context.SaveChanges();
 
+        AppendUsers(context);
+        context.SaveChanges();
+
+        AppendUserDisciplines(context);
+        AppendUserLanguages(context);
+        AppendUserGrades(context);
         context.SaveChanges();
         return context;
+    }
+
+    private static void AppendUsers(ISharedLessonDbContext context)
+    {
+        context.Users.AddRange(
+            new User()
+            {
+                UserId = UserRegisteredId,
+                Email = "email",
+                Password = "password",
+            },
+            new User
+            {
+                UserId = UserAId,
+                Email = "email",
+                Password = "password",
+                FirstName = "FirstName",
+                LastName = "LastName",
+                IsATeacher = true,
+                IsAnExpert = false,
+                Classes = null,
+                Establishment = context.Establishments.FirstOrDefault(e =>
+                    e.EstablishmentId == EstablishmentAId)!,
+                CityLocation = context.Cities.FirstOrDefault(c =>
+                    c.CityId == CityAId)!,
+                ReceivedInvitations = null,
+                SentInvitations = null,
+                ReceivedFeedbacks = null,
+                SentFeedbacks = null,
+                Description = "Description",
+                PhotoUrl = "PhotoUrl",
+                BannerPhotoUrl = "BannerPhotoUrl",
+                RegisteredAt = DateTime.Today,
+                CreatedAt = DateTime.Today,
+
+                UserRoles = null,
+                IsVerified = true,
+                VerifiedAt = default,
+                LastOnlineAt = DateTime.Today,
+                DeletedAt = default,
+            },
+            new User()
+            {
+                UserId = UserForDeleteId,
+                FirstName = "FirstNameForDelete",
+                LastName = "LastNameForDelete",
+                Email = "emailForDelete",
+                Password = "passwordForDelete",
+                IsVerified = true
+            });
+    }
+
+    private static void AppendUserGrades(ISharedLessonDbContext context)
+    {
+        context.UserGrades.AddRange(
+            new UserGrade()
+            {
+                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
+                Grade = context.Grades.SingleAsync(g => g.GradeNumber == 10).Result!
+            },
+            new UserGrade()
+            {
+                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
+                Grade = context.Grades.SingleAsync(g => g.GradeNumber == 6).Result!
+            });
+    }
+
+    private static void AppendUserDisciplines(ISharedLessonDbContext context)
+    {
+        context.UserDisciplines.AddRange(
+            new UserDiscipline()
+            {
+                User = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!,
+            },
+            new UserDiscipline
+            {
+                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
+                Discipline = context.Disciplines.SingleAsync(d => d.Title == "Biology").Result!
+            });
+    }
+
+    private static void AppendUserLanguages(ISharedLessonDbContext context)
+    {
+        context.UserLanguages.AddRange(
+            new UserLanguage()
+            {
+                User = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
+                Language = context.Languages.FirstOrDefault(l => l.Title == "English")!
+            },
+            new UserLanguage()
+            {
+                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
+                Language = context.Languages.SingleAsync(l => l.Title == "Russian").Result!
+            },
+            new UserLanguage()
+            {
+                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
+                Language = context.Languages.SingleAsync(l => l.Title == "Italian").Result!
+            }
+        );
     }
 
     private static void AppendCountries(ISharedLessonDbContext context)
@@ -73,6 +177,12 @@ public class SharedLessonDbContextFactory
                 CountryId = CountryAId,
                 Title = "CityA"
             },
+            new City()
+            {
+                CityId = CityBId,
+                CountryId = CountryBId,
+                Title = "CityB"
+            },
             new City
             {
                 CityId = CityForDeleteId,
@@ -93,6 +203,13 @@ public class SharedLessonDbContextFactory
             },
             new Establishment()
             {
+                EstablishmentId = EstablishmentBId,
+                Type = EstablishmentTypes.School.ToString(),
+                Title = "EstablishmentB",
+                CityId = CityBId
+            },
+            new Establishment()
+            {
                 EstablishmentId = EstablishmentForDeleteId,
                 Type = EstablishmentTypes.School.ToString(),
                 Title = "EstablishmentForDelete",
@@ -100,20 +217,6 @@ public class SharedLessonDbContextFactory
             });
     }
 
-    private static void AppendLanguages(ISharedLessonDbContext context)
-    {
-        context.Languages.AddRange(
-            new Language()
-            {
-                LanguageId = LanguageAId,
-                Title = "LanguageA"
-            },
-            new Language()
-            {
-                LanguageId = LanguageForDeleteId,
-                Title = "LanguageForDelete"
-            });
-    }
 
     public static void Destroy(SharedLessonDbContext context)
     {

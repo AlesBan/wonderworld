@@ -28,4 +28,8 @@
       <ProjectReference Include="..\Wonderworld.Persistence\Wonderworld.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Handlers\EntityHandlers" />
+    </ItemGroup>
+
 </Project>

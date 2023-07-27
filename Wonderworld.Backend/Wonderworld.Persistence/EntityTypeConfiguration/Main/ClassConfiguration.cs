@@ -15,17 +15,15 @@ public class ClassConfiguration : IEntityTypeConfiguration<Class>
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
 
-        builder.Property(c => c.ClassNumber)
-            .HasColumnType("SMALLINT")
-            .IsRequired();
-        builder.Property(c => c.ClassAge)
-            .HasColumnType("SMALLINT")
-            .IsRequired();
+        builder.HasOne(c => c.Grade)
+            .WithMany(g => g.Classes)
+            .HasForeignKey(c => c.GradeId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-        builder.Property(c=>c.CreatedAt)
+        builder.Property(c => c.CreatedAt)
             .HasDefaultValueSql("now()")
             .ValueGeneratedOnAdd();
-        
+
         builder.Property(c => c.UserId)
             .IsRequired();
 

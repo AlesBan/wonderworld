@@ -1,4 +1,4 @@
-using Wonderworld.Domain.ConnectionEntities;
+using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Domain.Entities.Main;
 

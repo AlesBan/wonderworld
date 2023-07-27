@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Wonderworld.Domain.ConnectionEntities;
+using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
 

@@ -2,5 +2,8 @@ namespace Wonderworld.Domain.Enums;
 
 public enum EstablishmentTypes
 {
-    School, Gymnasium, 
+    School, 
+    Gymnasium, 
+    Lyceum, 
+    College
 }

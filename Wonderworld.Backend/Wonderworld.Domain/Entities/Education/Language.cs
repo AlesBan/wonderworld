@@ -1,5 +1,5 @@
-using Wonderworld.Domain.ConnectionEntities;
 using Wonderworld.Domain.Entities.Main;
+using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Domain.Entities.Education;
 

@@ -1,0 +1,39 @@
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Interfaces;
+using Wonderworld.Domain.Entities.Main;
+
+namespace Wonderworld.Application.Handlers.UserHandlers.Commands.DeleteUser;
+
+public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
+{
+    private readonly ISharedLessonDbContext _context;
+
+    public DeleteUserCommandHandler(ISharedLessonDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+    {
+        var user = await _context.Users.FirstOrDefaultAsync(t =>
+                t.UserId == request.UserId,
+            cancellationToken: cancellationToken);
+        
+        if (user == null)
+        {
+            throw new NotFoundException(nameof(User), request.UserId);
+        }
+
+        await RemoveUser(user, cancellationToken);
+
+        return Unit.Value;
+    }
+
+    private async Task RemoveUser(User user, CancellationToken cancellationToken)
+    {
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync(cancellationToken);
+    }
+}

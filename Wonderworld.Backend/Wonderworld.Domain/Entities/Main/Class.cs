@@ -1,4 +1,5 @@
-using Wonderworld.Domain.ConnectionEntities;
+using Wonderworld.Domain.Entities.Education;
+using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Domain.Entities.Main;
 
@@ -8,9 +9,8 @@ public class Class
     
     public Guid UserId { get; set; }
     public User User { get; set; }
-    public int ClassNumber { get; set; }
-    public int ClassAge { get; set; }
-
+    public Guid GradeId { get; set; }
+    public Grade Grade { get; set; }
 
     public ICollection<ClassLanguage> ClassLanguages { get; set; }
     public DateTime CreatedAt { get; set; }

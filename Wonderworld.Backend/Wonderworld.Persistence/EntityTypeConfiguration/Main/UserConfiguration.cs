@@ -30,8 +30,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(t => t.EstablishmentId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.Property(t => t.Aims)
-            .HasMaxLength(255);
         builder.Property(t => t.Description)
             .HasMaxLength(300);
 
