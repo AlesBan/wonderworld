@@ -1,11 +1,11 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Handlers.CountryHandlers.Commands.DeleteCountry;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Location;
-using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.CountryHandlers.Commands.DeleteCountry;
+namespace Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Commands.DeleteCountry;
 
 public class DeleteCountryCommandHandler : IRequestHandler<DeleteCountryCommand>
 {

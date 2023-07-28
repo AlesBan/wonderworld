@@ -1,9 +1,8 @@
 using MediatR;
-using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Location;
 
-namespace Wonderworld.Application.Handlers.CountryHandlers.Commands.CreateCountry;
+namespace Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Commands.CreateCountry;
 
 public class CreateCountryCommandHandler : IRequestHandler<CreateCountryCommand, Guid>
 {

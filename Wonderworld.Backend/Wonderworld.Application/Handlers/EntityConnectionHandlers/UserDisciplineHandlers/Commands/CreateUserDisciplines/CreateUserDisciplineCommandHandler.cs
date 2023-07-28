@@ -14,7 +14,7 @@ public class CreateUserDisciplineCommandHandler : IRequestHandler<CreateUserDisc
         _context = context;
     }
 
-    public Task<Unit> Handle(CreateUserDisciplineCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateUserDisciplineCommand request, CancellationToken cancellationToken)
     {
         var userDiscipline = new UserDiscipline
         {
@@ -23,8 +23,8 @@ public class CreateUserDisciplineCommandHandler : IRequestHandler<CreateUserDisc
         };
 
         _context.UserDisciplines.AddRange(userDiscipline);
-        _context.SaveChangesAsync(cancellationToken);
+       await _context.SaveChangesAsync(cancellationToken);
 
-        return Task.FromResult(Unit.Value);
+       return Unit.Value;
     }
 }

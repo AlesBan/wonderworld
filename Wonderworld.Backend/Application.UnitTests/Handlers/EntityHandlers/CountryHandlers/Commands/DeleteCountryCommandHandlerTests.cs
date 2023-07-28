@@ -2,6 +2,7 @@ using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Handlers.CountryHandlers.Commands.DeleteCountry;
+using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Commands.DeleteCountry;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.CountryHandlers.Commands;

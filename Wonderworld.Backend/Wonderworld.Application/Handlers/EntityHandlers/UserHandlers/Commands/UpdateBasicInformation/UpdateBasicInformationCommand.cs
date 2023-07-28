@@ -2,7 +2,7 @@ using MediatR;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.EntityConnections;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateBasicInformation;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateBasicInformation;
 
 public class UpdateBasicInformationCommand : IRequest
 {

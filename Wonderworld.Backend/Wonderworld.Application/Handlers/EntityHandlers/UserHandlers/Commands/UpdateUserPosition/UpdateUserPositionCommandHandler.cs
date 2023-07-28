@@ -4,7 +4,7 @@ using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateUserPosition;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPosition;
 
 public class UpdateUserPositionCommandHandler: IRequestHandler<UpdateUserPositionCommand>
 {

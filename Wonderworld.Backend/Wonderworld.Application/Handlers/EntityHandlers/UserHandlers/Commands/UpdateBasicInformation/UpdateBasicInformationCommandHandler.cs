@@ -1,7 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
-using Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateBasicInformation;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 

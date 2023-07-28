@@ -2,7 +2,6 @@ using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateUserDescription;
-using Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateUserPosition;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.UserHandlers.Commands;

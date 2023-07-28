@@ -1,6 +1,6 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Handlers.CountryHandlers.Commands.CreateCountry;
+using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Commands.CreateCountry;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.CountryHandlers.Commands;
