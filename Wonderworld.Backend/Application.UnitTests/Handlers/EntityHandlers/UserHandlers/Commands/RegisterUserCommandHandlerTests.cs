@@ -1,6 +1,6 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Handlers.UserHandlers.Commands.RegisterUser;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.UserHandlers.Commands;

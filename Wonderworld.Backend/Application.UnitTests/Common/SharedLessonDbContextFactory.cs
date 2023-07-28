@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Interfaces;
-using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
@@ -28,6 +27,10 @@ public class SharedLessonDbContextFactory
     public static readonly Guid EstablishmentBId = Guid.NewGuid();
     public static readonly Guid EstablishmentForDeleteId = Guid.NewGuid();
 
+    public static readonly Guid ClassAId = Guid.NewGuid();
+    public static readonly Guid ClassForUpdateId = Guid.NewGuid();
+    public static readonly Guid ClassForDeleteId = Guid.NewGuid();
+
     public static SharedLessonDbContext Create()
     {
         var options = new DbContextOptionsBuilder<SharedLessonDbContext>()
@@ -40,15 +43,20 @@ public class SharedLessonDbContextFactory
         AppendCountries(context);
         AppendCities(context);
         AppendEstablishments(context);
-        context.SaveChanges();
+        context.SaveChangesAsync();
 
         AppendUsers(context);
-        context.SaveChanges();
+        context.SaveChangesAsync();
+
+        AppendClasses(context);
+        context.SaveChangesAsync();
 
         AppendUserDisciplines(context);
         AppendUserLanguages(context);
         AppendUserGrades(context);
-        context.SaveChanges();
+        AppendClassLanguages(context);
+        AppendClassDisciplines(context);
+        context.SaveChangesAsync();
         return context;
     }
 
@@ -100,6 +108,84 @@ public class SharedLessonDbContextFactory
                 Password = "passwordForDelete",
                 IsVerified = true
             });
+    }
+
+    private static void AppendClasses(SharedLessonDbContext context)
+    {
+        context.Classes.AddRange(
+            new Class()
+            {
+                UserId = UserAId,
+                ClassId = ClassAId,
+                Title = "title",
+                Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 10)!,
+                Age = 10,
+                PhotoUrl = "PhotoUrl",
+                CreatedAt = DateTime.Today
+            },
+            new Class()
+            {
+                UserId = UserAId,
+                ClassId = ClassForUpdateId,
+                Title = "title",
+                Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
+                Age = 10,
+                PhotoUrl = "PhotoUrl",
+                CreatedAt = DateTime.Today
+            },
+            new Class()
+            {
+                UserId = UserAId,
+                ClassId = ClassForDeleteId,
+                Title = "title",
+                Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 10)!,
+                Age = 10,
+                PhotoUrl = "PhotoUrl",
+                CreatedAt = DateTime.Today
+            }
+        );
+    }
+
+    private static void AppendClassLanguages(ISharedLessonDbContext context)
+    {
+        context.ClassLanguages.AddRangeAsync(
+            new ClassLanguage()
+            {
+                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassAId)!,
+                Language = context.Languages.FirstOrDefault(l => l.Title == "English")!
+            },
+            new ClassLanguage()
+            {
+                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassForUpdateId)!,
+                Language = context.Languages.FirstOrDefault(l => l.Title == "English")!
+            },
+            new ClassLanguage()
+            {
+                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassForDeleteId)!,
+                Language = context.Languages.FirstOrDefault(l => l.Title == "English")!
+            }
+        );
+    }
+    
+    private static void AppendClassDisciplines(ISharedLessonDbContext context)
+    {
+        context.ClassDisciplines.AddRangeAsync(
+            new ClassDiscipline()
+            {
+                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassAId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!
+            },
+            new ClassDiscipline()
+            {
+                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassForUpdateId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!
+            },
+            new ClassDiscipline()
+            {
+                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassForDeleteId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!
+            }
+        );
     }
 
     private static void AppendUserGrades(ISharedLessonDbContext context)

@@ -2,12 +2,13 @@ using MediatR;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
+using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.CreateUserAccount;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 
 public class CreateUserAccountCommand : IRequest
 {
-    public Guid UserId { get; set; }
+    public User User { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public bool IsATeacher { get; set; }
@@ -15,6 +16,7 @@ public class CreateUserAccountCommand : IRequest
     public City CityLocation { get; set; }
     public Establishment Establishment { get; set; }
     public ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();
-    
+    public ICollection<Language> Languages { get; set; } = new List<Language>();
+
     public string PhotoUrl { get; set; }
 }

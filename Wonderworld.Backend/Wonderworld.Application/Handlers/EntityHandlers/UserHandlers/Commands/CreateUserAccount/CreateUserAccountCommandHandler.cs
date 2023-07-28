@@ -1,12 +1,10 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.UpdateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Application.Interfaces;
-using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Domain.EntityConnections;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.CreateUserAccount;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 
 public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccountCommand>
 {
@@ -19,31 +17,36 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
 
     public async Task<Unit> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users
-            .FirstOrDefaultAsync(u => u.UserId == request.UserId, cancellationToken);
+        MapUser(request.User, request);
 
-        if (user == null)
-        {
-            throw new NotFoundException(nameof(User), request.UserId);
-        }
+        await SeedUserLanguages(request.User, request, cancellationToken);
+        await SeedUserDisciplines(request.User, request, cancellationToken);
 
-        MapUser(user, request);
-        SeedUserDisciplines(user, request);
-
-        _context.Users.Update(user);
+        _context.Users.Update(request.User);
         await _context.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }
 
-    private void SeedUserDisciplines(User user, CreateUserAccountCommand request)
+    private async Task SeedUserLanguages(User user, CreateUserAccountCommand request,
+        CancellationToken cancellationToken = default)
     {
-        var userDisciplines = request.Disciplines.Select(d => new UserDiscipline
+        var handler = new UpdateUserLanguagesCommandHandler(_context);
+        await handler.Handle(new UpdateUserLanguagesCommand
         {
-            Discipline = d,
-            UserId = user.UserId
-        }).ToList();
+            User = user,
+            NewLanguages = request.Languages
+        }, cancellationToken);
+    }
 
-        _context.UserDisciplines.AddRange(userDisciplines);
+    private async Task SeedUserDisciplines(User user, CreateUserAccountCommand request,
+        CancellationToken cancellationToken = default)
+    {
+        var handler = new UpdateUserDisciplinesCommandHandler(_context);
+        await handler.Handle(new UpdateUserDisciplinesCommand()
+        {
+            User = user,
+            NewDisciplines = request.Disciplines
+        }, cancellationToken);
     }
 
     private static void MapUser(User user, CreateUserAccountCommand request)

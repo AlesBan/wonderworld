@@ -2,7 +2,7 @@ using MediatR;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.RegisterUser;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 
 public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Guid>
 {
@@ -22,7 +22,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, G
         return await Task.FromResult(user.UserId);
     }
 
-    private User MapUser(RegisterUserCommand request)
+    private static User MapUser(RegisterUserCommand request)
     {
         var user = new User()
         {

@@ -1,10 +1,7 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
-using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.UpdateUserDescription;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserDescription;
 
 public class UpdateUserDescriptionCommandHandler : IRequestHandler<UpdateUserDescriptionCommand>
 {
@@ -17,26 +14,11 @@ public class UpdateUserDescriptionCommandHandler : IRequestHandler<UpdateUserDes
 
     public async Task<Unit> Handle(UpdateUserDescriptionCommand request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users
-            .FirstOrDefaultAsync(t =>
-                    t.UserId == request.UserId,
-                cancellationToken: cancellationToken);
+        request.User.Description = request.Description;
 
-        if (user == null)
-        {
-            throw new NotFoundException(nameof(User), request.UserId);
-        }
-
-        MapUser(user, request);
-
-        _context.Users.Update(user);
+        _context.Users.Update(request.User);
         await _context.SaveChangesAsync(cancellationToken);
 
         return await Task.FromResult(Unit.Value);
-    }
-    
-    private static void MapUser(User user, UpdateUserDescriptionCommand request)
-    {
-        user.Description = request.Description;
     }
 }

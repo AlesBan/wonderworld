@@ -1,6 +1,4 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -17,19 +15,10 @@ public class UpdateUserPositionCommandHandler: IRequestHandler<UpdateUserPositio
 
     public async Task<Unit> Handle(UpdateUserPositionCommand request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users
-            .FirstOrDefaultAsync(t =>
-                    t.UserId == request.UserId,
-                cancellationToken: cancellationToken);
-
-        if (user == null)
-        {
-            throw new NotFoundException(nameof(User), request.UserId);
-        }
         
-        MapUser(user, request);
+        MapUser(request.User, request);
 
-        _context.Users.Update(user);
+        _context.Users.Update(request.User);
         await _context.SaveChangesAsync(cancellationToken);
 
         return await Task.FromResult(Unit.Value);

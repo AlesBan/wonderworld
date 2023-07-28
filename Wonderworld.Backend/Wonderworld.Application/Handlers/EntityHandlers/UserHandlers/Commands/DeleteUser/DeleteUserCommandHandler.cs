@@ -4,7 +4,7 @@ using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.DeleteUser;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
 
 public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
 {
@@ -17,23 +17,9 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
 
     public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users.FirstOrDefaultAsync(t =>
-                t.UserId == request.UserId,
-            cancellationToken: cancellationToken);
-        
-        if (user == null)
-        {
-            throw new NotFoundException(nameof(User), request.UserId);
-        }
-
-        await RemoveUser(user, cancellationToken);
+        _context.Users.Remove(request.User);
+        await _context.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
-    }
-
-    private async Task RemoveUser(User user, CancellationToken cancellationToken)
-    {
-        _context.Users.Remove(user);
-        await _context.SaveChangesAsync(cancellationToken);
     }
 }

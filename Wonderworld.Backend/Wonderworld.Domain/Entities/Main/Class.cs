@@ -6,15 +6,19 @@ namespace Wonderworld.Domain.Entities.Main;
 public class Class
 {
     public Guid ClassId { get; set; }
-    
     public Guid UserId { get; set; }
     public User User { get; set; }
+    
+    public string Title { get; set; }
     public Guid GradeId { get; set; }
     public Grade Grade { get; set; }
+    
+    public int Age { get; set; }
+    public string PhotoUrl { get; set; }
 
-    public ICollection<ClassLanguage> ClassLanguages { get; set; }
+    public ICollection<ClassLanguage> ClassLanguages { get; set; } = new List<ClassLanguage>();
     public DateTime CreatedAt { get; set; }
     public DateTime DeletedAt { get; set; }
 
-    public ICollection<ClassDiscipline> ClassDisciplines { get; set; }
+    public ICollection<ClassDiscipline> ClassDisciplines { get; set; } = new List<ClassDiscipline>();
 }

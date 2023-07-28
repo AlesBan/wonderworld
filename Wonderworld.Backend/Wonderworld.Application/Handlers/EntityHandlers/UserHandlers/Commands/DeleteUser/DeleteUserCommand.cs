@@ -1,8 +1,9 @@
 using MediatR;
+using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.UserHandlers.Commands.DeleteUser;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
 
 public class DeleteUserCommand : IRequest
 {
-    public Guid UserId { get; set; }
+    public User User { get; set; }
 }

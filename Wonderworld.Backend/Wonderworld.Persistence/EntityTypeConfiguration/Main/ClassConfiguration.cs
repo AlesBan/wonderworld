@@ -19,6 +19,17 @@ public class ClassConfiguration : IEntityTypeConfiguration<Class>
             .WithMany(g => g.Classes)
             .HasForeignKey(c => c.GradeId)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.Property(c => c.Title)
+            .HasMaxLength(40)
+            .IsRequired();
+
+        builder.Property(c => c.Age)
+            .HasColumnType("smallint")
+            .IsRequired();
+
+        builder.Property(c => c.PhotoUrl)
+            .HasMaxLength(200);
 
         builder.Property(c => c.CreatedAt)
             .HasDefaultValueSql("now()")
