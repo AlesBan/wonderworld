@@ -31,7 +31,7 @@
 }
 
 .content {
-    margin: 0 auto;
+    position: relative;
     width: 384px
 }
 
@@ -51,6 +51,7 @@
     display: flex;
     gap: 8px;
     justify-content: center;
+
 }
 
 .label {
@@ -59,6 +60,7 @@
     font-size: 16px;
     line-height: 24px;
     color: #0C0F12;
+
 }
 
 .CTA-button {
@@ -74,6 +76,8 @@
 
 .content-body {
     margin: 30px 0 0 0;
+
+
 }
 
 .CTAs {
@@ -147,6 +151,12 @@
 
 .email, .password, .confirm-password {
     margin-top: 16px;
+
+}
+
+.password-container {
+    display: flex;
+    justify-content: space-between;
 }
 
 .input-title {
@@ -155,6 +165,17 @@
     font-size: 14px;
     line-height: 20px;
     color: #0C0F12;
+}
+
+.forget-password {
+    font-family: 'Inter', serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #216C5E;
+    text-decoration: underline;
+    background-color: #FFFFFF;
+    border: none;
 }
 
 .email-input, .password-input, .confirm-password-input {
@@ -194,4 +215,25 @@
     font-size: 14px;
     line-height: 20px;
     color: #3E4C5B;
+}
+
+.dialog {
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 100%;
+
+}
+
+.dialog.shown {
+    display: block;
+}
+
+.checkEmail {
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 100%;
 }
