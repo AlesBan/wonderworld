@@ -8,37 +8,49 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 {
     public void Configure(EntityTypeBuilder<Invitation> builder)
     {
-        builder.HasKey(t => t.InvitationId);
-        builder.HasIndex(t => t.InvitationId)
+        builder.HasKey(i => i.InvitationId);
+        builder.HasIndex(i => i.InvitationId)
             .IsUnique();
-        builder.Property(t => t.InvitationId)
+        builder.Property(i => i.InvitationId)
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
 
-        builder.HasOne(t => t.UserInvitationSender)
+        builder.HasOne(i => i.UserSender)
             .WithMany(ti => ti.SentInvitations)
-            .HasForeignKey(ti => ti.UserInvitationSenderId)
+            .HasForeignKey(ti => ti.UserSenderId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
         
-        builder.HasOne(t => t.UserInvitationRecipient)
-            .WithMany(tr => tr.ReceivedInvitations)
-            .HasForeignKey(t => t.UserInvitationRecipientId)
+        builder.HasOne(i => i.UserRecipient)
+            .WithMany(ur => ur.ReceivedInvitations)
+            .HasForeignKey(i => i.UserRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
 
-        builder.Property(t => t.CreatedAt)
+        builder.HasOne(i=>i.ClassSender)
+            .WithMany(cl=>cl.SentInvitations)
+            .HasForeignKey(i=>i.ClassSenderId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .IsRequired();
+        
+        builder.HasOne(i=>i.ClassRecipient)
+            .WithMany(cl=>cl.ReceivedInvitations)
+            .HasForeignKey(i=>i.ClassRecipientId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .IsRequired();
+            
+        builder.Property(i => i.CreatedAt)
             .HasDefaultValueSql("now()")
             .ValueGeneratedOnAdd()
             .IsRequired();
         
-        builder.Property(t => t.DateOfInvitation)
+        builder.Property(i => i.DateOfInvitation)
             .IsRequired();
 
-        builder.Property(t => t.InvitationText)
+        builder.Property(i => i.InvitationText)
             .HasMaxLength(255);
         
-        builder.Property(t => t.Status)
+        builder.Property(i => i.Status)
             .HasDefaultValue("Pending")
             .IsRequired();
     }

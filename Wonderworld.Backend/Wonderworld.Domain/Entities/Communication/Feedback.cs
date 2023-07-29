@@ -11,6 +11,11 @@ public class Feedback
     public Guid? UserFeedbackRecipientId { get; set; }
     public User UserFeedbackRecipient { get; set; }
     
+    public Guid ClassSenderId { get; set; }
+    public Class ClassSender { get; set; }
+
+    public Guid ClassRecipientId { get; set; }
+    public Class ClassRecipient { get; set; }
     public bool WasTheJointLesson  { get; set; }
     public string? ReasonForNotConducting  { get; set; }
     

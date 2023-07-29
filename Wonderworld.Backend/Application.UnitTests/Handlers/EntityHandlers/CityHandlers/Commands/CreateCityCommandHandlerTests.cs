@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Commands.CreateCity;
 using Xunit;
 
-namespace Application.UnitTests.Handlers.CityHandlers.Commands;
+namespace Application.UnitTests.Handlers.EntityHandlers.CityHandlers.Commands;
 
 public class CreateCityCommandHandlerTests : TestCommonBase
 {

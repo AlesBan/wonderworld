@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Domain.Entities.Education;
+using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums;
 using Wonderworld.Persistence.EntityTypeConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
@@ -41,6 +42,7 @@ public static class ModelBuilderExtensions
         modelBuilder.SeedingGrades();
         modelBuilder.SeedingDisciplines();
         modelBuilder.SeedingLanguages();
+        modelBuilder.SeedingRoles();
     }
 
     private static void SeedingGrades(this ModelBuilder modelBuilder)
@@ -76,6 +78,17 @@ public static class ModelBuilderExtensions
             {
                 LanguageId = Guid.NewGuid(),
                 Title = l.ToString()
+            }).ToList());
+    }
+
+    private static void SeedingRoles(this ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Role>().HasData(((RoleTypes[])
+            Enum.GetValues(typeof(RoleTypes))).Select(r =>
+            new Role()
+            {
+                RoleId = Guid.NewGuid(),
+                Title = r.ToString()
             }).ToList());
     }
 }

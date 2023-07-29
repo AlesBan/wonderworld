@@ -18,12 +18,26 @@ public class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
         builder.HasOne(f => f.UserFeedbackSender)
             .WithMany(t => t.SentFeedbacks)
             .HasForeignKey(f => f.UserFeedbackSenderId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .IsRequired();
         
         builder.HasOne(f => f.UserFeedbackRecipient)
             .WithMany(t => t.ReceivedFeedbacks)
             .HasForeignKey(f => f.UserFeedbackRecipientId)
-            .OnDelete(DeleteBehavior.ClientSetNull);
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .IsRequired();
+        
+        builder.HasOne(f => f.ClassSender)
+            .WithMany(t => t.SentFeedbacks)
+            .HasForeignKey(f => f.ClassSenderId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .IsRequired();
+        
+        builder.HasOne(f => f.ClassRecipient)
+            .WithMany(t => t.ReceivedFeedbacks)
+            .HasForeignKey(f => f.ClassRecipientId)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .IsRequired();
 
         builder.Property(f => f.WasTheJointLesson)
             .IsRequired();

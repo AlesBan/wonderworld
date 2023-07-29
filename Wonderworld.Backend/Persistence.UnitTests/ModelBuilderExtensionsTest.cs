@@ -17,6 +17,7 @@ public class ModelBuilderExtensionsTest : TestCommonBase
         // Assert
         Assert.NotEmpty(await Context.Disciplines.ToListAsync());
         Assert.NotEmpty(await Context.Languages.ToListAsync());
+        Assert.NotEmpty(await Context.Roles.ToListAsync());
         Assert.Equal(12, await Context.Grades.CountAsync());
     }
 }
