@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Interfaces;
+using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
@@ -29,8 +30,14 @@ public class SharedLessonDbContextFactory
     public static readonly Guid EstablishmentForDeleteId = Guid.NewGuid();
 
     public static readonly Guid ClassAId = Guid.NewGuid();
+    public static readonly Guid ClassBId = Guid.NewGuid();
     public static readonly Guid ClassForUpdateId = Guid.NewGuid();
     public static readonly Guid ClassForDeleteId = Guid.NewGuid();
+
+    public static readonly Guid InvitationAId = Guid.NewGuid();
+    public static readonly Guid InvitationForDeleteId = Guid.NewGuid();
+
+    public static readonly Guid FeedbackForDeleteId = Guid.NewGuid();
 
     public static SharedLessonDbContext Create()
     {
@@ -44,10 +51,8 @@ public class SharedLessonDbContextFactory
         AppendCountries(context);
         AppendCities(context);
         AppendEstablishments(context);
-        context.SaveChangesAsync();
 
         AppendUsers(context);
-        context.SaveChangesAsync();
 
         AppendClasses(context);
         context.SaveChangesAsync();
@@ -56,9 +61,12 @@ public class SharedLessonDbContextFactory
         AppendUserLanguages(context);
         AppendUserGrades(context);
         AppendUserRoles(context);
-
         AppendClassLanguages(context);
         AppendClassDisciplines(context);
+
+        AppendInvitations(context);
+        AppendFeedbacks(context);
+        
         context.SaveChangesAsync();
         return context;
     }
@@ -165,7 +173,7 @@ public class SharedLessonDbContextFactory
             },
             new Class()
             {
-                UserId = UserBId,
+                UserId = UserAId,
                 ClassId = ClassForDeleteId,
                 Title = "titleA",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
@@ -176,12 +184,54 @@ public class SharedLessonDbContextFactory
             new Class()
             {
                 UserId = UserBId,
-                ClassId = ClassForDeleteId,
+                ClassId = ClassBId,
                 Title = "titleB",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 6)!,
                 Age = 11,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
+            }
+        );
+    }
+
+    private static void AppendInvitations(ISharedLessonDbContext context)
+    {
+        context.Invitations.AddRange(
+            new Invitation()
+            {
+                InvitationId = InvitationAId,
+                UserSender = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
+                UserRecipient = context.Users.FirstOrDefault(u => u.UserId == UserBId)!,
+                ClassSender = context.Classes.FirstOrDefault(c => c.ClassId == ClassAId)!,
+                ClassRecipient = context.Classes.FirstOrDefault(c => c.ClassId == ClassBId)!,
+                DateOfInvitation = DateTime.Today,
+                Status = InvitationStatus.Pending.ToString()
+            },
+            new Invitation()
+            {
+                InvitationId = InvitationForDeleteId,
+                UserSender = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
+                UserRecipient = context.Users.FirstOrDefault(u => u.UserId == UserBId)!,
+                ClassSender = context.Classes.FirstOrDefault(c => c.ClassId == ClassAId)!,
+                ClassRecipient = context.Classes.FirstOrDefault(c => c.ClassId == ClassBId)!,
+                DateOfInvitation = DateTime.Today,
+                Status = InvitationStatus.Pending.ToString()
+            }
+        );
+    }
+
+    private static void AppendFeedbacks(ISharedLessonDbContext context)
+    {
+        context.Feedbacks.AddRangeAsync(
+            new Feedback()
+            {
+                FeedbackId = FeedbackForDeleteId,
+                Invitation = context.Invitations.FirstOrDefault(i
+                    => i.InvitationId == InvitationAId)!,
+                WasTheJointLesson = true,
+                ReasonForNotConducting = null,
+                FeedbackText = "ABOBA",
+                Rating = 5
             }
         );
     }

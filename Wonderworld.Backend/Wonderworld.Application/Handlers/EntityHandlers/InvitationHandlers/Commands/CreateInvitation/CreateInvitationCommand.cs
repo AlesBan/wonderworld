@@ -5,8 +5,11 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.InvitationHandlers.Com
 
 public class CreateInvitationCommand : IRequest<Guid>
 {
-    public User UserInvitationSender { get; set; }
-    public User UserInvitationRecipient { get; set; }
+    public User UserSender { get; set; }
+    public User UserRecipient { get; set; }
+    public Class ClassSender { get; set; }
+    public Class ClassRecipient { get; set; }
     public DateTime DateOfInvitation { get; set; }
+    public string Status { get; set; }
     public string? InvitationText { get; set; }
 }

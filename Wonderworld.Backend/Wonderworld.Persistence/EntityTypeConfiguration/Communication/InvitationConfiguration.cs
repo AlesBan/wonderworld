@@ -20,38 +20,38 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
             .HasForeignKey(ti => ti.UserSenderId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
-        
+
         builder.HasOne(i => i.UserRecipient)
             .WithMany(ur => ur.ReceivedInvitations)
             .HasForeignKey(i => i.UserRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
 
-        builder.HasOne(i=>i.ClassSender)
-            .WithMany(cl=>cl.SentInvitations)
-            .HasForeignKey(i=>i.ClassSenderId)
+        builder.HasOne(i => i.ClassSender)
+            .WithMany(cl => cl.SentInvitations)
+            .HasForeignKey(i => i.ClassSenderId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
-        
-        builder.HasOne(i=>i.ClassRecipient)
-            .WithMany(cl=>cl.ReceivedInvitations)
-            .HasForeignKey(i=>i.ClassRecipientId)
+
+        builder.HasOne(i => i.ClassRecipient)
+            .WithMany(cl => cl.ReceivedInvitations)
+            .HasForeignKey(i => i.ClassRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
-            
+
         builder.Property(i => i.CreatedAt)
             .HasDefaultValueSql("now()")
             .ValueGeneratedOnAdd()
             .IsRequired();
-        
+
         builder.Property(i => i.DateOfInvitation)
             .IsRequired();
 
         builder.Property(i => i.InvitationText)
             .HasMaxLength(255);
-        
+
         builder.Property(i => i.Status)
             .HasDefaultValue("Pending")
-            .IsRequired();
+            .ValueGeneratedOnAdd();
     }
 }

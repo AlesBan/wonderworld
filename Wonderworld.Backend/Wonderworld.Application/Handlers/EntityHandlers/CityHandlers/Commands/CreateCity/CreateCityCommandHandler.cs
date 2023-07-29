@@ -33,7 +33,7 @@ public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Guid>
 
         await AddCity(city, cancellationToken);
 
-        return await Task.FromResult(city.CityId);
+        return city.CityId;
     }
 
     private async Task AddCity(City city, CancellationToken cancellationToken)

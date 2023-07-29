@@ -19,4 +19,5 @@ public class Invitation
     public DateTime DateOfInvitation { get; set; }
     public string Status { get; set; }
     public string? InvitationText { get; set; }
+    public Feedback Feedback { get; set; }
 }

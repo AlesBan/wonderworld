@@ -17,10 +17,13 @@ public class CreateInvitationCommandHandler : IRequestHandler<CreateInvitationCo
     {
         var invitation = new Invitation()
         {
-            UserSender = request.UserInvitationSender,
-            UserRecipient = request.UserInvitationRecipient,
+            UserSender = request.UserSender,
+            UserRecipient = request.UserRecipient,
+            ClassSender = request.ClassSender,
+            ClassRecipient = request.ClassRecipient,
             DateOfInvitation = request.DateOfInvitation,
-            InvitationText = request.InvitationText
+            InvitationText = request.InvitationText,
+            Status = request.Status
         };
 
         await _context.Invitations.AddAsync(invitation, cancellationToken);

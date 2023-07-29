@@ -3,10 +3,9 @@ using Wonderworld.Application.Interfaces;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.InvitationHandlers.Commands.DeleteInvitation;
 
-public class DeleteInvitationCommandHandler: IRequestHandler<DeleteInvitationCommand>
+public class DeleteInvitationCommandHandler : IRequestHandler<DeleteInvitationCommand>
 {
     private readonly ISharedLessonDbContext _context;
-
     public DeleteInvitationCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
@@ -16,7 +15,7 @@ public class DeleteInvitationCommandHandler: IRequestHandler<DeleteInvitationCom
     {
         _context.Invitations.Remove(request.Invitation);
         await _context.SaveChangesAsync(cancellationToken);
-        
+
         return Unit.Value;
     }
 }

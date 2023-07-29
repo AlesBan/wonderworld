@@ -15,28 +15,9 @@ public class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
 
-        builder.HasOne(f => f.UserFeedbackSender)
-            .WithMany(t => t.SentFeedbacks)
-            .HasForeignKey(f => f.UserFeedbackSenderId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
-            .IsRequired();
-        
-        builder.HasOne(f => f.UserFeedbackRecipient)
-            .WithMany(t => t.ReceivedFeedbacks)
-            .HasForeignKey(f => f.UserFeedbackRecipientId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
-            .IsRequired();
-        
-        builder.HasOne(f => f.ClassSender)
-            .WithMany(t => t.SentFeedbacks)
-            .HasForeignKey(f => f.ClassSenderId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
-            .IsRequired();
-        
-        builder.HasOne(f => f.ClassRecipient)
-            .WithMany(t => t.ReceivedFeedbacks)
-            .HasForeignKey(f => f.ClassRecipientId)
-            .OnDelete(DeleteBehavior.ClientSetNull)
+        builder.HasOne(f => f.Invitation)
+            .WithOne(i => i.Feedback)
+            .HasForeignKey<Feedback>(f => f.InvitationId)
             .IsRequired();
 
         builder.Property(f => f.WasTheJointLesson)
@@ -44,7 +25,7 @@ public class FeedbackConfiguration : IEntityTypeConfiguration<Feedback>
 
         builder.Property(f => f.ReasonForNotConducting)
             .HasMaxLength(255);
-        
+
         builder.Property(f => f.FeedbackText)
             .HasMaxLength(255);
         builder.Property(f => f.Rating)
