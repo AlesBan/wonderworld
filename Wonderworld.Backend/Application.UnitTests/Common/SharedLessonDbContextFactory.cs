@@ -12,6 +12,7 @@ namespace Application.UnitTests.Common;
 public class SharedLessonDbContextFactory
 {
     public static readonly Guid UserAId = Guid.NewGuid();
+    public static readonly Guid UserBId = Guid.NewGuid();
     public static readonly Guid UserRegisteredId = Guid.NewGuid();
     public static readonly Guid UserForDeleteId = Guid.NewGuid();
 
@@ -54,6 +55,8 @@ public class SharedLessonDbContextFactory
         AppendUserDisciplines(context);
         AppendUserLanguages(context);
         AppendUserGrades(context);
+        AppendUserRoles(context);
+
         AppendClassLanguages(context);
         AppendClassDisciplines(context);
         context.SaveChangesAsync();
@@ -78,7 +81,6 @@ public class SharedLessonDbContextFactory
                 LastName = "LastName",
                 IsATeacher = true,
                 IsAnExpert = false,
-                Classes = null,
                 Establishment = context.Establishments.FirstOrDefault(e =>
                     e.EstablishmentId == EstablishmentAId)!,
                 CityLocation = context.Cities.FirstOrDefault(c =>
@@ -93,6 +95,34 @@ public class SharedLessonDbContextFactory
                 RegisteredAt = DateTime.Today,
                 CreatedAt = DateTime.Today,
 
+                UserRoles = null,
+                IsVerified = true,
+                VerifiedAt = default,
+                LastOnlineAt = DateTime.Today,
+                DeletedAt = default,
+            },
+            new User
+            {
+                UserId = UserBId,
+                Email = "emailB",
+                Password = "passwordB",
+                FirstName = "FirstNameB",
+                LastName = "LastNameB",
+                IsATeacher = true,
+                IsAnExpert = true,
+                Establishment = context.Establishments.FirstOrDefault(e =>
+                    e.EstablishmentId == EstablishmentAId)!,
+                CityLocation = context.Cities.FirstOrDefault(c =>
+                    c.CityId == CityAId)!,
+                ReceivedInvitations = null,
+                SentInvitations = null,
+                ReceivedFeedbacks = null,
+                SentFeedbacks = null,
+                Description = "Description",
+                PhotoUrl = "PhotoUrl",
+                BannerPhotoUrl = "BannerPhotoUrl",
+                RegisteredAt = DateTime.Today,
+                CreatedAt = DateTime.Today,
                 UserRoles = null,
                 IsVerified = true,
                 VerifiedAt = default,
@@ -135,13 +165,39 @@ public class SharedLessonDbContextFactory
             },
             new Class()
             {
-                UserId = UserAId,
+                UserId = UserBId,
                 ClassId = ClassForDeleteId,
-                Title = "title",
-                Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 10)!,
+                Title = "titleA",
+                Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
+            },
+            new Class()
+            {
+                UserId = UserBId,
+                ClassId = ClassForDeleteId,
+                Title = "titleB",
+                Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 6)!,
+                Age = 11,
+                PhotoUrl = "PhotoUrl",
+                CreatedAt = DateTime.Today
+            }
+        );
+    }
+
+    private static void AppendUserRoles(ISharedLessonDbContext context)
+    {
+        context.UserRoles.AddRangeAsync(
+            new UserRole()
+            {
+                Role = context.Roles.FirstOrDefault(r => r.Title == "User")!,
+                User = context.Users.FirstOrDefault(u => u.UserId == UserAId)!
+            },
+            new UserRole()
+            {
+                Role = context.Roles.FirstOrDefault(r => r.Title == "User")!,
+                User = context.Users.FirstOrDefault(u => u.UserId == UserBId)!
             }
         );
     }
@@ -166,7 +222,7 @@ public class SharedLessonDbContextFactory
             }
         );
     }
-    
+
     private static void AppendClassDisciplines(ISharedLessonDbContext context)
     {
         context.ClassDisciplines.AddRangeAsync(

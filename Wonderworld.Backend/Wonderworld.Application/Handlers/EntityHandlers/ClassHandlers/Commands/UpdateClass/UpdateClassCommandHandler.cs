@@ -1,5 +1,4 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.EntityConnections;
@@ -45,22 +44,4 @@ public class UpdateClassCommandHandler : IRequestHandler<UpdateClassCommand>
 
         @class.PhotoUrl = request.PhotoUrl;
     }
-
-    private async void UpdateDisciplines(Class @class, UpdateClassCommand request)
-    {
-        var classDisciplines = await _context.ClassDisciplines.FirstOrDefaultAsync(cd =>
-            cd.ClassId == @class.ClassId);
-
-        if (classDisciplines != null)
-        {
-            _context.ClassDisciplines.RemoveRange(classDisciplines);
-        }
-
-        var classDisciplinesToAdd = request.Disciplines.Select(disc => new ClassDiscipline
-        {
-            Discipline = disc,
-            Class = @class
-        });
-    }
 }
-
