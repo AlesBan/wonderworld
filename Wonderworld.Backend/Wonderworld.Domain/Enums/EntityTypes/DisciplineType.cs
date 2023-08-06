@@ -1,6 +1,6 @@
-namespace Wonderworld.Domain.Enums;
+namespace Wonderworld.Domain.Enums.EntityTypes;
 
-public enum DisciplineTypes
+public enum DisciplineType
 {
     Biology, 
     Chemistry,

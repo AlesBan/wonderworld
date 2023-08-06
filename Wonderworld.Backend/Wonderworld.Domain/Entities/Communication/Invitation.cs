@@ -17,7 +17,7 @@ public class Invitation
     public Class ClassRecipient { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime DateOfInvitation { get; set; }
-    public string Status { get; set; }
-    public string? InvitationText { get; set; }
+    public string Status { get; set; } = string.Empty;
+    public string? InvitationText { get; set; } = string.Empty;
     public Feedback Feedback { get; set; }
 }

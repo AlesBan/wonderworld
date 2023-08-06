@@ -6,6 +6,7 @@ using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.EntityConnections;
 using Wonderworld.Domain.Enums;
+using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence;
 
 namespace Application.UnitTests.Common;
@@ -122,10 +123,6 @@ public class SharedLessonDbContextFactory
                     e.EstablishmentId == EstablishmentAId)!,
                 CityLocation = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityAId)!,
-                ReceivedInvitations = null,
-                SentInvitations = null,
-                ReceivedFeedbacks = null,
-                SentFeedbacks = null,
                 Description = "Description",
                 PhotoUrl = "PhotoUrl",
                 BannerPhotoUrl = "BannerPhotoUrl",
@@ -389,21 +386,21 @@ public class SharedLessonDbContextFactory
             new Establishment()
             {
                 EstablishmentId = EstablishmentAId,
-                Type = EstablishmentTypes.School.ToString(),
+                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentA",
                 CityId = CityAId
             },
             new Establishment()
             {
                 EstablishmentId = EstablishmentBId,
-                Type = EstablishmentTypes.School.ToString(),
+                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentB",
                 CityId = CityBId
             },
             new Establishment()
             {
                 EstablishmentId = EstablishmentForDeleteId,
-                Type = EstablishmentTypes.School.ToString(),
+                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentForDelete",
                 CityId = CityAId
             });

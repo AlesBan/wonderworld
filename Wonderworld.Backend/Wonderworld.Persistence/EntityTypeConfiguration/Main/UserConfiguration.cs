@@ -21,7 +21,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(40);
 
         builder.HasOne(t => t.CityLocation)
-            .WithMany(cl => cl.Teachers)
+            .WithMany(cl => cl.Users)
             .HasForeignKey(t => t.CityLocationId)
             .OnDelete(DeleteBehavior.SetNull);
 

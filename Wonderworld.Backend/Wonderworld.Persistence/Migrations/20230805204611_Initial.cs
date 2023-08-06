@@ -115,21 +115,21 @@ namespace Wonderworld.Persistence.Migrations
                     UserId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
-                    FirstName = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
-                    LastName = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
-                    IsATeacher = table.Column<bool>(type: "boolean", nullable: false),
-                    IsAnExpert = table.Column<bool>(type: "boolean", nullable: false),
+                    FirstName = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    LastName = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: true),
+                    IsATeacher = table.Column<bool>(type: "boolean", nullable: true),
+                    IsAnExpert = table.Column<bool>(type: "boolean", nullable: true),
                     EstablishmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     CityLocationId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Description = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: false),
-                    PhotoUrl = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
-                    BannerPhotoUrl = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
+                    PhotoUrl = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    BannerPhotoUrl = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     RegisteredAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    IsVerified = table.Column<bool>(type: "boolean", nullable: false),
-                    VerifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsVerified = table.Column<bool>(type: "boolean", nullable: true),
+                    VerifiedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     LastOnlineAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -157,9 +157,9 @@ namespace Wonderworld.Persistence.Migrations
                     Title = table.Column<string>(type: "character varying(40)", maxLength: 40, nullable: false),
                     GradeId = table.Column<Guid>(type: "uuid", nullable: false),
                     Age = table.Column<short>(type: "smallint", nullable: false),
-                    PhotoUrl = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    PhotoUrl = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "now()"),
-                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    DeletedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -323,45 +323,6 @@ namespace Wonderworld.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Feedbacks",
-                columns: table => new
-                {
-                    FeedbackId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
-                    UserFeedbackSenderId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserFeedbackRecipientId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ClassSenderId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ClassRecipientId = table.Column<Guid>(type: "uuid", nullable: false),
-                    WasTheJointLesson = table.Column<bool>(type: "boolean", nullable: false),
-                    ReasonForNotConducting = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    FeedbackText = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
-                    Rating = table.Column<short>(type: "SMALLINT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Feedbacks", x => x.FeedbackId);
-                    table.ForeignKey(
-                        name: "FK_Feedbacks_Classes_ClassRecipientId",
-                        column: x => x.ClassRecipientId,
-                        principalTable: "Classes",
-                        principalColumn: "ClassId");
-                    table.ForeignKey(
-                        name: "FK_Feedbacks_Classes_ClassSenderId",
-                        column: x => x.ClassSenderId,
-                        principalTable: "Classes",
-                        principalColumn: "ClassId");
-                    table.ForeignKey(
-                        name: "FK_Feedbacks_Users_UserFeedbackRecipientId",
-                        column: x => x.UserFeedbackRecipientId,
-                        principalTable: "Users",
-                        principalColumn: "UserId");
-                    table.ForeignKey(
-                        name: "FK_Feedbacks_Users_UserFeedbackSenderId",
-                        column: x => x.UserFeedbackSenderId,
-                        principalTable: "Users",
-                        principalColumn: "UserId");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Invitations",
                 columns: table => new
                 {
@@ -400,21 +361,67 @@ namespace Wonderworld.Persistence.Migrations
                         principalColumn: "UserId");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Feedbacks",
+                columns: table => new
+                {
+                    FeedbackId = table.Column<Guid>(type: "uuid", nullable: false, defaultValueSql: "gen_random_uuid()"),
+                    InvitationId = table.Column<Guid>(type: "uuid", nullable: false),
+                    WasTheJointLesson = table.Column<bool>(type: "boolean", nullable: false),
+                    ReasonForNotConducting = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    FeedbackText = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
+                    Rating = table.Column<short>(type: "SMALLINT", nullable: true),
+                    ClassId = table.Column<Guid>(type: "uuid", nullable: true),
+                    ClassId1 = table.Column<Guid>(type: "uuid", nullable: true),
+                    UserId = table.Column<Guid>(type: "uuid", nullable: true),
+                    UserId1 = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedbacks", x => x.FeedbackId);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Classes_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Classes",
+                        principalColumn: "ClassId");
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Classes_ClassId1",
+                        column: x => x.ClassId1,
+                        principalTable: "Classes",
+                        principalColumn: "ClassId");
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Invitations_InvitationId",
+                        column: x => x.InvitationId,
+                        principalTable: "Invitations",
+                        principalColumn: "InvitationId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
+                    table.ForeignKey(
+                        name: "FK_Feedbacks_Users_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
+                });
+
             migrationBuilder.InsertData(
                 table: "Disciplines",
                 columns: new[] { "DisciplineId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("1dd70b4b-f65a-4757-bb0c-9f69f92eb311"), "Chemistry" },
-                    { new Guid("210c7fa7-e584-4d28-a53b-f51827b59a49"), "Biology" },
-                    { new Guid("3c5d14c2-0aa7-49a5-b6b6-c05a74de3e3d"), "Mathematics" },
-                    { new Guid("5d538e74-800b-4a3e-94e3-621bdfab7f62"), "History" },
-                    { new Guid("74dfac2b-3489-485d-adca-caed39c667ea"), "Art" },
-                    { new Guid("89a7358a-4c48-4a3f-a03a-bb68d3d72d05"), "ComputerScience" },
-                    { new Guid("a449d6db-12b0-4517-81d7-1d8c6f1bb4c1"), "Music" },
-                    { new Guid("ae90dff5-c5ec-4a5c-9874-54fc393998ae"), "Geography" },
-                    { new Guid("c3f6aaca-c905-4b90-a7da-ba74ad9cfcd5"), "Physics" },
-                    { new Guid("ca495284-9383-47b0-b11a-bd111d4e7e93"), "Literature" }
+                    { new Guid("02740c6d-223b-4953-8a01-c54c16436dd9"), "Biology" },
+                    { new Guid("06c8ddea-2321-46a4-beb4-5b7947791e56"), "Music" },
+                    { new Guid("0eee2d64-54e8-4fbc-9224-4defb5fb2ddf"), "Chemistry" },
+                    { new Guid("24ac3cc5-9335-48db-901b-e581bdf839b8"), "Geography" },
+                    { new Guid("2b10cd21-a61a-4cf6-8b3e-c1273bf52617"), "History" },
+                    { new Guid("6293b70d-fcf5-42cd-9933-9db08a160e7a"), "ComputerScience" },
+                    { new Guid("a754f80a-c1c0-4aec-9d42-ab6e30fb37ce"), "Literature" },
+                    { new Guid("c551e9bc-a9cd-47e8-9a16-687a2027002c"), "Mathematics" },
+                    { new Guid("ce529ac1-89e1-4095-a553-a90943f7790c"), "Art" },
+                    { new Guid("ed43be3e-1341-4857-843a-5b47b55306f5"), "Physics" }
                 });
 
             migrationBuilder.InsertData(
@@ -422,18 +429,18 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "GradeId", "GradeNumber" },
                 values: new object[,]
                 {
-                    { new Guid("09027cf3-754a-4cc7-9052-000dab729a51"), 4 },
-                    { new Guid("0f11fb01-5628-4033-8490-17da8cf3821a"), 10 },
-                    { new Guid("2749e600-bacd-431d-8071-7afe465ce50f"), 1 },
-                    { new Guid("49380a47-e7ec-4f81-8e88-7cf330b66249"), 9 },
-                    { new Guid("5b701a8c-9419-42f5-ad58-a1ab7051d1e1"), 3 },
-                    { new Guid("6a0ad83b-dcc0-407f-a5d2-1f3d1a11c40e"), 2 },
-                    { new Guid("72e71abc-f4eb-46d1-a1f0-b09600752ee3"), 12 },
-                    { new Guid("8b1c79a4-d87e-4f1d-a7a1-6258d8c12daa"), 6 },
-                    { new Guid("a38a50b5-2b7c-4647-9813-ec758b253e84"), 8 },
-                    { new Guid("c1c28e01-e281-40fd-b23c-089c6bc33811"), 7 },
-                    { new Guid("c1d4fd81-aae8-4406-b702-631460d4dd00"), 5 },
-                    { new Guid("d5921de8-25fd-4d1d-b653-47708ce6c9cd"), 11 }
+                    { new Guid("1e3df4d9-fcc3-49c6-be71-5e5a1c8a6b13"), 3 },
+                    { new Guid("32344afe-a4b3-4137-b050-b5fc4ec869b1"), 4 },
+                    { new Guid("58476213-5bdd-46dd-a904-76166bea5581"), 2 },
+                    { new Guid("5a476302-3dea-4a7b-b42e-6c1eb891bdec"), 6 },
+                    { new Guid("7825f406-cdd6-4647-ae7e-9ffc26177de4"), 7 },
+                    { new Guid("9410550c-7df7-4fd5-ac8f-a71372d18816"), 8 },
+                    { new Guid("a0d91032-b371-498a-a5c3-9e59341d7a0e"), 11 },
+                    { new Guid("a1a9c2e6-f39a-472f-9c6e-d64e86ea3b8a"), 10 },
+                    { new Guid("b1473ff4-39ef-40f1-bb1a-23c7cf036fac"), 1 },
+                    { new Guid("c917c332-2c30-494c-b4c4-93f0fa152946"), 9 },
+                    { new Guid("cdaca36c-f273-4bd9-b2fe-726f86435fe1"), 12 },
+                    { new Guid("f528e6f7-b918-4c2c-8b31-4837b19b5cc5"), 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -441,23 +448,23 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "LanguageId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("03c3f2a0-a612-47bd-92a5-d44df9b63919"), "Belarusian" },
-                    { new Guid("27d918b7-fb44-4abf-b136-9cd82f6264ed"), "Georgian" },
-                    { new Guid("2f370863-bef0-45e0-9a2a-2eaf14deefab"), "Spanish" },
-                    { new Guid("35d9b3aa-bf48-4067-a01d-9330fd8783fc"), "German" },
-                    { new Guid("3a15bfee-15c2-4ad5-9525-c3ad8c8d1c32"), "Kyrgyz" },
-                    { new Guid("40caa9a4-d062-4957-95da-ded74ea0a550"), "Armenian" },
-                    { new Guid("4580419a-ef29-4628-a85e-e5126432e604"), "Portuguese" },
-                    { new Guid("47064fce-d6a2-4ea3-aa1e-69a007ad3147"), "Ukrainian" },
-                    { new Guid("4c202ff5-862e-4eb6-9105-d1d0c9e4369b"), "Hungarian" },
-                    { new Guid("57d1061f-3098-440f-a7e9-526d6a173c71"), "French" },
-                    { new Guid("65b7ebc1-a346-48d1-b3a0-65401f130a4a"), "English" },
-                    { new Guid("8cb10c20-3e67-40fb-b59e-6be3b6ca995f"), "Russian" },
-                    { new Guid("a4845518-73bb-4c3f-a8c9-680a70b434cc"), "Kazakh" },
-                    { new Guid("bb052a60-395c-4564-b31e-ea3b1fc3182b"), "Uzbek" },
-                    { new Guid("e8c19ece-b1ce-4aa9-9349-b5ada2d04090"), "Azerbaijani" },
-                    { new Guid("fd7300c7-e7ae-4b5c-8de7-58c49bca235d"), "Tajik" },
-                    { new Guid("ff1e82a2-4af8-411a-b080-2e91174b7ba6"), "Italian" }
+                    { new Guid("226b0693-354e-4108-aa33-c6410ae7d700"), "Belarusian" },
+                    { new Guid("557b8744-294f-44a9-92a8-83479e8989f5"), "English" },
+                    { new Guid("66a720d0-9dca-4048-bb00-29df003440d1"), "Azerbaijani" },
+                    { new Guid("821cb7ef-7033-44b9-b32e-2d043bda62b4"), "Portuguese" },
+                    { new Guid("8ce2d8f1-0136-4ad5-ab8a-569264c7dcb2"), "German" },
+                    { new Guid("9636cf4d-8b67-4061-8ead-ef0b482b60d7"), "Russian" },
+                    { new Guid("9af93013-c9f3-48f7-8935-9079072f6554"), "Georgian" },
+                    { new Guid("a1dc162a-8756-4246-bde0-0cd3f662827a"), "French" },
+                    { new Guid("aa722dc8-8c62-43e9-b466-98304fca89a0"), "Uzbek" },
+                    { new Guid("ace16174-815f-4661-92e1-e8eb23d1ffff"), "Spanish" },
+                    { new Guid("c427c334-4468-4b17-b3d3-d17a4fc76c26"), "Hungarian" },
+                    { new Guid("c6502dad-5d49-4a35-8015-f6acd3d7492a"), "Tajik" },
+                    { new Guid("ca140106-79c5-4709-a5b2-eda25f364f6d"), "Kazakh" },
+                    { new Guid("ccfb7ab5-c80f-4b54-a6f1-cf476bbc6f1e"), "Kyrgyz" },
+                    { new Guid("d1f148af-85b8-4d38-8c1a-7effcf660499"), "Armenian" },
+                    { new Guid("ef826e19-452d-407c-a1d3-5be893831713"), "Italian" },
+                    { new Guid("efc99b67-b235-440d-af0c-9807653f10a8"), "Ukrainian" }
                 });
 
             migrationBuilder.InsertData(
@@ -465,9 +472,9 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "RoleId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("237de451-58a5-4781-9f52-fa54683e2b03"), "Manager" },
-                    { new Guid("8306c127-f9be-43ab-8a17-6382d6246690"), "User" },
-                    { new Guid("b6a0a95b-642f-465d-9d18-6b6c48e7ab2b"), "Admin" }
+                    { new Guid("1ca81997-86ef-4379-a40f-b25370c50676"), "Manager" },
+                    { new Guid("3568f759-6b29-425f-82a3-2084b52e2c68"), "User" },
+                    { new Guid("4db5b138-f32e-4aee-a63c-ee6e752a936a"), "Admin" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -538,14 +545,14 @@ namespace Wonderworld.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_ClassRecipientId",
+                name: "IX_Feedbacks_ClassId",
                 table: "Feedbacks",
-                column: "ClassRecipientId");
+                column: "ClassId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_ClassSenderId",
+                name: "IX_Feedbacks_ClassId1",
                 table: "Feedbacks",
-                column: "ClassSenderId");
+                column: "ClassId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_FeedbackId",
@@ -554,14 +561,20 @@ namespace Wonderworld.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_UserFeedbackRecipientId",
+                name: "IX_Feedbacks_InvitationId",
                 table: "Feedbacks",
-                column: "UserFeedbackRecipientId");
+                column: "InvitationId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feedbacks_UserFeedbackSenderId",
+                name: "IX_Feedbacks_UserId",
                 table: "Feedbacks",
-                column: "UserFeedbackSenderId");
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedbacks_UserId1",
+                table: "Feedbacks",
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Grades_GradeId",
@@ -675,9 +688,6 @@ namespace Wonderworld.Persistence.Migrations
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
-                name: "Invitations");
-
-            migrationBuilder.DropTable(
                 name: "UserDisciplines");
 
             migrationBuilder.DropTable(
@@ -690,7 +700,7 @@ namespace Wonderworld.Persistence.Migrations
                 name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "Classes");
+                name: "Invitations");
 
             migrationBuilder.DropTable(
                 name: "Disciplines");
@@ -700,6 +710,9 @@ namespace Wonderworld.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Classes");
 
             migrationBuilder.DropTable(
                 name: "Grades");

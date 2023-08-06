@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums;
+using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence.EntityTypeConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
@@ -61,8 +62,8 @@ public static class ModelBuilderExtensions
 
     private static void SeedingDisciplines(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Discipline>().HasData(((DisciplineTypes[])
-            Enum.GetValues(typeof(DisciplineTypes))).Select(d =>
+        modelBuilder.Entity<Discipline>().HasData(((DisciplineType[])
+            Enum.GetValues(typeof(DisciplineType))).Select(d =>
             new Discipline
             {
                 DisciplineId = Guid.NewGuid(),
@@ -72,8 +73,8 @@ public static class ModelBuilderExtensions
 
     private static void SeedingLanguages(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Language>().HasData(((LanguageTypes[])
-            Enum.GetValues(typeof(LanguageTypes))).Select(l =>
+        modelBuilder.Entity<Language>().HasData(((LanguageType[])
+            Enum.GetValues(typeof(LanguageType))).Select(l =>
             new Language
             {
                 LanguageId = Guid.NewGuid(),
@@ -83,8 +84,8 @@ public static class ModelBuilderExtensions
 
     private static void SeedingRoles(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Role>().HasData(((RoleTypes[])
-            Enum.GetValues(typeof(RoleTypes))).Select(r =>
+        modelBuilder.Entity<Role>().HasData(((RoleType[])
+            Enum.GetValues(typeof(RoleType))).Select(r =>
             new Role()
             {
                 RoleId = Guid.NewGuid(),

@@ -2,6 +2,7 @@ using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Handlers.EstablishmentHandlers.Commands.CreateEstablishment;
 using Wonderworld.Domain.Enums;
+using Wonderworld.Domain.Enums.EntityTypes;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.EstablishmentHandlers.Commands;
@@ -17,7 +18,7 @@ public class CreateEstablishmentCommandHandlerTests : TestCommonBase
                     c.CityId == SharedLessonDbContextFactory.CityAId,
                 CancellationToken.None).Result;
         const string title = "Establishment1";
-        var type = EstablishmentTypes.School.ToString();
+        var type = EstablishmentType.School.ToString();
         
         var command = new CreateEstablishmentCommand
         {
