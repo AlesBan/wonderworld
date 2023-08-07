@@ -8,11 +8,11 @@ using Xunit;
 namespace Application.UnitTests.Handlers.EntityHandlers.UserHandlers.Queries;
 
 [Collection("QueryCollection")]
-public class GetProfileUserCommandHandlerTests : TestCommonBase
+public class GetUserProfileCommandHandlerTests : TestCommonBase
 {
     private readonly IMapper _mapper;
 
-    public GetProfileUserCommandHandlerTests(QueryTestFixture fixture)
+    public GetUserProfileCommandHandlerTests(QueryTestFixture fixture)
     {
         _mapper = fixture.Mapper;
     }
@@ -23,10 +23,10 @@ public class GetProfileUserCommandHandlerTests : TestCommonBase
         // Arrange
         var user = Context.Users.SingleOrDefault(u =>
             u.UserId == SharedLessonDbContextFactory.UserAId);
-        var handler = new GetProfileUserCommandHandler(_mapper);
+        var handler = new GetUserProfileCommandHandler(_mapper);
 
         // Act
-        var result = await handler.Handle(new GetProfileUserCommand()
+        var result = await handler.Handle(new GetUserProfileCommand()
         {
             User = user!
         }, CancellationToken.None);

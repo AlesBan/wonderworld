@@ -1,7 +1,6 @@
 using AutoMapper;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Domain.Entities.Communication;
-using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
@@ -19,12 +18,12 @@ public class UserProfileDto : IMapWith<User>
     public string BannerPhotoUrl { get; set; } = string.Empty;
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
-    public City? CityLocation { get; set; }
-    public Establishment? Establishment { get; set; }
+    public City CityLocation { get; set; } = new();
+    public Establishment Establishment { get; set; } = new();
     public double Rating { get; set; }
     public ICollection<Class> Classes { get; set; } = new List<Class>();
-    public ICollection<Language> Languages { get; set; } = new List<Language>();
-    public ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();
+    public List<string> Languages { get; set; } = new();
+    public List<string> Disciplines { get; set; } = new();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
 

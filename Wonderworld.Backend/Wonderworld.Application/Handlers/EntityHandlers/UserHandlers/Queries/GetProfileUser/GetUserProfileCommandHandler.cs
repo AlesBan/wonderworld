@@ -4,15 +4,15 @@ using Wonderworld.Application.Dtos;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetProfileUser;
 
-public class GetProfileUserCommandHandler : IRequestHandler<GetProfileUserCommand, UserProfileDto>
+public class GetUserProfileCommandHandler : IRequestHandler<GetUserProfileCommand, UserProfileDto>
 {
     private readonly IMapper _mapper;
-    public GetProfileUserCommandHandler(IMapper mapper)
+    public GetUserProfileCommandHandler(IMapper mapper)
     {
         _mapper = mapper;
     }
 
-    public async Task<UserProfileDto> Handle(GetProfileUserCommand request, CancellationToken cancellationToken)
+    public async Task<UserProfileDto> Handle(GetUserProfileCommand request, CancellationToken cancellationToken)
     {
         
         var userProfile = _mapper.Map<UserProfileDto>(request.User);

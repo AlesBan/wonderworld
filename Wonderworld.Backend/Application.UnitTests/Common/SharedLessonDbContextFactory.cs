@@ -151,7 +151,8 @@ public class SharedLessonDbContextFactory
                 UserId = UserAId,
                 ClassId = ClassAId,
                 Title = "title",
-                Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 10)!,
+                Grade = context.Grades.FirstOrDefault(g => 
+                    g.GradeNumber == 10)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today

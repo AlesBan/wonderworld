@@ -37,4 +37,5 @@ public class User
     public DateTime? VerifiedAt { get; set; }
     public DateTime LastOnlineAt { get; set; }
     public DateTime? DeletedAt { get; set; }
+    public string FullName => $"{FirstName} {LastName}";
 }
