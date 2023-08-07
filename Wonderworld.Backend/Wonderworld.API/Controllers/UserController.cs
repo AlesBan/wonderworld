@@ -6,9 +6,7 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.API.Controllers;
 
-[Authorize]
-[Route("api/[controller]")]
-public class UserController : Controller
+public class UserController : BaseController
 {
     private readonly ISharedLessonDbContext _sharedLessonDbContext;
 
@@ -20,6 +18,7 @@ public class UserController : Controller
     [HttpGet]
     public async Task<List<User>> GetAllUsers()
     {
+        
         return await _sharedLessonDbContext.Users.ToListAsync();   
     }
 }

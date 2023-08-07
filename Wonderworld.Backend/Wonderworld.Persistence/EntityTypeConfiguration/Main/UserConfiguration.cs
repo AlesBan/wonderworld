@@ -30,6 +30,11 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(t => t.EstablishmentId)
             .OnDelete(DeleteBehavior.SetNull);
 
+        builder.Property(u => u.Rating)
+            .HasColumnType("numeric(3,2)")
+            .HasDefaultValue(0.0)
+            .ValueGeneratedOnAdd();
+
         builder.Property(t => t.Description)
             .HasMaxLength(300);
 

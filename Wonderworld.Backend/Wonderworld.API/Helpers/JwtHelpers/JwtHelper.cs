@@ -3,20 +3,12 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Wonderworld.API.Constants;
-using Wonderworld.API.Interfaces.Auth;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.API.Services.Auth;
+namespace Wonderworld.API.Helpers.JwtHelpers;
 
-public class AuthService : IAuthService
+public static class JwtHelper
 {
-    public void SetToken(User user, HttpContext httpContext, IConfiguration configuration)
-    {
-        var token = CreateToken(user, configuration);
-
-        httpContext.Session.Set("Authorization", Encoding.UTF8.GetBytes(token));
-    }
-
     public static string CreateToken(User user, IConfiguration configuration)
     {
         var jwtClaims = GetClaims(user);
@@ -41,20 +33,23 @@ public class AuthService : IAuthService
     {
         var claims = new List<Claim>
         {
-            new("UserId", user.UserId.ToString()),
-            new(ClaimTypes.Name, user.FirstName),
-            new(ClaimTypes.Surname, user.LastName),
+            new(ClaimTypes.NameIdentifier, user.UserId.ToString()),
             new(ClaimTypes.Email, user.Email),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUniversalTime().ToString())
         };
 
+        claims.SetRoleClaims(user);
+
+        return claims;
+    }
+
+    private static void SetRoleClaims(this ICollection<Claim> claims, User user)
+    {
         user.UserRoles.Select(ur =>
                 ur.Role.Title)
             .ToList()
             .ForEach(role =>
                 claims.Add(new Claim(ClaimTypes.Role, role)));
-
-        return claims;
     }
 }

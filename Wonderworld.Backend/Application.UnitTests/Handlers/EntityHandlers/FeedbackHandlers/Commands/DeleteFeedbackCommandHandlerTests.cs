@@ -11,8 +11,8 @@ public class DeleteFeedbackCommandHandlerTests : TestCommonBase
     public async Task DeleteFeedbackCommandHandler_Handle_ShouldDeleteFeedback()
     {
         // Arrange
-        var feedback = await Context.Feedbacks.FirstOrDefaultAsync(f=>
-            f.FeedbackId == SharedLessonDbContextFactory.FeedbackForDeleteId);
+        var feedback = await Context.Reviews.FirstOrDefaultAsync(f=>
+            f.ReviewId == SharedLessonDbContextFactory.FeedbackForDeleteId);
         
         var handler = new DeleteFeedbackCommandHandler(Context);
         
@@ -23,7 +23,7 @@ public class DeleteFeedbackCommandHandlerTests : TestCommonBase
         }, CancellationToken.None);
         
         // Assert
-        Assert.Null(await Context.Feedbacks.SingleOrDefaultAsync(f =>
-            f.FeedbackId == SharedLessonDbContextFactory.FeedbackForDeleteId));
+        Assert.Null(await Context.Reviews.SingleOrDefaultAsync(f =>
+            f.ReviewId == SharedLessonDbContextFactory.FeedbackForDeleteId));
     }
 }

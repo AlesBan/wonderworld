@@ -5,5 +5,5 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.FeedbackHandlers.Comma
 
 public class DeleteFeedbackCommand : IRequest
 {
-    public Feedback Feedback { get; set; }
+    public Review Feedback { get; set; }
 }

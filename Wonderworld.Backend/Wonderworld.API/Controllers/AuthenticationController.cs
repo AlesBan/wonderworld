@@ -1,16 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Models.AuthDtoModels;
-using Wonderworld.API.Models.AuthModels;
-using Wonderworld.API.Services.Auth;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.API.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public class AuthenticationController : ControllerBase
+
+public class AuthenticationController : BaseController
 {
     private readonly ISharedLessonDbContext _sharedLessonDbContext;
     private readonly IConfiguration _configuration;
@@ -54,7 +52,7 @@ public class AuthenticationController : ControllerBase
         }
 
         var isCorrectPassword = existingUser.Password == requestUserDto.Password;
-        
+
         if (!isCorrectPassword)
         {
             return BadRequest(new AuthResult()
@@ -67,7 +65,8 @@ public class AuthenticationController : ControllerBase
             });
         }
 
-        var token = AuthService.CreateToken(existingUser, _configuration);
+        var token = JwtHelper.CreateToken(existingUser, _configuration);
+        
         return Ok(new AuthResult()
         {
             Result = true,
@@ -113,11 +112,13 @@ public class AuthenticationController : ControllerBase
 
         await _sharedLessonDbContext.Users.AddAsync(user);
         await _sharedLessonDbContext.SaveChangesAsync(CancellationToken.None);
-
+        
+        var token = JwtHelper.CreateToken(user, _configuration);
+        
         return Ok(new AuthResult
         {
             Result = true,
-            Token = AuthService.CreateToken(user, _configuration),
+            Token = token
         });
     }
 }

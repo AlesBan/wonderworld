@@ -21,6 +21,6 @@ public class Class
     public ICollection<Invitation> ReceivedInvitations { get; set; } = new List<Invitation>();
     public ICollection<Invitation> SentInvitations { get; set; } = new List<Invitation>();
 
-    public ICollection<Feedback> ReceivedFeedbacks { get; set; } = new List<Feedback>();
-    public ICollection<Feedback> SentFeedbacks { get; set; } = new List<Feedback>();
+    public ICollection<Review> ReceivedFeedbacks { get; set; } = new List<Review>();
+    public ICollection<Review> SentFeedbacks { get; set; } = new List<Review>();
 }

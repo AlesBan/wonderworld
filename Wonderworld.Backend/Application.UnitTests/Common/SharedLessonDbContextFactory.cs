@@ -36,8 +36,11 @@ public class SharedLessonDbContextFactory
     public static readonly Guid ClassForDeleteId = Guid.NewGuid();
 
     public static readonly Guid InvitationAId = Guid.NewGuid();
+    public static readonly Guid InvitationBId = Guid.NewGuid();
     public static readonly Guid InvitationForDeleteId = Guid.NewGuid();
 
+    public static readonly Guid ReviewAId = Guid.NewGuid();
+    public static readonly Guid ReviewBId = Guid.NewGuid();
     public static readonly Guid FeedbackForDeleteId = Guid.NewGuid();
 
     public static SharedLessonDbContext Create()
@@ -52,7 +55,8 @@ public class SharedLessonDbContextFactory
         AppendCountries(context);
         AppendCities(context);
         AppendEstablishments(context);
-
+        
+        context.SaveChangesAsync();
         AppendUsers(context);
 
         AppendClasses(context);
@@ -64,10 +68,11 @@ public class SharedLessonDbContextFactory
         AppendUserRoles(context);
         AppendClassLanguages(context);
         AppendClassDisciplines(context);
-
-        AppendInvitations(context);
-        AppendFeedbacks(context);
         
+        AppendInvitations(context);
+        context.SaveChangesAsync();
+
+        AppendReviews(context);
         context.SaveChangesAsync();
         return context;
     }
@@ -78,33 +83,27 @@ public class SharedLessonDbContextFactory
             new User()
             {
                 UserId = UserRegisteredId,
-                Email = "email",
-                Password = "password",
+                Email = "emailR",
+                Password = "passwordR",
             },
             new User
             {
                 UserId = UserAId,
-                Email = "email",
-                Password = "password",
-                FirstName = "FirstName",
-                LastName = "LastName",
+                Email = "emailA",
+                Password = "passwordA",
+                FirstName = "FirstNameA",
+                LastName = "LastNameA",
                 IsATeacher = true,
                 IsAnExpert = false,
                 Establishment = context.Establishments.FirstOrDefault(e =>
-                    e.EstablishmentId == EstablishmentAId)!,
+                    e.EstablishmentId == EstablishmentAId),
                 CityLocation = context.Cities.FirstOrDefault(c =>
-                    c.CityId == CityAId)!,
-                ReceivedInvitations = null,
-                SentInvitations = null,
-                ReceivedFeedbacks = null,
-                SentFeedbacks = null,
-                Description = "Description",
-                PhotoUrl = "PhotoUrl",
-                BannerPhotoUrl = "BannerPhotoUrl",
+                    c.CityId == CityAId),
+                Description = "DescriptionA",
+                PhotoUrl = "PhotoUrlA",
+                BannerPhotoUrl = "BannerPhotoUrlA",
                 RegisteredAt = DateTime.Today,
                 CreatedAt = DateTime.Today,
-
-                UserRoles = null,
                 IsVerified = true,
                 VerifiedAt = default,
                 LastOnlineAt = DateTime.Today,
@@ -123,12 +122,11 @@ public class SharedLessonDbContextFactory
                     e.EstablishmentId == EstablishmentAId)!,
                 CityLocation = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityAId)!,
-                Description = "Description",
-                PhotoUrl = "PhotoUrl",
-                BannerPhotoUrl = "BannerPhotoUrl",
+                Description = "DescriptionB",
+                PhotoUrl = "PhotoUrlB",
+                BannerPhotoUrl = "BannerPhotoUrlB",
                 RegisteredAt = DateTime.Today,
                 CreatedAt = DateTime.Today,
-                UserRoles = null,
                 IsVerified = true,
                 VerifiedAt = default,
                 LastOnlineAt = DateTime.Today,
@@ -197,37 +195,87 @@ public class SharedLessonDbContextFactory
             new Invitation()
             {
                 InvitationId = InvitationAId,
-                UserSender = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
-                UserRecipient = context.Users.FirstOrDefault(u => u.UserId == UserBId)!,
-                ClassSender = context.Classes.FirstOrDefault(c => c.ClassId == ClassAId)!,
-                ClassRecipient = context.Classes.FirstOrDefault(c => c.ClassId == ClassBId)!,
+                UserSender = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserBId)!,
+                UserRecipient = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserAId)!,
+                ClassSender = context.Classes.FirstOrDefault(c =>
+                    c.ClassId == ClassBId)!,
+                ClassRecipient = context.Classes.FirstOrDefault(c =>
+                    c.ClassId == ClassAId)!,
+                DateOfInvitation = DateTime.Today,
+                Status = InvitationStatus.Pending.ToString()
+            },
+            new Invitation()
+            {
+                InvitationId = InvitationBId,
+                UserSender = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserBId)!,
+                UserRecipient = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserAId)!,
+                ClassSender = context.Classes.FirstOrDefault(c =>
+                    c.ClassId == ClassBId)!,
+                ClassRecipient = context.Classes.FirstOrDefault(c =>
+                    c.ClassId == ClassAId)!,
                 DateOfInvitation = DateTime.Today,
                 Status = InvitationStatus.Pending.ToString()
             },
             new Invitation()
             {
                 InvitationId = InvitationForDeleteId,
-                UserSender = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
-                UserRecipient = context.Users.FirstOrDefault(u => u.UserId == UserBId)!,
-                ClassSender = context.Classes.FirstOrDefault(c => c.ClassId == ClassAId)!,
-                ClassRecipient = context.Classes.FirstOrDefault(c => c.ClassId == ClassBId)!,
+                UserSender = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserAId)!,
+                UserRecipient = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserBId)!,
+                ClassSender = context.Classes.FirstOrDefault(c =>
+                    c.ClassId == ClassAId)!,
+                ClassRecipient = context.Classes.FirstOrDefault(c =>
+                    c.ClassId == ClassBId)!,
                 DateOfInvitation = DateTime.Today,
                 Status = InvitationStatus.Pending.ToString()
             }
         );
     }
 
-    private static void AppendFeedbacks(ISharedLessonDbContext context)
+    private static void AppendReviews(ISharedLessonDbContext context)
     {
-        context.Feedbacks.AddRangeAsync(
-            new Feedback()
+        context.Reviews.AddRangeAsync(
+            new Review()
             {
-                FeedbackId = FeedbackForDeleteId,
+                ReviewId = ReviewAId,
                 Invitation = context.Invitations.FirstOrDefault(i
                     => i.InvitationId == InvitationAId)!,
+                UserRecipient = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserAId)!,
+                UserSender = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserBId)!,
                 WasTheJointLesson = true,
                 ReasonForNotConducting = null,
-                FeedbackText = "ABOBA",
+                ReviewText = "ABOBA",
+                Rating = 5
+            },
+            new Review()
+            {
+                ReviewId = ReviewBId,
+                Invitation = context.Invitations.FirstOrDefault(i
+                    => i.InvitationId == InvitationBId)!,
+                UserRecipient = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserBId)!,
+                UserSender = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserAId)!,
+                WasTheJointLesson = true,
+                ReasonForNotConducting = null,
+                ReviewText = "ABOBA",
+                Rating = 5
+            },
+            new Review()
+            {
+                ReviewId = FeedbackForDeleteId,
+                Invitation = context.Invitations.FirstOrDefault(i
+                    => i.InvitationId == InvitationForDeleteId)!,
+                WasTheJointLesson = true,
+                ReasonForNotConducting = null,
+                ReviewText = "ABOBA",
                 Rating = 5
             }
         );
@@ -296,13 +344,13 @@ public class SharedLessonDbContextFactory
         context.UserGrades.AddRange(
             new UserGrade()
             {
-                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
-                Grade = context.Grades.SingleAsync(g => g.GradeNumber == 10).Result!
+                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result,
+                Grade = context.Grades.SingleAsync(g => g.GradeNumber == 10).Result
             },
             new UserGrade()
             {
-                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
-                Grade = context.Grades.SingleAsync(g => g.GradeNumber == 6).Result!
+                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result,
+                Grade = context.Grades.SingleAsync(g => g.GradeNumber == 6).Result
             });
     }
 
@@ -311,13 +359,17 @@ public class SharedLessonDbContextFactory
         context.UserDisciplines.AddRange(
             new UserDiscipline()
             {
-                User = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!,
+                User = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserAId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d =>
+                    d.Title == "Chemistry")!,
             },
             new UserDiscipline
             {
-                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
-                Discipline = context.Disciplines.SingleAsync(d => d.Title == "Biology").Result!
+                User = context.Users.SingleAsync(u =>
+                    u.UserId == UserAId).Result,
+                Discipline = context.Disciplines.SingleAsync(d =>
+                    d.Title == "Biology").Result
             });
     }
 
@@ -326,18 +378,24 @@ public class SharedLessonDbContextFactory
         context.UserLanguages.AddRange(
             new UserLanguage()
             {
-                User = context.Users.FirstOrDefault(u => u.UserId == UserAId)!,
-                Language = context.Languages.FirstOrDefault(l => l.Title == "English")!
+                User = context.Users.FirstOrDefault(u =>
+                    u.UserId == UserAId)!,
+                Language = context.Languages.FirstOrDefault(l =>
+                    l.Title == "English")!
             },
             new UserLanguage()
             {
-                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
-                Language = context.Languages.SingleAsync(l => l.Title == "Russian").Result!
+                User = context.Users.SingleAsync(u =>
+                    u.UserId == UserAId).Result,
+                Language = context.Languages.SingleAsync(l =>
+                    l.Title == "Russian").Result
             },
             new UserLanguage()
             {
-                User = context.Users.SingleAsync(u => u.UserId == UserAId).Result!,
-                Language = context.Languages.SingleAsync(l => l.Title == "Italian").Result!
+                User = context.Users.SingleAsync(u =>
+                    u.UserId == UserAId).Result,
+                Language = context.Languages.SingleAsync(l =>
+                    l.Title == "Italian").Result
             }
         );
     }
@@ -349,6 +407,11 @@ public class SharedLessonDbContextFactory
             {
                 CountryId = CountryAId,
                 Title = "CountryA"
+            },
+            new Country()
+            {
+                CountryId = CountryBId,
+                Title = "CountryB"
             },
             new Country
             {

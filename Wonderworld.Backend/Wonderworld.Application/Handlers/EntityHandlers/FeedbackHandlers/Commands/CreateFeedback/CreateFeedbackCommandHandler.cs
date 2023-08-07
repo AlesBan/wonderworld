@@ -15,18 +15,18 @@ public class CreateFeedbackCommandHandler : IRequestHandler<CreateFeedbackComman
 
     public async Task<Guid> Handle(CreateFeedbackCommand request, CancellationToken cancellationToken)
     {
-        var feedback = new Feedback()
+        var feedback = new Review()
         {
             Invitation = request.Invitation,
             WasTheJointLesson = request.WasTheJointLesson,
             ReasonForNotConducting = request.ReasonForNotConducting,
-            FeedbackText = request.FeedbackText,
+            ReviewText = request.FeedbackText,
             Rating = request.Rating
         };
 
-        _context.Feedbacks.Add(feedback);
+        _context.Reviews.Add(feedback);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return feedback.FeedbackId;
+        return feedback.ReviewId;
     }
 }

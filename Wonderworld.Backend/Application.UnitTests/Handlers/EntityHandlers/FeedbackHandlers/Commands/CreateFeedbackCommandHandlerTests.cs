@@ -32,7 +32,7 @@ public class CreateFeedbackCommandHandlerTests : TestCommonBase
         }, CancellationToken.None);
 
         // Assert
-        Assert.NotNull(await Context.Feedbacks.FirstOrDefaultAsync(f =>
-            f.FeedbackId == result));
+        Assert.NotNull(await Context.Reviews.FirstOrDefaultAsync(f =>
+            f.ReviewId == result));
     }
 }

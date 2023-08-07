@@ -14,7 +14,7 @@ public class DeleteFeedbackCommandHandler : IRequestHandler<DeleteFeedbackComman
 
     public async Task<Unit> Handle(DeleteFeedbackCommand request, CancellationToken cancellationToken)
     {
-        _context.Feedbacks.Remove(request.Feedback);
+        _context.Reviews.Remove(request.Feedback);
         await _context.SaveChangesAsync(cancellationToken);
         
         return Unit.Value;

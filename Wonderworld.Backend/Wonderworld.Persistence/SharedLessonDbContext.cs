@@ -24,7 +24,7 @@ public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
     public DbSet<Establishment> Establishments { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<Country> Countries { get; set; }
-    public DbSet<Feedback> Feedbacks { get; set; }
+    public DbSet<Review> Reviews { get; set; }
     public DbSet<Invitation> Invitations { get; set; }
     
     public DbSet<UserRole> UserRoles { get; set; }
