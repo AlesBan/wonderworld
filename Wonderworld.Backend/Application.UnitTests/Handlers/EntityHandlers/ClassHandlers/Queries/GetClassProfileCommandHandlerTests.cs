@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Wonderworld.Application.Dtos;
+using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClassProfile;
 using Xunit;
 

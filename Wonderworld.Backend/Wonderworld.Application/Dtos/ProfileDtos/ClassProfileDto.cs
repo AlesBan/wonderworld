@@ -3,7 +3,7 @@ using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Dtos;
+namespace Wonderworld.Application.Dtos.ProfileDtos;
 
 public class ClassProfileDto : IMapWith<Class>
 {

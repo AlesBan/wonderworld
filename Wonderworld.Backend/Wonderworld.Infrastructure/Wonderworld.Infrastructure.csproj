@@ -11,8 +11,4 @@
       <ProjectReference Include="..\Wonderworld.Persistence\Wonderworld.Persistence.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Services" />
-    </ItemGroup>
-
 </Project>

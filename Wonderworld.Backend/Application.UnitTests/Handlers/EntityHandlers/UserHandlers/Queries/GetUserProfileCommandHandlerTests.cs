@@ -2,6 +2,7 @@ using Application.UnitTests.Common;
 using AutoMapper;
 using Shouldly;
 using Wonderworld.Application.Dtos;
+using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetProfileUser;
 using Xunit;
 

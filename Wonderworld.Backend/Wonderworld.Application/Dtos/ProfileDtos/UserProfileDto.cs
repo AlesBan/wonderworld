@@ -5,7 +5,7 @@ using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Dtos;
+namespace Wonderworld.Application.Dtos.ProfileDtos;
 
 public class UserProfileDto : IMapWith<User>
 {

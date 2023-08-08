@@ -1,7 +1,4 @@
 version: "3.9"
-networks:
-  wonderworld-dev:
-    driver: bridge
 services:
   wonderworld:
     image: wonderworld:latest
@@ -10,23 +7,23 @@ services:
       dockerfile: Dockerfile
     ports:
       - "12193:12193"
-      - "5170:5170"
     networks:
-      - wonderworld-dev
+      - default
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
   postgres:
     image: postgres:latest
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d wonderworld" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - "5432:5432"
     networks:
-      - wonderworld-dev
+      - default
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres123
       - POSTGRES_DB=wonderworld
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-volumes:
-  postgres-data:
