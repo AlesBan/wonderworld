@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="signIn.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Georgia' rel='stylesheet'>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="company-logo">
+      <img src="../../images/CompanyLogo.svg" alt="">
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="english">
+      <div class="flag"><img src="../../images/flagEnglish.svg" alt=""></div>
+      English
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="title-and-subtle">
+    <div class="title">Sign in</div>
+    <div class="label-and-CTA">
+      <div class="label">New to Wonder World?</div>
+      <div ><a class="CTA-button" href="../signUp/signUp.html">Sign up</a></div>
+    </div>
+  </div>
+  <div class="content-body">
+    <div class="CTAs">
+      <div class="google">
+        <div class="google-image"><img src="../../images/google-image.svg" alt=""></div>
+        <div class="google-text">Continue with Google</div>
+      </div>
+      <div class="facebook">
+        <div class="facebook-image"><img src="../../images/facebook-image.svg" alt=""></div>
+        <div class="facebook-text">Continue with Facebook</div>
+      </div>
+    </div>
+    <div class="line-with-text">
+      <hr>
+      <span class="text">or</span>
+      <hr>
+    </div>
+    <div class="inputs">
+      <div class="email">
+        <div class="input-title">Email</div>
+        <div class="">
+          <label><input name="email" class="email-input" type="text" placeholder="awesomeperson@email.com"></label>
+        </div>
+      </div>
+      <div class="password">
+        <div class="password-container">
+          <div class="input-title">Password</div>
+          <button onclick="openDialog()" class="forget-password">Forgot password?</button>
+        </div>
+        <div class="">
+          <label><input name="email" class="password-input" type="text" placeholder="At least 6 characters"></label>
+        </div>
+      </div>
+    </div>
+    <button class="primary-button">Sign in</button>
+  </div>
+</div>
+</body>
+<script>
+
+
+
+  function openDialog() {
+
+      let dialog = document.createElement('div');
+      document.body.append(dialog);
+      dialog.innerHTML = `
+<div class="dialog">
+  <div class="title-and-subtle">
+    <div class="title">Forgot password?</div>
+    <div class="label-and-CTA">
+      <div class="label">Type in the email you used to register in Wonder World. We’ll send you a link to create your new password.</div>
+      </div>
+  </div>
+  <div class="content-body">
+  <div class="inputs">
+      <div class="email">
+        <div class="input-title">Email</div>
+        <div class="">
+          <label><input name="email" class="email-input" type="text" placeholder="awesomeperson@email.com"></label>
+        </div>
+      </div>
+      </div>
+       <button onclick="checkEmail()" class="primary-button">Continue</button>
+       </div>
+       </div>
+  `;
+
+  }
+
+</script>
+<script src="checkEmail.js"></script>
+<script src="resetPassword.js"></script>
+</html>
