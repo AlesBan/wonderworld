@@ -6,21 +6,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d457eef0-b6e8-451a-9b7f-9f762fc0a167" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UpdateDtos/BasicInformationDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UpdateDtos/UpdateNameDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UpdateDtos/UpdatePositionDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/UserDataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassProfileCommandHandlerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassProfileCommandHandlerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/UserHandlers/Queries/GetUserProfileCommandHandlerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/UserHandlers/Queries/GetUserProfileCommandHandlerTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/.idea/.idea.Frontend.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/.idea/.idea.Frontend.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Dtos/ClassProfileDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/ProfileDtos/ClassProfileDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UserProfileDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/ProfileDtos/UserProfileDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassProfile/GetClassProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassProfile/GetClassProfileCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassProfile/GetClassProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassProfile/GetClassProfileCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetProfileUser/GetUserProfileCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetProfileUser/GetUserProfileCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetProfileUser/GetUserProfileCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetProfileUser/GetUserProfileCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Interfaces/Services/IUserManagerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Interfaces/Services/IUserDataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Infrastructure/Wonderworld.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Wonderworld.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Domain/Wonderworld.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Domain/Wonderworld.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/Wonderworld.Persistence.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/Wonderworld.Persistence.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,10 +31,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="tsconfig.json" />
+      </list>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54d33cdcdbf84c7db420fc3a50117b18a24aa0/15/d8a70458/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37a954845b52703c5cce1aacf8fa1292378878e82bf68c4c4b5effc447316e9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4ea681aa1df24442c1a5e1e18582b1a2d29ac5bfd41390c94a5d2cc958b5ff/UserManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7b9a533b55d9a3c0765407ed0dd18b43332ea208c5a7057dbcf33a8d6917255/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7cb7424fd293afbd058d95c82aaf7b12b3cf57037576ecc8fd333ccfad7ad/Encoding.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7fae937e13ed52cf7b7079061a6b947b946c41c4a86a47a162b519b3763447/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -56,6 +69,9 @@
     &quot;DatabaseDriversLRU&quot;: [
       &quot;oracle&quot;,
       &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;yaml&quot;
     ]
   }
 }</component>
@@ -117,6 +133,15 @@
       <workItem from="1691426657174" duration="16318000" />
       <workItem from="1691447616202" duration="829000" />
       <workItem from="1691494573261" duration="984000" />
+      <workItem from="1691496813724" duration="7862000" />
+      <workItem from="1691511710599" duration="456000" />
+      <workItem from="1691512200172" duration="5040000" />
+      <workItem from="1691517562099" duration="372000" />
+      <workItem from="1691583998886" duration="3605000" />
+      <workItem from="1691591413396" duration="5583000" />
+      <workItem from="1691941735615" duration="6190000" />
+      <workItem from="1691959062214" duration="934000" />
+      <workItem from="1691961244461" duration="290000" />
     </task>
     <task id="LOCAL-00001" summary="user register + login">
       <created>1691322374733</created>
@@ -185,6 +210,110 @@
           <line>18</line>
           <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.Application\Handlers\EntityHandlers\UserHandlers\Queries\GetProfileUser\GetProfileUserCommandHandler.cs" initialLine="18" containingFunctionPresentation="method 'Handle'" />
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
+          <line>80</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="80" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="2270" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2294" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
+          <line>92</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="92" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="2551" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2662" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
+          <line>107</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="107" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="2948" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3077" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
+          <line>82</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="82" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="2317" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2531" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
+          <line>95</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="95" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="2672" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2687" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
+          <line>97</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="97" containingFunctionPresentation="method 'Register'">
+            <startOffsets>
+              <option value="2710" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2928" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Program.cs</url>
+          <line>55</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Program.cs" initialLine="52" containingFunctionPresentation="">
+            <startOffsets>
+              <option value="1857" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1858" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Program.cs</url>
+          <line>43</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Program.cs" initialLine="43" containingFunctionPresentation="">
+            <startOffsets>
+              <option value="1337" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1447" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

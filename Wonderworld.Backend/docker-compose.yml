@@ -1,29 +1,38 @@
-version: "3.9"
+version: '3.9'
 services:
-  wonderworld:
-    image: wonderworld:latest
+  wonderworld-db:
+    image: postgres
+    container_name: wonderworld-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: wonderworld
+    networks:
+      - default
+
+  wonderworld-api:
+    image: wonderworld-api
+    container_name: wonderworld-api
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "12193:12193"
-    networks:
-      - default
+      - "5000:80"
     depends_on:
-      postgres:
-        condition: service_healthy
-  postgres:
-    image: postgres:latest
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d wonderworld" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    ports:
-      - "5432:5432"
+      - wonderworld-db
     networks:
       - default
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres123
-      - POSTGRES_DB=wonderworld
+      - ConnectionStrings__DefaultConnection=Server=localhost;Port=5432;Database=wonderworld;User Id=postgres;Password=postgres123;Integrated Security=True;Pooling=True;
+      - JwtSettings__ValidateIssuerSigningKey=true
+      - JwtSettings__IssuerSigningKey=yJhcmJjPj9143mZN2JhcmJjPj9143mZN
+      - JwtSettings__ValidateIssuer=true
+      - JwtSettings__ValidIssuer=http://localhost:7275
+      - JwtSettings__ValidateAudience=true
+      - JwtSettings__ValidAudience=http://localhost:7275
+      - JwtSettings__RequireExpirationTime=true
+      - JwtSettings__ValidateLifetime=true
+      - ASPNETCORE_URLS=http://+:80

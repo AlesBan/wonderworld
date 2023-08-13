@@ -4,7 +4,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Wonderworld.API.Models.JwtModels;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Persistence;
@@ -14,6 +13,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AlloyAll", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    });
+});
 builder.Services.AddPersistence(builder.Configuration);
 
 builder.Services.AddAutoMapper(config =>
@@ -32,14 +41,17 @@ builder.Services.AddAuthentication(options =>
     {
         options.RequireHttpsMetadata = false;
         options.SaveToken = true;
+        Console.WriteLine(Encoding.UTF8
+            .GetBytes(builder.Configuration["JwtSettings:IssuerSigningKey"]));
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidAudience = builder.Configuration.GetValue<string>("JwtSettings:ValidAudience"),
-            ValidIssuer = builder.Configuration.GetValue<string>("JwtSettings:Issuer"),
+            ValidAudience = "http://localhost:7275",
+            ValidIssuer = "http://localhost:7275",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(builder.Configuration.GetValue<string>("JwtSettings:IssuerSigningKey")))
+                .GetBytes("yJhcmJjPj9143mZN2JhcmJjPj9143mZN"))
         };
     });
 
@@ -79,9 +91,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
+app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseCors("AlloyAll");
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 app.Run();

@@ -7,7 +7,8 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.API.Controllers;
 
-
+[Route("api/[controller]")]
+[ApiController]
 public class AuthenticationController : BaseController
 {
     private readonly ISharedLessonDbContext _sharedLessonDbContext;
