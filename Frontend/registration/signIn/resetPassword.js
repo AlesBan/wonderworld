@@ -24,7 +24,7 @@ function resetPassword() {
         </div>
       </div>
       </div>
-       <button onclick="" class="primary-button">Change password</button>
+        <a href="../signIn/signIn.html" class="CTA-button">Change password</a>
        </div>
        </div>
     `
