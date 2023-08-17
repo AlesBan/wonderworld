@@ -6,23 +6,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d457eef0-b6e8-451a-9b7f-9f762fc0a167" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Frontend/.idea/.idea.Frontend.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/.idea/.idea.Frontend.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/registration/signUp/signUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/.dockerignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wonderworld.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/appsettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Domain/Wonderworld.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Domain/Wonderworld.Domain.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/DependencyInjection.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/Wonderworld.Persistence.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/Wonderworld.Persistence.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
@@ -142,6 +131,10 @@
       <workItem from="1691941735615" duration="6190000" />
       <workItem from="1691959062214" duration="934000" />
       <workItem from="1691961244461" duration="290000" />
+      <workItem from="1692029311314" duration="61000" />
+      <workItem from="1692211688043" duration="24000" />
+      <workItem from="1692212530375" duration="2019000" />
+      <workItem from="1692215839098" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary="user register + login">
       <created>1691322374733</created>
@@ -291,29 +284,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Wonderworld.API/Program.cs</url>
-          <line>55</line>
+          <line>53</line>
           <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Program.cs" initialLine="52" containingFunctionPresentation="">
             <startOffsets>
-              <option value="1857" />
+              <option value="1738" />
             </startOffsets>
             <endOffsets>
-              <option value="1858" />
+              <option value="1739" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.API/Program.cs</url>
-          <line>43</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Program.cs" initialLine="43" containingFunctionPresentation="">
-            <startOffsets>
-              <option value="1337" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1447" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

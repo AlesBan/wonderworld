@@ -1,5 +1,25 @@
 version: '3.9'
+
+networks:
+    dev:
+        driver: bridge
 services:
+  wonderworld:
+    image: alesban/wonderworldbackend
+    container_name: wonderworldbackend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7280:80"
+    depends_on:
+      - "wonderworld-db"
+    networks:
+      - dev
+    restart: always
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=wonderworld-db;Port=5432;Database=wonderworld;User Id=postgres;Password=postgres123;Integrated Security=true;Pooling=true;
+        
   wonderworld-db:
     image: postgres
     container_name: wonderworld-db
@@ -7,32 +27,12 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres123
-      POSTGRES_DB: wonderworld
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_DB=wonderworld
     networks:
-      - default
-
-  wonderworld-api:
-    image: wonderworld-api
-    container_name: wonderworld-api
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "5000:80"
-    depends_on:
-      - wonderworld-db
-    networks:
-      - default
-    environment:
-      - ConnectionStrings__DefaultConnection=Server=localhost;Port=5432;Database=wonderworld;User Id=postgres;Password=postgres123;Integrated Security=True;Pooling=True;
-      - JwtSettings__ValidateIssuerSigningKey=true
-      - JwtSettings__IssuerSigningKey=yJhcmJjPj9143mZN2JhcmJjPj9143mZN
-      - JwtSettings__ValidateIssuer=true
-      - JwtSettings__ValidIssuer=http://localhost:7275
-      - JwtSettings__ValidateAudience=true
-      - JwtSettings__ValidAudience=http://localhost:7275
-      - JwtSettings__RequireExpirationTime=true
-      - JwtSettings__ValidateLifetime=true
-      - ASPNETCORE_URLS=http://+:80
+      - dev
+    volumes:
+      - wonderworld-data:/var/lib/postgresql/data
+volumes:
+  wonderworld-data:

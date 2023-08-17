@@ -1,20 +1,24 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-# Copy and restore dependencies
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["Wonderworld.API/Wonderworld.API.csproj", "Wonderworld.API/"]
+COPY ["Wonderworld.Infrastructure/Wonderworld.Infrastructure.csproj", "Wonderworld.Infrastructure/"]
+COPY ["Wonderworld.Domain/Wonderworld.Domain.csproj", "Wonderworld.Domain/"]
+COPY ["Wonderworld.Application/Wonderworld.Application.csproj", "Wonderworld.Application/"]
+COPY ["Wonderworld.Persistence/Wonderworld.Persistence.csproj", "Wonderworld.Persistence/"]
+RUN dotnet restore "Wonderworld.API/Wonderworld.API.csproj"
 COPY . .
-RUN dotnet restore
+WORKDIR "/src/Wonderworld.API"
+RUN dotnet build "Wonderworld.API.csproj" -c Release -o /app/build
 
-# Build the application
-RUN dotnet build -c Release --no-restore
+FROM build AS publish
+RUN dotnet publish "Wonderworld.API.csproj" -c Release -o /app/publish
 
-# Publish the application
-RUN dotnet publish -c Release --no-build -o /app/publish
-
-# Final stage for the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/publish .
-
-# Set the entry point
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Wonderworld.API.dll"]

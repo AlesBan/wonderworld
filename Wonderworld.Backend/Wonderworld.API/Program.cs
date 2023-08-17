@@ -41,8 +41,6 @@ builder.Services.AddAuthentication(options =>
     {
         options.RequireHttpsMetadata = false;
         options.SaveToken = true;
-        Console.WriteLine(Encoding.UTF8
-            .GetBytes(builder.Configuration["JwtSettings:IssuerSigningKey"]));
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
