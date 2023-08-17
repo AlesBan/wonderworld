@@ -55,13 +55,21 @@
             <div class="password">
                 <div class="input-title">Password</div>
                 <div class="">
+<<<<<<< HEAD
                     <label><input id="password" name="password-input" class="password-input" type="text" placeholder="At least 6 characters"></label>
+=======
+                    <label><input name="password" class="password-input" type="text" placeholder="At least 6 characters"></label>
+>>>>>>> DevelopFrontend
                 </div>
             </div>
             <div class="confirm-password">
                 <div class="input-title">Confirm-password</div>
                 <div class="">
+<<<<<<< HEAD
                     <label><input id="confirm-password" name="confirm-password" class="confirm-password-input" type="text" placeholder="Re-enter your password"></label>
+=======
+                    <label><input name="confirm-password" class="confirm-password-input" type="text" placeholder="Re-enter your password"></label>
+>>>>>>> DevelopFrontend
                 </div>
             </div>
         </div>
