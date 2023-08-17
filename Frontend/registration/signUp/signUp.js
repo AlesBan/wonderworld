@@ -35,31 +35,32 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+async function postData() {
 
-// const url = 'https://api.example.com/post'; // Замените на нужный URL
-//
-// const data = {
-//     name: 'John Doe',
-//     email: 'johndoe@example.com'
-// };
-//
-// fetch(url, {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data)
-// })
-//     .then(response => {
-//         if (response.ok) {
-//             return response.json();
-//         } else {
-//             throw new Error('Произошла ошибка при выполнении запроса.');
-//         }
-//     })
-//     .then(responseData => {
-//         console.log(responseData);
-//     })
-//     .catch(error => {
-//         console.error(error);
-//     });
+    const url = 'https://localhost:7280/api/authentication/register';
+    const data = {
+        Email: document.getElementById("email").value,
+        Password: document.getElementById("password").value
+    };
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Произошла ошибка при выполнении запроса.');
+            }
+        })
+        .then(responseData => {
+            console.log(responseData);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
