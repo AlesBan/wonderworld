@@ -64,7 +64,8 @@
     font-size: 16px;
     line-height: 24px;
     color: #0C0F12;
-
+    width: 384px;
+    margin-top: 12px;
 }
 
 .CTA-button {
@@ -121,6 +122,17 @@
     margin-top: 8px;
 }
 
+.first-name-input:focus{
+    border-radius: 10px;
+    border: 1px solid #216C5E;
+    box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+}
+
+.last-name-input:focus{
+    border-radius: 10px;
+    border: 1px solid #216C5E;
+    box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+}
 
 .primary-button {
     margin: 24px 0 0 0;
@@ -134,4 +146,52 @@
     font-weight: 600;
     font-size: 16px;
     color: #FFFFFF;
+}
+
+.option {
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid #D8DBDE;
+    box-shadow: 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+    margin-bottom: 16px;
+}
+
+.option-value {
+    display: flex;
+    justify-content: space-between;
+}
+
+.option-name {
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+input[type='radio'] {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #D8DBDE;
+    background: #FFF;
+    box-shadow: 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+}
+
+input[type='radio']::before {
+
+}
+
+input[type='radio']:checked::after {
+
+}
+
+.option-text {
+    font-family: 'Inter', serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+    color: #3E4C5B;
+    width: 312px;
+    margin-top: 12px;
 }
