@@ -25,7 +25,7 @@ function userStatus() {
         </div>
       <div class="option-text">As an expert you can connect with teacher and join lessons.</div>
       </div>
-       <button onclick="resetPassword()" class="primary-button">Sign in again</button>
+       <button onclick="chooseLocation()" class="primary-button">Continue</button>
        </div>
        </div>
     `
@@ -43,3 +43,5 @@ function userName() {
 usernameInput.oninput = function() {
     usernameOutput.innerHTML = usernameInput.value;
 };
+
+

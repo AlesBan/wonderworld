@@ -33,6 +33,10 @@
     margin-top: 100px;
 }
 
+.userStatus {
+
+}
+
 
 .content {
     position: relative;
@@ -195,3 +199,4 @@ input[type='radio']:checked::after {
     width: 312px;
     margin-top: 12px;
 }
+
