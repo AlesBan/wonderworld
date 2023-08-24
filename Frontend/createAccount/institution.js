@@ -18,7 +18,7 @@ function chooseInstitution() {
         </div>
       </div>
     </div>
-    <button onclick="userStatus()" class="primary-button">Continue</button>
+    <button onclick="chooseWork()" class="primary-button">Continue</button>
   </div>
     `
 }

@@ -200,3 +200,7 @@ input[type='radio']:checked::after {
     margin-top: 12px;
 }
 
+.select {
+    display: flex;
+    justify-content: space-between;
+}
