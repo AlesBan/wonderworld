@@ -200,7 +200,42 @@ input[type='radio']:checked::after {
     margin-top: 12px;
 }
 
-.select {
+.select-btn {
     display: flex;
-    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    padding: 0 16px;
 }
+
+.select-btn .arrow-dwn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-items {
+    display: none;
+}
+
+.select-btn.open ~ .list-items {
+    display: block;
+}
+
+
+.list-items.item {
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.item.checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+
+
+
