@@ -1,3 +1,5 @@
+
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -200,11 +202,27 @@ input[type='radio']:checked::after {
     margin-top: 12px;
 }
 
+.content-body {
+    width: 384px;
+}
+
 .select-btn {
     display: flex;
     height: 50px;
     align-items: center;
+    justify-content: space-between;
     padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+}
+
+.select-btn:focus{
+    border-radius: 10px;
+    border: 1px solid #216C5E;
+    box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
 }
 
 .select-btn .arrow-dwn {
@@ -213,8 +231,20 @@ input[type='radio']:checked::after {
     justify-content: center;
 }
 
+.select-btn.open .arrow-dwn{
+    transform: rotate(-180deg);
+}
+
 .list-items {
+    position: relative;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     display: none;
+    overflow-y: auto ;
+    max-height: 296px;
 }
 
 .select-btn.open ~ .list-items {
@@ -226,15 +256,58 @@ input[type='radio']:checked::after {
     display: flex;
     align-items: center;
     list-style: none;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 15px;
+    border-radius: 8px;
 }
 
-.item.checkbox {
+.list-items .item:hover{
+    background-color: ghostwhite;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px 0 0 0;
+}
+
+.item-text {
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.item .checkbox{
     display: flex;
     align-items: center;
     justify-content: center;
-
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
 }
 
+.item.checked .checkbox{
+    background-color: #216C5E;
+    border-color: #216C5E;
+}
+
+.checkbox .check-icon{
+    color: #fff;
+    font-size: 11px;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+}
+.item.checked .check-icon{
+    transform: scale(1);
+}
 
 
 

@@ -13,14 +13,6 @@ function chooseWork() {
     <div class="inputs">
       <div class="first-name">
         <div class="input-title">Areas of work</div>
-<!--        <div class="select">-->
-<!--&lt;!&ndash;          <label><input name="first-name" class="first-name-input" type="text" placeholder="Select.."></label>&ndash;&gt;-->
-<!--&lt;!&ndash;          <div class=""><img src="../images/chevron-down.svg" alt=""></div>&ndash;&gt;-->
-<!--          <select>-->
-<!--           <option value="" disabled selected>Select..</option>-->
-<!--           <option>Пункт 1</option>-->
-<!--           <option>Пункт 2</option>-->
-<!--           </select>-->
 <div class="select-btn">
     <span class="btn-text">Select..</span>
     <span class="arrow-dwn">
@@ -29,20 +21,92 @@ function chooseWork() {
 </div>
 <ul class="list-items">
     <li class="item">
-        <span class="item-text">Art</span>
-        <span class="checkbox"></span>
+        <span class="item-text">Project activities</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
      <li class="item">
-        <span class="item-text">Biology</span>
-        <span class="checkbox"></span>
+        <span class="item-text">Russian</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
      <li class="item">
+        <span class="item-text">Literature</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+     <li class="item">
+        <span class="item-text">Math</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">History</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">English</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">French</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">German</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">Physics</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
         <span class="item-text">Chemistry</span>
-        <span class="checkbox"></span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">Biology</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+     <li class="item">
+        <span class="item-text">Social studies</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+     <li class="item">
+        <span class="item-text">Geography</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
      <li class="item">
         <span class="item-text">Computer science</span>
-        <span class="checkbox"></span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+     <li class="item">
+        <span class="item-text">World art</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+     <li class="item">
+        <span class="item-text">Visual art;</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+     <li class="item">
+        <span class="item-text">Technology</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">Natural science</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">Music</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">Economy</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">Rhetoric</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    <li class="item">
+        <span class="item-text">Local history</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
 </ul>
         </div>
@@ -56,6 +120,20 @@ function chooseWork() {
 
     selectBtn.addEventListener("click", () => {
         selectBtn.classList.toggle("open");
+    });
+
+    items.forEach(item => {
+        item.addEventListener("click", () => {
+            item.classList.toggle("checked");
+            let checked = document.querySelectorAll(".checked"),
+                btnText = document.querySelector(".btn-text");
+            if(checked && checked.length > 0){
+                btnText.innerText = `${btnText.innerText.value}`;
+            }else{
+                btnText.innerText = "Select..";
+            }
+        });
     })
+
 }
 
