@@ -112,7 +112,7 @@ function chooseWork() {
         </div>
       </div>
     </div>
-    <button onclick="" class="primary-button">Continue</button>
+    <button onclick="chooseGrades()" class="primary-button">Continue</button>
   </div>
     `
     const selectBtn = document.querySelector('.select-btn');
@@ -134,6 +134,30 @@ function chooseWork() {
             }
         });
     })
+
+
+
+    const lessons = document.querySelector('.list-items');
+
+    let filterFn = (lesson) => true;
+    generateItems(ALL_LESSONS);
+
+    function generateItems(items) {
+
+        const html = items.filter(filterFn).map(lesson => {
+            return `
+
+ <li class="item">
+        <span class="item-text">${lesson.title}</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    `;
+        })
+            .join('');
+
+        lessons.innerHTML = html;
+    }
+
 
 }
 
