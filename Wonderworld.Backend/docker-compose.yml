@@ -1,29 +1,38 @@
-version: "3.9"
+version: '3.9'
+
+networks:
+    dev:
+        driver: bridge
 services:
   wonderworld:
-    image: wonderworld:latest
+    image: alesban/wonderworldbackend
+    container_name: wonderworldbackend
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "12193:12193"
-    networks:
-      - default
+      - "7280:80"
     depends_on:
-      postgres:
-        condition: service_healthy
-  postgres:
-    image: postgres:latest
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d wonderworld" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - "wonderworld-db"
+    networks:
+      - dev
+    restart: always
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=wonderworld-db;Port=5432;Database=wonderworld;User Id=postgres;Password=postgres123;Integrated Security=true;Pooling=true;
+        
+  wonderworld-db:
+    image: postgres
+    container_name: wonderworld-db
+    restart: always
     ports:
       - "5432:5432"
-    networks:
-      - default
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres123
       - POSTGRES_DB=wonderworld
+    networks:
+      - dev
+    volumes:
+      - wonderworld-data:/var/lib/postgresql/data
+volumes:
+  wonderworld-data:
