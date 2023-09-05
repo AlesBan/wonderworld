@@ -7,7 +7,6 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.API.Controllers;
 
-
 public class AuthenticationController : BaseController
 {
     private readonly ISharedLessonDbContext _sharedLessonDbContext;
@@ -66,7 +65,7 @@ public class AuthenticationController : BaseController
         }
 
         var token = JwtHelper.CreateToken(existingUser, _configuration);
-        
+
         return Ok(new AuthResult()
         {
             Result = true,
@@ -112,9 +111,9 @@ public class AuthenticationController : BaseController
 
         await _sharedLessonDbContext.Users.AddAsync(user);
         await _sharedLessonDbContext.SaveChangesAsync(CancellationToken.None);
-        
+
         var token = JwtHelper.CreateToken(user, _configuration);
-        
+
         return Ok(new AuthResult
         {
             Result = true,
