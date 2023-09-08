@@ -20,16 +20,59 @@ function chooseGrades() {
     </span>
 </div>
 <ul class="list-items">
-    <li class="item">
-        <span class="item-text">Project activities</span>
-        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
-    </li>
-    </ul>
-     </div>
+    
+</ul>
+        </div>
       </div>
     </div>
-    <button onclick="chooseGrades()" class="primary-button">Continue</button>
+    <button onclick="" class="primary-button">Continue</button>
   </div>
     `
+
+    const selectBtn = document.querySelector('.select-btn');
+
+
+    selectBtn.addEventListener("click", () => {
+        selectBtn.classList.toggle("open");
+    });
+
+
+    const lessons = document.querySelector('.list-items');
+
+    let filterFn = (lesson) => true;
+    generateItems(ALL_LESSONS);
+
+    function generateItems(items) {
+
+        const html = items.filter(filterFn).map(lesson => {
+            return `
+
+ <li class="item">
+        <span class="item-text">${lesson.title}</span>
+        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    </li>
+    `;
+        })
+
+            .join('');
+
+        lessons.innerHTML = html;
+
+        items = document.querySelectorAll('.item');
+        items.forEach(item => {
+            item.addEventListener("click", () => {
+                item.classList.toggle("checked");
+                let checked = document.querySelectorAll(".checked"),
+                    btnText = document.querySelector(".btn-text");
+                if(checked && checked.length > 0){
+                    btnText.innerText = `${checked.value}`;
+                }else{
+                    btnText.innerText = "Select..";
+                }
+            });
+
+        })
+
+    }
 
 }

@@ -28,20 +28,27 @@ function userStatus() {
        <button onclick="chooseLocation()" class="primary-button">Continue</button>
        </div>
        </div>
+      
     `
+
+    let primaryBtn = document.querySelector('.primary-button')
+    let usernameInput = document.querySelector(".first-name-input");
+    let usernameOutput = document.querySelector('.first-name-output');
+
+    primaryBtn.addEventListener("click", function () {
+        console.log('lll')
+    })
+
+    usernameInput.onkeyup= function(e){
+        usernameOutput.innerHTML = e.target.value;
+    }
+
 }
 
-let usernameInput = document.querySelector('.first-name-input');
-let usernameOutput = document.querySelector('.first-name-output');
 
-usernameInput.addEventListener('input', userName)
-function userName() {
-    let inputValue = usernameInput.value;
-    usernameOutput.textContent = inputValue;
-}
-
-usernameInput.oninput = function() {
-    usernameOutput.innerHTML = usernameInput.value;
-};
-
-
+// let usernameInput = document.querySelector('.first-name-input');
+// let usernameOutput = document.querySelector('.first-name-output');
+//
+// usernameInput.oninput = function() {
+//     usernameOutput.innerHTML = usernameInput.value;
+// };

@@ -27,5 +27,6 @@ function chooseLocation() {
     <button onclick="chooseInstitution()" class="primary-button">Continue</button>
   </div>
     `
+
 }
 
