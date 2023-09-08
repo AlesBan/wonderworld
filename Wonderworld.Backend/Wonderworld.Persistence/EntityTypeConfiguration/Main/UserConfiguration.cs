@@ -49,7 +49,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
 
         builder.Property(t => t.LastOnlineAt)
-            .HasDefaultValueSql("now()")
-            .IsRequired();
+            .HasDefaultValueSql("now()");
     }
 }
