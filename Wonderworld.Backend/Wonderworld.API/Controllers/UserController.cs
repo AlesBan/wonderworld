@@ -18,7 +18,6 @@ public class UserController : BaseController
     [HttpGet("all-users")]
     public async Task<List<User>> GetAllUsers()
     {
-        
         return await _sharedLessonDbContext.Users.ToListAsync();   
     }
 }

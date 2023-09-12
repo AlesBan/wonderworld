@@ -38,7 +38,7 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
             .HasForeignKey(i => i.ClassRecipientId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
-
+        
         builder.Property(i => i.CreatedAt)
             .HasDefaultValueSql("now()")
             .ValueGeneratedOnAdd()

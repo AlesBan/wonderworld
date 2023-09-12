@@ -8,6 +8,7 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.G
 public class GetUserProfileCommandHandler : IRequestHandler<GetUserProfileCommand, UserProfileDto>
 {
     private readonly IMapper _mapper;
+
     public GetUserProfileCommandHandler(IMapper mapper)
     {
         _mapper = mapper;
@@ -15,7 +16,6 @@ public class GetUserProfileCommandHandler : IRequestHandler<GetUserProfileComman
 
     public async Task<UserProfileDto> Handle(GetUserProfileCommand request, CancellationToken cancellationToken)
     {
-        
         var userProfile = _mapper.Map<UserProfileDto>(request.User);
         return userProfile;
     }

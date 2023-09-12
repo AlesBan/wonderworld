@@ -97,8 +97,10 @@ public class SharedLessonDbContextFactory
                 IsAnExpert = false,
                 Establishment = context.Establishments.FirstOrDefault(e =>
                     e.EstablishmentId == EstablishmentAId),
-                CityLocation = context.Cities.FirstOrDefault(c =>
+                City = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityAId),
+                Country = context.Countries.FirstOrDefault(c =>
+                    c.CountryId == CountryAId),
                 Description = "DescriptionA",
                 PhotoUrl = "PhotoUrlA",
                 BannerPhotoUrl = "BannerPhotoUrlA",
@@ -120,8 +122,10 @@ public class SharedLessonDbContextFactory
                 IsAnExpert = true,
                 Establishment = context.Establishments.FirstOrDefault(e =>
                     e.EstablishmentId == EstablishmentAId)!,
-                CityLocation = context.Cities.FirstOrDefault(c =>
-                    c.CityId == CityAId)!,
+                City = context.Cities.FirstOrDefault(c =>
+                    c.CityId == CityBId)!,
+                Country = context.Countries.FirstOrDefault(c =>
+                    c.CountryId == CountryBId)!,
                 Description = "DescriptionB",
                 PhotoUrl = "PhotoUrlB",
                 BannerPhotoUrl = "BannerPhotoUrlB",
@@ -324,18 +328,24 @@ public class SharedLessonDbContextFactory
         context.ClassDisciplines.AddRangeAsync(
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassAId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!
+                Class = context.Classes.FirstOrDefault(c => 
+                    c.ClassId == ClassAId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d => 
+                    d.Title == "Chemistry")!
             },
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassForUpdateId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!
+                Class = context.Classes.FirstOrDefault(c => 
+                    c.ClassId == ClassForUpdateId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d => 
+                    d.Title == "Chemistry")!
             },
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => c.ClassId == ClassForDeleteId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => d.Title == "Chemistry")!
+                Class = context.Classes.FirstOrDefault(c => 
+                    c.ClassId == ClassForDeleteId)!,
+                Discipline = context.Disciplines.FirstOrDefault(d => 
+                    d.Title == "Chemistry")!
             }
         );
     }

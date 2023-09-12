@@ -8,7 +8,7 @@ namespace Wonderworld.API.Controllers;
 [ApiController]
 public class BaseController : ControllerBase
 {
-    private IMediator? Mediator => HttpContext.RequestServices.GetService<IMediator>();
+    protected IMediator? Mediator => HttpContext.RequestServices.GetService<IMediator>();
     
     internal Guid UserId => User.Identity is { IsAuthenticated: true } ? 
         Guid.Empty : 

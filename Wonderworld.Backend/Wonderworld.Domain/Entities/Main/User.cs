@@ -18,8 +18,11 @@ public class User
     public ICollection<Class> Classes { get; set; } = new List<Class>();
     public Guid? EstablishmentId { get; set; }
     public Establishment? Establishment { get; set; }
-    public Guid? CityLocationId { get; set; }
-    public City? CityLocation { get; set; }
+    public Guid? CityId { get; set; }
+    public City? City { get; set; }
+    
+    public Guid? CountryId { get; set; }
+    public Country? Country { get; set; }
     public ICollection<UserLanguage> UserLanguages { get; set; } = new List<UserLanguage>();
     public ICollection<UserDiscipline> UserDisciplines { get; set; } = new List<UserDiscipline>();
     public ICollection<UserGrade> UserGrades { get; set; } = new List<UserGrade>();

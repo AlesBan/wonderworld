@@ -53,7 +53,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             u.LastName == lastName &&
             u.IsATeacher == isATeacher &&
             u.IsAnExpert == isAnExpert &&
-            u.CityLocation == cityLocation &&
+            u.City == cityLocation &&
             u.Establishment == establishment &&
             u.UserDisciplines.Count() == disciplines.Count() &&
             u.UserLanguages.Count() == languages.Count() &&
