@@ -2,9 +2,11 @@ using MediatR;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClassProfileListDependingOnCountry;
+using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClassProfileListDependingOnDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListDependingOnCountry;
-using Wonderworld.Application.Interfaces.Services.Data;
+using Wonderworld.Application.Interfaces.Helpers;
 using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
+using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 
@@ -12,18 +14,18 @@ namespace Wonderworld.Infrastructure.Services.DefaultDataServices;
 
 public class DefaultSearchDataService : IDefaultSearchDataService
 {
-    private readonly IUserDataService _userDataService;
     private readonly IMediator _mediator;
+    private readonly IUserHelper _userHelper;
 
-    public DefaultSearchDataService(IUserDataService userDataService, IMediator mediator)
+    public DefaultSearchDataService(IMediator mediator, IUserHelper userHelper)
     {
-        _userDataService = userDataService;
         _mediator = mediator;
+        _userHelper = userHelper;
     }
 
     public async Task<IEnumerable<UserProfileDto>> GetTeachersDependingOnUserCountry(Guid userId, IMediator? mediator)
     {
-        var user = GetUserById(userId);
+        var user = await _userHelper.GetUserById(userId);
 
         var userCountry = GetUserCountry(user);
 
@@ -35,7 +37,7 @@ public class DefaultSearchDataService : IDefaultSearchDataService
 
     public async Task<IEnumerable<UserProfileDto>> GetExpertsDependingOnUserCountry(Guid userId, IMediator? mediator)
     {
-        var user = GetUserById(userId);
+        var user = await _userHelper.GetUserById(userId);
 
         var userCountry = GetUserCountry(user);
 
@@ -45,32 +47,30 @@ public class DefaultSearchDataService : IDefaultSearchDataService
         return expertList;
     }
 
-    public Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnUserCountry(Guid userId, IMediator? mediator)
+    public async Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnUserCountry(Guid userId, IMediator? mediator)
     {
-        var user = GetUserById(userId);
+        var user = await _userHelper.GetUserById(userId);
 
         var userCountry = GetUserCountry(user);
 
         var query = CreateGetClassProfileListDependingOnCountryCommand(userCountry.CountryId);
 
-        var classList = _mediator.Send(query);
+        var classList = await _mediator.Send(query);
         return classList;
     }
 
-    public Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnUserDisciplines(Guid userId, IMediator? mediator)
+    public async Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnUserDisciplines(Guid userId,
+        IMediator? mediator)
     {
-        throw new NotImplementedException();
-    }
+        var user = await _userHelper.GetUserById(userId);
 
-    private User GetUserById(Guid userId)
-    {
-        var user = _userDataService.GetUserById(userId);
-        if (user == null)
-        {
-            throw new NotFoundException(nameof(User), userId);
-        }
+        var userDisciplines = GetUserDisciplines(user);
 
-        return user;
+        var query = CreateGetClassProfileListDependingOnDisciplinesCommand(userDisciplines);
+
+        var classList = await _mediator.Send(query);
+
+        return classList;
     }
 
     private static Country GetUserCountry(User user)
@@ -82,6 +82,20 @@ public class DefaultSearchDataService : IDefaultSearchDataService
         }
 
         return userCountry;
+    }
+
+    private static List<Discipline> GetUserDisciplines(User user)
+    {
+        var userDisciplines = user.UserDisciplines
+            .Select(ud =>
+                ud.Discipline)
+            .ToList();
+        if (userDisciplines == null)
+        {
+            throw new NotFoundException(nameof(Discipline), user.UserId);
+        }
+
+        return userDisciplines;
     }
 
     private static GetUserProfileListDependingOnCountryCommand CreateGetUserProfileListDependingOnCountryCommand(
@@ -101,6 +115,15 @@ public class DefaultSearchDataService : IDefaultSearchDataService
         return new GetClassProfileListDependingOnCountryCommand()
         {
             CountryId = countryId
+        };
+    }
+
+    private static GetClassProfileListDependingOnDisciplinesCommand
+        CreateGetClassProfileListDependingOnDisciplinesCommand(List<Discipline> disciplines)
+    {
+        return new GetClassProfileListDependingOnDisciplinesCommand()
+        {
+            Disciplines = disciplines
         };
     }
 }

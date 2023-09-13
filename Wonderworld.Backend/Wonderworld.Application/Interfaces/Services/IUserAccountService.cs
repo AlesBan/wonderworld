@@ -1,10 +1,9 @@
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Interfaces.Services.Data;
+namespace Wonderworld.Application.Interfaces.Services;
 
-public interface IUserDataService
+public interface IUserAccountService
 {
-    public User GetUserById(Guid userId);
     public void RegisterUser(User user);
     public void CreateUserAccount(User user);
     public void DeleteUser(User user);

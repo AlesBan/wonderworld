@@ -1,21 +1,16 @@
 using Wonderworld.Application.Interfaces;
-using Wonderworld.Application.Interfaces.Services.Data;
+using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Infrastructure.Services.DataServices;
 
-public class UserDataService : IUserDataService
+public class UserAccountService : IUserAccountService
 {
     private readonly ISharedLessonDbContext _context;
 
-    public UserDataService(ISharedLessonDbContext context)
+    public UserAccountService(ISharedLessonDbContext context)
     {
         _context = context;
-    }
-
-    public User GetUserById(Guid userId)
-    {
-        throw new NotImplementedException();
     }
 
     public void RegisterUser(User user)

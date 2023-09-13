@@ -1,11 +1,21 @@
 using System.Reflection;
 using System.Text;
 using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Wonderworld.API.Helpers.JwtHelpers;
+using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
+using Wonderworld.Application.Interfaces.Helpers;
+using Wonderworld.Application.Interfaces.Services;
+using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Helpers;
+using Wonderworld.Infrastructure.Services;
+using Wonderworld.Infrastructure.Services.DataServices;
+using Wonderworld.Infrastructure.Services.DefaultDataServices;
 using Wonderworld.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +23,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
+
+builder.Services.AddApplication();
+builder.Services.AddPersistence(builder.Configuration);
+
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+    config.AddProfile(new AssemblyMappingProfile(typeof(ISharedLessonDbContext).Assembly));
+});
 
 builder.Services.AddCors(options =>
 {
@@ -22,13 +41,6 @@ builder.Services.AddCors(options =>
         policy.AllowAnyMethod();
         policy.AllowAnyOrigin();
     });
-});
-builder.Services.AddPersistence(builder.Configuration);
-
-builder.Services.AddAutoMapper(config =>
-{
-    config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
-    config.AddProfile(new AssemblyMappingProfile(typeof(ISharedLessonDbContext).Assembly));
 });
 
 builder.Services.AddAuthentication(options =>
@@ -80,8 +92,27 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddScoped<IDefaultSearchDataService, DefaultSearchDataService>();
+builder.Services.AddScoped<IUserAccountService, UserAccountService>();
+builder.Services.AddScoped<ISearchService, SearchService>();
+builder.Services.AddScoped<IUserHelper, UserHelper>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var servicesProvider = scope.ServiceProvider;
+    try
+    {
+        var context = servicesProvider.GetRequiredService<SharedLessonDbContext>();
+        DbInitializer.Initialize(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = servicesProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
 
 if (app.Environment.IsDevelopment())
 {
