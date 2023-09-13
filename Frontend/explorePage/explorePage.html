@@ -7,6 +7,7 @@
     <link href="../layout/layout.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Georgia' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 </head>
 <body>
 <div class="header">
@@ -42,11 +43,14 @@
     </div>
     <div class="filters">
         <div class="main-filters">
-            <div class="select-btn">
+            <div class="select-btn" onclick="toggleDropdown()">
                 <span class="btn-text">Subject</span>
                 <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
+            </div>
+            <div class="list-items">
+
             </div>
             <div class="select-btn">
                 <span class="btn-text">Grade</span>
@@ -161,5 +165,7 @@
     </div>
 </main>
 </body>
+<script src="../createAccount/dataLessons.js"></script>
 <script src="explorePage.js"></script>
+
 </html>
