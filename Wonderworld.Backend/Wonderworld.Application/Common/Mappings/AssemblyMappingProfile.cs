@@ -5,6 +5,7 @@ namespace Wonderworld.Application.Common.Mappings;
 
 public class AssemblyMappingProfile : Profile
 {
+    public AssemblyMappingProfile() => ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
     public AssemblyMappingProfile(Assembly assembly) =>
         ApplyMappingsFromAssembly(assembly);
 

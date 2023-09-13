@@ -55,7 +55,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         user.LastName = request.LastName;
         user.IsATeacher = request.IsATeacher;
         user.IsAnExpert = request.IsAnExpert;
-        user.CityLocation = request.CityLocation;
+        user.City = request.CityLocation;
         user.Establishment = request.Establishment;
         user.PhotoUrl = request.PhotoUrl;
     }

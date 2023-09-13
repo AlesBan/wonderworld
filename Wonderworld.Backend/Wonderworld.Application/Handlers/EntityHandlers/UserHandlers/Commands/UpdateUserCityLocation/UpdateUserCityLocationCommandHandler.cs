@@ -17,7 +17,7 @@ public class UpdateUserCityLocationCommandHandler : IRequestHandler<UpdateUserCi
 
     public async Task<Unit> Handle(UpdateUserCityLocationCommand request, CancellationToken cancellationToken)
     {
-        request.User.CityLocation = request.CityLocation;
+        request.User.City = request.CityLocation;
 
         _context.Users.Update(request.User);
         await _context.SaveChangesAsync(cancellationToken);

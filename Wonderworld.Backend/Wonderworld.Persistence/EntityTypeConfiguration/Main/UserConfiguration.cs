@@ -20,9 +20,14 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(t => t.LastName)
             .HasMaxLength(40);
 
-        builder.HasOne(t => t.CityLocation)
+        builder.HasOne(t => t.Country)
             .WithMany(cl => cl.Users)
-            .HasForeignKey(t => t.CityLocationId)
+            .HasForeignKey(t => t.CountryId)
+            .OnDelete(DeleteBehavior.SetNull);
+        
+        builder.HasOne(t => t.City)
+            .WithMany(cl => cl.Users)
+            .HasForeignKey(t => t.CityId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasOne(t => t.Establishment)

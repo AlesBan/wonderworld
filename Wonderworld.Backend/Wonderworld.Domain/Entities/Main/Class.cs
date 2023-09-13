@@ -20,7 +20,4 @@ public class Class
     public ICollection<ClassDiscipline> ClassDisciplines { get; set; } = new List<ClassDiscipline>();
     public ICollection<Invitation> ReceivedInvitations { get; set; } = new List<Invitation>();
     public ICollection<Invitation> SentInvitations { get; set; } = new List<Invitation>();
-
-    public ICollection<Review> ReceivedFeedbacks { get; set; } = new List<Review>();
-    public ICollection<Review> SentFeedbacks { get; set; } = new List<Review>();
 }

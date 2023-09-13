@@ -18,14 +18,14 @@ public class UserProfileDto : IMapWith<User>
     public string BannerPhotoUrl { get; set; } = string.Empty;
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
-    public City CityLocation { get; set; } = new();
+    public City City { get; set; } = new();
+    public Country Country { get; set; } = new();
     public Establishment Establishment { get; set; } = new();
     public double Rating { get; set; }
     public ICollection<Class> Classes { get; set; } = new List<Class>();
     public List<string> Languages { get; set; } = new();
     public List<string> Disciplines { get; set; } = new();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
-
 
     public void Mapping(Profile profile)
     {
@@ -46,8 +46,10 @@ public class UserProfileDto : IMapWith<User>
                 opt => opt.MapFrom(u => u.IsATeacher))
             .ForMember(up => up.IsAnExpert,
                 opt => opt.MapFrom(u => u.IsAnExpert))
-            .ForMember(up => up.CityLocation,
-                opt => opt.MapFrom(u => u.CityLocation))
+            .ForMember(up => up.City,
+                opt => opt.MapFrom(u => u.City))
+            .ForMember(up => up.Country,
+                opt => opt.MapFrom(u => u.Country))
             .ForMember(up => up.Establishment,
                 opt => opt.MapFrom(u => u.Establishment))
             .ForMember(up => up.Rating,
