@@ -20,7 +20,6 @@ public class User
     public Establishment? Establishment { get; set; }
     public Guid? CityId { get; set; }
     public City? City { get; set; }
-    
     public Guid? CountryId { get; set; }
     public Country? Country { get; set; }
     public ICollection<UserLanguage> UserLanguages { get; set; } = new List<UserLanguage>();

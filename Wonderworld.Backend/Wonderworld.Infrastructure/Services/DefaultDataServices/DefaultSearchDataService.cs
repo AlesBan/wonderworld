@@ -14,16 +14,14 @@ namespace Wonderworld.Infrastructure.Services.DefaultDataServices;
 
 public class DefaultSearchDataService : IDefaultSearchDataService
 {
-    private readonly IMediator _mediator;
     private readonly IUserHelper _userHelper;
 
-    public DefaultSearchDataService(IMediator mediator, IUserHelper userHelper)
+    public DefaultSearchDataService(IUserHelper userHelper)
     {
-        _mediator = mediator;
         _userHelper = userHelper;
     }
 
-    public async Task<IEnumerable<UserProfileDto>> GetTeachersDependingOnUserCountry(Guid userId, IMediator? mediator)
+    public async Task<IEnumerable<UserProfileDto>> GetTeachersDependingOnUserCountry(Guid userId, IMediator mediator)
     {
         var user = await _userHelper.GetUserById(userId);
 
@@ -31,11 +29,11 @@ public class DefaultSearchDataService : IDefaultSearchDataService
 
         var query = CreateGetUserProfileListDependingOnCountryCommand(userCountry.CountryId, true, false);
 
-        var teacherList = await _mediator.Send(query);
+        var teacherList = await mediator.Send(query);
         return teacherList;
     }
 
-    public async Task<IEnumerable<UserProfileDto>> GetExpertsDependingOnUserCountry(Guid userId, IMediator? mediator)
+    public async Task<IEnumerable<UserProfileDto>> GetExpertsDependingOnUserCountry(Guid userId, IMediator mediator)
     {
         var user = await _userHelper.GetUserById(userId);
 
@@ -43,11 +41,11 @@ public class DefaultSearchDataService : IDefaultSearchDataService
 
         var query = CreateGetUserProfileListDependingOnCountryCommand(userCountry.CountryId, false, true);
 
-        var expertList = await _mediator.Send(query);
+        var expertList = await mediator.Send(query);
         return expertList;
     }
 
-    public async Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnUserCountry(Guid userId, IMediator? mediator)
+    public async Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnUserCountry(Guid userId, IMediator mediator)
     {
         var user = await _userHelper.GetUserById(userId);
 
@@ -55,12 +53,12 @@ public class DefaultSearchDataService : IDefaultSearchDataService
 
         var query = CreateGetClassProfileListDependingOnCountryCommand(userCountry.CountryId);
 
-        var classList = await _mediator.Send(query);
+        var classList = await mediator.Send(query);
         return classList;
     }
 
     public async Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnUserDisciplines(Guid userId,
-        IMediator? mediator)
+        IMediator mediator)
     {
         var user = await _userHelper.GetUserById(userId);
 
@@ -68,7 +66,7 @@ public class DefaultSearchDataService : IDefaultSearchDataService
 
         var query = CreateGetClassProfileListDependingOnDisciplinesCommand(userDisciplines);
 
-        var classList = await _mediator.Send(query);
+        var classList = await mediator.Send(query);
 
         return classList;
     }

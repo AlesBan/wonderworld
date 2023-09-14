@@ -1,23 +1,37 @@
 using MediatR;
 using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.SearchDtos;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListDependingOnSearchQuery;
 using Wonderworld.Application.Interfaces.Services;
 
 namespace Wonderworld.Infrastructure.Services;
 
 public class SearchService : ISearchService
 {
-    public Task<IEnumerable<UserProfileDto>> GetTeachersDependingOnSearchRequest(Guid userId, IMediator? mediator)
+    public async Task<IEnumerable<UserProfileDto>> GetTeacherProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator mediator)
+    {
+        var query = GetUserCreateGetTeacherProfilesDependingOnSearchRequestCommand(searchRequest);
+        
+        var teacherList = await mediator.Send(query);
+        
+        return teacherList;
+    }
+
+    public Task<IEnumerable<UserProfileDto>> GetExpertProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator? mediator)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<UserProfileDto>> GetExpertsDependingOnSearchRequest(Guid userId, IMediator? mediator)
+    public Task<IEnumerable<ClassProfileDto>> GetClassProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator? mediator)
     {
         throw new NotImplementedException();
     }
-
-    public Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnSearchRequest(Guid userId, IMediator? mediator)
+    
+    private GetUserProfileListDependingOnSearchQueryCommand GetUserCreateGetTeacherProfilesDependingOnSearchRequestCommand(SearchRequestDto searchRequest)
     {
-        throw new NotImplementedException();
+        return new GetUserProfileListDependingOnSearchQueryCommand()
+        {
+            SearchRequest = searchRequest
+        };
     }
 }

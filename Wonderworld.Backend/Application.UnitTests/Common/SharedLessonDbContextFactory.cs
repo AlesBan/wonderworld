@@ -55,7 +55,7 @@ public class SharedLessonDbContextFactory
         AppendCountries(context);
         AppendCities(context);
         AppendEstablishments(context);
-        
+
         context.SaveChangesAsync();
         AppendUsers(context);
 
@@ -68,7 +68,7 @@ public class SharedLessonDbContextFactory
         AppendUserRoles(context);
         AppendClassLanguages(context);
         AppendClassDisciplines(context);
-        
+
         AppendInvitations(context);
         context.SaveChangesAsync();
 
@@ -154,8 +154,8 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserAId,
                 ClassId = ClassAId,
-                Title = "title",
-                Grade = context.Grades.FirstOrDefault(g => 
+                Title = "ClassAId",
+                Grade = context.Grades.FirstOrDefault(g =>
                     g.GradeNumber == 10)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
@@ -165,7 +165,7 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserAId,
                 ClassId = ClassForUpdateId,
-                Title = "title",
+                Title = "ClassForUpdateId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
@@ -175,7 +175,7 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserAId,
                 ClassId = ClassForDeleteId,
-                Title = "titleA",
+                Title = "ClassForDeleteId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
@@ -328,23 +328,23 @@ public class SharedLessonDbContextFactory
         context.ClassDisciplines.AddRangeAsync(
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => 
+                Class = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassAId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => 
+                Discipline = context.Disciplines.FirstOrDefault(d =>
                     d.Title == "Chemistry")!
             },
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => 
+                Class = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassForUpdateId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => 
+                Discipline = context.Disciplines.FirstOrDefault(d =>
                     d.Title == "Chemistry")!
             },
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => 
+                Class = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassForDeleteId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => 
+                Discipline = context.Disciplines.FirstOrDefault(d =>
                     d.Title == "Chemistry")!
             }
         );
