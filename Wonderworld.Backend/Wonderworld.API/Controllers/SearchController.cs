@@ -17,22 +17,10 @@ public class SearchController : BaseController
         _searchService = searchService;
     }
     
-    [HttpGet("teacher-profiles-depending-on-search-request")]
-    public async Task<IEnumerable<UserProfileDto>> GetTeachersDependingOnSearchRequest([FromBody] SearchRequestDto searchRequest)
+    [HttpGet("search-request")]
+    public async Task<SearchResponseDto> GetTeachersDependingOnSearchRequest([FromBody] SearchRequestDto searchRequest)
     {
-        return await _searchService.GetTeacherProfilesDependingOnSearchRequest(searchRequest, Mediator);
-    }
-    
-    [HttpGet("expert-profiles-depending-on-search-request")]
-    public async Task<IEnumerable<UserProfileDto>> GetExpertsDependingOnSearchRequest([FromBody] SearchRequestDto searchRequest)
-    {
-        return await _searchService.GetExpertProfilesDependingOnSearchRequest(searchRequest, Mediator);
-    }
-    
-    [HttpGet("class-profiles-depending-on-search-request")]
-    public async Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnSearchRequest([FromBody] SearchRequestDto searchRequest)
-    {
-        return await _searchService.GetClassProfilesDependingOnSearchRequest(searchRequest, Mediator);
+        return await _searchService.GetTeacherAndClassProfilesDependingOnSearchRequest(searchRequest, Mediator);
     }
 
     [HttpGet("teacher-profiles-depending-on-user-country/{userId:guid}")]

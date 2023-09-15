@@ -1,3 +1,4 @@
+using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
@@ -8,30 +9,70 @@ namespace Wonderworld.Infrastructure.Services;
 
 public class SearchService : ISearchService
 {
-    public async Task<IEnumerable<UserProfileDto>> GetTeacherProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator mediator)
+    private readonly IMapper _mapper;
+
+    public SearchService(IMapper mapper)
     {
-        var query = GetUserCreateGetTeacherProfilesDependingOnSearchRequestCommand(searchRequest);
-        
-        var teacherList = await mediator.Send(query);
-        
-        return teacherList;
+        _mapper = mapper;
     }
 
-    public Task<IEnumerable<UserProfileDto>> GetExpertProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator? mediator)
+    public async Task<SearchResponseDto> GetTeacherAndClassProfilesDependingOnSearchRequest(
+        SearchRequestDto searchRequest, IMediator mediator)
     {
-        throw new NotImplementedException();
+        var queryToGetUserProfiles = CreateGetUserProfileListDependingOnSearchQueryCommand(searchRequest);
+
+        var userProfileList = (await GetUserProfiles(queryToGetUserProfiles, mediator)).ToList();
+
+        var classProfileList = (await GetClassProfiles(userProfileList)).ToList();
+
+        var responseDto = CreateSearchResponseDto(userProfileList, classProfileList);
+
+        return responseDto;
     }
 
-    public Task<IEnumerable<ClassProfileDto>> GetClassProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator? mediator)
+    private Task<IEnumerable<ClassProfileDto>> GetClassProfiles(IEnumerable<UserProfileDto> userProfileList)
     {
-        throw new NotImplementedException();
+        var classList = userProfileList.Select(up => up.Classes).ToList();
+
+        var classProfileList = classList.Select(cp =>
+                _mapper.Map<ClassProfileDto>(cp))
+            .ToList();
+
+        return Task.FromResult<IEnumerable<ClassProfileDto>>(classProfileList);
     }
-    
-    private GetUserProfileListDependingOnSearchQueryCommand GetUserCreateGetTeacherProfilesDependingOnSearchRequestCommand(SearchRequestDto searchRequest)
+
+    private static async Task<IEnumerable<UserProfileDto>> GetUserProfiles(
+        GetUserProfileListDependingOnSearchQueryCommand query, IMediator mediator)
+    {
+        var userProfileList = (await mediator.Send(query)).ToList();
+
+        return userProfileList;
+    }
+
+    private static GetUserProfileListDependingOnSearchQueryCommand
+        CreateGetUserProfileListDependingOnSearchQueryCommand(
+            SearchRequestDto searchRequest)
     {
         return new GetUserProfileListDependingOnSearchQueryCommand()
         {
             SearchRequest = searchRequest
         };
+    }
+
+    private static SearchResponseDto CreateSearchResponseDto(IReadOnlyCollection<UserProfileDto> userProfileList,
+        IEnumerable<ClassProfileDto> classProfileList)
+    {
+        var responseDto = new SearchResponseDto
+        {
+            TeacherProfiles = userProfileList.Where(u =>
+                    u.IsATeacher)
+                .ToList(),
+            ExpertProfiles = userProfileList.Where(u =>
+                u.IsAnExpert &&
+                u.IsATeacher == false),
+            ClassProfiles = classProfileList
+        };
+
+        return responseDto;
     }
 }

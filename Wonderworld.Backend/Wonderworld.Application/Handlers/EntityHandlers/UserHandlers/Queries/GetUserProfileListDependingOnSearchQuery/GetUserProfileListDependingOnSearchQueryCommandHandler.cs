@@ -38,7 +38,9 @@ public class GetUserProfileListDependingOnSearchQueryCommandHandler : IRequestHa
                 u.UserDisciplines.Any(d => disciplineTitles.Contains(d.Discipline.Title)) &&
                 u.UserLanguages.Any(l => languageTitles.Contains(l.Language.Title)));
 
-        var userProfileDtos = users.Select(u => _mapper.Map<UserProfileDto>(u)).ToList();
+        var userProfileDtos = users.Select(u =>
+                _mapper.Map<UserProfileDto>(u))
+            .ToList();
 
         return Task.FromResult<IEnumerable<UserProfileDto>>(userProfileDtos);
     }
