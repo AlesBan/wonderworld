@@ -43,28 +43,35 @@
     </div>
     <div class="filters">
         <div class="main-filters">
-            <div class="select-btn" onclick="toggleDropdown()">
+            <div class="select-btn" id="subject">
                 <span class="btn-text">Subject</span>
                 <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
             </div>
-            <div class="list-items">
+            <div class="dropdown">
+                <div class="list-items" id="subject-items">
 
+                </div>
+                <div class="dropdown-buttons">
+                    <button class="clearButton">Clear All</button>
+                    <button class="applyButton">Apply</button>
+                </div>
             </div>
-            <div class="select-btn">
+
+            <div class="select-btn" id="grade">
                 <span class="btn-text">Grade</span>
                 <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
             </div>
-            <div class="select-btn">
+            <div class="select-btn" id="review">
                 <span class="btn-text">Reviews</span>
                 <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
             </div>
-            <div class="select-btn">
+            <div class="select-btn" id="location">
                 <span class="btn-text">Location</span>
                 <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
@@ -78,6 +85,9 @@
                 </label>
                 <div class="available">Show-specialists</div>
         </div>
+    </div>
+    <div class="selected-values">
+
     </div>
     <div class="section">
         <div class="top-line">
@@ -166,6 +176,7 @@
 </main>
 </body>
 <script src="../createAccount/dataLessons.js"></script>
+<script src="../createAccount/dataGrades.js"></script>
 <script src="explorePage.js"></script>
 
 </html>

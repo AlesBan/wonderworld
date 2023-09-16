@@ -1,16 +1,19 @@
 const selectBtn = document.querySelector('.select-btn');
 
+const selectedValuesDiv = document.querySelector(".selected-values");
+const selectedValues = [];
+
+
 selectBtn.addEventListener("click", () => {
     selectBtn.classList.toggle("open");
 });
 
 const lessons = document.querySelector('.list-items');
-// const grades = document.querySelector('.')
 
 let filterFn = (lesson) => true;
-generateItems(ALL_LESSONS);
+generateSubjects(ALL_LESSONS);
 
-function generateItems(items) {
+function generateSubjects(items) {
 
     const html = items.filter(filterFn).map(lesson => {
         return `
@@ -30,12 +33,33 @@ function generateItems(items) {
     items.forEach(item => {
         item.addEventListener("click", () => {
             item.classList.toggle("checked");
+            const itemText = item.querySelector(".item-text").textContent;
+            if (item.classList.contains("checked")) {
+                selectedValues.push(itemText);
+            } else {
+                const index = selectedValues.indexOf(itemText);
+                if (index !== -1) {
+                    selectedValues.splice(index, 1);
+                }
+            }
+            console.log(selectedValues);
         });
 
     })
 
 }
 
+const applyButton = document.querySelector(".applyButton");
+applyButton.addEventListener("click", () => {
+    const selectedTags = selectedValues.map(value => `<div class="tag">${value}</div>`).join("");
+    selectedValuesDiv.innerHTML = selectedTags;
 
+});
+
+
+const clearButton = document.querySelector('.clearButton');
+clearButton.addEventListener("click", () => {
+    selectedValuesDiv.innerHTML = "";
+})
 
 

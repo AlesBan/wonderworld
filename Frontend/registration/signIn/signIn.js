@@ -22,22 +22,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    let input = document.querySelector('[name="confirm-password"].confirm-password-input');
 
-    if (input) {
-        input.value = localStorage.getItem("confirm-password") || "";
+async function post() {
 
-        input.addEventListener('input', function () {
-            localStorage.setItem("confirm-password", this.value);
-        });
-    }
-});
-
-
-async function postData() {
-
-    const url = 'http://localhost:7280/api/authentication/register';
+    const url = 'http://localhost:7280/api/authentication/login';
     const data = {
         Email: document.getElementById("email").value,
         Password: document.getElementById("password").value
@@ -70,4 +58,3 @@ async function postData() {
             console.log(error);
         });
 }
-

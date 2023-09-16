@@ -49,7 +49,7 @@
       <div class="email">
         <div class="input-title">Email</div>
         <div class="">
-          <label><input name="email" class="email-input" type="text" placeholder="awesomeperson@email.com"></label>
+          <label><input id="email" class="email-input" type="text" placeholder="awesomeperson@email.com"></label>
         </div>
       </div>
       <div class="password">
@@ -58,11 +58,11 @@
           <button onclick="openDialog()" class="forget-password">Forgot password?</button>
         </div>
         <div class="">
-          <label><input name="email" class="password-input" type="text" placeholder="At least 6 characters"></label>
+          <label><input id="password" class="password-input" type="text" placeholder="At least 6 characters"></label>
         </div>
       </div>
     </div>
-    <button class="primary-button">Sign in</button>
+    <button class="primary-button" onclick="post()">Sign in</button>
   </div>
 </div>
 </body>
@@ -98,6 +98,7 @@
   }
 
 </script>
+<script src="signIn.js"></script>
 <script src="checkEmail.js"></script>
 <script src="resetPassword.js"></script>
 </html>

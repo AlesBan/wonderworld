@@ -80,7 +80,7 @@
     transform: rotate(-180deg);
 }
 
-.list-items {
+.dropdown {
     position: absolute;
     margin: 45px 0 0 0;
     border-radius: 8px;
@@ -92,11 +92,11 @@
     max-height: 296px;
 }
 
-.select-btn.open ~ .list-items {
+.select-btn.open ~ .dropdown {
     display: block;
 }
 
-.list-items.item {
+.dropdown.item {
     display: flex;
     align-items: center;
     list-style: none;
@@ -107,8 +107,48 @@
     border-radius: 8px;
 }
 
-.list-items .item:hover{
+.dropdown .item:hover{
     background-color: ghostwhite;
+}
+
+.dropdown-buttons {
+    display: flex;
+    padding: 16px 16px 16px 0;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: stretch;
+}
+
+.clearButton {
+    display: flex;
+    padding: 12px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    border: none;
+    background-color: #FFFFFF;
+}
+
+.applyButton {
+    display: flex;
+    padding: 12px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    color: #FFFFFF;
+    background-color: #216C5E;
+    border-radius: 10px;
+    border: none;
 }
 
 .item {
@@ -156,6 +196,19 @@
 .show-specialists {
     display: flex;
     align-items: center;
+}
+
+.selected-values {
+    padding: 16px 0 0 80px;
+    display: flex;
+    gap: 16px;
+}
+
+.tag {
+    padding: 4px 10px;
+    background-color: #ECEDEF;
+    border-radius: 100px;
+
 }
 
 .section {
