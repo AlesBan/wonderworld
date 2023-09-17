@@ -2,7 +2,7 @@ using Wonderworld.Application.Interfaces;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Infrastructure.Services.DataServices;
+namespace Wonderworld.Infrastructure.Services.AccountServices;
 
 public class UserAccountService : IUserAccountService
 {

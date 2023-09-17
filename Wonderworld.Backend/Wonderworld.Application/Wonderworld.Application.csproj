@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Interfaces\Helpers" />
       <Folder Include="Interfaces\Services\Data" />
     </ItemGroup>
 

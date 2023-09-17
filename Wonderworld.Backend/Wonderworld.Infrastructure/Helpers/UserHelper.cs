@@ -1,26 +1,21 @@
 using MediatR;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
-using Wonderworld.Application.Interfaces.Helpers;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListByDefaultSearchRequest;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListBySearchRequest;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Infrastructure.Helpers;
 
-public class UserHelper : IUserHelper
+public static class UserHelper
 {
-    private readonly IMediator _mediator;
-
-
-    public UserHelper(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
-    public async Task<User> GetUserById(Guid userId)
+    public static async Task<User> GetUserById(Guid userId, IMediator mediator)
     {
         var query = CreateGetUserCommand(userId);
 
-        var user = await _mediator.Send(query);
+        var user = await mediator.Send(query);
 
         if (user == null)
         {
@@ -28,6 +23,45 @@ public class UserHelper : IUserHelper
         }
 
         return user;
+    }
+    public static async Task<IEnumerable<UserProfileDto>> GetUserProfilesBySearchRequest(SearchRequestDto searchRequest,
+        IMediator mediator)
+    {
+        var query = CreateGetUserProfileListBySearchQueryCommand(searchRequest);
+
+        var userProfileList = (await mediator.Send(query)).ToList();
+
+        return userProfileList;
+    }
+    
+    public static async Task<IEnumerable<UserProfileDto>> GetUserProfilesByDefaultSearchRequest(DefaultSearchRequestDto searchRequest,
+        IMediator mediator)
+    {
+        var query = CreateGetUserProfileListByDefaultSearchRequestCommand(searchRequest);
+
+        var userProfileList = (await mediator.Send(query)).ToList();
+
+        return userProfileList;
+    }
+    
+    private static GetUserProfileListByDefaultSearchRequestCommand
+        CreateGetUserProfileListByDefaultSearchRequestCommand(
+            DefaultSearchRequestDto searchRequest)
+    {
+        return new GetUserProfileListByDefaultSearchRequestCommand()
+        {
+            SearchRequest = searchRequest
+        };
+    }
+    
+    private static GetUserProfileListBySearchRequestCommand
+        CreateGetUserProfileListBySearchQueryCommand(
+            SearchRequestDto searchRequest)
+    {
+        return new GetUserProfileListBySearchRequestCommand()
+        {
+            SearchRequest = searchRequest
+        };
     }
 
     private static GetUserCommand CreateGetUserCommand(Guid userId)

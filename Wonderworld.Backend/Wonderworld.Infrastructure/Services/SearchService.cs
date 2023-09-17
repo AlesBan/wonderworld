@@ -2,8 +2,8 @@ using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListDependingOnSearchQuery;
 using Wonderworld.Application.Interfaces.Services;
+using Wonderworld.Infrastructure.Helpers;
 
 namespace Wonderworld.Infrastructure.Services;
 
@@ -19,9 +19,7 @@ public class SearchService : ISearchService
     public async Task<SearchResponseDto> GetTeacherAndClassProfilesDependingOnSearchRequest(
         SearchRequestDto searchRequest, IMediator mediator)
     {
-        var queryToGetUserProfiles = CreateGetUserProfileListDependingOnSearchQueryCommand(searchRequest);
-
-        var userProfileList = (await GetUserProfiles(queryToGetUserProfiles, mediator)).ToList();
+        var userProfileList = (await UserHelper.GetUserProfilesBySearchRequest(searchRequest, mediator)).ToList();
 
         var classProfileList = (await GetClassProfiles(userProfileList)).ToList();
 
@@ -39,24 +37,6 @@ public class SearchService : ISearchService
             .ToList();
 
         return Task.FromResult<IEnumerable<ClassProfileDto>>(classProfileList);
-    }
-
-    private static async Task<IEnumerable<UserProfileDto>> GetUserProfiles(
-        GetUserProfileListDependingOnSearchQueryCommand query, IMediator mediator)
-    {
-        var userProfileList = (await mediator.Send(query)).ToList();
-
-        return userProfileList;
-    }
-
-    private static GetUserProfileListDependingOnSearchQueryCommand
-        CreateGetUserProfileListDependingOnSearchQueryCommand(
-            SearchRequestDto searchRequest)
-    {
-        return new GetUserProfileListDependingOnSearchQueryCommand()
-        {
-            SearchRequest = searchRequest
-        };
     }
 
     private static SearchResponseDto CreateSearchResponseDto(IReadOnlyCollection<UserProfileDto> userProfileList,

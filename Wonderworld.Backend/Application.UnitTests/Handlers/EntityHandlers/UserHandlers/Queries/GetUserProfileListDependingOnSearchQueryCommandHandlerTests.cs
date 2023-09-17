@@ -2,7 +2,7 @@ using Application.UnitTests.Common;
 using AutoMapper;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Dtos.SearchDtos;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListDependingOnSearchQuery;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListBySearchRequest;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.EntityHandlers.UserHandlers.Queries;
@@ -20,7 +20,7 @@ public class GetUserProfileListDependingOnSearchQueryCommandHandlerTests : TestC
             Disciplines = new List<string> { "Mathematics", "Chemistry" },
             Languages = new List<string> { "English", "Russian" }
         };
-        var command = new GetUserProfileListDependingOnSearchQueryCommand()
+        var command = new GetUserProfileListBySearchRequestCommand()
         {
             SearchRequest = searchRequest
         };
@@ -30,7 +30,7 @@ public class GetUserProfileListDependingOnSearchQueryCommandHandlerTests : TestC
 
         var mapper = mapperConfiguration.CreateMapper();
 
-        var handler = new GetUserProfileListDependingOnSearchQueryCommandHandler(Context, mapper);
+        var handler = new GetUserProfileListBySearchRequestCommandHandler(Context, mapper);
 
         // Act
         var result = await handler.Handle(command, cancellationToken);

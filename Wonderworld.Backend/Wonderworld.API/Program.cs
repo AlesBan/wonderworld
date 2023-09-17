@@ -1,20 +1,16 @@
 using System.Reflection;
 using System.Text;
 using AutoMapper;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
-using Wonderworld.Application.Interfaces.Helpers;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
-using Wonderworld.Infrastructure.Helpers;
 using Wonderworld.Infrastructure.Services;
-using Wonderworld.Infrastructure.Services.DataServices;
+using Wonderworld.Infrastructure.Services.AccountServices;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
 using Wonderworld.Persistence;
 
@@ -92,10 +88,9 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddScoped<IDefaultSearchDataService, DefaultSearchDataService>();
+builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
-builder.Services.AddScoped<IUserHelper, UserHelper>();
 
 var app = builder.Build();
 

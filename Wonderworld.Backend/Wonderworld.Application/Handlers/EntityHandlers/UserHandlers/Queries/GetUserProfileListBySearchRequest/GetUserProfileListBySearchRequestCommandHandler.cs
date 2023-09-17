@@ -4,21 +4,21 @@ using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Interfaces;
 
-namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListDependingOnSearchQuery;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListBySearchRequest;
 
-public class GetUserProfileListDependingOnSearchQueryCommandHandler : IRequestHandler<
-    GetUserProfileListDependingOnSearchQueryCommand, IEnumerable<UserProfileDto>>
+public class GetUserProfileListBySearchRequestCommandHandler : IRequestHandler<
+    GetUserProfileListBySearchRequestCommand, IEnumerable<UserProfileDto>>
 {
     private readonly ISharedLessonDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetUserProfileListDependingOnSearchQueryCommandHandler(ISharedLessonDbContext context, IMapper mapper)
+    public GetUserProfileListBySearchRequestCommandHandler(ISharedLessonDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
     }
 
-    public Task<IEnumerable<UserProfileDto>> Handle(GetUserProfileListDependingOnSearchQueryCommand request,
+    public Task<IEnumerable<UserProfileDto>> Handle(GetUserProfileListBySearchRequestCommand request,
         CancellationToken cancellationToken)
     {
         var searchRequest = request.SearchRequest;
