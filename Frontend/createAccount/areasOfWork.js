@@ -29,6 +29,8 @@ function chooseWork() {
   </div>
     `
     const selectBtn = document.querySelector('.select-btn');
+    const selectedValues = [];
+    const selectedValuesDiv = document.querySelector(".btn-text");
 
 
     selectBtn.addEventListener("click", () => {
@@ -57,21 +59,27 @@ function chooseWork() {
 
         lessons.innerHTML = html;
 
+
         items = document.querySelectorAll('.item');
         items.forEach(item => {
             item.addEventListener("click", () => {
                 item.classList.toggle("checked");
-                let checked = document.querySelectorAll(".checked"),
-                    btnText = document.querySelector(".btn-text");
-                if(checked && checked.length > 0){
-                    btnText.innerText = `${checked.value}`;
-                }else{
-                    btnText.innerText = "Select..";
+                const itemText = item.querySelector(".item-text").textContent;
+                if (item.classList.contains("checked")) {
+                    selectedValues.push(itemText);
+                } else {
+                    const index = selectedValues.indexOf(itemText);
+                    if (index !== -1) {
+                        selectedValues.splice(index, 1);
+                    }
                 }
+                selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
             });
 
         })
 
     }
+
+    document.querySelector('.createAccount').replaceWith(chooseWork);
 
 }

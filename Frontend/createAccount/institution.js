@@ -21,5 +21,8 @@ function chooseInstitution() {
     <button onclick="chooseWork()" class="primary-button">Continue</button>
   </div>
     `
+
+    document.querySelector('.createAccount').replaceWith(institution);
+
 }
 

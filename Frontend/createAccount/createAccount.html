@@ -3,55 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <link href="createAccount.css" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Georgia' rel='stylesheet'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="createAccount.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Georgia' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
 </head>
 <body>
 <div class="header">
-  <div class="header-left">
-    <div class="company-logo">
-      <img src="../images/CompanyLogo.svg" alt="">
+    <div class="header-left">
+        <div class="company-logo">
+            <img src="../images/CompanyLogo.svg" alt="">
+        </div>
     </div>
-  </div>
-  <div class="header-right">
-    <div class="sign-out">
-     Sign out
+    <div class="header-right">
+        <div class="sign-out">
+            Sign out
+        </div>
     </div>
-  </div>
 </div>
 <div class="createAccount">
-  <div class="title-and-subtle">
-    <div class="title">Your full name</div>
-    <div class="label-and-CTA">
-      <div class="label">Enter your first and last name to get your account up and running.</div>
-    </div>
-  </div>
-  <div class="content-body">
-    <div class="inputs">
-      <div class="first-name">
-        <div class="input-title">First name</div>
-        <div class="">
-          <label><input name="first-name" class="first-name-input" type="text" placeholder="Enter your first name"></label>
+    <div class="title-and-subtle">
+        <div class="title">Your full name</div>
+        <div class="label-and-CTA">
+            <div class="label">Enter your first and last name to get your account up and running.</div>
         </div>
-      </div>
-      <div class="last-name">
-        <div class="input-title">Last name</div>
-        <div class="">
-          <label><input name="last-name" class="last-name-input" type="text" placeholder="Enter your last name"></label>
-        </div>
-      </div>
     </div>
-    <button onclick="userStatus()" class="primary-button">Continue</button>
-  </div>
+    <div class="content-body">
+        <div class="inputs">
+            <div class="first-name">
+                <div class="input-title">First name</div>
+                <div class="">
+                    <label><input name="first-name" class="first-name-input" type="text"
+                                  placeholder="Enter your first name"></label>
+                </div>
+            </div>
+            <div class="last-name">
+                <div class="input-title">Last name</div>
+                <div class="">
+                    <label><input name="last-name" class="last-name-input" type="text"
+                                  placeholder="Enter your last name"></label>
+                </div>
+            </div>
+        </div>
+        <button onclick="userStatus()" class="primary-button">Continue</button>
+    </div>
 </div>
+<script src="dataLessons.js"></script>
+<script src="dataGrades.js"></script>
 <script src="userStatus.js"></script>
 <script src="location.js"></script>
 <script src="institution.js"></script>
 <script src="areasOfWork.js"></script>
-<script src="dataLessons.js"></script>
 <script src="grades.js"></script>
+<script src="choosePhoto.js"></script>
 </body>
 </html>

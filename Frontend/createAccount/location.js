@@ -28,5 +28,7 @@ function chooseLocation() {
   </div>
     `
 
+    document.querySelector('.createAccount').replaceWith(location);
+
 }
 

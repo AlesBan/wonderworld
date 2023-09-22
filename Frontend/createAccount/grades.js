@@ -14,41 +14,42 @@ function chooseGrades() {
       <div class="first-name">
         <div class="input-title">Grades</div>
 <div class="select-btn">
-    <span class="btn-text">Select..</span>
+    <span class="btn-text-grades">Select..</span>
     <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
 </div>
-<ul class="list-items">
+<ul class="grades-items">
     
 </ul>
         </div>
       </div>
     </div>
-    <button onclick="" class="primary-button">Continue</button>
+    <button onclick="choosePhoto()" class="primary-button">Continue</button>
   </div>
     `
 
     const selectBtn = document.querySelector('.select-btn');
-
+    const selectedValues = [];
+    const selectedValuesDiv = document.querySelector(".btn-text-grades");
 
     selectBtn.addEventListener("click", () => {
         selectBtn.classList.toggle("open");
     });
 
 
-    const lessons = document.querySelector('.list-items');
+    const grades = document.querySelector('.grades-items');
 
-    let filterFn = (lesson) => true;
-    generateItems(ALL_LESSONS);
+    let filterFn = (grade) => true;
+    generateItems(ALL_GRADES);
 
     function generateItems(items) {
 
-        const html = items.filter(filterFn).map(lesson => {
+        const html = items.filter(filterFn).map(grade => {
             return `
 
  <li class="item">
-        <span class="item-text">${lesson.title}</span>
+        <span class="item-text">${grade.age}</span>
         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
     `;
@@ -56,23 +57,28 @@ function chooseGrades() {
 
             .join('');
 
-        lessons.innerHTML = html;
+        grades.innerHTML = html;
 
         items = document.querySelectorAll('.item');
         items.forEach(item => {
             item.addEventListener("click", () => {
                 item.classList.toggle("checked");
-                let checked = document.querySelectorAll(".checked"),
-                    btnText = document.querySelector(".btn-text");
-                if(checked && checked.length > 0){
-                    btnText.innerText = `${checked.value}`;
-                }else{
-                    btnText.innerText = "Select..";
+                const itemText = item.querySelector(".item-text").textContent;
+                if (item.classList.contains("checked")) {
+                    selectedValues.push(itemText);
+                } else {
+                    const index = selectedValues.indexOf(itemText);
+                    if (index !== -1) {
+                        selectedValues.splice(index, 1);
+                    }
                 }
+                selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
             });
 
         })
 
     }
+
+    document.querySelector('.createAccount').replaceWith(chooseWork);
 
 }

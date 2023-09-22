@@ -47,12 +47,12 @@ body {
 
 }
 
-.profile-photo, .my-profile {
+.profile-photo, .my-profile, .position-verification {
     padding: 32px 0 32px 32px;
     border-bottom: 1px solid #E9E9E9;
 }
 
-.profile-photo-title, .my-profile-title {
+.profile-photo-title, .my-profile-title, .position-verification-title {
     font-family: 'Inter', serif;
     font-size: 20px;
     font-style: normal;
@@ -60,7 +60,7 @@ body {
     line-height: 30px;
 }
 
-.profile-photo-text, .my-profile-text {
+.profile-photo-text, .my-profile-text, .position-verification-text {
     padding-top: 8px;
     color: #3E4C5B;
     font-family: 'Inter', serif;
@@ -96,4 +96,45 @@ body {
 
 .update {
     padding-top: 16px;
+}
+
+.inputs {
+    display: flex;
+    gap: 16px;
+    padding-top: 32px;
+}
+
+.input-title {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0C0F12;
+
+}
+
+.first-name-input, .last-name-input {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8B949D;
+    width: 316px;
+    border-radius: 10px;
+    border: 1px solid #D8DBDE;
+    margin-top: 8px;
+    padding: 12px 14px;
+
+}
+
+.first-name-input:focus{
+    border-radius: 10px;
+    border: 1px solid #216C5E;
+    box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+}
+
+.last-name-input:focus{
+    border-radius: 10px;
+    border: 1px solid #216C5E;
+    box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
 }

@@ -43,12 +43,5 @@ function userStatus() {
         usernameOutput.innerHTML = e.target.value;
     }
 
+    document.querySelector('.createAccount').replaceWith(userStatus);
 }
-
-
-// let usernameInput = document.querySelector('.first-name-input');
-// let usernameOutput = document.querySelector('.first-name-output');
-//
-// usernameInput.oninput = function() {
-//     usernameOutput.innerHTML = usernameInput.value;
-// };
