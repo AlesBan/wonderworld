@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Application.UnitTests.Handlers.EntityHandlers.UserHandlers.Queries;
 
-public class GetUserProfileListDependingOnSearchQueryCommandHandlerTests : TestCommonBase
+public class GetUserProfileListBySearchQueryCommandHandlerTests : TestCommonBase
 {
     [Fact]
     public async Task Handle_GetUserProfileListDependingOnSearchQueryCommand_ReturnsUserProfileDtos()

@@ -1,5 +1,6 @@
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Interfaces;
 
@@ -11,7 +12,7 @@ public class GetUserProfileListByDefaultSearchRequestCommandHandler : IRequestHa
     private readonly ISharedLessonDbContext _context;
     private readonly IMapper _mapper;
 
-    public GetUserProfileListByDefaultSearchRequestCommandHandler(IMapper mapper, ISharedLessonDbContext context)
+    public GetUserProfileListByDefaultSearchRequestCommandHandler(ISharedLessonDbContext context, IMapper mapper)
     {
         _mapper = mapper;
         _context = context;
@@ -24,10 +25,16 @@ public class GetUserProfileListByDefaultSearchRequestCommandHandler : IRequestHa
         var country = searchRequest.Country;
         var disciplines = searchRequest.Disciplines;
 
-        var users = _context.Users.Where(u => u.Country == country &&
-                                              disciplines.Any(d =>
-                                                  u.UserDisciplines.Any(ud =>
-                                                      ud.Discipline.DisciplineId == d.DisciplineId)))
+        var userDisciplineIds = disciplines.Select(d => 
+            d.DisciplineId).ToList();
+
+        var users = _context.Users
+            .Include(u => u.UserDisciplines)
+            .ThenInclude(ud => ud.Discipline)
+            .Where(u => u.Country != null && u.Country == country)
+            .ToList()
+            .Where(u => u.UserDisciplines.Any(ud =>
+                userDisciplineIds.Contains(ud.Discipline.DisciplineId)))
             .ToList();
 
         var userProfileDtos = users.Select(u =>

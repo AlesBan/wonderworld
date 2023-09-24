@@ -10,7 +10,6 @@ public class Establishment
     public string Title { get; set; }= string.Empty;
     public Guid CityId { get; set; }
     public City City { get; set; }
-
     public ICollection<User> Users { get; set; } = new List<User>();
 
 }

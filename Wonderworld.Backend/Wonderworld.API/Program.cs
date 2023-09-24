@@ -9,9 +9,11 @@ using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
+using Wonderworld.Application.Interfaces.Services.ExternalServices;
 using Wonderworld.Infrastructure.Services;
 using Wonderworld.Infrastructure.Services.AccountServices;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Services.ExternalServices;
 using Wonderworld.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -88,9 +90,20 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+builder.Services.AddHttpClient<IOrganizationSearchService, OrganizationSearchService>(c =>
+{
+    c.BaseAddress = new Uri("https://search-maps.yandex.ru/v1/");
+});
+
+
+builder.Services.AddScoped<ISharedLessonDbContext, SharedLessonDbContext>();
 builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
+builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService>();
+builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
+
+
 
 var app = builder.Build();
 

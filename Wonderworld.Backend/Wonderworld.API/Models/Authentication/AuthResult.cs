@@ -1,4 +1,4 @@
-namespace Wonderworld.API.Models.AuthDtoModels;
+namespace Wonderworld.API.Models.Authentication;
 
 public class AuthResult
 {

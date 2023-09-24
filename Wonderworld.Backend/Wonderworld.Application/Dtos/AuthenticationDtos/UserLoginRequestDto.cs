@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Wonderworld.API.Models.AuthDtoModels;
+namespace Wonderworld.Application.Dtos.AuthenticationDto;
 
-public class UserRegisterRequestDto
+public class UserLoginRequestDto
 {
     [Required]
     public string Email { get; set; }

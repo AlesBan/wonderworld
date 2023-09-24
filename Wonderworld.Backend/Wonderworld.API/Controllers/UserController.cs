@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Wonderworld.Application.Dtos;
+using Wonderworld.Application.Dtos.AuthenticationDto;
+using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -19,5 +22,11 @@ public class UserController : BaseController
     public async Task<List<User>> GetAllUsers()
     {
         return await _sharedLessonDbContext.Users.ToListAsync();   
+    }
+
+    [HttpPost("create-account")]
+    public async Task<IActionResult> CreateAccount([FromBody] UserCreateAccountRequestDto requestUserDto)
+    {
+        return Ok();
     }
 }
