@@ -11,8 +11,6 @@ public class OrganizationSearchService : IOrganizationSearchService
 {
     private readonly IYandexAccountService _yandexAccountService;
     private readonly HttpClient _httpClient;
-
-
     public OrganizationSearchService(IYandexAccountService yandexAccountService, HttpClient httpClient)
     {
         _yandexAccountService = yandexAccountService;

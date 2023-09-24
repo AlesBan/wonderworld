@@ -15,7 +15,7 @@ public class UserCreateAccountRequestDto
     [Required]
     public string CityLocation { get; set; }
     [Required]
-    public EstablishmentSearchDto EstablishmentDto { get; set; }
+    public string EstablishmentDto { get; set; }
     [Required]
     public ICollection<string> Disciplines { get; set; } = new List<string>();
     [Required]

@@ -11,8 +11,8 @@ public class CreateUserAccountCommand : IRequest
     public User User { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public bool IsATeacher { get; set; }
-    public bool IsAnExpert { get; set; }
+    public bool? IsATeacher { get; set; }
+    public bool? IsAnExpert { get; set; }
     public City CityLocation { get; set; }
     public Establishment Establishment { get; set; }
     public ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();

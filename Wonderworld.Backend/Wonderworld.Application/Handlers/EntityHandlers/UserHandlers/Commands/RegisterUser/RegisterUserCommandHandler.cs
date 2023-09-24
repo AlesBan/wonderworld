@@ -4,7 +4,7 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 
-public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, Guid>
+public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -13,13 +13,13 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, G
         _context = context;
     }
 
-    public async Task<Guid> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var user = MapUser(request);
 
         await AddUser(user, cancellationToken);
 
-        return await Task.FromResult(user.UserId);
+        return await Task.FromResult(user);
     }
 
     private static User MapUser(RegisterUserCommand request)
