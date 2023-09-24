@@ -8,5 +8,5 @@ namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDiscipli
 public class UpdateUserDisciplinesCommand : IRequest
 {
     public User User { get; set; }
-    public ICollection<Discipline> NewDisciplines { get; set; } = new List<Discipline>();
+    public IEnumerable<Discipline> NewDisciplines { get; set; } = new List<Discipline>();
 }

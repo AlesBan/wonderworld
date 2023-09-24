@@ -15,7 +15,7 @@ public class OrganizationSearchController : BaseController
 
     [HttpGet("get-establishments")]
     public async Task<IEnumerable<EstablishmentSearchResponseDto>> GetEstablishments(
-        [FromQuery] EstablishmentSearchDto establishment)
+        [FromQuery] EstablishmentDto establishment)
     {
         var result = await _organizationSearchService.GetEstablishments(establishment);
         return result;

@@ -7,6 +7,10 @@ public class GetUserCommand : IRequest<User>
 {
     public Guid UserId { get; set; }
 
+    public GetUserCommand()
+    {
+        
+    }
     public GetUserCommand(Guid userId)
     {
         UserId = userId;

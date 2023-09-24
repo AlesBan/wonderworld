@@ -66,9 +66,6 @@ public static class UserHelper
 
     private static GetUserCommand CreateGetUserCommand(Guid userId)
     {
-        return new GetUserCommand()
-        {
-            UserId = userId
-        };
+        return new GetUserCommand(userId);
     }
 }

@@ -33,7 +33,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             LastName = lastName,
             IsATeacher = isATeacher,
             IsAnExpert = isAnExpert,
-            CityLocation = cityLocation!,
+            City = cityLocation!,
             Establishment = establishment!,
             Disciplines = disciplines,
             Languages = languages,

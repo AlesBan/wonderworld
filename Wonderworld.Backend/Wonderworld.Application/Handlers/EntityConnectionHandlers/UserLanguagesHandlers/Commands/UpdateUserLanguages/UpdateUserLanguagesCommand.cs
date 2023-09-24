@@ -7,5 +7,5 @@ namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguage
 public class UpdateUserLanguagesCommand : IRequest
 {
     public User User { get; set; }
-    public ICollection<Language> NewLanguages { get; set; } = new List<Language>();
+    public IEnumerable<Language> NewLanguages { get; set; } = new List<Language>();
 }

@@ -17,15 +17,15 @@ public class OrganizationSearchService : IOrganizationSearchService
         _httpClient = httpClient;
     }
 
-    public async Task<IEnumerable<EstablishmentSearchResponseDto>> GetEstablishments(EstablishmentSearchDto establishment)
+    public async Task<IEnumerable<EstablishmentSearchResponseDto>> GetEstablishments(EstablishmentDto establishment)
     {
         var token = _yandexAccountService.GeyAccessToken();
         var baseUrl = _yandexAccountService.GetBaseUrl();
 
         var requestText = establishment.Type +
                           " " + establishment.Number+
-                          " " + establishment.City +
-                          " " + establishment.Country;
+                          " " + establishment.CityTitle +
+                          " " + establishment.CountryTitle;
         var requestUrl = baseUrl +
                          "apikey=" + token +
                          "&text=" + requestText +
