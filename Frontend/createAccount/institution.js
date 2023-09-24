@@ -14,7 +14,7 @@ function chooseInstitution() {
       <div class="first-name">
         <div class="input-title">Institution name</div>
         <div class="">
-          <label><input name="first-name" class="first-name-input" type="text" placeholder="e.g. Gymnasium No. 7, Minsk"></label>
+          <label><input name="first-name" class="first-name-input" id="institutionValue" type="text" placeholder="e.g. Gymnasium No. 7, Minsk"></label>
         </div>
       </div>
     </div>

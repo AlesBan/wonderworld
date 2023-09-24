@@ -12,7 +12,7 @@ function choosePhoto() {
   <div class="content-body">
     
     </div>
-    <button onclick="" class="primary-button">Finish</button>
+    <button onclick="postCreateAccount()" class="primary-button">Finish</button>
   </div>
     `
 

@@ -14,14 +14,14 @@ function userStatus() {
       <div class="option">
         <div class="option-value">
             <div class="option-name">I’m a teacher</div>
-            <input type="radio" class="radiobutton" name="radio">
+            <input type="radio" class="radiobutton" id="teacherValue" name="radio">
         </div>
       <div class="option-text">As a teacher you can add your classes and organise lessons, as well as join lessons as an expert in your field.</div>
       </div>
       <div class="option">
         <div class="option-value">
             <div class="option-name">I’m an expert</div>
-            <input type="radio" class="radiobutton" name="radio">
+            <input type="radio" class="radiobutton" id="expertValue" name="radio">
         </div>
       <div class="option-text">As an expert you can connect with teacher and join lessons.</div>
       </div>
@@ -45,3 +45,5 @@ function userStatus() {
 
     document.querySelector('.createAccount').replaceWith(userStatus);
 }
+
+

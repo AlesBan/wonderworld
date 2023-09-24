@@ -14,13 +14,13 @@ function chooseLocation() {
       <div class="first-name">
         <div class="input-title">Location</div>
         <div class="">
-          <label><input name="first-name" class="first-name-input" type="text" placeholder="e.g. Minsk, Belarus"></label>
+          <label><input name="first-name" class="first-name-input" id="locationValue" type="text" placeholder="e.g. Minsk, Belarus"></label>
         </div>
       </div>
       <div class="last-name">
         <div class="input-title">Languages</div>
         <div class="">
-          <label><input name="last-name" class="last-name-input" type="text" placeholder="Select languages that you speak"></label>
+          <label><input name="last-name" class="last-name-input" id="languagesValue" type="text" placeholder="Select languages that you speak"></label>
         </div>
       </div>
     </div>

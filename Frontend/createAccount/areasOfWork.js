@@ -49,7 +49,7 @@ function chooseWork() {
             return `
 
  <li class="item">
-        <span class="item-text">${lesson.title}</span>
+        <span class="item-text" id="disciplinesValue">${lesson.title}</span>
         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
     `;
