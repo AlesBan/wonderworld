@@ -1,7 +1,10 @@
 namespace Wonderworld.Infrastructure.Models.YandexOrganizationSearch;
 
+using Newtonsoft.Json;
+
 public class Geometry
 {
-    public string type { get; set; }
-    public List<double> coordinates { get; set; }
+    [JsonProperty("type")] public string Type { get; set; }
+
+    [JsonProperty("coordinates")] public double[] Coordinates { get; set; }
 }

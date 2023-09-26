@@ -11,6 +11,7 @@ public class OrganizationSearchService : IOrganizationSearchService
 {
     private readonly IYandexAccountService _yandexAccountService;
     private readonly HttpClient _httpClient;
+
     public OrganizationSearchService(IYandexAccountService yandexAccountService, HttpClient httpClient)
     {
         _yandexAccountService = yandexAccountService;
@@ -23,40 +24,40 @@ public class OrganizationSearchService : IOrganizationSearchService
         var baseUrl = _yandexAccountService.GetBaseUrl();
 
         var requestText = establishment.Type +
-                          " " + establishment.Number+
+                          " " + establishment.Number +
                           " " + establishment.CityTitle +
                           " " + establishment.CountryTitle;
         var requestUrl = baseUrl +
                          "apikey=" + token +
                          "&text=" + requestText +
                          "&lang=" + establishment.SearchLanguage +
-                         "&type=geo" +
+                         "&type=biz" +
                          "&results=" + ExternalServicesConstants.SearchLimit;
 
         var response = await GetResponse(requestUrl);
-        
+
         var responseObject = await DeserializationAsync<Root>(response);
         if (responseObject == null)
         {
-            return  new List<EstablishmentSearchResponseDto>();
+            return new List<EstablishmentSearchResponseDto>();
         }
+
         var establishmentSearchDtoList = GetEstablishmentSearchDtoList(responseObject);
         return establishmentSearchDtoList;
     }
 
-    private IEnumerable<EstablishmentSearchResponseDto> GetEstablishmentSearchDtoList(Root responseObject)
+    private static IEnumerable<EstablishmentSearchResponseDto> GetEstablishmentSearchDtoList(Root responseObject)
     {
-        var establishmentSearchDtoList = responseObject.features.Select(f => 
+        var establishmentSearchDtoList = responseObject.Features.Select(f =>
             new EstablishmentSearchResponseDto()
-        {
-            Title = f.properties.GeocoderMetaData.text + ""+
-                     f.properties.name+""+
-                     f.properties.description,
-        });
-        
+            {
+                Title = f.Properties.Name + "" +
+                        f.Properties.Description,
+            });
+
         return establishmentSearchDtoList;
     }
-    
+
     private async Task<HttpResponseMessage> GetResponse(string requestMessage)
     {
         var response = await _httpClient.GetAsync(requestMessage);
@@ -68,7 +69,7 @@ public class OrganizationSearchService : IOrganizationSearchService
     {
         throw new NotImplementedException();
     }
-    
+
     private static async Task<T?> DeserializationAsync<T>(HttpResponseMessage response)
     {
         T? responseObj;
@@ -85,4 +86,3 @@ public class OrganizationSearchService : IOrganizationSearchService
         return responseObj;
     }
 }
-

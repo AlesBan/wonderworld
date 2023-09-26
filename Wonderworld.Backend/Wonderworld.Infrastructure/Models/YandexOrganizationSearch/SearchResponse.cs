@@ -1,9 +1,10 @@
+using Newtonsoft.Json;
+
 namespace Wonderworld.Infrastructure.Models.YandexOrganizationSearch;
 
 public class SearchResponse
 {
-    public int found { get; set; }
-    public Point Point { get; set; }
-    public List<List<double>> boundedBy { get; set; }
-    public string display { get; set; }
+    [JsonProperty("found")] public long Found { get; set; }
+    [JsonProperty("display")] public string Display { get; set; }
+    [JsonProperty("boundedBy")] public double[][] BoundedBy { get; set; }
 }

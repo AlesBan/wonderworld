@@ -1,8 +1,11 @@
+using Newtonsoft.Json;
+
 namespace Wonderworld.Infrastructure.Models.YandexOrganizationSearch;
 
 public class Root
 {
-    public string type { get; set; }
-    public Properties properties { get; set; }
-    public List<Feature> features { get; set; }
+    [JsonProperty("type")] public string Type { get; set; }
+
+    [JsonProperty("properties")] public Properties Properties { get; set; }
+    [JsonProperty("features")] public Feature[] Features { get; set; }
 }
