@@ -43,12 +43,33 @@ body {
     line-height: 24px;
 }
 
-.content {
-
+.filter {
+    position: relative;
+    cursor: pointer;
 }
 
-.profile-photo, .my-profile, .position-verification {
-    padding: 32px 0 32px 32px;
+.filter-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+}
+
+.filter.active .filter-underline {
+    background-color: #216C5E;
+}
+
+.content {
+    position: relative;
+    background-color: #FFFFFF;
+    margin: 48px 112px 0 112px;
+}
+
+.profile-photo, .my-profile, .position-verification, .about-me, .basic-info,
+.email-address, .password-reset, .delete-account {
+    padding: 32px 500px 32px 32px;
     border-bottom: 1px solid #E9E9E9;
 }
 
@@ -94,8 +115,14 @@ body {
     gap: 16px;
 }
 
-.update {
+.update, .delete {
     padding-top: 16px;
+}
+
+.verify-update {
+    padding-top: 16px;
+    display: flex;
+    gap: 16px;
 }
 
 .inputs {
@@ -127,14 +154,171 @@ body {
 
 }
 
-.first-name-input:focus{
+.first-name-input:focus {
     border-radius: 10px;
     border: 1px solid #216C5E;
     box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
 }
 
-.last-name-input:focus{
+.last-name-input:focus {
     border-radius: 10px;
     border: 1px solid #216C5E;
     box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+}
+
+.dropdown-input {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.institution-name-input {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8B949D;
+    width: 50%;
+    border-radius: 10px;
+    border: 1px solid #D8DBDE;
+    margin-top: 8px;
+    padding: 12px 14px;
+}
+
+.description {
+    padding-top: 32px;
+    padding-bottom: 16px;
+}
+
+.reset {
+    padding-top: 16px;
+}
+
+.delete-btn {
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    color: #C26A6A;
+}
+
+
+/* basic info dropdowns (смотреть css createAccount) */
+
+.dropdowns {
+    padding-top: 32px;
+    padding-bottom: 16px;
+}
+
+.input-title {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0C0F12;
+    margin-top: 16px;
+}
+
+.select-btn {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 8px;
+}
+
+.select-btn:focus {
+    border-radius: 10px;
+    border: 1px solid #216C5E;
+    box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+}
+
+.select-btn .arrow-dwn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-btn.open .arrow-dwn {
+    transform: rotate(-180deg);
+}
+
+.list-items, .grades-items {
+    position: relative;
+    margin-top: 15px;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    overflow-y: auto;
+    max-height: 296px;
+}
+
+.select-btn.open ~ .list-items, .grades-items {
+    display: block;
+}
+
+
+.list-items.item, .grades-items.item {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 0 15px;
+    border-radius: 8px;
+}
+
+.list-items .item:hover {
+    background-color: ghostwhite;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 24px 0 0 0;
+}
+
+.item-text {
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.item .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    margin-right: 12px;
+    border: 1px solid #c0c0c0;
+    transition: all 0.3s ease-in-out;
+}
+
+.item.checked .checkbox {
+    background-color: #216C5E;
+    border-color: #216C5E;
+}
+
+.checkbox .check-icon {
+    color: #fff;
+    font-size: 11px;
+    transform: scale(0);
+    transition: all 0.2s ease-in-out;
+}
+
+.item.checked .check-icon {
+    transform: scale(1);
 }

@@ -64,10 +64,14 @@ async function postData() {
             }
         })
         .then(responseData => {
+            const accessToken = responseData.token;
+            document.cookie = `accessToken=${accessToken}`;
             console.log(responseData);
+            // window.location.href = "../../createAccount/createAccount.html";
         })
         .catch(error => {
             console.log(error);
         });
 }
+
 

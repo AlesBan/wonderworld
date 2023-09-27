@@ -1,4 +1,16 @@
- async function postCreateAccount() {
+const cookieName = 'accessToken';
+const cookieValue = document.cookie
+    .split(';')
+    .map(cookie => cookie.trim())
+    .find(cookie => cookie.startsWith(`${cookieName}=`))
+    ?.split('=')[1];
+
+console.log(cookieName);
+
+
+let token = cookieValue;
+
+async function postCreateAccount() {
     const url = 'http://localhost:7280/api/authentication/register';
     const data = {
         FirstName: document.querySelector("#first-name-value").value,
@@ -21,6 +33,7 @@
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
+            'Authorization':`Bearer ${token}`
         },
         body: JSON.stringify(data)
     })

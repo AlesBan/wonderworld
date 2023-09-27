@@ -36,8 +36,12 @@
     </div>
     <div class="settings">Settings</div>
     <div class="settings-filters">
-        <div class="profile-info">Profile info</div>
-        <div class="profile-login">Login & Security</div>
+        <div class="filter profile-info active">Profile info
+            <div class="filter-underline"></div>
+        </div>
+        <div class="filter profile-login">Login & Security
+            <div class="filter-underline"></div>
+        </div>
     </div>
     <div class="content">
         <div class="profile-photo">
@@ -62,7 +66,9 @@
                         <div class="option-name">I’m a teacher</div>
                         <input type="radio" class="radiobutton" name="radio">
                     </div>
-                    <div class="option-text">As a teacher you can add your classes and organise lessons, as well as join lessons as an expert in your field.</div>
+                    <div class="option-text">As a teacher you can add your classes and organise lessons, as well as join
+                        lessons as an expert in your field.
+                    </div>
                 </div>
                 <div class="option">
                     <div class="option-value">
@@ -85,20 +91,109 @@
                 <div class="first-name">
                     <div class="input-title">First name</div>
                     <div class="">
-                        <label><input name="first-name" class="first-name-input" type="text" placeholder="Enter your first name"></label>
+                        <label><input name="first-name" class="first-name-input" type="text"
+                                      placeholder="Enter your first name"></label>
                     </div>
                 </div>
                 <div class="last-name">
                     <div class="input-title">Last name</div>
                     <div class="">
-                        <label><input name="last-name" class="last-name-input" type="text" placeholder="Enter your last name"></label>
+                        <label><input name="last-name" class="last-name-input" type="text"
+                                      placeholder="Enter your last name"></label>
                     </div>
                 </div>
             </div>
+            <div class="dropdown-input">
+                <div class="institution-name">
+                    <div class="input-title">Institution name</div>
+                    <div class="">
+                        <label><input name="institution-name" class="institution-name-input" type="text"
+                                      placeholder="Enter your institution name"></label>
+                    </div>
+                </div>
+            </div>
+            <div class="verify-update">
+                <button class="update-btn">Verify</button>
+                <button class="verify-btn">Update</button>
+            </div>
         </div>
-        <div class="about-me"></div>
-        <div class="basic-info"></div>
+        <div class="about-me">
+            <div class="position-verification-title">About me</div>
+            <div class="position-verification-text">
+                <span>Add a brief description for your profile</span>
+            </div>
+            <div class="description">
+                <div class="input-title">Description</div>
+                <div class="">
+                    <label><input name="institution-name" class="institution-name-input" type="text"
+                                  placeholder="Let others know you better.."></label>
+                </div>
+            </div>
+            <div class="update">
+                <button class="update-btn">Update</button>
+            </div>
+        </div>
+        <div class="basic-info">
+            <div class="position-verification-title">Basic information</div>
+            <div class="position-verification-text">
+                <span>Lorem ipsum dolor sit amet consectetur. Euismod nunc cursus risus at egestas. Nec mi.</span>
+            </div>
+            <div class="dropdowns">
+                <div class="dropdown">
+                    <div class="input-title">Languages</div>
+                    <div class="select-btn">
+                        <span class="btn-text">Select..</span>
+                        <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
+                    </div>
+                    <ul class="list-items">
+
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <div class="input-title">Location</div>
+                    <div class="select-btn">
+                        <span class="btn-text">Select..</span>
+                        <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
+                    </div>
+                    <ul class="list-items">
+
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <div class="input-title">Grades</div>
+                    <div class="select-btn">
+                        <span class="btn-text">Select..</span>
+                        <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
+                    </div>
+                    <ul class="list-items">
+
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <div class="input-title">Areas of work</div>
+                    <div class="select-btn">
+                        <span class="btn-text">Select..</span>
+                        <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
+                    </div>
+                    <ul class="list-items">
+
+                    </ul>
+                </div>
+            </div>
+            <div class="update">
+                <button class="update-btn">Update</button>
+            </div>
+        </div>
     </div>
 </div>
 </body>
+<script src="settingsProfile.js"></script>
 </html>
