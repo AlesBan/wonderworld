@@ -7,11 +7,11 @@ using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Queries.GetEstablishmentByAddress;
 
-public class GetEstablishmentByAddressCommandHandler : IRequestHandler<GetEstablishmentCommand, Establishment>
+public class GetEstablishmentCommandHandler : IRequestHandler<GetEstablishmentCommand, Establishment>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public GetEstablishmentByAddressCommandHandler(ISharedLessonDbContext context)
+    public GetEstablishmentCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
@@ -23,30 +23,11 @@ public class GetEstablishmentByAddressCommandHandler : IRequestHandler<GetEstabl
             .FirstOrDefaultAsync(e =>
                 e.Address == request.Address, cancellationToken: cancellationToken);
 
-        if (establishment != null)
+        if (establishment == null)
         {
-            return establishment;
+            throw new NotFoundException(nameof(Establishment), request.Address);
         }
 
-        var newEstablishment = new Establishment()
-        {
-            Address = request.Address,
-            Title = request.Title
-        };
-
-        var establishmentTypesEstablishments = request.Types
-            .Select(t =>
-                new EstablishmentTypeEstablishment()
-                {
-                    EstablishmentType = t,
-                    Establishment = newEstablishment
-                });
-
-        await _context.EstablishmentTypesEstablishments.AddRangeAsync(establishmentTypesEstablishments,
-            cancellationToken);
-        await _context.Establishments.AddAsync(newEstablishment, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-
-        return newEstablishment;
+        return establishment;
     }
 }

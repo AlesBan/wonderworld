@@ -18,15 +18,15 @@ public class CreateCityCommandHandlerTests : TestCommonBase
         var handler = new CreateCityCommandHandler(Context);
 
         // Act
-        var cityId = await handler.Handle(new CreateCityCommand()
+        var city = await handler.Handle(new CreateCityCommand()
         {
-            Country = country!,
+            CountryId = country!.CountryId,
             Title = "City"
         }, CancellationToken.None);
 
         // Assert
         Assert.NotNull(await Context.Cities.SingleOrDefaultAsync(c =>
-            c.CityId == cityId &&
+            c.CityId == city.CityId &&
             c.Title == "City" &&
             c.Country == country));
     }

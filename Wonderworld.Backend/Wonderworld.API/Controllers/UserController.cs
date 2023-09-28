@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.API.Services.AccountServices;
@@ -46,8 +47,8 @@ public class UserController : BaseController
         }
 
         var userId = Guid.Parse(nameIdentifier);
-        await _userAccountService.CreateUserAccount(userId, requestUserDto, Mediator);
+        var result = await _userAccountService.CreateUserAccount(userId, requestUserDto, Mediator);
 
-        return Ok();
+        return Ok(result);
     }
 }

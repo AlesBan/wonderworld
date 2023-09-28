@@ -27,11 +27,6 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
             return establishment;
         }
 
-        var types = _context.EstablishmentTypes
-            .Where(et =>
-                request.Types
-                    .Contains(et));
-
         var newEstablishment = new Establishment()
         {
             Title = request.Title,
@@ -39,6 +34,11 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
         };
 
         await AddEstablishment(newEstablishment, cancellationToken);
+        
+        var types = _context.EstablishmentTypes
+            .Where(et =>
+                request.Types
+                    .Contains(et));
         await AddEstablishmentTypeEstablishment(newEstablishment, types, cancellationToken);
 
 
@@ -59,8 +59,8 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
             .Select(type =>
                 new EstablishmentTypeEstablishment
                 {
-                    Establishment = establishment,
-                    EstablishmentType = type
+                    EstablishmentId = establishment.EstablishmentId,
+                    EstablishmentTypeId = type.EstablishmentTypeId
                 }).ToList();
 
         await _context.EstablishmentTypesEstablishments

@@ -3,11 +3,11 @@ using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence.EntityConfiguration.Job;
+using Wonderworld.Persistence.EntityConfiguration.Location;
 using Wonderworld.Persistence.EntityConfiguration.Main;
 using Wonderworld.Persistence.EntityConnectionsConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
-using Wonderworld.Persistence.EntityTypeConfiguration.Location;
 using Wonderworld.Persistence.EntityTypeConfiguration.Main;
 using EstablishmentType = Wonderworld.Domain.Entities.Job.EstablishmentType;
 

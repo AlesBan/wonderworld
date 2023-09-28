@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wonderworld.Domain.Entities.Location;
 
-namespace Wonderworld.Persistence.EntityTypeConfiguration.Location;
+namespace Wonderworld.Persistence.EntityConfiguration.Location;
 
 public class CityConfiguration : IEntityTypeConfiguration<City>
 {

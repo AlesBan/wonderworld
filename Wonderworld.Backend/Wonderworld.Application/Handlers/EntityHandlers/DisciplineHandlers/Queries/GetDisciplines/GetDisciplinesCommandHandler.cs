@@ -16,9 +16,10 @@ public class GetDisciplinesCommandHandler : IRequestHandler<GetDisciplinesComman
     public Task<List<Discipline>> Handle(GetDisciplinesCommand request, CancellationToken cancellationToken)
     {
         var requiredDisciplines = request.DisciplineTitles;
-        var disciplines = _context.Disciplines.Where(d =>
-            requiredDisciplines.Contains(d.Title));
-        
+        var disciplines = _context.Disciplines
+            .Where(d =>
+                requiredDisciplines.Contains(d.Title));
+
         return Task.FromResult(disciplines.ToList());
     }
 }

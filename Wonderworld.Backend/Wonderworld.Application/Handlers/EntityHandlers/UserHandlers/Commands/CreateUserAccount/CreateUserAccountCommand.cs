@@ -6,9 +6,9 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 
-public class CreateUserAccountCommand : IRequest
+public class CreateUserAccountCommand : IRequest<User>
 {
-    public User User { get; set; }
+    public Guid UserId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public bool? IsATeacher { get; set; }

@@ -6,6 +6,7 @@ using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Models.Authentication;
 using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
+using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Commands.CreateCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
@@ -103,13 +104,13 @@ public class UserAccountService : IUserAccountService
                 }
 
                 var country = await GetCountry(requestUserDto.CountryLocation, mediator);
-                var city = await GetCity(requestUserDto.CountryLocation, requestUserDto.CityLocation, mediator);
+                var city = await GetCity(country, requestUserDto.CityLocation, mediator);
                 var establishment = await GetEstablishment(requestUserDto, mediator);
                 var disciplines = await GetDisciplines(requestUserDto.Disciplines, mediator);
                 var languages = await GetLanguages(requestUserDto.Languages, mediator);
                 var query = new CreateUserAccountCommand
                 {
-                    User = user,
+                    UserId = userId,
                     FirstName = requestUserDto.FirstName,
                     LastName = requestUserDto.LastName,
                     IsATeacher = requestUserDto.IsATeacher,
@@ -122,9 +123,9 @@ public class UserAccountService : IUserAccountService
                     PhotoUrl = requestUserDto.PhotoUrl,
                 };
 
-                await mediator.Send(query);
+                var userWithAccount = await mediator.Send(query);
 
-                return new OkObjectResult(user);
+                return new OkObjectResult(userWithAccount);
             default:
                 return GetBadRequest(SomethingWentWrongErrorMessage);
         }
@@ -147,7 +148,7 @@ public class UserAccountService : IUserAccountService
             return GetBadRequest(UserNotFoundErrorMessage);
         }
 
-        if (existingUser.IsCreatedAccount == true)
+        if (existingUser.IsCreatedAccount)
         {
             return GetBadRequest(UserAlreadyCreatedAccountErrorMessage);
         }
@@ -203,23 +204,37 @@ public class UserAccountService : IUserAccountService
         return await mediator.Send(query);
     }
 
-    private static Task<Country> GetCountry(string countryTitle, IMediator mediator)
+    private static async Task<Country> GetCountry(string countryTitle, IMediator mediator)
     {
         var query = new GetCountryByTitleCommand()
         {
             Title = countryTitle
         };
-        return mediator.Send(query);
+        return await mediator.Send(query);
     }
 
-    private static Task<City> GetCity(string countryTitle, string cityTitle, IMediator mediator)
+    private static async Task<City> GetCity(Country country, string cityTitle, IMediator mediator)
     {
-        var query = new GetCityCommand()
+        var query = new GetCityQuery()
         {
-            CountryTitle = countryTitle,
+            CountryId = country.CountryId,
             Title = cityTitle
         };
-        return mediator.Send(query);
+
+        try
+        {
+            var city = await mediator.Send(query);
+            return city;
+        }
+        catch
+        {
+            var createQuery = new CreateCityCommand()
+            {
+                CountryId = country.CountryId,
+                Title = cityTitle
+            };
+            return await mediator.Send(createQuery);
+        }
     }
 
     private async Task<Establishment> GetEstablishment(UserCreateAccountRequestDto requestUserDto,
@@ -231,11 +246,12 @@ public class UserAccountService : IUserAccountService
         var establishmentTypes = _context.EstablishmentTypes.ToList()
             .Where(et =>
                 establishmentTypesTitles.Contains(et.Title));
+
         var varGetQuery = new GetEstablishmentCommand()
         {
             Address = address,
             Title = establishmentTitle,
-            Types = establishmentTypes
+            Types = establishmentTypes.Select(e => e.EstablishmentTypeId).ToList()
         };
 
         Establishment establishment;

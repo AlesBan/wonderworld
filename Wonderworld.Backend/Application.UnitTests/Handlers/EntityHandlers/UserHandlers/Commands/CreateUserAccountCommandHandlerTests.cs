@@ -28,7 +28,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
 
         var createUserAccountCommand = new CreateUserAccountCommand()
         {
-            User = user!,
+            UserId = user.UserId,
             FirstName = firstName,
             LastName = lastName,
             IsATeacher = isATeacher,

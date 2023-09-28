@@ -19,16 +19,18 @@ public class UpdateUserDisciplinesCommandHandler : IRequestHandler<UpdateUserDis
         _context.UserDisciplines
             .RemoveRange(_context.UserDisciplines
                 .Where(ud =>
-                    ud.User == request.User));
+                    ud.UserId == request.UserId));
 
-        var userDisciplines = request.NewDisciplines.Select(discipline =>
-            new UserDiscipline()
-            {
-                User = request.User,
-                Discipline = discipline
-            });
+        var userDisciplines = request.NewDisciplines
+            .Select(discipline =>
+                new UserDiscipline()
+                {
+                    UserId = request.UserId,
+                    DisciplineId = discipline
+                });
 
-        await _context.UserDisciplines.AddRangeAsync(userDisciplines, cancellationToken);
+        await _context.UserDisciplines
+            .AddRangeAsync(userDisciplines, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
         return Unit.Value;
     }

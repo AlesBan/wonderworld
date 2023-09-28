@@ -25,16 +25,16 @@ public class UpdateUserDisciplineCommandHandlerTests : TestCommonBase
         // Act
         await handler.Handle(new UpdateUserDisciplinesCommand()
         {
-            User = user!,
-            NewDisciplines = newDisciplines
+            UserId = user!.UserId,
+            NewDisciplines = newDisciplines.Select(d =>
+                    d.DisciplineId)
+                .ToList()
         }, CancellationToken.None);
-        
+
         // Assert
         Assert.Equal(1, Context.UserDisciplines.Count(ud => ud.UserId == user!.UserId));
         Assert.NotEmpty(Context.UserDisciplines
             .Where(ud => ud.UserId == user!.UserId &&
                          ud.Discipline.Title == "History"));
-        
     }
 }
-
