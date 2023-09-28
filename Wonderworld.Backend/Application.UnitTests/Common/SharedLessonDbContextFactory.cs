@@ -8,6 +8,7 @@ using Wonderworld.Domain.EntityConnections;
 using Wonderworld.Domain.Enums;
 using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence;
+using EstablishmentType = Wonderworld.Domain.Enums.EntityTypes.EstablishmentType;
 
 namespace Application.UnitTests.Common;
 
@@ -55,7 +56,7 @@ public class SharedLessonDbContextFactory
         AppendCountries(context);
         AppendCities(context);
         AppendEstablishments(context);
-        
+
         context.SaveChangesAsync();
         AppendUsers(context);
 
@@ -68,7 +69,8 @@ public class SharedLessonDbContextFactory
         AppendUserRoles(context);
         AppendClassLanguages(context);
         AppendClassDisciplines(context);
-        
+        AppendEstablishmentTypesEstablishment(context);
+
         AppendInvitations(context);
         context.SaveChangesAsync();
 
@@ -154,8 +156,8 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserAId,
                 ClassId = ClassAId,
-                Title = "title",
-                Grade = context.Grades.FirstOrDefault(g => 
+                Title = "ClassAId",
+                Grade = context.Grades.FirstOrDefault(g =>
                     g.GradeNumber == 10)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
@@ -165,7 +167,7 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserAId,
                 ClassId = ClassForUpdateId,
-                Title = "title",
+                Title = "ClassForUpdateId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
@@ -175,7 +177,7 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserAId,
                 ClassId = ClassForDeleteId,
-                Title = "titleA",
+                Title = "ClassForDeleteId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
                 Age = 10,
                 PhotoUrl = "PhotoUrl",
@@ -328,23 +330,23 @@ public class SharedLessonDbContextFactory
         context.ClassDisciplines.AddRangeAsync(
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => 
+                Class = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassAId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => 
+                Discipline = context.Disciplines.FirstOrDefault(d =>
                     d.Title == "Chemistry")!
             },
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => 
+                Class = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassForUpdateId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => 
+                Discipline = context.Disciplines.FirstOrDefault(d =>
                     d.Title == "Chemistry")!
             },
             new ClassDiscipline()
             {
-                Class = context.Classes.FirstOrDefault(c => 
+                Class = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassForDeleteId)!,
-                Discipline = context.Disciplines.FirstOrDefault(d => 
+                Discipline = context.Disciplines.FirstOrDefault(d =>
                     d.Title == "Chemistry")!
             }
         );
@@ -460,24 +462,52 @@ public class SharedLessonDbContextFactory
             new Establishment()
             {
                 EstablishmentId = EstablishmentAId,
-                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentA",
-                CityId = CityAId
+                Address = "AddressA",
             },
             new Establishment()
             {
                 EstablishmentId = EstablishmentBId,
-                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentB",
-                CityId = CityBId
+                Address = "AddressB",
             },
             new Establishment()
             {
                 EstablishmentId = EstablishmentForDeleteId,
-                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentForDelete",
-                CityId = CityAId
+                Address = "AddressC",
             });
+    }
+
+    private static void AppendEstablishmentTypesEstablishment(ISharedLessonDbContext context)
+    {
+        context.EstablishmentTypesEstablishments.AddRange(
+            new EstablishmentTypeEstablishment()
+            {
+                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(
+                        et
+                            => et.Title == EstablishmentType.School.ToString())
+                    .Result.EstablishmentTypeId,
+
+                EstablishmentId = EstablishmentAId
+            },
+            new EstablishmentTypeEstablishment
+            {
+                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(et
+                        => et.Title == EstablishmentType.Gymnasium.ToString())
+                    .Result.EstablishmentTypeId,
+                EstablishmentId = EstablishmentAId
+            },
+            new EstablishmentTypeEstablishment
+            {
+                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(
+                        et
+                            => et.Title == EstablishmentType.School.ToString())
+                    .Result.EstablishmentTypeId,
+
+                EstablishmentId = EstablishmentBId
+            }
+        );
     }
 
 

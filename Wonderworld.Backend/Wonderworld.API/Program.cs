@@ -1,21 +1,20 @@
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using AutoMapper;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Wonderworld.API.Helpers.JwtHelpers;
+using Wonderworld.API.Services.AccountServices;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
-using Wonderworld.Application.Interfaces.Helpers;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
-using Wonderworld.Infrastructure.Helpers;
+using Wonderworld.Application.Interfaces.Services.ExternalServices;
 using Wonderworld.Infrastructure.Services;
-using Wonderworld.Infrastructure.Services.DataServices;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Services.ExternalServices;
 using Wonderworld.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,14 +23,14 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 
-builder.Services.AddApplication();
-builder.Services.AddPersistence(builder.Configuration);
-
 builder.Services.AddAutoMapper(config =>
 {
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
     config.AddProfile(new AssemblyMappingProfile(typeof(ISharedLessonDbContext).Assembly));
 });
+
+builder.Services.AddApplication();
+builder.Services.AddPersistence(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
@@ -51,6 +50,7 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(options =>
     {
+
         options.RequireHttpsMetadata = false;
         options.SaveToken = true;
 
@@ -61,7 +61,7 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = "http://localhost:7275",
             ValidIssuer = "http://localhost:7275",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes("yJhcmJjPj9143mZN2JhcmJjPj9143mZN"))
+                .GetBytes("yJhcmJjPj9143mZN2JhcmJjPj9143mZN")),
         };
     });
 
@@ -92,10 +92,19 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddScoped<IDefaultSearchDataService, DefaultSearchDataService>();
+builder.Services.AddHttpClient<IOrganizationSearchService, OrganizationSearchService>(c =>
+{
+    c.BaseAddress = new Uri("https://search-maps.yandex.ru/v1/");
+});
+
+
+builder.Services.AddScoped<ISharedLessonDbContext, SharedLessonDbContext>();
+builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
-builder.Services.AddScoped<IUserHelper, UserHelper>();
+builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService>();
+builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
+
 
 var app = builder.Build();
 

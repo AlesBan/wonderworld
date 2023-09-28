@@ -6,7 +6,7 @@ using Wonderworld.Domain.Entities.Location;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Commands.CreateCity;
 
-public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Guid>
+public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, City>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -15,30 +15,34 @@ public class CreateCityCommandHandler : IRequestHandler<CreateCityCommand, Guid>
         _context = context;
     }
 
-    public async Task<Guid> Handle(CreateCityCommand request, CancellationToken cancellationToken)
+    public async Task<City> Handle(CreateCityCommand request, CancellationToken cancellationToken)
     {
-        var country = await _context.Countries!.FirstOrDefaultAsync(t =>
-            t.CountryId == request.Country.CountryId, cancellationToken);
+        var country = await _context.Countries
+            .FirstOrDefaultAsync(t =>
+                    t.CountryId == request.CountryId,
+                cancellationToken);
 
         if (country == null)
         {
-            throw new NotFoundException(nameof(Country), request.Country.CountryId);
+            throw new NotFoundException(nameof(Country), request.CountryId);
         }
 
-        var city = new City()
+        var city = new City
         {
             Title = request.Title,
-            Country = country
+            CountryId = country.CountryId
         };
+        await _context.SaveChangesAsync(cancellationToken);
 
         await AddCity(city, cancellationToken);
 
-        return city.CityId;
+        return city;
     }
 
     private async Task AddCity(City city, CancellationToken cancellationToken)
     {
-        await _context.Cities.AddAsync(city, cancellationToken);
+        await _context.Cities
+            .AddAsync(city, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

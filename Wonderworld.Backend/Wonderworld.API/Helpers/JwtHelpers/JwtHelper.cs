@@ -13,7 +13,7 @@ public static class JwtHelper
     {
         var jwtClaims = GetClaims(user);
 
-        var singingKey = new SymmetricSecurityKey(Encoding.ASCII
+        var singingKey = new SymmetricSecurityKey(Encoding.UTF8
             .GetBytes(configuration.GetValue<string>("JwtSettings:IssuerSigningKey")));
         var expiresTime = AuthConstants.TokenLifeTime;
         var credentials = new SigningCredentials(singingKey, SecurityAlgorithms.HmacSha256);

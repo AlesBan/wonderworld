@@ -4,30 +4,33 @@ using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 
-public class UpdateUserLanguagesCommandHandler : IRequestHandler<UpdateUserLanguagesCommand>
+public class UpdateUserLanguagesQueryHandler : IRequestHandler<UpdateUserLanguagesQuery>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public UpdateUserLanguagesCommandHandler(ISharedLessonDbContext context)
+    public UpdateUserLanguagesQueryHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<Unit> Handle(UpdateUserLanguagesCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateUserLanguagesQuery request, CancellationToken cancellationToken)
     {
         var userLanguages = _context.UserLanguages
-            .Where(ul => ul.User == request.User);
+            .Where(ul => 
+                ul.UserId == request.UserId);
 
-        _context.UserLanguages.RemoveRange(userLanguages);
+        _context.UserLanguages
+            .RemoveRange(userLanguages);
         var userLanguagesToAdd = request.NewLanguages
             .Select(l =>
                 new UserLanguage()
                 {
-                    User = request.User,
-                    Language = l
+                    UserId = request.UserId,
+                    LanguageId = l
                 });
 
-        await _context.UserLanguages.AddRangeAsync(userLanguagesToAdd, cancellationToken);
+        await _context.UserLanguages
+            .AddRangeAsync(userLanguagesToAdd, cancellationToken);
 
         await _context.SaveChangesAsync(cancellationToken);
         return Unit.Value;

@@ -21,11 +21,19 @@ public class GetCountryByTitleCommandHandler : IRequestHandler<GetCountryByTitle
             .FirstOrDefaultAsync(c =>
                 c.Title == request.Title, cancellationToken: cancellationToken);
 
-        if (country == null)
+        if (country != null)
         {
-            throw new NotFoundException(nameof(Country), request.Title);
+            return country;
         }
 
-        return country;
+        var newCountry = new Country()
+        {
+            Title = request.Title
+        };
+
+        await _context.Countries.AddAsync(newCountry, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return newCountry;
     }
 }

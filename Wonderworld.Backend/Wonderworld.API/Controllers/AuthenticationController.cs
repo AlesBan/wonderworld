@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Wonderworld.API.Helpers;
+using Wonderworld.API.Services.AccountServices;
+using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Models.AuthDtoModels;
@@ -11,11 +14,14 @@ namespace Wonderworld.API.Controllers;
 [ApiController]
 public class AuthenticationController : BaseController
 {
+    private readonly IUserAccountService _userAccountService;
     private readonly ISharedLessonDbContext _sharedLessonDbContext;
     private readonly IConfiguration _configuration;
 
+    public AuthenticationController(IUserAccountService userAccountService)
     public AuthenticationController(ISharedLessonDbContext sharedLessonDbContext, IConfiguration configuration)
     {
+        _userAccountService = userAccountService;
         _sharedLessonDbContext = sharedLessonDbContext;
         _configuration = configuration;
     }
@@ -23,8 +29,10 @@ public class AuthenticationController : BaseController
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
     {
+        if (StateHelper.CheckModelState(ModelState) is BadRequestObjectResult modelStateValidationResult)
         if (!ModelState.IsValid)
         {
+            return modelStateValidationResult;
             return BadRequest(new AuthResult()
             {
                 Result = false,
@@ -66,6 +74,7 @@ public class AuthenticationController : BaseController
             });
         }
 
+        return await _userAccountService.LoginUser(requestUserDto, Mediator);
         var token = JwtHelper.CreateToken(existingUser, _configuration);
 
         return Ok(new AuthResult()
@@ -78,8 +87,10 @@ public class AuthenticationController : BaseController
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
     {
+        if (StateHelper.CheckModelState(ModelState) is BadRequestObjectResult modelStateValidationResult)
         if (!ModelState.IsValid)
         {
+            return modelStateValidationResult;
             return BadRequest(new AuthResult()
             {
                 Result = false,
@@ -90,6 +101,9 @@ public class AuthenticationController : BaseController
             });
         }
 
+        return await _userAccountService.RegisterUser(requestUserDto, Mediator);
+    }
+}
         var userExists = await _sharedLessonDbContext.Users.AnyAsync(u =>
             u.Email == requestUserDto.Email);
 
@@ -105,6 +119,7 @@ public class AuthenticationController : BaseController
             });
         }
 
+    
         var user = new User
         {
             Email = requestUserDto.Email,
@@ -117,6 +132,13 @@ public class AuthenticationController : BaseController
         var token = JwtHelper.CreateToken(user, _configuration);
 
         
+        return Ok(new AuthResult
+        {
+            Result = true,
+            Token = token
+        });
+    }
+}
         return Ok(new AuthResult
         {
             Result = true,

@@ -1,0 +1,25 @@
+﻿{
+  "profiles": {
+    "Wonderworld.API": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+<<<<<<< HEAD
+      "applicationUrl": "http://localhost:7275",
+=======
+      "applicationUrl": "http://localhost:7275;",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+>>>>>>> DevelopBackend
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

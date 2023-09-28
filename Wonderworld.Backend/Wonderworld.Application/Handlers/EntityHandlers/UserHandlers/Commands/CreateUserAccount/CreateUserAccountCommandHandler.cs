@@ -1,12 +1,15 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.UpdateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 
-public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccountCommand>
+public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccountCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -15,48 +18,70 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         _context = serviceDbContext;
     }
 
-    public async Task<Unit> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
     {
-        MapUser(request.User, request);
+        var user = _context
+            .Users
+            .FirstOrDefault(u => u.UserId == request.UserId);
+        
+        if (user == null)
+        {
+            throw new NotFoundException(nameof(User), request.UserId);
+            
+        }
+        
+        user.FirstName = request.FirstName;
+        user.LastName = request.LastName;
+        user.IsATeacher = request.IsATeacher;
+        user.IsAnExpert = request.IsAnExpert;
+        user.City = request.City;
+        user.Country = request.Country;
+        user.Establishment = request.Establishment;
+        user.PhotoUrl = request.PhotoUrl;
 
-        await SeedUserLanguages(request.User, request, cancellationToken);
-        await SeedUserDisciplines(request.User, request, cancellationToken);
-
-        _context.Users.Update(request.User);
+        user.IsCreatedAccount = true;
+        _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+
+        await SeedUserLanguages(user.UserId, request, cancellationToken);
+        await SeedUserDisciplines(user.UserId, request, cancellationToken);
+        var v = _context.Users
+            .FirstOrDefault(u => 
+            u.UserId == Guid.Parse("ff756e44-7297-47d9-bef9-05df241682f9"));
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return user;
     }
 
-    private async Task SeedUserLanguages(User user, CreateUserAccountCommand request,
+    private async Task SeedUserLanguages(Guid userId, CreateUserAccountCommand request,
         CancellationToken cancellationToken = default)
     {
-        var handler = new UpdateUserLanguagesCommandHandler(_context);
-        await handler.Handle(new UpdateUserLanguagesCommand
+        var handler = new UpdateUserLanguagesQueryHandler(_context);
+        await handler.Handle(new UpdateUserLanguagesQuery
         {
-            User = user,
+            UserId = userId,
             NewLanguages = request.Languages
+                .Select(l => l.LanguageId)
+                .ToList()
         }, cancellationToken);
     }
 
-    private async Task SeedUserDisciplines(User user, CreateUserAccountCommand request,
+    private async Task SeedUserDisciplines(Guid userId, CreateUserAccountCommand request,
         CancellationToken cancellationToken = default)
     {
         var handler = new UpdateUserDisciplinesCommandHandler(_context);
         await handler.Handle(new UpdateUserDisciplinesCommand()
         {
-            User = user,
+            UserId = userId,
             NewDisciplines = request.Disciplines
+                .Select(d => d.DisciplineId)
+                .ToList()
         }, cancellationToken);
     }
 
     private static void MapUser(User user, CreateUserAccountCommand request)
     {
-        user.FirstName = request.FirstName;
-        user.LastName = request.LastName;
-        user.IsATeacher = request.IsATeacher;
-        user.IsAnExpert = request.IsAnExpert;
-        user.City = request.CityLocation;
-        user.Establishment = request.Establishment;
-        user.PhotoUrl = request.PhotoUrl;
+        
     }
 }

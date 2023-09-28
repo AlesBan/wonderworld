@@ -1,11 +1,15 @@
 using MediatR;
-using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.SearchDtos;
 
 namespace Wonderworld.Application.Interfaces.Services;
 
 public interface ISearchService
 {
-    public Task<IEnumerable<UserProfileDto>> GetTeachersDependingOnSearchRequest(Guid userId, IMediator? mediator);
-    public Task<IEnumerable<UserProfileDto>> GetExpertsDependingOnSearchRequest(Guid userId, IMediator? mediator);
-    public Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnSearchRequest(Guid userId, IMediator? mediator);
+    /// <summary>
+    /// GetTeacherAndClassProfilesDependingOnSearchRequest
+    /// </summary>
+    /// <param name="searchRequest"></param>
+    /// <param name="mediator"></param>
+    /// <returns></returns>
+    public Task<SearchResponseDto> GetTeacherAndClassProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator mediator);
 }

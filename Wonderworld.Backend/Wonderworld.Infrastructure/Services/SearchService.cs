@@ -1,23 +1,58 @@
+using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Interfaces.Services;
+using Wonderworld.Infrastructure.Helpers;
 
 namespace Wonderworld.Infrastructure.Services;
 
 public class SearchService : ISearchService
 {
-    public Task<IEnumerable<UserProfileDto>> GetTeachersDependingOnSearchRequest(Guid userId, IMediator? mediator)
+    private readonly IMapper _mapper;
+
+    public SearchService(IMapper mapper)
     {
-        throw new NotImplementedException();
+        _mapper = mapper;
     }
 
-    public Task<IEnumerable<UserProfileDto>> GetExpertsDependingOnSearchRequest(Guid userId, IMediator? mediator)
+    public async Task<SearchResponseDto> GetTeacherAndClassProfilesDependingOnSearchRequest(
+        SearchRequestDto searchRequest, IMediator mediator)
     {
-        throw new NotImplementedException();
+        var userProfileList = (await UserHelper.GetUserProfilesBySearchRequest(searchRequest, mediator)).ToList();
+
+        var classProfileList = (await GetClassProfiles(userProfileList)).ToList();
+
+        var responseDto = CreateSearchResponseDto(userProfileList, classProfileList);
+
+        return responseDto;
     }
 
-    public Task<IEnumerable<ClassProfileDto>> GetClassesDependingOnSearchRequest(Guid userId, IMediator? mediator)
+    private Task<IEnumerable<ClassProfileDto>> GetClassProfiles(IEnumerable<UserProfileDto> userProfileList)
     {
-        throw new NotImplementedException();
+        var classList = userProfileList.Select(up => up.Classes).ToList();
+
+        var classProfileList = classList.Select(cp =>
+                _mapper.Map<ClassProfileDto>(cp))
+            .ToList();
+
+        return Task.FromResult<IEnumerable<ClassProfileDto>>(classProfileList);
+    }
+
+    private static SearchResponseDto CreateSearchResponseDto(IReadOnlyCollection<UserProfileDto> userProfileList,
+        IEnumerable<ClassProfileDto> classProfileList)
+    {
+        var responseDto = new SearchResponseDto
+        {
+            TeacherProfiles = userProfileList.Where(u =>
+                    u.IsATeacher)
+                .ToList(),
+            ExpertProfiles = userProfileList.Where(u =>
+                u.IsAnExpert &&
+                u.IsATeacher == false),
+            ClassProfiles = classProfileList
+        };
+
+        return responseDto;
     }
 }

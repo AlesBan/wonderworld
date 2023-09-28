@@ -1,0 +1,78 @@
+using Microsoft.AspNetCore.Mvc;
+using Wonderworld.API.Helpers;
+using Wonderworld.API.Services.AccountServices;
+using Wonderworld.Application.Dtos.AuthenticationDtos;
+
+namespace Wonderworld.API.Controllers;
+
+
+[ApiController]
+public class AuthenticationController : BaseController
+{
+    private readonly IUserAccountService _userAccountService;
+
+    public AuthenticationController(IUserAccountService userAccountService)
+    {
+        _userAccountService = userAccountService;
+    }
+
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
+    {
+        if (StateHelper.CheckModelState(ModelState) is BadRequestObjectResult modelStateValidationResult)
+        {
+            return modelStateValidationResult;
+        }
+
+        return await _userAccountService.LoginUser(requestUserDto, Mediator);
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
+    {
+        if (StateHelper.CheckModelState(ModelState) is BadRequestObjectResult modelStateValidationResult)
+        {
+            return modelStateValidationResult;
+        }
+
+<<<<<<< HEAD
+        var userExists = await _sharedLessonDbContext.Users.AnyAsync(u =>
+            u.Email == requestUserDto.Email);
+
+        if (userExists)
+        {
+            return BadRequest(new AuthResult()
+            {
+                Result = false,
+                Errors = new List<string>()
+                {
+                    "User already exists"
+                }
+            });
+        }
+
+        var user = new User
+        {
+            Email = requestUserDto.Email,
+            Password = requestUserDto.Password
+        };
+
+        await _sharedLessonDbContext.Users.AddAsync(user);
+        await _sharedLessonDbContext.SaveChangesAsync(CancellationToken.None);
+
+        var token = JwtHelper.CreateToken(user, _configuration);
+
+        
+        return Ok(new AuthResult
+        {
+            Result = true,
+            Token = token
+        });
+=======
+        return await _userAccountService.RegisterUser(requestUserDto, Mediator);
+>>>>>>> DevelopBackend
+    }
+}
+
+    
+

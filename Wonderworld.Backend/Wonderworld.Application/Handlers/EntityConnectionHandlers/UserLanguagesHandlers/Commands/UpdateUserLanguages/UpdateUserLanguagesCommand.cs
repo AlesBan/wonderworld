@@ -4,8 +4,8 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 
-public class UpdateUserLanguagesCommand : IRequest
+public class UpdateUserLanguagesQuery : IRequest
 {
-    public User User { get; set; }
-    public ICollection<Language> NewLanguages { get; set; } = new List<Language>();
+    public Guid UserId { get; set; }
+    public IEnumerable<Guid> NewLanguages { get; set; } = new List<Guid>();
 }

@@ -28,12 +28,12 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
 
         var createUserAccountCommand = new CreateUserAccountCommand()
         {
-            User = user!,
+            UserId = user.UserId,
             FirstName = firstName,
             LastName = lastName,
             IsATeacher = isATeacher,
             IsAnExpert = isAnExpert,
-            CityLocation = cityLocation!,
+            City = cityLocation!,
             Establishment = establishment!,
             Disciplines = disciplines,
             Languages = languages,

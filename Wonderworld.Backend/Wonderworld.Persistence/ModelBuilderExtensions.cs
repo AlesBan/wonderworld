@@ -1,14 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Domain.Enums;
 using Wonderworld.Domain.Enums.EntityTypes;
-using Wonderworld.Persistence.EntityTypeConfiguration;
+using Wonderworld.Persistence.EntityConfiguration.Job;
+using Wonderworld.Persistence.EntityConfiguration.Location;
+using Wonderworld.Persistence.EntityConfiguration.Main;
+using Wonderworld.Persistence.EntityConnectionsConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
-using Wonderworld.Persistence.EntityTypeConfiguration.Location;
 using Wonderworld.Persistence.EntityTypeConfiguration.Main;
-using Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
+using EstablishmentType = Wonderworld.Domain.Entities.Job.EstablishmentType;
 
 namespace Wonderworld.Persistence;
 
@@ -25,6 +26,7 @@ public static class ModelBuilderExtensions
         modelBuilder.ApplyConfiguration(new LanguageConfiguration());
 
         modelBuilder.ApplyConfiguration(new EstablishmentConfiguration());
+        modelBuilder.ApplyConfiguration(new EstablishmentTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CityConfiguration());
         modelBuilder.ApplyConfiguration(new CountryConfiguration());
         modelBuilder.ApplyConfiguration(new ReviewConfiguration());
@@ -36,6 +38,7 @@ public static class ModelBuilderExtensions
         modelBuilder.ApplyConfiguration(new UserLanguageConfiguration());
         modelBuilder.ApplyConfiguration(new ClassDisciplineConfiguration());
         modelBuilder.ApplyConfiguration(new ClassLanguageConfiguration());
+        modelBuilder.ApplyConfiguration(new EstablishmentTypeEstablishmentConfiguration());
     }
 
     public static void SeedingDefaultData(this ModelBuilder modelBuilder)
@@ -44,6 +47,7 @@ public static class ModelBuilderExtensions
         modelBuilder.SeedingDisciplines();
         modelBuilder.SeedingLanguages();
         modelBuilder.SeedingRoles();
+        modelBuilder.SeedingEstablishmentTypes();
     }
 
     private static void SeedingGrades(this ModelBuilder modelBuilder)
@@ -84,12 +88,29 @@ public static class ModelBuilderExtensions
 
     private static void SeedingRoles(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Role>().HasData(((RoleType[])
-            Enum.GetValues(typeof(RoleType))).Select(r =>
-            new Role()
-            {
-                RoleId = Guid.NewGuid(),
-                Title = r.ToString()
-            }).ToList());
+        modelBuilder.Entity<Role>()
+            .HasData(((RoleType[])
+                    Enum.GetValues(typeof(RoleType)))
+                .Select(r =>
+                    new Role()
+                    {
+                        RoleId = Guid.NewGuid(),
+                        Title = r.ToString()
+                    }).ToList());
+    }
+
+    private static void SeedingEstablishmentTypes(this ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<EstablishmentType>()
+            .HasData(
+                Enum.GetValues(typeof(Wonderworld.Domain.Enums.EntityTypes.EstablishmentType))
+                    .Cast<Wonderworld.Domain.Enums.EntityTypes.EstablishmentType>()
+                    .Select(et => new EstablishmentType
+                    {
+                        EstablishmentTypeId = Guid.NewGuid(),
+                        Title = et.ToString()
+                    })
+                    .ToArray()
+            );
     }
 }
