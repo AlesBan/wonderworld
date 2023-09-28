@@ -8,6 +8,7 @@ using Wonderworld.Domain.EntityConnections;
 using Wonderworld.Domain.Enums;
 using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence;
+using EstablishmentType = Wonderworld.Domain.Enums.EntityTypes.EstablishmentType;
 
 namespace Application.UnitTests.Common;
 
@@ -68,6 +69,7 @@ public class SharedLessonDbContextFactory
         AppendUserRoles(context);
         AppendClassLanguages(context);
         AppendClassDisciplines(context);
+        AppendEstablishmentTypesEstablishment(context);
 
         AppendInvitations(context);
         context.SaveChangesAsync();
@@ -460,24 +462,52 @@ public class SharedLessonDbContextFactory
             new Establishment()
             {
                 EstablishmentId = EstablishmentAId,
-                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentA",
-                CityId = CityAId
+                Address = "AddressA",
             },
             new Establishment()
             {
                 EstablishmentId = EstablishmentBId,
-                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentB",
-                CityId = CityBId
+                Address = "AddressB",
             },
             new Establishment()
             {
                 EstablishmentId = EstablishmentForDeleteId,
-                Type = EstablishmentType.School.ToString(),
                 Title = "EstablishmentForDelete",
-                CityId = CityAId
+                Address = "AddressC",
             });
+    }
+
+    private static void AppendEstablishmentTypesEstablishment(ISharedLessonDbContext context)
+    {
+        context.EstablishmentTypesEstablishments.AddRange(
+            new EstablishmentTypeEstablishment()
+            {
+                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(
+                        et
+                            => et.Title == EstablishmentType.School.ToString())
+                    .Result.EstablishmentTypeId,
+
+                EstablishmentId = EstablishmentAId
+            },
+            new EstablishmentTypeEstablishment
+            {
+                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(et
+                        => et.Title == EstablishmentType.Gymnasium.ToString())
+                    .Result.EstablishmentTypeId,
+                EstablishmentId = EstablishmentAId
+            },
+            new EstablishmentTypeEstablishment
+            {
+                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(
+                        et
+                            => et.Title == EstablishmentType.School.ToString())
+                    .Result.EstablishmentTypeId,
+
+                EstablishmentId = EstablishmentBId
+            }
+        );
     }
 
 

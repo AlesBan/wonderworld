@@ -17,13 +17,15 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
 
     public async Task<Unit> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
     {
-        MapUser(request.User, request);
+        var user = request.User;
+        MapUser(user, request);
 
-        await SeedUserLanguages(request.User, request, cancellationToken);
-        await SeedUserDisciplines(request.User, request, cancellationToken);
-
-        _context.Users.Update(request.User);
+        user.IsCreatedAccount = true;
+        
         await _context.SaveChangesAsync(cancellationToken);
+        
+        await SeedUserLanguages(user, request, cancellationToken);
+        await SeedUserDisciplines(user, request, cancellationToken);
         return Unit.Value;
     }
 

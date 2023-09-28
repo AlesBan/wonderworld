@@ -5,6 +5,7 @@ using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.EntityConnections;
+using EstablishmentType = Wonderworld.Domain.Entities.Job.EstablishmentType;
 
 namespace Wonderworld.Application.Interfaces;
 
@@ -17,6 +18,7 @@ public interface ISharedLessonDbContext
     DbSet<Discipline> Disciplines { get; set; }
     DbSet<Language> Languages { get; set; }
     DbSet<Establishment> Establishments { get; set; }
+    DbSet<EstablishmentType> EstablishmentTypes { get; set; }
     DbSet<City> Cities { get; set; }
     DbSet<Country> Countries { get; set; }
     DbSet<Review> Reviews { get; set; }
@@ -25,8 +27,8 @@ public interface ISharedLessonDbContext
     DbSet<UserDiscipline> UserDisciplines { get; set; }
     DbSet<UserGrade> UserGrades { get; set; }
     DbSet<UserLanguage> UserLanguages { get; set; }
-
     DbSet<ClassLanguage> ClassLanguages { get; set; }
     DbSet<ClassDiscipline> ClassDisciplines { get; set; }
+    DbSet<EstablishmentTypeEstablishment> EstablishmentTypesEstablishments { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

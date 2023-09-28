@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Persistence.EntityTypeConfiguration.Main;
+namespace Wonderworld.Persistence.EntityConfiguration.Main;
 
 public class RoleConfiguration: IEntityTypeConfiguration<Role>
 {

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wonderworld.Domain.EntityConnections;
 
-namespace Wonderworld.Persistence.EntityTypeConnectionsConfiguration;
+namespace Wonderworld.Persistence.EntityConnectionsConfiguration;
 
 public class ClassLanguageConfiguration : IEntityTypeConfiguration<ClassLanguage>
 {

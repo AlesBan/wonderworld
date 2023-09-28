@@ -23,10 +23,9 @@ public class OrganizationSearchService : IOrganizationSearchService
         var token = _yandexAccountService.GeyAccessToken();
         var baseUrl = _yandexAccountService.GetBaseUrl();
 
-        var requestText = establishment.Type +
-                          " " + establishment.Number +
-                          " " + establishment.CityTitle +
-                          " " + establishment.CountryTitle;
+        var requestText = string.Join(' ', establishment.Types) + " " +
+                          establishment.Title;
+
         var requestUrl = baseUrl +
                          "apikey=" + token +
                          "&text=" + requestText +
@@ -37,6 +36,7 @@ public class OrganizationSearchService : IOrganizationSearchService
         var response = await GetResponse(requestUrl);
 
         var responseObject = await DeserializationAsync<Root>(response);
+
         if (responseObject == null)
         {
             return new List<EstablishmentSearchResponseDto>();
@@ -51,8 +51,9 @@ public class OrganizationSearchService : IOrganizationSearchService
         var establishmentSearchDtoList = responseObject.Features.Select(f =>
             new EstablishmentSearchResponseDto()
             {
-                Title = f.Properties.Name + "" +
-                        f.Properties.Description,
+                Title = f.Properties.Name + " " +
+                        f.Properties.Description + " " +
+                        string.Join(' ', f.Properties.CompanyMetaData.Categories.ToList().Select(c => c.Name).ToList())
             });
 
         return establishmentSearchDtoList;
@@ -75,7 +76,6 @@ public class OrganizationSearchService : IOrganizationSearchService
         T? responseObj;
         try
         {
-            var a = response.Content.ReadAsStringAsync().Result;
             responseObj = await response.Content.ReadFromJsonAsync<T>();
         }
         catch (JsonException ex)

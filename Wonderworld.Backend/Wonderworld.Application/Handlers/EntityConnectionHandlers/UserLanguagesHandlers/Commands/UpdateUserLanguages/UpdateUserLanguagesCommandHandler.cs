@@ -16,7 +16,8 @@ public class UpdateUserLanguagesCommandHandler : IRequestHandler<UpdateUserLangu
     public async Task<Unit> Handle(UpdateUserLanguagesCommand request, CancellationToken cancellationToken)
     {
         var userLanguages = _context.UserLanguages
-            .Where(ul => ul.User == request.User);
+            .Where(ul => 
+                ul.User == request.User);
 
         _context.UserLanguages.RemoveRange(userLanguages);
         var userLanguagesToAdd = request.NewLanguages

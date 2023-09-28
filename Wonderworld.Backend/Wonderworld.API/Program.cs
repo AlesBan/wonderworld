@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -22,14 +23,14 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddControllers();
 
-builder.Services.AddApplication();
-builder.Services.AddPersistence(builder.Configuration);
-
 builder.Services.AddAutoMapper(config =>
 {
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
     config.AddProfile(new AssemblyMappingProfile(typeof(ISharedLessonDbContext).Assembly));
 });
+
+builder.Services.AddApplication();
+builder.Services.AddPersistence(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
@@ -49,6 +50,7 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(options =>
     {
+
         options.RequireHttpsMetadata = false;
         options.SaveToken = true;
 
@@ -59,7 +61,7 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = "http://localhost:7275",
             ValidIssuer = "http://localhost:7275",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes("yJhcmJjPj9143mZN2JhcmJjPj9143mZN"))
+                .GetBytes("yJhcmJjPj9143mZN2JhcmJjPj9143mZN")),
         };
     });
 
@@ -102,7 +104,6 @@ builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService>();
 builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
-
 
 
 var app = builder.Build();

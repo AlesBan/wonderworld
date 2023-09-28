@@ -7,16 +7,16 @@ namespace Wonderworld.Application.Dtos.AuthenticationDtos;
 
 public class UserRegisterRequestDto : IMapWith<User>
 {
-    [Required] public string Email => string.Empty;
+    [Required] public string Email { get; set; }
 
-    [Required] public string Password => string.Empty;
+    [Required] public string Password { get; set; }
 
     public void Mapping(Profile profile)
     {
         profile.CreateMap<UserRegisterRequestDto, User>()
-            .ForMember(u => u.Email, opt => 
+            .ForMember(u => u.Email, opt =>
                 opt.MapFrom(ur => ur.Email))
-            .ForMember(u => u.Password, opt => 
+            .ForMember(u => u.Password, opt =>
                 opt.MapFrom(ur => ur.Password));
     }
 }

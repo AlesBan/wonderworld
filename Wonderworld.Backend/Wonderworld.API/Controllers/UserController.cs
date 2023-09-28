@@ -1,5 +1,5 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.API.Services.AccountServices;
@@ -9,7 +9,6 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.API.Controllers;
 
-[Authorize]
 public class UserController : BaseController
 {
     private readonly ISharedLessonDbContext _sharedLessonDbContext;
@@ -30,9 +29,25 @@ public class UserController : BaseController
     [HttpPost("create-account")]
     public async Task<IActionResult> CreateAccount([FromBody] UserCreateAccountRequestDto requestUserDto)
     {
-        var jwToken = HttpContext.Session.GetString("Authorization");
-        var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        var jwtToken = HttpContext.Request
+            .Headers["Authorization"]
+            .ToString();
+        var jwtHandler = new JwtSecurityTokenHandler();
+        var decodedToken = jwtHandler.ReadJwtToken(jwtToken.Split(' ')[1]);
+
+        var nameIdentifier = decodedToken.Claims
+            .FirstOrDefault(claim =>
+                claim.Type == ClaimTypes.NameIdentifier)?
+            .Value;
+        
+        if (nameIdentifier == null)
+        {
+            return Ok();
+        }
+
+        var userId = Guid.Parse(nameIdentifier);
         await _userAccountService.CreateUserAccount(userId, requestUserDto, Mediator);
+
         return Ok();
     }
 }

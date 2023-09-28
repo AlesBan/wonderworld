@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Persistence.EntityTypeConfiguration.Main;
+namespace Wonderworld.Persistence.EntityConfiguration.Main;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {
@@ -15,6 +15,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
 
+        builder.Property(u => u.IsCreatedAccount)
+            .HasDefaultValue(false)
+            .IsRequired();
+
         builder.Property(t => t.FirstName)
             .HasMaxLength(40);
         builder.Property(t => t.LastName)
@@ -24,7 +28,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .WithMany(cl => cl.Users)
             .HasForeignKey(t => t.CountryId)
             .OnDelete(DeleteBehavior.SetNull);
-        
+
         builder.HasOne(t => t.City)
             .WithMany(cl => cl.Users)
             .HasForeignKey(t => t.CityId)

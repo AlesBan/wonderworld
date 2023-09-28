@@ -11,6 +11,7 @@ public class User
     public string Email { get; set; } = string.Empty;
     public string Password { get; set; } = string.Empty;
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
+    public bool IsCreatedAccount { get; set; }
     public string? FirstName { get; set; } = string.Empty;
     public string? LastName { get; set; } = string.Empty;
     public bool? IsATeacher { get; set; }

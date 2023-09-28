@@ -9,7 +9,7 @@ using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
-using Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Queries.GetEsteblishment;
+using Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Commands.CreateEstablishment;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
@@ -20,6 +20,9 @@ using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using static Wonderworld.API.Constants.AuthConstants;
+using GetEstablishmentCommand =
+    Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Queries.GetEstablishmentByAddress.
+    GetEstablishmentCommand;
 
 namespace Wonderworld.API.Services.AccountServices;
 
@@ -86,7 +89,7 @@ public class UserAccountService : IUserAccountService
     public async Task<IActionResult> CreateUserAccount(Guid userId, UserCreateAccountRequestDto requestUserDto,
         IMediator mediator)
     {
-        var userValidationResult = await CheckUserCreateAccount(userId, requestUserDto, mediator);
+        var userValidationResult = await CheckUserCreateAccount(userId, mediator);
 
         switch (userValidationResult)
         {
@@ -134,7 +137,7 @@ public class UserAccountService : IUserAccountService
     }
 
 
-    private async Task<IActionResult> CheckUserCreateAccount(Guid userId, UserCreateAccountRequestDto requestUserDto,
+    private static async Task<IActionResult> CheckUserCreateAccount(Guid userId,
         IMediator mediator)
     {
         var existingUser = await GetUserById(userId, mediator);
@@ -142,6 +145,11 @@ public class UserAccountService : IUserAccountService
         if (existingUser == null)
         {
             return GetBadRequest(UserNotFoundErrorMessage);
+        }
+
+        if (existingUser.IsCreatedAccount == true)
+        {
+            return GetBadRequest(UserAlreadyCreatedAccountErrorMessage);
         }
 
         return new OkObjectResult(existingUser);
@@ -214,24 +222,38 @@ public class UserAccountService : IUserAccountService
         return mediator.Send(query);
     }
 
-    private static async Task<Establishment> GetEstablishment(UserCreateAccountRequestDto requestUserDto,
+    private async Task<Establishment> GetEstablishment(UserCreateAccountRequestDto requestUserDto,
         IMediator mediator)
     {
-        var countryTitle = requestUserDto.EstablishmentDto.CountryTitle;
-        var cityTitle = requestUserDto.EstablishmentDto.CityTitle;
+        var address = requestUserDto.EstablishmentDto.Address;
         var establishmentTitle = requestUserDto.EstablishmentDto.Title;
-
-        var establishmentCountry = await GetCountry(countryTitle, mediator);
-        var establishmentCity = await GetCity(countryTitle, cityTitle, mediator);
-
-        var query = new GetEstablishmentCommand()
+        var establishmentTypesTitles = requestUserDto.EstablishmentDto.Types;
+        var establishmentTypes = _context.EstablishmentTypes.ToList()
+            .Where(et =>
+                establishmentTypesTitles.Contains(et.Title));
+        var varGetQuery = new GetEstablishmentCommand()
         {
+            Address = address,
             Title = establishmentTitle,
-            Country = establishmentCountry,
-            City = establishmentCity
+            Types = establishmentTypes
         };
 
-        return await mediator.Send(query);
+        Establishment establishment;
+        try
+        {
+            establishment = await mediator.Send(varGetQuery);
+        }
+        catch
+        {
+            var createQuery = new CreateEstablishmentCommand()
+            {
+                Address = address,
+                Title = establishmentTitle
+            };
+            establishment = await mediator.Send(createQuery);
+        }
+
+        return establishment;
     }
 
     private async Task<IEnumerable<Language>> GetLanguages(IEnumerable<string> languages, IMediator mediator)

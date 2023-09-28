@@ -1,11 +1,11 @@
 using MediatR;
-using Wonderworld.Domain.Entities.Location;
+using Wonderworld.Domain.Entities.Job;
 
-namespace Wonderworld.Application.Handlers.EstablishmentHandlers.Commands.CreateEstablishment;
+namespace Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Commands.CreateEstablishment;
 
-public class CreateEstablishmentCommand : IRequest<Guid>
+public class CreateEstablishmentCommand : IRequest<Establishment>
 {
-    public string Type { get; set; }
+    public IEnumerable<EstablishmentType> Types { get; set; } = new List<EstablishmentType>();
     public string Title { get; set; }
-    public City City { get; set; }
+    public string Address { get; set; }
 }

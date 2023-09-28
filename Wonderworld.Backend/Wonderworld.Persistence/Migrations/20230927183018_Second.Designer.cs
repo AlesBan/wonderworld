@@ -12,8 +12,8 @@ using Wonderworld.Persistence;
 namespace Wonderworld.Persistence.Migrations
 {
     [DbContext(typeof(SharedLessonDbContext))]
-    [Migration("20230912220923_Update cityLocation")]
-    partial class UpdatecityLocation
+    [Migration("20230927183018_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -143,52 +143,52 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            DisciplineId = new Guid("0c6e3f58-8143-4de5-9ccc-b32b25ffec47"),
+                            DisciplineId = new Guid("5660e95c-02fd-4815-a846-52e2131a5b69"),
                             Title = "Biology"
                         },
                         new
                         {
-                            DisciplineId = new Guid("f7d59fc6-d177-437a-add5-721b7f4c16c7"),
+                            DisciplineId = new Guid("58401dbc-658c-4885-9e37-1b51c605fbd3"),
                             Title = "Chemistry"
                         },
                         new
                         {
-                            DisciplineId = new Guid("d7cc1a26-fb65-46a1-8e2c-21e4e5dccf1c"),
+                            DisciplineId = new Guid("0e190e73-d559-4831-aa41-402fa8e754c7"),
                             Title = "Physics"
                         },
                         new
                         {
-                            DisciplineId = new Guid("fe015cbc-c7f3-498a-83f3-8a303b0889cc"),
+                            DisciplineId = new Guid("ce4f0ffc-6b6a-4698-9f8b-456b7952930d"),
                             Title = "Mathematics"
                         },
                         new
                         {
-                            DisciplineId = new Guid("b5a52cd5-6486-4279-9825-e88526f105e8"),
+                            DisciplineId = new Guid("41fe2e42-e605-48d5-96de-314a139f5bef"),
                             Title = "Literature"
                         },
                         new
                         {
-                            DisciplineId = new Guid("5fc0699d-e9f1-4440-be92-655da8a386ea"),
+                            DisciplineId = new Guid("ab9468eb-d723-4ced-b9f3-d7e2cae3062f"),
                             Title = "ComputerScience"
                         },
                         new
                         {
-                            DisciplineId = new Guid("aeab206b-e21b-452e-9d14-0dbd09b7b602"),
+                            DisciplineId = new Guid("45d4f0ae-cbdc-4290-a17e-230f99395b0e"),
                             Title = "Geography"
                         },
                         new
                         {
-                            DisciplineId = new Guid("0981f8de-c2f2-4045-8efa-05483269e183"),
+                            DisciplineId = new Guid("c1172edd-4e95-4c4d-8637-77e76ac91240"),
                             Title = "History"
                         },
                         new
                         {
-                            DisciplineId = new Guid("19448dc8-75a4-4c2a-9805-8546e88379b9"),
+                            DisciplineId = new Guid("30ce693a-01cd-4392-88b3-cf192b52c0af"),
                             Title = "Music"
                         },
                         new
                         {
-                            DisciplineId = new Guid("ed073876-7ad4-4095-bd51-8270fcf7b2c6"),
+                            DisciplineId = new Guid("a765e545-cfbd-42c8-aa40-45640481ff12"),
                             Title = "Art"
                         });
                 });
@@ -214,62 +214,62 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            GradeId = new Guid("e6dbaec7-eac0-4475-9aa2-1cff5598b245"),
+                            GradeId = new Guid("db4d7464-b1ef-46ef-933e-092c93d27e2e"),
                             GradeNumber = 1
                         },
                         new
                         {
-                            GradeId = new Guid("8894d094-a9fe-44b0-8418-dd580d004f39"),
+                            GradeId = new Guid("d378f043-cbda-420e-9fd5-0f1863b1828b"),
                             GradeNumber = 2
                         },
                         new
                         {
-                            GradeId = new Guid("14bb71ef-97d1-4481-9b00-3ebc8e7123a8"),
+                            GradeId = new Guid("44ec880d-0ebd-4ff6-82b9-aaa944ba7db9"),
                             GradeNumber = 3
                         },
                         new
                         {
-                            GradeId = new Guid("5fe0b6d1-b9d1-4a4c-a159-693472175c89"),
+                            GradeId = new Guid("9b785c0f-1113-4f9f-82f7-9ee2ba85800e"),
                             GradeNumber = 4
                         },
                         new
                         {
-                            GradeId = new Guid("87c61a8e-e763-4055-83f2-35236f19b608"),
+                            GradeId = new Guid("fd327c6c-8ba2-487d-9cbc-7181c265182d"),
                             GradeNumber = 5
                         },
                         new
                         {
-                            GradeId = new Guid("63fcc4bf-64a3-4d95-a111-28c2b4de21f0"),
+                            GradeId = new Guid("f3771ef0-97c6-4135-b8d8-7d1fb4e609cd"),
                             GradeNumber = 6
                         },
                         new
                         {
-                            GradeId = new Guid("dd3941e5-4a0d-4212-b80a-466eab14dda5"),
+                            GradeId = new Guid("a2f15865-54ed-4e32-a4af-b418d588d0ca"),
                             GradeNumber = 7
                         },
                         new
                         {
-                            GradeId = new Guid("43f8cb08-a303-4afd-974d-1f2274d55225"),
+                            GradeId = new Guid("1bfab4f1-1bfe-4019-a92c-c3bec3b66196"),
                             GradeNumber = 8
                         },
                         new
                         {
-                            GradeId = new Guid("3a128386-aea0-4b8d-9d04-06d85e163b9a"),
+                            GradeId = new Guid("61a69601-de72-4cea-9868-d855231b98ea"),
                             GradeNumber = 9
                         },
                         new
                         {
-                            GradeId = new Guid("bd543e28-48e9-4bf8-b29a-91344ea44db7"),
+                            GradeId = new Guid("02079c0a-1a5a-4a94-9926-9a66a08e1892"),
                             GradeNumber = 10
                         },
                         new
                         {
-                            GradeId = new Guid("3e4e8b51-3535-42b6-bbb1-ff6ddf2b9da2"),
+                            GradeId = new Guid("9b75bb5d-dedc-4133-89bd-2d925b05105f"),
                             GradeNumber = 11
                         },
                         new
                         {
-                            GradeId = new Guid("b0f4b2a6-ef47-4ac3-88cb-2357f0942b7a"),
+                            GradeId = new Guid("aa768fb8-f662-4732-918c-37a9584e39f7"),
                             GradeNumber = 12
                         });
                 });
@@ -296,87 +296,87 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            LanguageId = new Guid("c37a5f2f-56b8-47d2-ba44-2b4ae4aa7b11"),
+                            LanguageId = new Guid("d0c5bd41-d76a-47ef-8ec4-bdad7ac019e0"),
                             Title = "Russian"
                         },
                         new
                         {
-                            LanguageId = new Guid("0913135a-0586-45f9-873c-9a894c7a8b76"),
+                            LanguageId = new Guid("72fafbf8-a20e-4c0e-8fea-40c28619569d"),
                             Title = "English"
                         },
                         new
                         {
-                            LanguageId = new Guid("a3edb394-ab54-4fcf-afc7-e793de4b784a"),
+                            LanguageId = new Guid("fe43f28a-2ce9-4010-8d19-cc1309d35478"),
                             Title = "German"
                         },
                         new
                         {
-                            LanguageId = new Guid("479b8bd5-1965-4d15-b7f7-e09d996035f4"),
+                            LanguageId = new Guid("3e731e5a-5b73-44d8-bc4c-03601777ee9c"),
                             Title = "Italian"
                         },
                         new
                         {
-                            LanguageId = new Guid("37b6fc47-6256-4af5-9ff2-c855b5777956"),
+                            LanguageId = new Guid("ef9578e5-067a-4530-8498-074e20513c36"),
                             Title = "Spanish"
                         },
                         new
                         {
-                            LanguageId = new Guid("20d68d68-fae1-4dd2-bfa4-b1b22da764d9"),
+                            LanguageId = new Guid("e0ed9bf2-8154-4947-a4ab-1cbf2bf66dd5"),
                             Title = "French"
                         },
                         new
                         {
-                            LanguageId = new Guid("940199cd-d1b3-4928-8f2a-da85ea3edbb7"),
+                            LanguageId = new Guid("860a6675-18d0-4ccf-98a6-88192f11b157"),
                             Title = "Hungarian"
                         },
                         new
                         {
-                            LanguageId = new Guid("9dff528f-90dd-494b-9350-9197567b25a5"),
+                            LanguageId = new Guid("f02b427d-fe16-4980-96b4-c4720a7d7968"),
                             Title = "Portuguese"
                         },
                         new
                         {
-                            LanguageId = new Guid("ad7dad23-b756-49c8-ade0-8672f1026114"),
+                            LanguageId = new Guid("b1e44286-5cd8-4076-96e3-89b6d0103e6f"),
                             Title = "Belarusian"
                         },
                         new
                         {
-                            LanguageId = new Guid("fc191ed5-e996-4491-881e-b6f39b3da0d9"),
+                            LanguageId = new Guid("4eab363d-f401-4341-9fb2-08d3c5efbbb7"),
                             Title = "Ukrainian"
                         },
                         new
                         {
-                            LanguageId = new Guid("29725c06-8aa0-41b1-bb52-ad692d36b290"),
+                            LanguageId = new Guid("f8adc4ae-18cf-478a-8b4b-c820cb5f0845"),
                             Title = "Armenian"
                         },
                         new
                         {
-                            LanguageId = new Guid("e58e993c-2988-420d-b897-072cff8d9d56"),
+                            LanguageId = new Guid("b2ea8b5d-57df-4bb9-b5bf-055daabcc221"),
                             Title = "Georgian"
                         },
                         new
                         {
-                            LanguageId = new Guid("e084300b-05d3-45d2-9af3-e4ddde31c4fc"),
+                            LanguageId = new Guid("c89ede26-696e-4a95-aa01-a76da716d4ff"),
                             Title = "Azerbaijani"
                         },
                         new
                         {
-                            LanguageId = new Guid("7f239815-b8e1-49fb-8adc-66bb08bfc16f"),
+                            LanguageId = new Guid("03aeed61-9067-401e-b0e7-0e1d602e2a9a"),
                             Title = "Kazakh"
                         },
                         new
                         {
-                            LanguageId = new Guid("08ef04f5-54b0-46a9-93fa-8d2aaba16e6f"),
+                            LanguageId = new Guid("9bc119e7-7b17-4d0a-9b42-937c26a63bd6"),
                             Title = "Kyrgyz"
                         },
                         new
                         {
-                            LanguageId = new Guid("83aac05c-5ab4-450f-898d-32a9bdc039e4"),
+                            LanguageId = new Guid("d349a958-5c02-44d4-b1c3-92f112efb91c"),
                             Title = "Tajik"
                         },
                         new
                         {
-                            LanguageId = new Guid("b74aa414-ce17-4ed4-96c3-d3f54b83dc66"),
+                            LanguageId = new Guid("fe00de12-a6ff-451d-8a77-fd9527d8c663"),
                             Title = "Uzbek"
                         });
                 });
@@ -388,18 +388,18 @@ namespace Wonderworld.Persistence.Migrations
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("gen_random_uuid()");
 
-                    b.Property<Guid>("CityId")
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)");
+
+                    b.Property<Guid?>("CityId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
 
                     b.HasKey("EstablishmentId");
 
@@ -409,6 +409,48 @@ namespace Wonderworld.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("Establishments");
+                });
+
+            modelBuilder.Entity("Wonderworld.Domain.Entities.Job.EstablishmentType", b =>
+                {
+                    b.Property<Guid>("EstablishmentTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasDefaultValueSql("gen_random_uuid()");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("EstablishmentTypeId");
+
+                    b.HasIndex("EstablishmentTypeId")
+                        .IsUnique();
+
+                    b.ToTable("EstablishmentTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            EstablishmentTypeId = new Guid("69bcdd4c-8a5b-4408-93c1-c8122aeb254c"),
+                            Title = "School"
+                        },
+                        new
+                        {
+                            EstablishmentTypeId = new Guid("460b4a16-7d13-4587-bae8-b4efbb28b096"),
+                            Title = "Gymnasium"
+                        },
+                        new
+                        {
+                            EstablishmentTypeId = new Guid("f2315c84-6a71-4956-a2ba-dd3591374ca1"),
+                            Title = "Lyceum"
+                        },
+                        new
+                        {
+                            EstablishmentTypeId = new Guid("5e8a5e0d-a7ea-433d-b061-be061558ae98"),
+                            Title = "College"
+                        });
                 });
 
             modelBuilder.Entity("Wonderworld.Domain.Entities.Location.City", b =>
@@ -522,17 +564,17 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            RoleId = new Guid("a641c8d5-3930-44b8-827f-f3bb7030702a"),
+                            RoleId = new Guid("6fff0d07-bf89-45fd-aaf6-b19cbcabbdcf"),
                             Title = "Admin"
                         },
                         new
                         {
-                            RoleId = new Guid("9b9389bc-27be-4cf9-8a28-1925226fa6c8"),
+                            RoleId = new Guid("9f3c6b54-4ecc-413d-9573-fa1e3538322b"),
                             Title = "User"
                         },
                         new
                         {
-                            RoleId = new Guid("dba656ac-05bd-4af6-bc39-67121e1c2733"),
+                            RoleId = new Guid("81c0ec62-42ab-4baa-b880-dcd5c1f3b825"),
                             Title = "Manager"
                         });
                 });
@@ -660,6 +702,24 @@ namespace Wonderworld.Persistence.Migrations
                         .IsUnique();
 
                     b.ToTable("ClassLanguages");
+                });
+
+            modelBuilder.Entity("Wonderworld.Domain.EntityConnections.EstablishmentTypeEstablishment", b =>
+                {
+                    b.Property<Guid>("EstablishmentTypeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("EstablishmentId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("EstablishmentTypeId", "EstablishmentId");
+
+                    b.HasIndex("EstablishmentId");
+
+                    b.HasIndex("EstablishmentTypeId", "EstablishmentId")
+                        .IsUnique();
+
+                    b.ToTable("EstablishmentTypesEstablishments");
                 });
 
             modelBuilder.Entity("Wonderworld.Domain.EntityConnections.UserDiscipline", b =>
@@ -792,13 +852,9 @@ namespace Wonderworld.Persistence.Migrations
 
             modelBuilder.Entity("Wonderworld.Domain.Entities.Job.Establishment", b =>
                 {
-                    b.HasOne("Wonderworld.Domain.Entities.Location.City", "City")
+                    b.HasOne("Wonderworld.Domain.Entities.Location.City", null)
                         .WithMany("Establishments")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("City");
+                        .HasForeignKey("CityId");
                 });
 
             modelBuilder.Entity("Wonderworld.Domain.Entities.Location.City", b =>
@@ -891,6 +947,25 @@ namespace Wonderworld.Persistence.Migrations
                     b.Navigation("Class");
 
                     b.Navigation("Language");
+                });
+
+            modelBuilder.Entity("Wonderworld.Domain.EntityConnections.EstablishmentTypeEstablishment", b =>
+                {
+                    b.HasOne("Wonderworld.Domain.Entities.Job.Establishment", "Establishment")
+                        .WithMany("EstablishmentTypes")
+                        .HasForeignKey("EstablishmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wonderworld.Domain.Entities.Job.EstablishmentType", "EstablishmentType")
+                        .WithMany("EstablishmentTypes")
+                        .HasForeignKey("EstablishmentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Establishment");
+
+                    b.Navigation("EstablishmentType");
                 });
 
             modelBuilder.Entity("Wonderworld.Domain.EntityConnections.UserDiscipline", b =>
@@ -997,7 +1072,14 @@ namespace Wonderworld.Persistence.Migrations
 
             modelBuilder.Entity("Wonderworld.Domain.Entities.Job.Establishment", b =>
                 {
+                    b.Navigation("EstablishmentTypes");
+
                     b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("Wonderworld.Domain.Entities.Job.EstablishmentType", b =>
+                {
+                    b.Navigation("EstablishmentTypes");
                 });
 
             modelBuilder.Entity("Wonderworld.Domain.Entities.Location.City", b =>
