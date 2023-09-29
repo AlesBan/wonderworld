@@ -6,6 +6,5 @@ public class EstablishmentDto
 {
     public ICollection<string> Types { get; set; }
     public string Address { get; set; } = string.Empty;
-    public string SearchLanguage { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
 }

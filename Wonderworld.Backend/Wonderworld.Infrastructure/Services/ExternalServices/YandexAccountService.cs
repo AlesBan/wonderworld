@@ -1,5 +1,6 @@
 using Microsoft.Extensions.Configuration;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Authentication;
 using Wonderworld.Application.Interfaces.Services.ExternalServices;
 
 namespace Wonderworld.Infrastructure.Services.ExternalServices;

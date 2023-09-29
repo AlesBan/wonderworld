@@ -29,7 +29,7 @@ public class OrganizationSearchService : IOrganizationSearchService
         var requestUrl = baseUrl +
                          "apikey=" + token +
                          "&text=" + requestText +
-                         "&lang=" + establishment.SearchLanguage +
+                         "&lang=en_US" +
                          "&type=biz" +
                          "&results=" + ExternalServicesConstants.SearchLimit;
 
