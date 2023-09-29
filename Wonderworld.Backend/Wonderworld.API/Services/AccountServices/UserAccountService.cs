@@ -132,9 +132,9 @@ public class UserAccountService : IUserAccountService
     }
 
 
-    public Task<IActionResult> DeleteUser(User user, IMediator mediator)
+    public async Task<IActionResult> DeleteUser(User user, IMediator mediator)
     {
-        throw new NotImplementedException();
+        return new OkObjectResult(user);
     }
 
 
