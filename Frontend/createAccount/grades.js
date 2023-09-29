@@ -75,7 +75,7 @@ function chooseGrades() {
                 selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
             });
 
-        })
+        });
 
     }
 

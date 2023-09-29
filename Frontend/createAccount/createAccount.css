@@ -233,7 +233,12 @@ input[type='radio']:checked::after {
     transform: rotate(-180deg);
 }
 
-.list-items, .grades-items {
+.institution-items {
+    display: none;
+    /* Other existing styles */
+}
+
+.list-items, .grades-items, .institution-items {
     position: relative;
     margin-top: 15px;
     border-radius: 8px;
@@ -250,7 +255,7 @@ input[type='radio']:checked::after {
 }
 
 
-.list-items.item, .grades-items.item {
+.list-items.item, .grades-items.item, .institution-items.item {
     display: flex;
     align-items: center;
     list-style: none;
