@@ -2,7 +2,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
-using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.API.Services.AccountServices;
 
