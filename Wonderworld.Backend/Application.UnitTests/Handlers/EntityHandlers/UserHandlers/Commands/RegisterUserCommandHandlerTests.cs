@@ -17,16 +17,12 @@ public class RegisterUserCommandHandlerTests : TestCommonBase
         var handler = new RegisterUserCommandHandler(Context);
 
         // Act
-        var userId = await handler.Handle(new RegisterUserCommand()
-            {
-                Email = email,
-                Password = password,
-            },
-            CancellationToken.None);
+        var user = await handler.Handle(new RegisterUserCommand(email, password), CancellationToken.None);
 
         // Assert
+        Assert.NotNull(user);
         Assert.NotNull(await Context.Users.SingleOrDefaultAsync(u =>
-            // u.UserId == userId && 
+            u.UserId == user.UserId &&
             u.Email == email && 
             u.Password == password));
     }

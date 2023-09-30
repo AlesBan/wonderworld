@@ -64,8 +64,8 @@ public static class UserHelper
         };
     }
 
-    private static GetUserCommand CreateGetUserCommand(Guid userId)
+    private static GetUserByIdQuery CreateGetUserCommand(Guid userId)
     {
-        return new GetUserCommand(userId);
+        return new GetUserByIdQuery(userId);
     }
 }

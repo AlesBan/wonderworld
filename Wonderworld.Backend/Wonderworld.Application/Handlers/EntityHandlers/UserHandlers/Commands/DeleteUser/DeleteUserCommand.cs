@@ -5,5 +5,10 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.
 
 public class DeleteUserCommand : IRequest
 {
-    public User User { get; set; }
+    public Guid UserId { get; set; }
+
+    public DeleteUserCommand(Guid userId)
+    {
+        UserId = userId;
+    }
 }

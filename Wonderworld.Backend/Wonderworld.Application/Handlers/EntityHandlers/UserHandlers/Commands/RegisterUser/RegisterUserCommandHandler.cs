@@ -1,4 +1,7 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -15,6 +18,14 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
 
     public async Task<User> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
+        var userExists = await _context.Users
+            .AnyAsync(x => x.Email == request.UserRegister.Email, cancellationToken);
+        
+        if (userExists)
+        {
+            throw new UserAlreadyExistsException(request.UserRegister.Email);
+        }
+        
         var user = MapUser(request);
 
         await AddUser(user, cancellationToken);
@@ -26,8 +37,8 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
     {
         var user = new User()
         {
-            Email = request.Email,
-            Password = request.Password,
+            Email = request.UserRegister.Email,
+            Password = request.UserRegister.Password,
         };
 
         return user;

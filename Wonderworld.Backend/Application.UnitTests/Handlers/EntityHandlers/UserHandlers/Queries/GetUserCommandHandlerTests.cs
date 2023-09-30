@@ -12,13 +12,10 @@ public class GetUserCommandHandlerTests : TestCommonBase
     {
         // Arrange
         var userId = SharedLessonDbContextFactory.UserAId;
-        var handler = new GetUserCommandHandler(Context);
+        var handler = new GetUserByIdQueryHandler(Context);
 
         // Act
-        var result = handler.Handle(new GetUserCommand()
-        {
-            UserId = userId
-        }, CancellationToken.None);
+        var result = handler.Handle(new GetUserByIdQuery(userId), CancellationToken.None);
 
         // Assert
         Assert.NotNull(result);
@@ -30,14 +27,11 @@ public class GetUserCommandHandlerTests : TestCommonBase
         // Arrange
         var userId = Guid.NewGuid();
 
-        var handler = new GetUserCommandHandler(Context);
+        var handler = new GetUserByIdQueryHandler(Context);
 
         // Act
         // Assert
         await Assert.ThrowsAsync<NotFoundException>(() =>
-            handler.Handle(new GetUserCommand()
-            {
-                UserId = userId
-            }, CancellationToken.None));
+            handler.Handle(new GetUserByIdQuery(userId), CancellationToken.None));
     }
 }

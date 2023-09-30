@@ -18,10 +18,7 @@ public class DeleteUserCommandHandlerTests : TestCommonBase
         var handler = new DeleteUserCommandHandler(Context);
 
         // Act
-        await handler.Handle(new DeleteUserCommand()
-        {
-            User = userForDelete!
-        }, CancellationToken.None);
+        await handler.Handle(new DeleteUserCommand(userForDelete!.UserId), CancellationToken.None);
 
         // Assert
         Assert.Null(await Context.Users.SingleOrDefaultAsync(u =>

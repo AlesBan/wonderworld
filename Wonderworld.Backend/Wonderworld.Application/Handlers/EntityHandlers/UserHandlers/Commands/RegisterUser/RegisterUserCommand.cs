@@ -1,20 +1,20 @@
 using MediatR;
+using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 
 public class RegisterUserCommand : IRequest<User>
 {
-    public string Email { get; set; } = string.Empty;
-    public string Password { get; set; }= string.Empty;
+    public UserRegisterRequestDto UserRegister { get; set; }
 
-    public RegisterUserCommand()
+    public RegisterUserCommand(UserRegisterRequestDto userRegisterRequestDto)
     {
-        
+        UserRegister = userRegisterRequestDto;
     }
-    public RegisterUserCommand(User user)
+
+    public RegisterUserCommand(string email, string password)
     {
-        Email = user.Email;
-        Password = user.Password;
+        UserRegister = new UserRegisterRequestDto { Email = email, Password = password };
     }
 }

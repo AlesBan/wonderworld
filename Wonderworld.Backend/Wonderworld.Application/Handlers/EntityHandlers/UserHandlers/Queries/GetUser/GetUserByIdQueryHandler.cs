@@ -7,16 +7,16 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
 
-public class GetUserCommandHandler : IRequestHandler<GetUserCommand, User>
+public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public GetUserCommandHandler(ISharedLessonDbContext context)
+    public GetUserByIdQueryHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<User> Handle(GetUserCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
         var user = await _context.Users.FirstOrDefaultAsync(u =>
             u.UserId == request.UserId, cancellationToken: cancellationToken);
