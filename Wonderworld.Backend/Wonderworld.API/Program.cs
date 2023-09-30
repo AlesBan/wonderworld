@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Wonderworld.API.Filters;
 using Wonderworld.API.Services.AccountServices;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
@@ -18,19 +19,18 @@ using Wonderworld.Infrastructure.Services.ExternalServices;
 using Wonderworld.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
+var config = builder.Configuration;
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddControllers();
-
-builder.Services.AddAutoMapper(config =>
+builder.Services.AddAutoMapper(conf =>
 {
-    config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
-    config.AddProfile(new AssemblyMappingProfile(typeof(ISharedLessonDbContext).Assembly));
+    conf.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+    conf.AddProfile(new AssemblyMappingProfile(typeof(ISharedLessonDbContext).Assembly));
 });
 
 builder.Services.AddApplication();
-builder.Services.AddPersistence(builder.Configuration);
+builder.Services.AddPersistence(config);
 
 builder.Services.AddCors(options =>
 {
@@ -50,18 +50,15 @@ builder.Services.AddAuthentication(options =>
     })
     .AddJwtBearer(options =>
     {
-
-        options.RequireHttpsMetadata = false;
-        options.SaveToken = true;
-
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidAudience = "http://localhost:7275",
-            ValidIssuer = "http://localhost:7275",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes("yJhcmJjPj9143mZN2JhcmJjPj9143mZN")),
+            ValidateIssuer = bool.Parse(config["JwtSettings:ValidateIssuer"]),
+            ValidateAudience = bool.Parse(config["JwtSettings:ValidateAudience"]),
+            ValidAudience = config["JwtSettings:ValidAudience"],
+            ValidIssuer = config["JwtSettings:ValidIssuer"],
+            IssuerSigningKey = new SymmetricSecurityKey
+                (Encoding.UTF8.GetBytes(config["JwtSettings:IssuerSigningKey"])),
+            ValidateIssuerSigningKey = bool.Parse(config["JwtSettings:ValidateIssuerSigningKey"]),
         };
     });
 

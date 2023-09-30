@@ -6,6 +6,7 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHan
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Wonderworld.Application.Common.Exceptions.User;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 
@@ -26,8 +27,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         
         if (user == null)
         {
-            throw new NotFoundException(nameof(User), request.UserId);
-            
+            throw new UserNotFoundException(request.UserId);
         }
         
         user.FirstName = request.FirstName;
@@ -40,14 +40,12 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         user.PhotoUrl = request.PhotoUrl;
 
         user.IsCreatedAccount = true;
+        
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 
         await SeedUserLanguages(user.UserId, request, cancellationToken);
         await SeedUserDisciplines(user.UserId, request, cancellationToken);
-        var v = _context.Users
-            .FirstOrDefault(u => 
-            u.UserId == Guid.Parse("ff756e44-7297-47d9-bef9-05df241682f9"));
 
         await _context.SaveChangesAsync(cancellationToken);
 
@@ -78,10 +76,5 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
                 .Select(d => d.DisciplineId)
                 .ToList()
         }, cancellationToken);
-    }
-
-    private static void MapUser(User user, CreateUserAccountCommand request)
-    {
-        
     }
 }

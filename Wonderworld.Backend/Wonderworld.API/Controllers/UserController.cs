@@ -1,9 +1,9 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.AccountServices;
+using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
@@ -27,27 +27,34 @@ public class UserController : BaseController
         return await _sharedLessonDbContext.Users.ToListAsync();
     }
 
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
+    {
+        return await _userAccountService.LoginUser(requestUserDto, Mediator);
+    }
+
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
+    {
+        return await _userAccountService.RegisterUser(requestUserDto, Mediator);
+    }
+
+    [Authorize]
     [HttpPost("create-account")]
     public async Task<IActionResult> CreateAccount([FromBody] UserCreateAccountRequestDto requestUserDto)
     {
-        var jwtToken = HttpContext.Request
-            .Headers["Authorization"]
-            .ToString();
-        var jwtHandler = new JwtSecurityTokenHandler();
-        var decodedToken = jwtHandler.ReadJwtToken(jwtToken.Split(' ')[1]);
-
-        var nameIdentifier = decodedToken.Claims
-            .FirstOrDefault(claim =>
-                claim.Type == ClaimTypes.NameIdentifier)?
-            .Value;
-        
-        if (nameIdentifier == null)
-        {
-            return Ok();
-        }
-
-        var userId = Guid.Parse(nameIdentifier);
+        var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
         var result = await _userAccountService.CreateUserAccount(userId, requestUserDto, Mediator);
+
+        return Ok(result);
+    }
+
+    [Authorize]
+    [HttpDelete("delete-user")]
+    public async Task<IActionResult> DeleteUser()
+    {
+        var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
+        var result = await _userAccountService.DeleteUser(userId, Mediator);
 
         return Ok(result);
     }

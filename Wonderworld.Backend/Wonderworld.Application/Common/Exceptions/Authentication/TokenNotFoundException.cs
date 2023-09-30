@@ -1,4 +1,4 @@
-namespace Wonderworld.Application.Common.Exceptions;
+namespace Wonderworld.Application.Common.Exceptions.Authentication;
 
 public class TokenNotFoundException : Exception
 {
