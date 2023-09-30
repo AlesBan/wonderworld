@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Wonderworld.API.Filters;
 using Wonderworld.API.Services.AccountServices;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
@@ -21,8 +22,6 @@ var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 
 builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddControllers();
 
 builder.Services.AddAutoMapper(conf =>
 {
@@ -58,9 +57,8 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = config["JwtSettings:ValidAudience"],
             ValidIssuer = config["JwtSettings:ValidIssuer"],
             IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(config["JwtSettings:IssuerSigningKey"])),
+                (Encoding.UTF8.GetBytes(config["JwtSettings:IssuerSigningKey"])),
             ValidateIssuerSigningKey = bool.Parse(config["JwtSettings:ValidateIssuerSigningKey"]),
-            
         };
     });
 

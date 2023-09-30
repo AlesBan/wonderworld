@@ -98,7 +98,6 @@ public class UserAccountService : IUserAccountService
         }
     }
 
-
     public async Task<IActionResult> DeleteUser(Guid userId, IMediator mediator)
     {
         try
@@ -113,14 +112,14 @@ public class UserAccountService : IUserAccountService
         return new OkResult();
     }
 
-    private async Task<User> GetUser(Guid userId, IMediator mediator)
+    private static async Task<User> GetUser(Guid userId, IMediator mediator)
     {
         var user = await mediator.Send(new GetUserByIdQuery(userId));
 
         return user;
     }
 
-    private async Task<User> GetUser(string email, IMediator mediator)
+    private static async Task<User> GetUser(string email, IMediator mediator)
     {
         var user = await mediator.Send(new GetUserByEmailQuery(email));
 
