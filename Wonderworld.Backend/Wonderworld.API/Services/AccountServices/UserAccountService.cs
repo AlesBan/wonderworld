@@ -33,7 +33,6 @@ public class UserAccountService : IUserAccountService
 {
     private readonly ISharedLessonDbContext _context;
     private readonly IConfiguration _configuration;
-
     public UserAccountService(ISharedLessonDbContext context, IConfiguration configuration)
     {
         _context = context;

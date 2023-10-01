@@ -7,7 +7,7 @@ using Wonderworld.Application.Common.Exceptions;
 namespace Wonderworld.API.Controllers;
 
 [Route("api/[controller]")]
-[ValidateModelStateFilter]
+// [ValidateModelStateFilter]
 [ApiController]
 public class BaseController : ControllerBase
 {
