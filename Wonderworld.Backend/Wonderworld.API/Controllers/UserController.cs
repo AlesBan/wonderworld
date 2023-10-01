@@ -39,7 +39,6 @@ public class UserController : BaseController
         return await _userAccountService.RegisterUser(requestUserDto, Mediator);
     }
 
-    [Authorize]
     [HttpPost("create-account")]
     public async Task<IActionResult> CreateAccount([FromBody] UserCreateAccountRequestDto requestUserDto)
     {
@@ -49,7 +48,6 @@ public class UserController : BaseController
         return Ok(result);
     }
 
-    [Authorize]
     [HttpDelete("delete-user")]
     public async Task<IActionResult> DeleteUser()
     {
