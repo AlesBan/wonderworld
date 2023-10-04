@@ -5,15 +5,8 @@
     <projectFile profileName="Wonderworld.API">Wonderworld.API/Wonderworld.API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d457eef0-b6e8-451a-9b7f-9f762fc0a167" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/DependencyInjection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/DependencyInjection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/Wonderworld.Persistence.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/Wonderworld.Persistence.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Properties/launchSettings.json.orig" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,13 +20,30 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="DevelopBackend" />
+      </map>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2194f61e2ea7415786eda6b9772bf3b31cbb20/0a/744303bd/OkObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54d33cdcdbf84c7db420fc3a50117b18a24aa0/15/d8a70458/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a22438a7984b4ca986a56631544a392b43000/0f/563e5d05/IMapper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c91e5b8421b74116911c011508bff3a33add10/b0/0fb3b15e/Expression.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e639c1f93a204a8d8f59ebcd8f7fb8d64600/05/d3c55116/IMediator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e639c1f93a204a8d8f59ebcd8f7fb8d64600/88/6321cde7/Mediator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/205c8cba7c08adcb9f1f31ee1edb557631f6788494a0681ad14487088289d/MappingExpression.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37a954845b52703c5cce1aacf8fa1292378878e82bf68c4c4b5effc447316e9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4ea681aa1df24442c1a5e1e18582b1a2d29ac5bfd41390c94a5d2cc958b5ff/UserManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7b9a533b55d9a3c0765407ed0dd18b43332ea208c5a7057dbcf33a8d6917255/TokenValidationParameters.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7cb7424fd293afbd058d95c82aaf7b12b3cf57037576ecc8fd333ccfad7ad/Encoding.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7fae937e13ed52cf7b7079061a6b947b946c41c4a86a47a162b519b3763447/WebApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b34cdea969917836c37b6dc15e916d3e5954856c12dd1caf3926e4a2a3a0dfe2/AuthorizationAppBuilderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cde0291933299f1e732d9436b8558e21577bcdf64c6d8ac7c6a0abeac6c6d/RuntimeMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d5f92893b4e362502fc4e02cf758f9ed02fdab36fa5d36b75d31416bdb3596/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -211,79 +221,37 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
           <line>80</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="80" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="2270" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2294" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="80" containingFunctionPresentation="method 'Register'" />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
           <line>92</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="92" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="2551" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2662" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="92" containingFunctionPresentation="method 'Register'" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
           <line>107</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="107" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="2948" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3077" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="107" containingFunctionPresentation="method 'Register'" />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
           <line>82</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="82" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="2317" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2531" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="82" containingFunctionPresentation="method 'Register'" />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
           <line>95</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="95" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="2672" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2687" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="95" containingFunctionPresentation="method 'Register'" />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
           <line>97</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="97" containingFunctionPresentation="method 'Register'">
-            <startOffsets>
-              <option value="2710" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2928" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="97" containingFunctionPresentation="method 'Register'" />
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
@@ -301,6 +269,14 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Type#System.Collections.Generic.KeyValuePair`2" memberName="Value" />
+        <PinnedItemInfo parentTag="Type#System.Security.Claims.ClaimsPrincipal" memberName="Identities" />
+        <PinnedItemInfo parentTag="Type#Wonderworld.Infrastructure.Models.YandexOrganizationSearch.Feature" memberName="properties" />
+        <PinnedItemInfo parentTag="Type#Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity.GetCityQuery" memberName="Country" />
+      </pinned-members>
+    </pin-to-top-manager>
     <watches-manager>
       <configuration name="RiderUnitTests">
         <watch expression="Context" language="C#" />
