@@ -24,7 +24,7 @@
     line-height: 24px;
 }
 
-.createAccount {
+.createAccount, .location {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,10 +1,14 @@
 function chooseGrades() {
+    const inputValueDisciplines = document.querySelector('#disciplines').value;
+
+    localStorage.setItem('disciplines', inputValueDisciplines);
+
     let chooseWork = document.createElement('div');
     document.body.append(chooseWork)
     chooseWork.innerHTML = `
     <div class="createAccount">
   <div class="title-and-subtle">
-    <div class="title">Welcome <div class="first-name-output"></div></div>
+    <div class="title">Welcome <div class="first-name-output">${localStorage.getItem('firstName')}</div></div>
     <div class="label-and-CTA">
       <div class="label">It’s great to have you with us! To help us optimise your experience, tell us what you plan to use WonderWorld for.</div>
       </div>

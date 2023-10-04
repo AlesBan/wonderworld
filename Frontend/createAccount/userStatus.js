@@ -1,10 +1,16 @@
 function userStatus() {
+    const inputValueFirstName = document.querySelector('#first-name-value').value;
+    const inputValueLastName = document.querySelector('#last-name-value').value;
+
+    localStorage.setItem('firstName', inputValueFirstName);
+    localStorage.setItem('lastName', inputValueLastName);
+
     let userStatus = document.createElement('div');
     document.body.append(userStatus)
     userStatus.innerHTML = `
     <div class="createAccount">
   <div class="title-and-subtle">
-    <div class="title">Welcome <div class="first-name-output"></div></div>
+    <div class="title">Welcome <div class="first-name-output">${localStorage.getItem('firstName')}</div></div>
     <div class="label-and-CTA">
       <div class="label">It’s great to have you with us! To help us optimise your experience, tell us what you plan to use WonderWorld for.</div>
       </div>
@@ -30,18 +36,6 @@ function userStatus() {
        </div>
       
     `
-
-    let primaryBtn = document.querySelector('.primary-button')
-    let usernameInput = document.querySelector(".first-name-input");
-    let usernameOutput = document.querySelector('.first-name-output');
-
-    primaryBtn.addEventListener("click", function () {
-        console.log('lll')
-    })
-
-    usernameInput.onkeyup= function(e){
-        usernameOutput.innerHTML = e.target.value;
-    }
 
     document.querySelector('.createAccount').replaceWith(userStatus);
 }

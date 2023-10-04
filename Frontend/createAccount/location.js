@@ -1,10 +1,27 @@
 function chooseLocation() {
+    const inputValueTeacher = document.querySelector('#teacherValue').checked;
+    const inputValueExpert = document.querySelector('#expertValue').checked;
+    if (inputValueTeacher === true) {
+        localStorage.setItem('teacher', true);
+    }
+     if(inputValueTeacher === false) {
+        localStorage.setItem('teacher', false);
+    }
+
+    if (inputValueExpert === true) {
+        localStorage.setItem('expert', true);
+    }
+     if(inputValueExpert === false) {
+        localStorage.setItem('expert', false);
+    }
+
+
     let location = document.createElement('div');
     document.body.append(location)
     location.innerHTML = `
     <div class="createAccount">
   <div class="title-and-subtle">
-    <div class="title">Welcome <div class="first-name-output"></div></div>
+    <div class="title">Welcome <div class="first-name-output">${localStorage.getItem('firstName')}</div></div>
     <div class="label-and-CTA">
       <div class="label">It’s great to have you with us! To help us optimise your experience, tell us what you plan to use WonderWorld for.</div>
       </div>
@@ -31,7 +48,6 @@ function chooseLocation() {
     document.querySelector('.createAccount').replaceWith(location);
 
 }
-
 
 
 

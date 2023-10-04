@@ -4,7 +4,7 @@ function chooseWork() {
     chooseWork.innerHTML = `
     <div class="createAccount">
   <div class="title-and-subtle">
-    <div class="title">Welcome <div class="first-name-output"></div></div>
+    <div class="title">Welcome <div class="first-name-output">${localStorage.getItem('firstName')}</div></div>
     <div class="label-and-CTA">
       <div class="label">It’s great to have you with us! To help us optimise your experience, tell us what you plan to use WonderWorld for.</div>
       </div>
@@ -14,7 +14,7 @@ function chooseWork() {
       <div class="first-name">
         <div class="input-title">Areas of work</div>
 <div class="select-btn">
-    <span class="btn-text">Select..</span>
+    <span class="btn-text" id="disciplines">Select..</span>
     <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
@@ -83,3 +83,5 @@ function chooseWork() {
     document.querySelector('.createAccount').replaceWith(chooseWork);
 
 }
+
+

@@ -1,10 +1,16 @@
 function chooseInstitution() {
+    const inputValueLocation = document.querySelector('#locationValue').value;
+    const inputValueLanguages = document.querySelector('#languagesValue').value;
+
+    localStorage.setItem('location', inputValueLocation);
+    localStorage.setItem('languages', inputValueLanguages);
+
     let institution = document.createElement('div');
     document.body.append(institution)
     institution.innerHTML = `
     <div class="createAccount">
   <div class="title-and-subtle">
-    <div class="title">Welcome <div class="first-name-output"></div></div>
+    <div class="title">Welcome <div class="first-name-output">${localStorage.getItem('firstName')}</div></div>
     <div class="label-and-CTA">
       <div class="label">It’s great to have you with us! To help us optimise your experience, tell us what you plan to use WonderWorld for.</div>
       </div>
@@ -42,8 +48,7 @@ async function fetchOrg(searchText) {
 }
 
 
-const selectedValues = [];
-const selectedValuesDiv = document.querySelector(".first-name-input");
+
 
 function renderOrg(items) {
     console.log(items);
@@ -61,12 +66,12 @@ function renderOrg(items) {
     target.innerHTML = html;
     target.style.display = items.length > 0 ? 'block' : 'none';
 
-    items = document.querySelectorAll('.item');
-    items.forEach(item => {
-        item.addEventListener("click", () => {
-            selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
+    const itemElements = document.querySelectorAll('.item');
+    itemElements.forEach(item => {
+        item.addEventListener('click', () => {
+            const selectedValue = item.querySelector('.item-text').textContent;
+            document.querySelector('#institutionValue').value = selectedValue;
         });
-
     });
 
 }
@@ -80,6 +85,7 @@ async function searchOrg() {
         return item.properties.description.toLowerCase();
     });
     console.log(items);
+
     renderOrg(items)
 }
 

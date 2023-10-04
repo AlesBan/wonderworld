@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function postData() {
 
-    const url = 'http://localhost:7280/api/authentication/register';
+    const url = 'http://localhost:7280/api/user/register';
     const data = {
         Email: document.getElementById("email").value,
         Password: document.getElementById("password").value
@@ -64,14 +64,17 @@ async function postData() {
             }
         })
         .then(responseData => {
-            const accessToken = responseData.token;
-            document.cookie = `accessToken=${accessToken}`;
-            console.log(responseData);
-            // window.location.href = "../../createAccount/createAccount.html";
+            // const accessToken = responseData.token;
+            // document.cookie = `accessToken=${accessToken}`;
+            localStorage.setItem('accessToken', responseData.token);
+            console.log(responseData.token);
+
+            window.location.href = "../../createAccount/createAccount.html";
         })
         .catch(error => {
             console.log(error);
         });
 }
+
 
 

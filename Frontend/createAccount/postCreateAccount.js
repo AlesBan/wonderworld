@@ -5,22 +5,46 @@ const cookieValue = document.cookie
     .find(cookie => cookie.startsWith(`${cookieName}=`))
     ?.split('=')[1];
 
-console.log(cookieName);
+console.log(localStorage.getItem('accessToken'));
+
+let token = localStorage.getItem('accessToken');
 
 
-let token = cookieValue;
+// function getCookie(name) {
+//     let matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+//     return matches ? decodeURIComponent(matches[1]) : undefined;
+// }
+//
+// console.log(getCookie('accessToken'));
 
-async function postCreateAccount() {
-    const url = 'http://localhost:7280/api/authentication/register';
+// let token = getCookie('accessToken');
+
+
+async function postCreateAccount(searchText) {
+    const url = 'http://localhost:7280/api/user/create-account';
+    const apiData = await fetchOrg(searchText);
+    const establishmentFields = apiData.features[0].properties;
+    let biology = ["Biology"];
+    let types = ["School"];
+    let location = localStorage.getItem('location')
+    let languages = localStorage.getItem('languages')
     const data = {
-        FirstName: document.querySelector("#first-name-value").value,
-        LastName: document.querySelector("#last-name-value").value,
-        IsATeacher: document.querySelector("#teacherValue").value,
-        IsAnExpert: document.querySelector("#expertValue").value,
-        CityLocation: document.querySelector("#locationValue").value,
-        Languages: document.querySelector("#languagesValue").value,
-        EstablishmentDto: document.querySelector("#institutionValue").value,
-        Disciplines: document.querySelector("#disciplinesValue").value,
+        // FirstName: localStorage.getItem('firstName'),
+        FirstName: "klim",
+        LastName: localStorage.getItem('lastName'),
+        IsATeacher: true,
+        IsAnExpert: false,
+        CityLocation: location.split(' ')[0],
+        CountryLocation: location.split(' ')[1],
+        Languages: languages.split(' '),
+        // EstablishmentDto: document.querySelector("#institutionValue").value,
+        EstablishmentDto: {
+            Types: types,
+            Address: establishmentFields.description,
+            Title: establishmentFields.name,
+        },
+        Disciplines: biology,
+        PhotoUrl: "dede"
     };
 
     console.log(JSON.stringify(data));
@@ -33,7 +57,7 @@ async function postCreateAccount() {
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization':`Bearer ${token}`
+            'Authorization':`Bearer ${localStorage.getItem('accessToken')}`
         },
         body: JSON.stringify(data)
     })
@@ -51,3 +75,4 @@ async function postCreateAccount() {
             console.log(error);
         });
 }
+
