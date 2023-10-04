@@ -64,7 +64,7 @@
     ]
   }
 }</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Wonderworld.API">
+  <component name="RunManager">
     <configuration name="Wonderworld.API" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
