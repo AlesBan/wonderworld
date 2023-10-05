@@ -90,7 +90,7 @@ public class DefaultSearchService : IDefaultSearchService
         IEnumerable<UserProfileDto> userProfileList)
     {
         var expertProfilesByCountry = userProfileList
-            .Where(up => up.Country.CountryId == userCountry.CountryId &&
+            .Where(up => up.CountryTitle == userCountry.Title &&
                          up.IsAnExpert && !up.IsATeacher);
 
         return expertProfilesByCountry;
@@ -113,7 +113,7 @@ public class DefaultSearchService : IDefaultSearchService
     {
         var teacherProfilesByCountry = userProfileList
             .Where(up =>
-                up.Country.CountryId == country.CountryId &&
+                up.CountryTitle == country.Title &&
                 up.IsATeacher);
 
         return teacherProfilesByCountry;

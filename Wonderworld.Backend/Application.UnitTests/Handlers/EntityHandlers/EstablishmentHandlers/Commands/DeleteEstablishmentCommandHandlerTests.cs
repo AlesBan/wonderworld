@@ -26,7 +26,7 @@ public class DeleteEstablishmentCommandHandlerTests: TestCommonBase
         // Assert
         Assert.Null(await Context.Establishments
             .SingleOrDefaultAsync(e => 
-            e.EstablishmentId == establishmentId));
+            e.InstitutionId == establishmentId));
     }
     
     [Fact]

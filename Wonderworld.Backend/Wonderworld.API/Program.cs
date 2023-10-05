@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Wonderworld.API.Filters;
 using Wonderworld.API.Services.AccountServices;
+using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
@@ -101,6 +102,7 @@ builder.Services.AddHttpClient<IOrganizationSearchService, OrganizationSearchSer
 builder.Services.AddScoped<ISharedLessonDbContext, SharedLessonDbContext>();
 builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
+builder.Services.AddScoped<IEditUserAccountService, EditUserAccountService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService>();
 builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();

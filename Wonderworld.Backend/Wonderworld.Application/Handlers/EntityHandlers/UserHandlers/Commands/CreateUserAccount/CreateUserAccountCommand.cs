@@ -15,7 +15,7 @@ public class CreateUserAccountCommand : IRequest<User>
     public bool? IsAnExpert { get; set; }
     public City City { get; set; }
     public Country Country { get; set; }
-    public Establishment Establishment { get; set; }
+    public Institution Establishment { get; set; }
     public IEnumerable<Discipline> Disciplines { get; set; } = new List<Discipline>();
     public IEnumerable<Language> Languages { get; set; } = new List<Language>();
     public string PhotoUrl { get; set; }

@@ -14,7 +14,7 @@ public class UpdateUserEstablishmentCommandHandler : IRequestHandler<UpdateUserE
 
     public async Task<Unit> Handle(UpdateUserEstablishmentCommand request, CancellationToken cancellationToken)
     {
-        request.User.Establishment = request.Establishment;
+        request.User.Institution = request.Establishment;
         
         _context.Users.Update(request.User);
         await _context.SaveChangesAsync(cancellationToken);

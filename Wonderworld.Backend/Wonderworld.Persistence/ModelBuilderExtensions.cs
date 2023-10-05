@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Domain.Entities.Education;
+using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence.EntityConfiguration.Job;
@@ -9,7 +10,6 @@ using Wonderworld.Persistence.EntityConnectionsConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
 using Wonderworld.Persistence.EntityTypeConfiguration.Main;
-using EstablishmentType = Wonderworld.Domain.Entities.Job.EstablishmentType;
 
 namespace Wonderworld.Persistence;
 
@@ -38,7 +38,7 @@ public static class ModelBuilderExtensions
         modelBuilder.ApplyConfiguration(new UserLanguageConfiguration());
         modelBuilder.ApplyConfiguration(new ClassDisciplineConfiguration());
         modelBuilder.ApplyConfiguration(new ClassLanguageConfiguration());
-        modelBuilder.ApplyConfiguration(new EstablishmentTypeEstablishmentConfiguration());
+        modelBuilder.ApplyConfiguration(new InstitutionTypeInstitutionConfiguration());
     }
 
     public static void SeedingDefaultData(this ModelBuilder modelBuilder)
@@ -101,13 +101,13 @@ public static class ModelBuilderExtensions
 
     private static void SeedingEstablishmentTypes(this ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<EstablishmentType>()
+        modelBuilder.Entity<InstitutionType>()
             .HasData(
                 Enum.GetValues(typeof(Wonderworld.Domain.Enums.EntityTypes.EstablishmentType))
                     .Cast<Wonderworld.Domain.Enums.EntityTypes.EstablishmentType>()
-                    .Select(et => new EstablishmentType
+                    .Select(et => new InstitutionType
                     {
-                        EstablishmentTypeId = Guid.NewGuid(),
+                        InstitutionTypeId = Guid.NewGuid(),
                         Title = et.ToString()
                     })
                     .ToArray()

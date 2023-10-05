@@ -7,6 +7,7 @@ namespace Wonderworld.API.Services.AccountServices;
 
 public interface IUserAccountService
 {
+    public Task<IActionResult> GetUserProfile(Guid userId, IMediator mediator);
     public Task<IActionResult> RegisterUser(UserRegisterRequestDto requestUserDto, IMediator mediator);
     public Task<IActionResult> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator);
     public Task<IActionResult> CreateUserAccount(Guid userId, UserCreateAccountRequestDto requestUserDto, IMediator mediator);

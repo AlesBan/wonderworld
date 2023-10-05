@@ -36,7 +36,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         user.IsAnExpert = request.IsAnExpert;
         user.City = request.City;
         user.Country = request.Country;
-        user.Establishment = request.Establishment;
+        user.Institution = request.Establishment;
         user.PhotoUrl = request.PhotoUrl;
 
         user.IsCreatedAccount = true;

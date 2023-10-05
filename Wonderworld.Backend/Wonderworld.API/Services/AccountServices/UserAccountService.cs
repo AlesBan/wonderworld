@@ -1,3 +1,4 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Helpers.JwtHelpers;
@@ -6,6 +7,7 @@ using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
+using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Commands.CreateCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
@@ -33,10 +35,29 @@ public class UserAccountService : IUserAccountService
 {
     private readonly ISharedLessonDbContext _context;
     private readonly IConfiguration _configuration;
-    public UserAccountService(ISharedLessonDbContext context, IConfiguration configuration)
+    private readonly IMapper _mapper;
+
+    public UserAccountService(ISharedLessonDbContext context, IConfiguration configuration, IMapper mapper)
     {
         _context = context;
         _configuration = configuration;
+        _mapper = mapper;
+    }
+
+    public async Task<IActionResult> GetUserProfile(Guid userId, IMediator mediator)
+    {
+        User user;
+        try
+        {
+            user = await mediator.Send(new GetUserByIdQuery(userId));
+        }
+        catch (UserNotFoundException e)
+        {
+            return GetBadRequest(e.Message);
+        }
+
+        var userProfileDto = _mapper.Map<UserProfileDto>(user);
+        return new OkObjectResult(userProfileDto);
     }
 
     public async Task<IActionResult> RegisterUser(UserRegisterRequestDto requestUserDto, IMediator mediator)
@@ -83,9 +104,9 @@ public class UserAccountService : IUserAccountService
 
             CheckUserCreateAccountAbility(user);
 
-            var userWithAccount = GetUserWithAccount(userId, requestUserDto, mediator);
-
-            return new OkObjectResult(userWithAccount);
+            var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
+            var userDto = _mapper.Map<UserProfileDto>(userWithAccount);
+            return new OkObjectResult(userDto);
         }
         catch (UserNotFoundException e)
         {
@@ -210,7 +231,7 @@ public class UserAccountService : IUserAccountService
         }
     }
 
-    private async Task<Establishment> GetEstablishment(UserCreateAccountRequestDto requestUserDto,
+    private async Task<Institution> GetEstablishment(UserCreateAccountRequestDto requestUserDto,
         IMediator mediator)
     {
         var address = requestUserDto.EstablishmentDto.Address;
@@ -224,10 +245,10 @@ public class UserAccountService : IUserAccountService
         {
             Address = address,
             Title = establishmentTitle,
-            Types = establishmentTypes.Select(e => e.EstablishmentTypeId).ToList()
+            Types = establishmentTypes.Select(e => e.InstitutionTypeId).ToList()
         };
 
-        Establishment establishment;
+        Institution establishment;
         try
         {
             establishment = await mediator.Send(varGetQuery);

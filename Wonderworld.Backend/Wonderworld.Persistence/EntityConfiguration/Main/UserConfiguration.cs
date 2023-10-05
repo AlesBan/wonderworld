@@ -34,7 +34,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(t => t.CityId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        builder.HasOne(t => t.Establishment)
+        builder.HasOne(t => t.Institution)
             .WithMany(e => e.Users)
             .HasForeignKey(t => t.EstablishmentId)
             .OnDelete(DeleteBehavior.SetNull);
