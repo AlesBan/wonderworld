@@ -20,7 +20,7 @@ addClassBtn.addEventListener('click', () => {
                     <label><input name="institution-name" class="class-title-input" type="text"
                                   placeholder="Class title"></label>
                 </div>
-            </div>ые
+            </div>
             <div class="class-grade-and-age">
                 <div class="grade-title">
                     <div class="input-title">Grade</div>

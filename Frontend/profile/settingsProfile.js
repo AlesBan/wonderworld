@@ -13,10 +13,9 @@ filters.forEach(filter => {
 });
 
 
-
-
+let profileInfoBtn = document.querySelector('.profile-info')
 let loginAndSecurityBtn = document.querySelector('.profile-login');
-
+let settingsProfileHTML = document.querySelector('.content').innerHTML;
 loginAndSecurityBtn.addEventListener("click",  () => {
     let loginAndSecurity = document.createElement('div');
     document.body.append(loginAndSecurity)
@@ -78,15 +77,15 @@ loginAndSecurityBtn.addEventListener("click",  () => {
             </div>
         </div>
         </div>
-      
+
     `
+
+    profileInfoBtn.addEventListener('click', () => {
+        document.querySelector('.content').innerHTML = settingsProfileHTML;
+    });
 
     document.querySelector('.content').replaceWith(loginAndSecurity);
 
 })
 
-let profileInfo = document.querySelector('.profile-info');
 
-profileInfo.addEventListener('click', () => {
-
-})

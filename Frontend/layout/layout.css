@@ -25,7 +25,12 @@
     line-height: 24px;
     text-align: center;
     margin-left: 24px;
+}
 
+.profile-link {
+    text-decoration: none;  /* Убирает подчеркивание ссылки */
+    color: inherit;  /* Наследует цвет текста от родительского элемента */
+    cursor: pointer;  /* Устанавливает вид курсора при наведении */
 }
 
 .header-right {
