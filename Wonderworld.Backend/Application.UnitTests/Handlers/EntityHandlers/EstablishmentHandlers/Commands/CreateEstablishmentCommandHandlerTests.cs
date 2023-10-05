@@ -22,7 +22,7 @@ public class CreateEstablishmentCommandHandlerTests : TestCommonBase
         {
             Title = title,
             Address = address,
-            Types = new List<Wonderworld.Domain.Entities.Job.EstablishmentType> { type! }
+            Types = new List<Wonderworld.Domain.Entities.Job.InstitutionType> { type! }
         };
 
         var handler = new CreateEstablishmentCommandHandler(Context);
@@ -33,6 +33,6 @@ public class CreateEstablishmentCommandHandlerTests : TestCommonBase
         // Assert
         Assert.NotNull(await Context.Establishments
             .SingleOrDefaultAsync(e =>
-                e.EstablishmentId == establishment.EstablishmentId));
+                e.InstitutionId == establishment.InstitutionId));
     }
 }

@@ -19,12 +19,12 @@ public class DeleteEstablishmentCommandHandler : IRequestHandler<DeleteEstablish
     public async Task<Unit> Handle(DeleteEstablishmentCommand request, CancellationToken cancellationToken)
     {
         var establishment = await _context.Establishments.FirstOrDefaultAsync(e =>
-                e.EstablishmentId == request.EstablishmentId,
+                e.InstitutionId == request.EstablishmentId,
             cancellationToken: cancellationToken);
 
         if (establishment == null)
         {
-            throw new NotFoundException(nameof(Establishment), request.EstablishmentId);
+            throw new NotFoundException(nameof(Institution), request.EstablishmentId);
         }
 
         await RemoveCountry(establishment, cancellationToken);
@@ -32,7 +32,7 @@ public class DeleteEstablishmentCommandHandler : IRequestHandler<DeleteEstablish
         return Unit.Value;
     }
 
-    private async Task RemoveCountry(Establishment establishment, CancellationToken cancellationToken)
+    private async Task RemoveCountry(Institution establishment, CancellationToken cancellationToken)
     {
         _context.Establishments.Remove(establishment);
         await _context.SaveChangesAsync(cancellationToken);

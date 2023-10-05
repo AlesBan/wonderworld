@@ -97,8 +97,8 @@ public class SharedLessonDbContextFactory
                 LastName = "LastNameA",
                 IsATeacher = true,
                 IsAnExpert = false,
-                Establishment = context.Establishments.FirstOrDefault(e =>
-                    e.EstablishmentId == EstablishmentAId),
+                Institution = context.Establishments.FirstOrDefault(e =>
+                    e.InstitutionId == EstablishmentAId),
                 City = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityAId),
                 Country = context.Countries.FirstOrDefault(c =>
@@ -122,8 +122,8 @@ public class SharedLessonDbContextFactory
                 LastName = "LastNameB",
                 IsATeacher = true,
                 IsAnExpert = true,
-                Establishment = context.Establishments.FirstOrDefault(e =>
-                    e.EstablishmentId == EstablishmentAId)!,
+                Institution = context.Establishments.FirstOrDefault(e =>
+                    e.InstitutionId == EstablishmentAId)!,
                 City = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityBId)!,
                 Country = context.Countries.FirstOrDefault(c =>
@@ -459,21 +459,21 @@ public class SharedLessonDbContextFactory
     private static void AppendEstablishments(ISharedLessonDbContext context)
     {
         context.Establishments.AddRange(
-            new Establishment()
+            new Institution()
             {
-                EstablishmentId = EstablishmentAId,
+                InstitutionId = EstablishmentAId,
                 Title = "EstablishmentA",
                 Address = "AddressA",
             },
-            new Establishment()
+            new Institution()
             {
-                EstablishmentId = EstablishmentBId,
+                InstitutionId = EstablishmentBId,
                 Title = "EstablishmentB",
                 Address = "AddressB",
             },
-            new Establishment()
+            new Institution()
             {
-                EstablishmentId = EstablishmentForDeleteId,
+                InstitutionId = EstablishmentForDeleteId,
                 Title = "EstablishmentForDelete",
                 Address = "AddressC",
             });
@@ -482,30 +482,30 @@ public class SharedLessonDbContextFactory
     private static void AppendEstablishmentTypesEstablishment(ISharedLessonDbContext context)
     {
         context.EstablishmentTypesEstablishments.AddRange(
-            new EstablishmentTypeEstablishment()
+            new InstitutionTypeInstitution()
             {
-                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(
+                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(
                         et
                             => et.Title == EstablishmentType.School.ToString())
-                    .Result.EstablishmentTypeId,
+                    .Result.InstitutionTypeId,
 
-                EstablishmentId = EstablishmentAId
+                InstitutionId = EstablishmentAId
             },
-            new EstablishmentTypeEstablishment
+            new InstitutionTypeInstitution
             {
-                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(et
+                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(et
                         => et.Title == EstablishmentType.Gymnasium.ToString())
-                    .Result.EstablishmentTypeId,
-                EstablishmentId = EstablishmentAId
+                    .Result.InstitutionTypeId,
+                InstitutionId = EstablishmentAId
             },
-            new EstablishmentTypeEstablishment
+            new InstitutionTypeInstitution
             {
-                EstablishmentTypeId = context.EstablishmentTypes.SingleAsync(
+                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(
                         et
                             => et.Title == EstablishmentType.School.ToString())
-                    .Result.EstablishmentTypeId,
+                    .Result.InstitutionTypeId,
 
-                EstablishmentId = EstablishmentBId
+                InstitutionId = EstablishmentBId
             }
         );
     }

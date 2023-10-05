@@ -7,7 +7,7 @@ using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Queries.GetEstablishmentByAddress;
 
-public class GetEstablishmentCommandHandler : IRequestHandler<GetEstablishmentCommand, Establishment>
+public class GetEstablishmentCommandHandler : IRequestHandler<GetEstablishmentCommand, Institution>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -16,7 +16,7 @@ public class GetEstablishmentCommandHandler : IRequestHandler<GetEstablishmentCo
         _context = context;
     }
 
-    public async Task<Establishment> Handle(GetEstablishmentCommand request,
+    public async Task<Institution> Handle(GetEstablishmentCommand request,
         CancellationToken cancellationToken)
     {
         var establishment = await _context.Establishments
@@ -25,7 +25,7 @@ public class GetEstablishmentCommandHandler : IRequestHandler<GetEstablishmentCo
 
         if (establishment == null)
         {
-            throw new NotFoundException(nameof(Establishment), request.Address);
+            throw new NotFoundException(nameof(Institution), request.Address);
         }
 
         return establishment;

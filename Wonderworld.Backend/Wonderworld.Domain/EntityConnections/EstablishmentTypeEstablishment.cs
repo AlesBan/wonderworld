@@ -2,11 +2,11 @@ using Wonderworld.Domain.Entities.Job;
 
 namespace Wonderworld.Domain.EntityConnections;
 
-public class EstablishmentTypeEstablishment
+public class InstitutionTypeInstitution
 {
-    public Guid EstablishmentTypeId { get; set; }
-    public EstablishmentType EstablishmentType { get; set; }
+    public Guid InstitutionTypeId { get; set; }
+    public InstitutionType InstitutionType { get; set; }
     
-    public Guid EstablishmentId { get; set; }
-    public Establishment Establishment { get; set; }
+    public Guid InstitutionId { get; set; }
+    public Institution Institution { get; set; }
 }

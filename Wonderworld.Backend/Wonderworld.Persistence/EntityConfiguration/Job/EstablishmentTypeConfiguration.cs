@@ -4,15 +4,15 @@ using Wonderworld.Domain.Entities.Job;
 
 namespace Wonderworld.Persistence.EntityConfiguration.Job;
 
-public class EstablishmentTypeConfiguration : IEntityTypeConfiguration<EstablishmentType>
+public class EstablishmentTypeConfiguration : IEntityTypeConfiguration<InstitutionType>
 {
-    public void Configure(EntityTypeBuilder<EstablishmentType> builder)
+    public void Configure(EntityTypeBuilder<InstitutionType> builder)
     {
-        builder.HasKey(e => e.EstablishmentTypeId);
-        builder.HasIndex(e => e.EstablishmentTypeId)
+        builder.HasKey(e => e.InstitutionTypeId);
+        builder.HasIndex(e => e.InstitutionTypeId)
             .IsUnique();
         
-        builder.Property(e => e.EstablishmentTypeId)
+        builder.Property(e => e.InstitutionTypeId)
             .HasDefaultValueSql("gen_random_uuid()")
             .ValueGeneratedOnAdd();
 

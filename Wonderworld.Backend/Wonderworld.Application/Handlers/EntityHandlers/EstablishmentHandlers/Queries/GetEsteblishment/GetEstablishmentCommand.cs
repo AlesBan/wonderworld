@@ -4,7 +4,7 @@ using Wonderworld.Domain.Entities.Location;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Queries.GetEsteblishment;
 
-public class GetEstablishmentCommand : IRequest<Establishment>
+public class GetEstablishmentCommand : IRequest<Institution>
 {
     public Country Country { get; set; }
     public City City { get; set; }

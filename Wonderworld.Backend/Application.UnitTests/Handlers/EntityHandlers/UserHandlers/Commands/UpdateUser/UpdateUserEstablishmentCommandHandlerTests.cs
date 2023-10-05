@@ -15,7 +15,7 @@ public class UpdateUserEstablishmentCommandHandlerTests : TestCommonBase
         var user = await Context.Users.SingleOrDefaultAsync(u =>
             u.UserId == SharedLessonDbContextFactory.UserAId);
         var newEstablishment = await Context.Establishments.SingleOrDefaultAsync(e =>
-            e.EstablishmentId == SharedLessonDbContextFactory.EstablishmentBId);
+            e.InstitutionId == SharedLessonDbContextFactory.EstablishmentBId);
 
         var handler = new UpdateUserEstablishmentCommandHandler(Context);
 
@@ -28,7 +28,7 @@ public class UpdateUserEstablishmentCommandHandlerTests : TestCommonBase
 
         // Assert
         Assert.NotNull(await Context.Users.SingleOrDefaultAsync(e =>
-            e.EstablishmentId == newEstablishment!.EstablishmentId &&
+            e.EstablishmentId == newEstablishment!.InstitutionId &&
             e.UserId == user!.UserId));
     }
 }

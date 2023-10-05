@@ -1,5 +1,6 @@
 using AutoMapper;
 using Wonderworld.Application.Common.Mappings;
+using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
@@ -9,7 +10,6 @@ namespace Wonderworld.Application.Dtos.ProfileDtos;
 
 public class UserProfileDto : IMapWith<User>
 {
-    public Guid UserId { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
@@ -18,9 +18,9 @@ public class UserProfileDto : IMapWith<User>
     public string BannerPhotoUrl { get; set; } = string.Empty;
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
-    public City City { get; set; } = new();
-    public Country Country { get; set; } = new();
-    public Establishment Establishment { get; set; } = new();
+    public string CityTitle { get; set; } 
+    public string CountryTitle { get; set; } 
+    public EstablishmentDto Establishment { get; set; } = new();
     public double Rating { get; set; }
     public ICollection<Class> Classes { get; set; } = new List<Class>();
     public List<string> Languages { get; set; } = new();
@@ -46,12 +46,18 @@ public class UserProfileDto : IMapWith<User>
                 opt => opt.MapFrom(u => u.IsATeacher))
             .ForMember(up => up.IsAnExpert,
                 opt => opt.MapFrom(u => u.IsAnExpert))
-            .ForMember(up => up.City,
-                opt => opt.MapFrom(u => u.City))
-            .ForMember(up => up.Country,
-                opt => opt.MapFrom(u => u.Country))
+            .ForMember(up => up.CityTitle,
+                opt => opt.MapFrom(u => u.City.Title))
+            .ForMember(up => up.CountryTitle,
+                opt => opt.MapFrom(u => u.Country.Title))
             .ForMember(up => up.Establishment,
-                opt => opt.MapFrom(u => u.Establishment))
+                opt => opt.MapFrom(u => new EstablishmentDto()
+                    {
+                        Types = u.Institution.InstitutionTypes.Select(ets => ets.InstitutionType.Title),
+                        Address = u.Institution.Address,
+                        Title = u.Institution.Title
+                        
+                    }))
             .ForMember(up => up.Rating,
                 opt => opt.MapFrom(u => u.Rating))
             .ForMember(up => up.Classes,

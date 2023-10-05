@@ -11,5 +11,5 @@ public class City
     public Country Country { get; set; }
 
     public ICollection<User> Users { get; set; } = new List<User>();
-    public ICollection<Establishment> Establishments { get; set; } = new List<Establishment>();
+    public ICollection<Institution> Establishments { get; set; } = new List<Institution>();
 }

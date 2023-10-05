@@ -1,7 +1,6 @@
 using Application.UnitTests.Common;
 using AutoMapper;
 using Shouldly;
-using Wonderworld.Application.Dtos;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetProfileUser;
 using Xunit;
@@ -39,8 +38,8 @@ public class GetUserProfileCommandHandlerTests : TestCommonBase
         result.LastName.ShouldBe("LastNameA");
         result.IsATeacher.ShouldBe(true);
         result.IsAnExpert.ShouldBe(false);
-        result.City!.CityId.ShouldBe(SharedLessonDbContextFactory.CityAId);  
-        result.Establishment!.EstablishmentId.ShouldBe(SharedLessonDbContextFactory.EstablishmentAId);
+        result.CityTitle.ShouldBe("CityA");  
+        result.Establishment.Title.ShouldBe("EstablishmentA");
         result.Description.ShouldBe("DescriptionA");
         result.PhotoUrl.ShouldBe("PhotoUrlA");
         result.BannerPhotoUrl.ShouldBe("BannerPhotoUrlA");

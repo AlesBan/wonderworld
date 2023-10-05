@@ -4,12 +4,12 @@ using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Domain.Entities.Job;
 
-public class Establishment
+public class Institution
 {
-    public Guid EstablishmentId { get; set; }
+    public Guid InstitutionId { get; set; }
     public string Title { get; set; }= string.Empty;
     public string Address { get; set; } = string.Empty;
     public ICollection<User> Users { get; set; } = new List<User>();
-    public ICollection<EstablishmentTypeEstablishment> EstablishmentTypes { get; set; } = new List<EstablishmentTypeEstablishment>();
+    public ICollection<InstitutionTypeInstitution> InstitutionTypes { get; set; } = new List<InstitutionTypeInstitution>();
 
 }

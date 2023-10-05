@@ -6,7 +6,7 @@ using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Commands.CreateEstablishment;
 
-public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablishmentCommand, Establishment>
+public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablishmentCommand, Institution>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -15,7 +15,7 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
         _context = context;
     }
 
-    public async Task<Establishment> Handle(CreateEstablishmentCommand request, CancellationToken cancellationToken)
+    public async Task<Institution> Handle(CreateEstablishmentCommand request, CancellationToken cancellationToken)
     {
         var establishment = await _context.Establishments
             .FirstOrDefaultAsync(e =>
@@ -27,7 +27,7 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
             return establishment;
         }
 
-        var newEstablishment = new Establishment()
+        var newEstablishment = new Institution()
         {
             Title = request.Title,
             Address = request.Address
@@ -45,22 +45,22 @@ public class CreateEstablishmentCommandHandler : IRequestHandler<CreateEstablish
         return newEstablishment;
     }
 
-    private async Task AddEstablishment(Establishment establishment, CancellationToken cancellationToken)
+    private async Task AddEstablishment(Institution establishment, CancellationToken cancellationToken)
     {
         await _context.Establishments
             .AddAsync(establishment, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
 
-    private async Task AddEstablishmentTypeEstablishment(Establishment establishment,
-        IEnumerable<EstablishmentType> types, CancellationToken cancellationToken)
+    private async Task AddEstablishmentTypeEstablishment(Institution establishment,
+        IEnumerable<InstitutionType> types, CancellationToken cancellationToken)
     {
         var establishmentTypes = types
             .Select(type =>
-                new EstablishmentTypeEstablishment
+                new InstitutionTypeInstitution
                 {
-                    EstablishmentId = establishment.EstablishmentId,
-                    EstablishmentTypeId = type.EstablishmentTypeId
+                    InstitutionId = establishment.InstitutionId,
+                    InstitutionTypeId = type.InstitutionTypeId
                 }).ToList();
 
         await _context.EstablishmentTypesEstablishments

@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.API.Helpers.JwtHelpers;
@@ -30,7 +29,8 @@ public class UserController : BaseController
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
     {
-        return await _userAccountService.LoginUser(requestUserDto, Mediator);
+        var result = await _userAccountService.LoginUser(requestUserDto, Mediator);
+        return result;
     }
 
     [HttpPost("register")]
@@ -45,7 +45,16 @@ public class UserController : BaseController
         var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
         var result = await _userAccountService.CreateUserAccount(userId, requestUserDto, Mediator);
 
-        return Ok(result);
+        return result;
+    }
+
+    [HttpGet("get-userprofile")]
+    public async Task<IActionResult> GetUser()
+    {
+        var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
+        var result = await _userAccountService.GetUserProfile(userId, Mediator);
+        
+        return result;
     }
 
     [HttpDelete("delete-user")]
@@ -54,6 +63,6 @@ public class UserController : BaseController
         var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
         var result = await _userAccountService.DeleteUser(userId, Mediator);
 
-        return Ok(result);
+        return result;
     }
 }

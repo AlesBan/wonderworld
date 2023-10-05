@@ -21,7 +21,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             c.CityId == SharedLessonDbContextFactory.CityAId);
 
         var establishment = Context.Establishments.FirstOrDefault(e =>
-            e.EstablishmentId == SharedLessonDbContextFactory.EstablishmentAId);
+            e.InstitutionId == SharedLessonDbContextFactory.EstablishmentAId);
         var disciplines = Extensions.PickRandom(Context.Disciplines.ToList(), 3).ToList();
         var languages = Extensions.PickRandom(Context.Languages.ToList(), 2).ToList();
         const string photoUrl = "PhotoUrl";
@@ -54,7 +54,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             u.IsATeacher == isATeacher &&
             u.IsAnExpert == isAnExpert &&
             u.City == cityLocation &&
-            u.Establishment == establishment &&
+            u.Institution == establishment &&
             u.UserDisciplines.Count() == disciplines.Count() &&
             u.UserLanguages.Count() == languages.Count() &&
             u.PhotoUrl == photoUrl));

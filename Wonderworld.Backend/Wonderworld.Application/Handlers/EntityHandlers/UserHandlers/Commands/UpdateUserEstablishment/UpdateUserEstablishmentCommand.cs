@@ -7,5 +7,5 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.
 public class UpdateUserEstablishmentCommand : IRequest
 {
     public User User { get; set; }
-    public Establishment Establishment { get; set; }
+    public Institution Establishment { get; set; }
 }

@@ -3,9 +3,9 @@ using Wonderworld.Domain.Entities.Job;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Commands.CreateEstablishment;
 
-public class CreateEstablishmentCommand : IRequest<Establishment>
+public class CreateEstablishmentCommand : IRequest<Institution>
 {
-    public IEnumerable<EstablishmentType> Types { get; set; } = new List<EstablishmentType>();
+    public IEnumerable<InstitutionType> Types { get; set; } = new List<InstitutionType>();
     public string Title { get; set; }
     public string Address { get; set; }
 }
