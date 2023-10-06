@@ -20,24 +20,22 @@ let token = localStorage.getItem('accessToken');
 // let token = getCookie('accessToken');
 
 
-async function postCreateAccount(searchText) {
+async function postCreateAccount() {
     const url = 'http://localhost:7280/api/user/create-account';
-    const apiData = await fetchOrg(searchText);
+    const apiData = await fetchOrg(localStorage.getItem('selectedValue'));
     const establishmentFields = apiData.features[0].properties;
     let biology = ["Biology"];
     let types = ["School"];
     let location = localStorage.getItem('location')
     let languages = localStorage.getItem('languages')
     const data = {
-        // FirstName: localStorage.getItem('firstName'),
-        FirstName: "klim",
+        FirstName: localStorage.getItem('firstName'),
         LastName: localStorage.getItem('lastName'),
         IsATeacher: true,
         IsAnExpert: false,
         CityLocation: location.split(' ')[0],
         CountryLocation: location.split(' ')[1],
         Languages: languages.split(' '),
-        // EstablishmentDto: document.querySelector("#institutionValue").value,
         EstablishmentDto: {
             Types: types,
             Address: establishmentFields.description,

@@ -71,6 +71,7 @@ function renderOrg(items) {
         item.addEventListener('click', () => {
             const selectedValue = item.querySelector('.item-text').textContent;
             document.querySelector('#institutionValue').value = selectedValue;
+            localStorage.setItem('selectedValue', selectedValue);
         });
     });
 
