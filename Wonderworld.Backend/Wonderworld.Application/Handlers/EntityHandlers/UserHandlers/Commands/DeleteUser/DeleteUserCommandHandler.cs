@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -23,7 +24,7 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
 
         if (user == null)
         {
-            throw new NotFoundException(nameof(User), request.UserId);
+            throw new UserNotFoundException(request.UserId);
         }
 
         _context.Users.Remove(user);

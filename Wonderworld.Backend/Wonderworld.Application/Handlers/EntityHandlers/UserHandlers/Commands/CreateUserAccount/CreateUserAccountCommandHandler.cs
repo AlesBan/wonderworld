@@ -23,6 +23,9 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
     {
         var user = _context
             .Users
+            .Include(u => u.Country)
+            .Include(u => u.City)
+            .Include(u => u.Institution)
             .FirstOrDefault(u => u.UserId == request.UserId);
         
         if (user == null)

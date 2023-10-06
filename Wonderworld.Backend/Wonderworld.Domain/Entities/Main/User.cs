@@ -17,7 +17,7 @@ public class User
     public bool? IsATeacher { get; set; }
     public bool? IsAnExpert { get; set; }
     public ICollection<Class> Classes { get; set; } = new List<Class>();
-    public Guid? EstablishmentId { get; set; }
+    public Guid? InstitutionId { get; set; }
     public Institution? Institution { get; set; }
     public Guid? CityId { get; set; }
     public City? City { get; set; }

@@ -6,17 +6,17 @@ namespace Wonderworld.API.Services.EditUserData;
 
 public interface IEditUserAccountService
 {
-    public Task<IActionResult> EditUserPersonalInfo(Guid userId, UpdatePersonalInfoRequestDto requestUserDto,
+    public Task<IActionResult> EditUserPersonalInfoAsync(Guid userId, UpdatePersonalInfoRequestDto requestUserDto,
         IMediator mediator);
 
-    public Task<IActionResult> EditUserInstitution(Guid userId, UpdateInstitutionRequestDto requestUserDto,
+    public Task<IActionResult> EditUserInstitutionAsync(Guid userId, UpdateInstitutionRequestDto requestUserDto,
         IMediator mediator);
 
-    public Task<IActionResult> EditUserProfessionalInfo(Guid userId, UpdateProfessionalInfoRequestDto requestUserDto,
+    public Task<IActionResult> EditUserProfessionalInfoAsync(Guid userId, UpdateProfessionalInfoRequestDto requestUserDto,
         IMediator mediator);
 
-    public Task<IActionResult> EditUserEmail(Guid userId, UpdateUserEmailRequestDto requestUserDto, IMediator mediator);
+    public Task<IActionResult> EditUserEmailAsync(Guid userId, UpdateUserEmailRequestDto requestUserDto, IMediator mediator);
 
-    public Task<IActionResult> EditUserPassword(Guid userId, UpdateUserPasswordRequestDto requestUserDto,
+    public Task<IActionResult> EditUserPasswordAsync(Guid userId, UpdateUserPasswordRequestDto requestUserDto,
         IMediator mediator);
 }

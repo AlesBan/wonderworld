@@ -10,6 +10,7 @@ using Wonderworld.Persistence.EntityConnectionsConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
 using Wonderworld.Persistence.EntityTypeConfiguration.Main;
+using InstitutionType = Wonderworld.Domain.Entities.Job.InstitutionType;
 
 namespace Wonderworld.Persistence;
 
@@ -25,8 +26,8 @@ public static class ModelBuilderExtensions
         modelBuilder.ApplyConfiguration(new DisciplineConfiguration());
         modelBuilder.ApplyConfiguration(new LanguageConfiguration());
 
-        modelBuilder.ApplyConfiguration(new EstablishmentConfiguration());
-        modelBuilder.ApplyConfiguration(new EstablishmentTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new InstitutionConfiguration());
+        modelBuilder.ApplyConfiguration(new InstitutionTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CityConfiguration());
         modelBuilder.ApplyConfiguration(new CountryConfiguration());
         modelBuilder.ApplyConfiguration(new ReviewConfiguration());
@@ -103,8 +104,8 @@ public static class ModelBuilderExtensions
     {
         modelBuilder.Entity<InstitutionType>()
             .HasData(
-                Enum.GetValues(typeof(Wonderworld.Domain.Enums.EntityTypes.EstablishmentType))
-                    .Cast<Wonderworld.Domain.Enums.EntityTypes.EstablishmentType>()
+                Enum.GetValues(typeof(Wonderworld.Domain.Enums.EntityTypes.InstitutionType))
+                    .Cast<Wonderworld.Domain.Enums.EntityTypes.InstitutionType>()
                     .Select(et => new InstitutionType
                     {
                         InstitutionTypeId = Guid.NewGuid(),

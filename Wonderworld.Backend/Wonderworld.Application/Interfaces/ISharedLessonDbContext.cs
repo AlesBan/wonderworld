@@ -16,8 +16,8 @@ public interface ISharedLessonDbContext
     DbSet<Class> Classes { get; set; }
     DbSet<Discipline> Disciplines { get; set; }
     DbSet<Language> Languages { get; set; }
-    DbSet<Institution> Establishments { get; set; }
-    DbSet<InstitutionType> EstablishmentTypes { get; set; }
+    DbSet<Institution> Institutions { get; set; }
+    DbSet<InstitutionType> InstitutionTypes { get; set; }
     DbSet<City> Cities { get; set; }
     DbSet<Country> Countries { get; set; }
     DbSet<Review> Reviews { get; set; }
@@ -28,6 +28,6 @@ public interface ISharedLessonDbContext
     DbSet<UserLanguage> UserLanguages { get; set; }
     DbSet<ClassLanguage> ClassLanguages { get; set; }
     DbSet<ClassDiscipline> ClassDisciplines { get; set; }
-    DbSet<InstitutionTypeInstitution> EstablishmentTypesEstablishments { get; set; }
+    DbSet<InstitutionTypeInstitution> InstitutionTypesInstitutions { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

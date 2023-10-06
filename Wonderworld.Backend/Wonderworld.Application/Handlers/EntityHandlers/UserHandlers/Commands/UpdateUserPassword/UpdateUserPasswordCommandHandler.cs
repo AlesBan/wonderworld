@@ -1,9 +1,12 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Interfaces;
+using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPassword;
 
-public class UpdateUserPasswordCommandHandler: IRequestHandler<UpdateUserPasswordCommand>
+public class UpdateUserPasswordCommandHandler : IRequestHandler<UpdateUserPasswordCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -12,13 +15,21 @@ public class UpdateUserPasswordCommandHandler: IRequestHandler<UpdateUserPasswor
         _context = context;
     }
 
-    public async Task<Unit> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)
     {
-        request.User.Password = request.NewPassword;
-        
-        _context.Users.Update(request.User);
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u =>
+                u.UserId == request.UserId, cancellationToken: cancellationToken);
+
+        if (user == null)
+        {
+            throw new UserNotFoundException(request.UserId);
+        }
+
+        user.Password = request.Password;
+        _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
-        
-        return Unit.Value;
+
+        return user;
     }
 }

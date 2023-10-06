@@ -1,9 +1,12 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Interfaces;
+using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
 
-public class UpdateUserEmailCommandHandler : IRequestHandler<UpdateUserEmailCommand>
+public class UpdateUserEmailCommandHandler : IRequestHandler<UpdateUserEmailCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -12,13 +15,23 @@ public class UpdateUserEmailCommandHandler : IRequestHandler<UpdateUserEmailComm
         _context = context;
     }
 
-    public async Task<Unit> Handle(UpdateUserEmailCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(UpdateUserEmailCommand request, CancellationToken cancellationToken)
     {
-        request.User.Email = request.NewEmail;
-
-        _context.Users.Update(request.User);
+        var user = await _context.Users
+            .FirstOrDefaultAsync(u => 
+                u.UserId == request.UserId, cancellationToken: cancellationToken);
+        
+        if (user == null)
+        {
+            throw new UserNotFoundException(request.UserId);
+        }
+        
+        
+        user.Email = request.Email;
+        _context.Users.Attach(user).State = EntityState.Modified;
+        
         await _context.SaveChangesAsync(cancellationToken);
 
-        return Unit.Value;
+        return user;
     }
 }

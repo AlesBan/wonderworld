@@ -20,7 +20,7 @@ public class UserProfileDto : IMapWith<User>
     public bool IsAnExpert { get; set; }
     public string CityTitle { get; set; } 
     public string CountryTitle { get; set; } 
-    public EstablishmentDto Establishment { get; set; } = new();
+    public InstitutionDto Establishment { get; set; } = new();
     public double Rating { get; set; }
     public ICollection<Class> Classes { get; set; } = new List<Class>();
     public List<string> Languages { get; set; } = new();
@@ -51,7 +51,7 @@ public class UserProfileDto : IMapWith<User>
             .ForMember(up => up.CountryTitle,
                 opt => opt.MapFrom(u => u.Country.Title))
             .ForMember(up => up.Establishment,
-                opt => opt.MapFrom(u => new EstablishmentDto()
+                opt => opt.MapFrom(u => new InstitutionDto()
                     {
                         Types = u.Institution.InstitutionTypes.Select(ets => ets.InstitutionType.Title),
                         Address = u.Institution.Address,

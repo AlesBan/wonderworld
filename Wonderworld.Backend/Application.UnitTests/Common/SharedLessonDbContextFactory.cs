@@ -8,7 +8,7 @@ using Wonderworld.Domain.EntityConnections;
 using Wonderworld.Domain.Enums;
 using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence;
-using EstablishmentType = Wonderworld.Domain.Enums.EntityTypes.EstablishmentType;
+using InstitutionType = Wonderworld.Domain.Enums.EntityTypes.InstitutionType;
 
 namespace Application.UnitTests.Common;
 
@@ -97,7 +97,7 @@ public class SharedLessonDbContextFactory
                 LastName = "LastNameA",
                 IsATeacher = true,
                 IsAnExpert = false,
-                Institution = context.Establishments.FirstOrDefault(e =>
+                Institution = context.Institutions.FirstOrDefault(e =>
                     e.InstitutionId == EstablishmentAId),
                 City = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityAId),
@@ -122,7 +122,7 @@ public class SharedLessonDbContextFactory
                 LastName = "LastNameB",
                 IsATeacher = true,
                 IsAnExpert = true,
-                Institution = context.Establishments.FirstOrDefault(e =>
+                Institution = context.Institutions.FirstOrDefault(e =>
                     e.InstitutionId == EstablishmentAId)!,
                 City = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityBId)!,
@@ -458,7 +458,7 @@ public class SharedLessonDbContextFactory
 
     private static void AppendEstablishments(ISharedLessonDbContext context)
     {
-        context.Establishments.AddRange(
+        context.Institutions.AddRange(
             new Institution()
             {
                 InstitutionId = EstablishmentAId,
@@ -481,28 +481,28 @@ public class SharedLessonDbContextFactory
 
     private static void AppendEstablishmentTypesEstablishment(ISharedLessonDbContext context)
     {
-        context.EstablishmentTypesEstablishments.AddRange(
+        context.InstitutionTypesInstitutions.AddRange(
             new InstitutionTypeInstitution()
             {
-                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(
+                InstitutionTypeId = context.InstitutionTypes.SingleAsync(
                         et
-                            => et.Title == EstablishmentType.School.ToString())
+                            => et.Title == InstitutionType.School.ToString())
                     .Result.InstitutionTypeId,
 
                 InstitutionId = EstablishmentAId
             },
             new InstitutionTypeInstitution
             {
-                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(et
-                        => et.Title == EstablishmentType.Gymnasium.ToString())
+                InstitutionTypeId = context.InstitutionTypes.SingleAsync(et
+                        => et.Title == InstitutionType.Gymnasium.ToString())
                     .Result.InstitutionTypeId,
                 InstitutionId = EstablishmentAId
             },
             new InstitutionTypeInstitution
             {
-                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(
+                InstitutionTypeId = context.InstitutionTypes.SingleAsync(
                         et
-                            => et.Title == EstablishmentType.School.ToString())
+                            => et.Title == InstitutionType.School.ToString())
                     .Result.InstitutionTypeId,
 
                 InstitutionId = EstablishmentBId
