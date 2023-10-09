@@ -68,6 +68,7 @@ async function postCreateAccount() {
         })
         .then(responseData => {
             console.log(responseData);
+            window.location.href = "../explorePage/explorePage.html";
         })
         .catch(error => {
             console.log(error);
