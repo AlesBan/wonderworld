@@ -1,9 +1,28 @@
-let getUserProfileBtn = document.querySelector('.menu-text');
 
-// getUserProfileBtn.addEventListener('click', () => {
+const firstName = localStorage.getItem('firstName');
+const firstNameOutput = document.querySelector(".first-name-output");
+firstNameOutput.textContent = firstName;
+
+const lastName = localStorage.getItem('lastName');
+const lastNameOutput = document.querySelector(".last-name-output");
+lastNameOutput.textContent = lastName;
+
+const getLanguage = localStorage.getItem('languages');
+const languagesOutput = document.querySelector(".language");
+languagesOutput.textContent = getLanguage;
+
+const getLocation = localStorage.getItem('location');
+const locationOutput =  document.querySelector(".location-text");
+locationOutput.textContent = getLocation;
+
+const getEstablishmentDto = localStorage.getItem('selectedValue');
+const EstablishmentDtoOutput =  document.querySelector("#establishment");
+EstablishmentDtoOutput.textContent = getEstablishmentDto;
 
 
-    async function getUserProfile(searchText) {
+
+
+    async function getUserProfile() {
         const url = 'http://localhost:7280/api/user/get-userprofile';
 
 

@@ -50,7 +50,7 @@
     color: #3E4C5B;
 }
 
-.language, .user-info, .location, .time {
+.languages, .language, .user-info, .location, .time {
     font-family: 'Inter', serif;
     font-weight: 400;
     font-size: 16px;

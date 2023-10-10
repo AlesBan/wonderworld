@@ -1,10 +1,11 @@
 let addClassBtn = document.querySelector('#addClass');
 
 addClassBtn.addEventListener('click', () => {
+
     let addClass = document.createElement('div');
     document.body.append(addClass)
     addClass.innerHTML = `
-    <div class="modal">
+    <div class="modal" id="modal">
     <div class="modal-top">
         <div class="createClass">Create class</div>
         <div class=""><img src="../images/Cross.svg" alt=""></div>
@@ -63,21 +64,20 @@ addClassBtn.addEventListener('click', () => {
                 <div class="input-title">Description</div>
                 <div class="">
                     <label><input name="institution-name" class="class-title-input" type="text"
-                                  placeholder="Class description"></label>
+                                  placeholder="Class description" id="class-description"></label>
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-bottom">
         <div class="cancel-btn">cancel</div>
-        <div class="update-btn">create</div>
+        <div class="update-btn" id="create-btn">create</div>
     </div>
 </div>
     
     `
 
-
-
+    const inputDescription = document.querySelector('#class-description');
 
     const selectBtn = document.querySelector('#select-subjects');
     const selectedValues = [];
@@ -100,7 +100,7 @@ addClassBtn.addEventListener('click', () => {
             return `
 
  <li class="item">
-        <span class="item-text" id="disciplinesValue">${lesson.title}</span>
+        <span class="item-text" id="item-lessons">${lesson.title}</span>
         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
     `;
@@ -115,7 +115,7 @@ addClassBtn.addEventListener('click', () => {
         items.forEach(item => {
             item.addEventListener("click", () => {
                 item.classList.toggle("checked");
-                const itemText = item.querySelector(".item-text").textContent;
+                const itemText = item.querySelector("#item-lessons").textContent;
                 if (item.classList.contains("checked")) {
                     selectedValues.push(itemText);
                 } else {
@@ -157,7 +157,7 @@ addClassBtn.addEventListener('click', () => {
             return `
 
  <li class="item">
-        <span class="item-text" id="disciplinesValue">${grade.classNum}</span>
+        <span class="item-text" id="item-grades">${grade.classNum}</span>
         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
     `;
@@ -172,7 +172,7 @@ addClassBtn.addEventListener('click', () => {
         items.forEach(item => {
             item.addEventListener("click", () => {
                 item.classList.toggle("checked");
-                const itemText = item.querySelector(".item-text").textContent;
+                const itemText = item.querySelector("#item-grades").textContent;
                 if (item.classList.contains("checked")) {
                     selectedGrades.push(itemText);
                 } else {
@@ -212,7 +212,7 @@ addClassBtn.addEventListener('click', () => {
             return `
 
  <li class="item">
-        <span class="item-text" id="disciplinesValue">${age.age}</span>
+        <span class="item-text" id="item-ages">${age.age}</span>
         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
     `;
@@ -227,7 +227,7 @@ addClassBtn.addEventListener('click', () => {
         items.forEach(item => {
             item.addEventListener("click", () => {
                 item.classList.toggle("checked");
-                const itemText = item.querySelector(".item-text").textContent;
+                const itemText = item.querySelector("#item-ages").textContent;
                 if (item.classList.contains("checked")) {
                     selectedAge.push(itemText);
                 } else {
@@ -243,4 +243,34 @@ addClassBtn.addEventListener('click', () => {
 
     }
 
+    let createBtn = document.querySelector('#create-btn');
+
+    createBtn.addEventListener('click', () => {
+        let createClass = document.createElement('div');
+        document.body.append(createClass)
+        createClass.innerHTML = `
+       <div class="class-preview">
+                <div class="class-preview-image"><img src="../images/class-preview-image.svg" alt=""></div>
+                <div class="class-preview-text">${inputDescription.value}
+                </div>
+                <div class="class-preview-footer">
+                    <div class="class-preview-tags">
+                        ${selectedValues.map(value => `<span class="class-preview-tag">${value}</span>`).join("")}
+                    </div>
+                    <div class="menu-action">
+                        <img src="../images/menu-action.svg" alt="">
+                    </div>
+                </div>
+            </div>
+       
+        `
+        document.querySelector('.add-classes').replaceWith(createClass)
+    })
+
+
+
 })
+
+// voice:.idea/1696947139042.wav
+
+
