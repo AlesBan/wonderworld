@@ -49,7 +49,6 @@ public class CreateClassCommandHandlerTests : TestCommonBase
             c.Title == title &&
             c.UserId == user!.UserId &
             c.Grade == grade &&
-            c.Age == age &&
             c.ClassDisciplines.Count() == disciplines.Count &&
             c.ClassLanguages.Count() == languages.Count &&
             c.PhotoUrl == photoUrl));

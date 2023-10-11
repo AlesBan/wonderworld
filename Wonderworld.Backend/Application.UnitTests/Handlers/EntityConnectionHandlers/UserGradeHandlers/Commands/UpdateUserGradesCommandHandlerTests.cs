@@ -23,10 +23,10 @@ public class UpdateUserGradesCommandHandlerTests : TestCommonBase
         var handler = new UpdateUserGradesCommandHandler(Context);
 
         // Act
-        await handler.Handle(new UpdateUserGradesCommand()
+        await handler.Handle(new UpdateUserGradesCommand
         {
-            User = user!,
-            NewGrades = newGrades
+            UserId = user!.UserId,
+            NewGradeIds = newGrades.Select(x => x.GradeId).ToList()
         }, CancellationToken.None);
 
         // Assert

@@ -3,13 +3,13 @@ using AutoMapper;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Dtos.AuthenticationDtos;
+namespace Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 
 public class UserRegisterRequestDto : IMapWith<User>
 {
-    [Required] public string Email { get; set; }
+    [Required] public string Email { get; set; } = string.Empty;
 
-    [Required] public string Password { get; set; }
+    [Required] public string Password { get; set; } = string.Empty;
 
     public void Mapping(Profile profile)
     {

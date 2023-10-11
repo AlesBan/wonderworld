@@ -21,11 +21,20 @@ public class GetCityQueryHandler : IRequestHandler<GetCityQuery, City>
             c.Country.CountryId == request.CountryId &&
             c.Title == request.Title, cancellationToken: cancellationToken);
 
-        if (city == null)
+        if (city != null)
         {
-            throw new NotFoundException(nameof(City), request.Title);
+            return city;
         }
 
-        return city;
+        var newCity = new City()
+        {
+            CountryId = request.CountryId,
+            Title = request.Title
+        };
+
+        await _context.Cities.AddAsync(newCity, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return newCity;
     }
 }

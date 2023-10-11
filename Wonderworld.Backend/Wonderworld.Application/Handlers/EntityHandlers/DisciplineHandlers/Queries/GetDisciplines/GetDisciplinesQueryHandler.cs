@@ -4,16 +4,16 @@ using Wonderworld.Domain.Entities.Education;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 
-public class GetDisciplinesCommandHandler : IRequestHandler<GetDisciplinesCommand, List<Discipline>>
+public class GetDisciplinesQueryHandler : IRequestHandler<GetDisciplinesQuery, List<Discipline>>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public GetDisciplinesCommandHandler(ISharedLessonDbContext context)
+    public GetDisciplinesQueryHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public Task<List<Discipline>> Handle(GetDisciplinesCommand request, CancellationToken cancellationToken)
+    public Task<List<Discipline>> Handle(GetDisciplinesQuery request, CancellationToken cancellationToken)
     {
         var requiredDisciplines = request.DisciplineTitles;
         var disciplines = _context.Disciplines

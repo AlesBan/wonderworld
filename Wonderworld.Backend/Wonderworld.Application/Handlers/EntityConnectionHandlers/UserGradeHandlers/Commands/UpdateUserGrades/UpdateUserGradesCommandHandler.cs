@@ -4,7 +4,7 @@ using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.UpdateUserGrades;
 
-public class UpdateUserGradesCommandHandler: IRequestHandler<UpdateUserGradesCommand>
+public class UpdateUserGradesCommandHandler : IRequestHandler<UpdateUserGradesCommand>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -18,13 +18,13 @@ public class UpdateUserGradesCommandHandler: IRequestHandler<UpdateUserGradesCom
         _context.UserGrades
             .RemoveRange(_context.UserGrades
                 .Where(ug =>
-                    ug.User == request.User));
+                    ug.User.UserId == request.UserId));
 
-        var userGrades = request.NewGrades.Select(grade =>
+        var userGrades = request.NewGradeIds.Select(gradeId =>
             new UserGrade()
             {
-                User = request.User,
-                Grade = grade
+                UserId = request.UserId,
+                GradeId = gradeId
             });
 
         await _context.UserGrades.AddRangeAsync(userGrades, cancellationToken);

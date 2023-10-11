@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
@@ -5,6 +6,7 @@ using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
+using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Dtos.ProfileDtos;
 
@@ -18,9 +20,9 @@ public class UserProfileDto : IMapWith<User>
     public string BannerPhotoUrl { get; set; } = string.Empty;
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
-    public string CityTitle { get; set; } 
-    public string CountryTitle { get; set; } 
-    public InstitutionDto Establishment { get; set; } = new();
+    public string CityTitle { get; set; }
+    public string CountryTitle { get; set; }
+    public InstitutionDto Institution { get; set; }
     public double Rating { get; set; }
     public ICollection<Class> Classes { get; set; } = new List<Class>();
     public List<string> Languages { get; set; } = new();
@@ -50,23 +52,25 @@ public class UserProfileDto : IMapWith<User>
                 opt => opt.MapFrom(u => u.City.Title))
             .ForMember(up => up.CountryTitle,
                 opt => opt.MapFrom(u => u.Country.Title))
-            .ForMember(up => up.Establishment,
-                opt => opt.MapFrom(u => new InstitutionDto()
-                    {
-                        Types = u.Institution.InstitutionTypes.Select(ets => ets.InstitutionType.Title),
-                        Address = u.Institution.Address,
-                        Title = u.Institution.Title
-                        
-                    }))
             .ForMember(up => up.Rating,
                 opt => opt.MapFrom(u => u.Rating))
             .ForMember(up => up.Classes,
                 opt => opt.MapFrom(u => u.Classes))
             .ForMember(up => up.Languages,
-                opt => opt.MapFrom(u => u.UserLanguages.Select(ul => ul.Language)))
+                opt => opt.MapFrom(u =>
+                    u.UserLanguages.Select(ul =>
+                        ul.Language.Title).ToList()))
             .ForMember(up => up.Disciplines,
-                opt => opt.MapFrom(u => u.UserDisciplines.Select(ud => ud.Discipline)))
+                opt => opt.MapFrom(u =>
+                    u.UserDisciplines.Select(ud =>
+                        ud.Discipline.Title).ToList()))
             .ForMember(up => up.Reviews,
-                opt => opt.MapFrom(u => u.ReceivedReviews));
+                opt => opt.MapFrom(u => u.ReceivedReviews))
+            .ForMember(dest => dest.Institution,
+                opt => opt.MapFrom(src => new InstitutionDto
+                {
+                    Address = src.Institution.Address,
+                    Title = src.Institution.Title,
+                }));
     }
 }

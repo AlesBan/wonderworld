@@ -1,11 +1,10 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.EntityConnections;
 
-namespace Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateEstablishment;
+namespace Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 
 public class CreateInstitutionCommandHandler : IRequestHandler<CreateInstitutionCommand, Institution>
 {
@@ -18,31 +17,31 @@ public class CreateInstitutionCommandHandler : IRequestHandler<CreateInstitution
 
     public async Task<Institution> Handle(CreateInstitutionCommand request, CancellationToken cancellationToken)
     {
-        var establishment = await _context.Institutions
+        var institution = await _context.Institutions
             .FirstOrDefaultAsync(e =>
                     e.Address == request.Address,
                 cancellationToken: cancellationToken);
 
-        if (establishment != null)
+        if (institution != null)
         {
-            return establishment;
+            return institution;
         }
 
-        var newEstablishment = new Institution()
+        var newInstitution = new Institution()
         {
-            Title = request.Title,
+            Title = request.InstitutionTitle,
             Address = request.Address
         };
 
-        await AddInstitution(newEstablishment, cancellationToken);
+        await AddInstitution(newInstitution, cancellationToken);
         
         var types = _context.InstitutionTypes
             .Where(et =>
                 request.Types
                     .Contains(et.Title));
-        await AddInstitutionTypeInstitution(newEstablishment, types, cancellationToken);
+        await AddInstitutionTypeInstitution(newInstitution, types, cancellationToken);
 
-        return newEstablishment;
+        return newInstitution;
     }
 
     private async Task AddInstitution(Institution establishment, CancellationToken cancellationToken)

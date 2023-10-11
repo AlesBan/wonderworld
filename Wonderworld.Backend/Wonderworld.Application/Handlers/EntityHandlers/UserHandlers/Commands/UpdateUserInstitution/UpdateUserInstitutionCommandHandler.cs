@@ -32,7 +32,7 @@ public class UpdateUserInstitutionCommandHandler : IRequestHandler<UpdateUserIns
 
         var institution = await _mediator.Send(new GetInstitutionQuery()
         {
-            Title = request.InstitutionTitle,
+            InstitutionTitle = request.InstitutionTitle,
             Address = request.InstitutionTitle,
             Types = request.Types
         }, cancellationToken);

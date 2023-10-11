@@ -21,7 +21,7 @@ public class UpdateUserDisciplinesCommandHandler : IRequestHandler<UpdateUserDis
                 .Where(ud =>
                     ud.UserId == request.UserId));
 
-        var userDisciplines = request.NewDisciplines
+        var userDisciplines = request.NewDisciplineIds
             .Select(discipline =>
                 new UserDiscipline()
                 {

@@ -4,16 +4,16 @@ using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 
-public class UpdateUserLanguagesQueryHandler : IRequestHandler<UpdateUserLanguagesQuery>
+public class UpdateUserLanguagesCommandHandler : IRequestHandler<UpdateUserLanguagesCommand>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public UpdateUserLanguagesQueryHandler(ISharedLessonDbContext context)
+    public UpdateUserLanguagesCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<Unit> Handle(UpdateUserLanguagesQuery request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(UpdateUserLanguagesCommand request, CancellationToken cancellationToken)
     {
         var userLanguages = _context.UserLanguages
             .Where(ul => 
@@ -21,7 +21,7 @@ public class UpdateUserLanguagesQueryHandler : IRequestHandler<UpdateUserLanguag
 
         _context.UserLanguages
             .RemoveRange(userLanguages);
-        var userLanguagesToAdd = request.NewLanguages
+        var userLanguagesToAdd = request.NewLanguageIds
             .Select(l =>
                 new UserLanguage()
                 {

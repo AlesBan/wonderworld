@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Wonderworld.Application.Dtos.CreateAccountDtos;
 
-public class UserCreateAccountRequestDto
+public class CreateUserAccountRequestDto
 {
     [Required]
     public string FirstName { get; set; }

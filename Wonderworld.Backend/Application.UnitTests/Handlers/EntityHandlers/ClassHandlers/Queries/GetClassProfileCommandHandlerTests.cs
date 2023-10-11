@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Shouldly;
 using Wonderworld.Application.Dtos;
+using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClassProfile;
 using Xunit;
@@ -37,14 +38,9 @@ public class GetClassProfileCommandHandlerTests : TestCommonBase
         // Assert
         Assert.NotNull(result);
         result.ShouldBeOfType<ClassProfileDto>();
-        Assert.NotNull(result.ClassId);
         result.ClassId.ShouldBe(@class!.ClassId);
-        Assert.NotNull(result.Age);
-        result.Age.ShouldBe(@class.Age);
         Assert.NotNull(result.UserFullName);
         result.UserFullName.ShouldBe(@class.User.FullName);
-        Assert.NotNull(result.Grade);
-        result.Grade.ShouldBe(@class.Grade);
         Assert.NotNull(result.PhotoUrl);
         result.PhotoUrl.ShouldBe(@class.PhotoUrl);
     }

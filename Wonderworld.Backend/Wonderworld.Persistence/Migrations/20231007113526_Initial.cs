@@ -446,16 +446,16 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "DisciplineId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("0d1176f9-c609-429a-b349-ecd35621840a"), "History" },
-                    { new Guid("27e8b22a-65d5-4679-8354-0d9a66829eb0"), "Geography" },
-                    { new Guid("68b5f91b-400d-49f0-9f78-98864774c3a7"), "Music" },
-                    { new Guid("690a91fb-aef1-4c42-afb1-5a674e4d5179"), "Mathematics" },
-                    { new Guid("6dfa73ee-a6c6-4635-84d7-f4466b74eaa1"), "Chemistry" },
-                    { new Guid("983e22d2-0acf-4102-a935-bbc55e7ec0c2"), "Physics" },
-                    { new Guid("a8348b83-761a-4a0a-91da-0cfe0367ad2f"), "Biology" },
-                    { new Guid("b93b496c-bcc7-448f-9320-d9e79352343d"), "ComputerScience" },
-                    { new Guid("ceb77662-52a5-4440-a163-0788360049be"), "Art" },
-                    { new Guid("fe8c95ac-5820-4143-83cd-f4e3a9a2e3d2"), "Literature" }
+                    { new Guid("66e4b097-e11c-4c9d-8943-ae311c823494"), "Geography" },
+                    { new Guid("92441449-4848-4566-b6e3-fdeb150f0301"), "History" },
+                    { new Guid("9f82bc63-6413-41de-a054-50930bd2c1ef"), "Mathematics" },
+                    { new Guid("ae246bc5-75d9-4918-aa44-fef1fc7acb24"), "Biology" },
+                    { new Guid("ae3a3f57-d10a-4005-8c8f-0c720f2cd7e0"), "Art" },
+                    { new Guid("bad64787-8cbe-40b5-ba40-1d54459b5321"), "ComputerScience" },
+                    { new Guid("c916733c-2dfc-4423-8d32-cc3afb17a8c0"), "Chemistry" },
+                    { new Guid("d8d7cb79-3bab-4659-896a-8c6c4b91fccc"), "Music" },
+                    { new Guid("e0848045-5e48-4447-aaa3-10aee1be3cc8"), "Literature" },
+                    { new Guid("fb3546a3-6840-471b-b67a-f66bdda2becd"), "Physics" }
                 });
 
             migrationBuilder.InsertData(
@@ -463,18 +463,18 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "GradeId", "GradeNumber" },
                 values: new object[,]
                 {
-                    { new Guid("31623a53-e7a0-492e-a4bc-ea542f6e8270"), 8 },
-                    { new Guid("353a7b56-7e5d-4d74-b942-e1a791a06141"), 4 },
-                    { new Guid("40b2ea27-1828-47e1-9dcc-83be42fa4967"), 10 },
-                    { new Guid("50dfbcdc-755e-4db8-b033-bf5c0e1216ea"), 11 },
-                    { new Guid("6571dc37-06e3-405c-aece-71a72c0f6e0c"), 12 },
-                    { new Guid("7859f230-b9aa-46e5-a2b4-690ef536dfa1"), 6 },
-                    { new Guid("93ea1ea0-78df-4353-b8df-fdc9fd70969f"), 5 },
-                    { new Guid("9d362d06-3d89-4d4c-b6e2-64b1ccb06570"), 3 },
-                    { new Guid("c00b6562-78cc-4c02-ab04-3466580eca14"), 2 },
-                    { new Guid("da7efe12-c84b-4371-9ce9-2ff41932a3b1"), 7 },
-                    { new Guid("e02a6687-f70b-4d44-9254-6f7955629a2c"), 1 },
-                    { new Guid("e541f010-8f11-4db7-a1d8-5ab8d5f92878"), 9 }
+                    { new Guid("6184cf81-1efd-49eb-9ffa-da667986c273"), 11 },
+                    { new Guid("70b0792f-68b1-4abe-bd00-2be2bff83009"), 7 },
+                    { new Guid("79496808-8d72-4d83-af23-bd77e6f197e1"), 2 },
+                    { new Guid("82dd31dd-e16b-4258-b87f-0e1629ba84f7"), 12 },
+                    { new Guid("8c90a879-6f4e-497e-a3a0-b453681f243f"), 3 },
+                    { new Guid("aa948db1-0e4c-432a-a003-b166a71a491e"), 10 },
+                    { new Guid("b97c721d-7acd-4442-a8d2-a9bfe5ac24d6"), 9 },
+                    { new Guid("ba43674b-ce37-4c1e-ad55-0d832592702f"), 5 },
+                    { new Guid("be224635-6eb5-45f6-b234-75299b50be7f"), 1 },
+                    { new Guid("c5503122-df6c-41ce-8c45-345b150fe2a7"), 8 },
+                    { new Guid("dd1aba64-abfd-4dc5-964e-7c3bd606483c"), 4 },
+                    { new Guid("f11b1dd2-5ef2-4292-8efb-92bd564d4c16"), 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -482,10 +482,10 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "InstitutionTypeId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("26d9efc5-b58e-44c8-9325-0d3653fbd827"), "Lyceum" },
-                    { new Guid("510e2f26-e72f-470e-ba6b-9a1074cb4dbb"), "College" },
-                    { new Guid("dbab9cb3-148d-4216-9804-69400492f15c"), "School" },
-                    { new Guid("eb94d85d-2747-4da5-a232-2404cedefa3c"), "Gymnasium" }
+                    { new Guid("23beaee3-7f06-442a-9948-d39e28973c7c"), "Lyceum" },
+                    { new Guid("4ec8bc74-8bfe-4a44-9658-efa020de900c"), "School" },
+                    { new Guid("cda20a55-7bb8-4f65-b0a0-f9bca031b013"), "Gymnasium" },
+                    { new Guid("ed3c70d8-a35a-4aae-a575-d6f10c164b49"), "College" }
                 });
 
             migrationBuilder.InsertData(
@@ -493,23 +493,23 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "LanguageId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("2ff62ce5-cfc8-4e91-9acd-d9ad266a0d9d"), "Kyrgyz" },
-                    { new Guid("4869efcf-702f-4ca8-b5d9-d666183ddfac"), "Hungarian" },
-                    { new Guid("5eadbb71-16f4-4102-93db-e2d0792e208b"), "Tajik" },
-                    { new Guid("723afa2e-738c-48e0-8757-b4af309a7b3a"), "Kazakh" },
-                    { new Guid("840a38cb-fdaf-42d8-a7c0-f859e1ed553a"), "Russian" },
-                    { new Guid("8af7fb1f-add3-4eb4-b712-9a0ffadcb042"), "English" },
-                    { new Guid("8bf622c1-78a6-457c-abe2-62e8cf5efc11"), "Georgian" },
-                    { new Guid("8e0a4511-2b75-49f4-974b-4982eebde738"), "Ukrainian" },
-                    { new Guid("a3e42078-fd33-4af5-833e-b0d2d98dcffe"), "Uzbek" },
-                    { new Guid("a62bb5e3-f009-49fe-96c8-addb8f9b6861"), "French" },
-                    { new Guid("d2670554-9d69-4c87-8d59-e75448458e0c"), "German" },
-                    { new Guid("d9082c0b-346f-40e9-9dcb-6c5b1b803f69"), "Spanish" },
-                    { new Guid("dcbbae56-cad3-4aca-925e-158a5428c854"), "Belarusian" },
-                    { new Guid("dceece5e-ecd6-4a72-9e49-b8ca0505f677"), "Armenian" },
-                    { new Guid("f1b46063-96ce-44e6-b71a-79636eaa47e8"), "Azerbaijani" },
-                    { new Guid("f1fbd4e3-d132-40e3-83d8-e11432dc31f1"), "Portuguese" },
-                    { new Guid("fa141eae-57ea-4893-aef8-ddfa7c06ac42"), "Italian" }
+                    { new Guid("01b6d943-20ea-4b84-a9bc-95c5797f70be"), "Kyrgyz" },
+                    { new Guid("0a19ea78-8fe7-458f-a1a8-272644649873"), "Azerbaijani" },
+                    { new Guid("1c310b5c-48e3-4862-9b17-c34c08a433ed"), "Ukrainian" },
+                    { new Guid("1dea0797-6a39-4a05-a3fd-928821509791"), "Portuguese" },
+                    { new Guid("2e4554de-6005-46a9-89e2-daec0bab29c4"), "Belarusian" },
+                    { new Guid("3497a19f-c28d-481b-978e-9556db80b9a5"), "Tajik" },
+                    { new Guid("37c02caf-c3eb-491a-b348-ef944d3c4291"), "Kazakh" },
+                    { new Guid("4e58e147-371a-44c8-b07b-3034e3cabb86"), "Uzbek" },
+                    { new Guid("503b6ea3-1902-4587-a61d-8195cd4a3356"), "Russian" },
+                    { new Guid("6a1860bc-49a7-481c-8993-0927188110c2"), "German" },
+                    { new Guid("84f34e1f-4e7e-464c-8959-56194ffeae4b"), "Italian" },
+                    { new Guid("99ab6fb4-622f-4b1a-a543-54b8742b4fd7"), "Armenian" },
+                    { new Guid("a2644b9c-fdc1-42e1-b97f-532b583d08f1"), "French" },
+                    { new Guid("a55aff93-c707-4353-acc2-e8d6fdbe1041"), "Georgian" },
+                    { new Guid("c1d52696-91a5-44bd-9125-8c5c5a769af4"), "Spanish" },
+                    { new Guid("c3422764-b37c-428f-a586-18087f0c76d5"), "Hungarian" },
+                    { new Guid("e2877f40-89dc-4b69-a7da-33982ed97b31"), "English" }
                 });
 
             migrationBuilder.InsertData(
@@ -517,9 +517,9 @@ namespace Wonderworld.Persistence.Migrations
                 columns: new[] { "RoleId", "Title" },
                 values: new object[,]
                 {
-                    { new Guid("28dcacf3-69dc-4b0b-ba0d-3bdc4eb9b3fb"), "Manager" },
-                    { new Guid("7368254d-4abf-48ca-acb6-b7999c2dc01e"), "User" },
-                    { new Guid("f8fca007-c45d-4baa-bc3f-66e67c420ba1"), "Admin" }
+                    { new Guid("0e712a22-dcca-49ed-9b09-056df59b02b1"), "Manager" },
+                    { new Guid("91281740-669b-4d08-acc5-3ee8aa4a23f2"), "User" },
+                    { new Guid("fb8488a4-ca20-4489-a560-6ccb3c7f705e"), "Admin" }
                 });
 
             migrationBuilder.CreateIndex(

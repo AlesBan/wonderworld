@@ -6,6 +6,6 @@ namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHan
 
 public class UpdateUserGradesCommand : IRequest
 {
-    public User User { get; set; }
-    public ICollection<Grade> NewGrades { get; set; } = new List<Grade>();
+    public Guid UserId { get; set; }
+    public ICollection<Guid> NewGradeIds { get; set; } = new List<Guid>();
 }

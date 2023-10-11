@@ -9,7 +9,6 @@ using Wonderworld.Persistence.EntityConfiguration.Main;
 using Wonderworld.Persistence.EntityConnectionsConfiguration;
 using Wonderworld.Persistence.EntityTypeConfiguration.Communication;
 using Wonderworld.Persistence.EntityTypeConfiguration.Education;
-using Wonderworld.Persistence.EntityTypeConfiguration.Main;
 using InstitutionType = Wonderworld.Domain.Entities.Job.InstitutionType;
 
 namespace Wonderworld.Persistence;

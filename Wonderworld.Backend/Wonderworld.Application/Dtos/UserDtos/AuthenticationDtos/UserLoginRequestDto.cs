@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Wonderworld.Application.Dtos.AuthenticationDtos;
+namespace Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 
 public class UserLoginRequestDto
 {

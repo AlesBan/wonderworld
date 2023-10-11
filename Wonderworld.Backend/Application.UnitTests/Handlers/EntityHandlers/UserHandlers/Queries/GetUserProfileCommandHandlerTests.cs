@@ -39,7 +39,7 @@ public class GetUserProfileCommandHandlerTests : TestCommonBase
         result.IsATeacher.ShouldBe(true);
         result.IsAnExpert.ShouldBe(false);
         result.CityTitle.ShouldBe("CityA");  
-        result.Establishment.Title.ShouldBe("EstablishmentA");
+        result.Institution.Title.ShouldBe("EstablishmentA");
         result.Description.ShouldBe("DescriptionA");
         result.PhotoUrl.ShouldBe("PhotoUrlA");
         result.BannerPhotoUrl.ShouldBe("BannerPhotoUrlA");

@@ -21,16 +21,25 @@ public class GetInstitutionQueryHandler : IRequestHandler<GetInstitutionQuery, I
     public async Task<Institution> Handle(GetInstitutionQuery request,
         CancellationToken cancellationToken)
     {
-        var establishment = await _context.Institutions
+        var institution = await _context.Institutions
             .FirstOrDefaultAsync(e =>
-                e.Address == request.Address, cancellationToken: cancellationToken) ?? await _mediator.Send(
+                e.Address == request.Address, cancellationToken: cancellationToken);
+        
+        if (institution != null)
+        {
+           return institution;
+        }
+        
+        var newInstitution = await _mediator.Send(
             new CreateInstitutionCommand
             {
                 Types = request.Types,
-                Title = request.Title,
+                InstitutionTitle = request.InstitutionTitle,
                 Address = request.Address
             }, cancellationToken);
-
-        return establishment;
+        
+        await _context.Institutions.AddAsync(newInstitution, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken: cancellationToken);
+        return newInstitution;
     }
 }

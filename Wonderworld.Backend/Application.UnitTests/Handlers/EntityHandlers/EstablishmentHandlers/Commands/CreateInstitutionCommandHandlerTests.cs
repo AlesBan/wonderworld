@@ -1,6 +1,5 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateEstablishment;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 using Wonderworld.Domain.Enums.EntityTypes;
 using Xunit;
@@ -19,7 +18,7 @@ public class CreateInstitutionCommandHandlerTests : TestCommonBase
 
         var command = new CreateInstitutionCommand
         {
-            Title = title,
+            InstitutionTitle = title,
             Address = address,
             Types = new List<string> { typeTitle }
         

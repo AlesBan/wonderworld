@@ -11,8 +11,7 @@ public class UpdateUserPasswordCommandHandlerTests : TestCommonBase
     public async Task UpdateUserPasswordCommandHandler_Handle_ShouldUpdateUserPassword()
     {
         // Arrange
-        var user = await Context.Users.SingleOrDefaultAsync(u =>
-            u.UserId == SharedLessonDbContextFactory.UserAId);
+        var userId = SharedLessonDbContextFactory.UserAId;
         const string newPassword = "NewPassword";
 
         var handler = new UpdateUserPasswordCommandHandler(Context);
@@ -20,13 +19,13 @@ public class UpdateUserPasswordCommandHandlerTests : TestCommonBase
         // Act
         await handler.Handle(new UpdateUserPasswordCommand()
         {
-            User = user!,
-            NewPassword = newPassword
+            UserId = userId,
+            Password = newPassword
         }, CancellationToken.None);
 
         // Assert
         Assert.NotNull(await Context.Users.SingleOrDefaultAsync(u =>
-            u.UserId == user!.UserId &&
+            u.UserId == userId &&
             u.Password == newPassword));
     }
 }

@@ -10,6 +10,6 @@ public class Institution
     public string Title { get; set; }= string.Empty;
     public string Address { get; set; } = string.Empty;
     public ICollection<User> Users { get; set; } = new List<User>();
-    public ICollection<InstitutionTypeInstitution> InstitutionTypes { get; set; } = new List<InstitutionTypeInstitution>();
+    public List<InstitutionTypeInstitution> InstitutionTypes { get; set; } = new List<InstitutionTypeInstitution>();
 
 }

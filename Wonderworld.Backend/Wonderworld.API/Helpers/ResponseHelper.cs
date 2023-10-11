@@ -1,17 +1,27 @@
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Models;
 using Wonderworld.API.Models.Authentication;
+using Wonderworld.Application.Dtos.ClassDtos;
 
 namespace Wonderworld.API.Helpers;
 
 public static class ResponseHelper
 {
-    public static BadRequestObjectResult GetBadRequest(string message)
+    public static IActionResult GetBadRequest(string message)
     {
         return new BadRequestObjectResult(new ResponseResult
         {
             Result = false,
-            Errors = new List<string> { message }
+            Errors = new List<string> { message },
+        });
+    }
+    
+    public static OkObjectResult GetOkResult(object value)
+    {
+        return new OkObjectResult(new ResponseResult
+        {
+            Result = true,
+            Value = value
         });
     }
 
@@ -32,4 +42,5 @@ public static class ResponseHelper
             Token = token
         });
     }
+    
 }

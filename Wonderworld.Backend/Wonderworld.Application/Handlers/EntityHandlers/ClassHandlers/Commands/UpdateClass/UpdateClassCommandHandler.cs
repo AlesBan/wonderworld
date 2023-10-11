@@ -28,7 +28,6 @@ public class UpdateClassCommandHandler : IRequestHandler<UpdateClassCommand>
     {
         @class.Title = request.Title;
         @class.Grade = request.Grade;
-        @class.Age = request.Age;
 
         @class.ClassDisciplines = request.Disciplines.Select(disc => new ClassDiscipline
         {

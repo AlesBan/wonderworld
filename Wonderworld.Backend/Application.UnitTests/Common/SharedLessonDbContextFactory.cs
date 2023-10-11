@@ -87,12 +87,14 @@ public class SharedLessonDbContextFactory
                 UserId = UserRegisteredId,
                 Email = "emailR",
                 Password = "passwordR",
+                IsCreatedAccount = false
             },
             new User
             {
                 UserId = UserAId,
                 Email = "emailA",
                 Password = "passwordA",
+                IsCreatedAccount = true,
                 FirstName = "FirstNameA",
                 LastName = "LastNameA",
                 IsATeacher = true,
@@ -120,6 +122,7 @@ public class SharedLessonDbContextFactory
                 Password = "passwordB",
                 FirstName = "FirstNameB",
                 LastName = "LastNameB",
+                IsCreatedAccount = true,
                 IsATeacher = true,
                 IsAnExpert = true,
                 Institution = context.Institutions.FirstOrDefault(e =>
@@ -159,7 +162,6 @@ public class SharedLessonDbContextFactory
                 Title = "ClassAId",
                 Grade = context.Grades.FirstOrDefault(g =>
                     g.GradeNumber == 10)!,
-                Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             },
@@ -169,7 +171,6 @@ public class SharedLessonDbContextFactory
                 ClassId = ClassForUpdateId,
                 Title = "ClassForUpdateId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
-                Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             },
@@ -179,7 +180,6 @@ public class SharedLessonDbContextFactory
                 ClassId = ClassForDeleteId,
                 Title = "ClassForDeleteId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
-                Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             },
@@ -189,7 +189,6 @@ public class SharedLessonDbContextFactory
                 ClassId = ClassBId,
                 Title = "titleB",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 6)!,
-                Age = 11,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             }

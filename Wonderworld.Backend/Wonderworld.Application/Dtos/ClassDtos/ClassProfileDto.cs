@@ -3,7 +3,7 @@ using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Dtos.ProfileDtos;
+namespace Wonderworld.Application.Dtos.ClassDtos;
 
 public class ClassProfileDto : IMapWith<Class>
 {
@@ -12,14 +12,16 @@ public class ClassProfileDto : IMapWith<Class>
     public string UserFullName { get; set; } = string.Empty;
     public double UserRating { get; set; }
     public int UserReviewsCount { get; set; }
-    public Grade Grade { get; set; } = new();
-    public int Age { get; set; }
+    public int Grade { get; set; }
     public List<string> Languages { get; set; } = new();
     public List<string> Disciplines { get; set; } = new();
     public string PhotoUrl { get; set; } = string.Empty;
 
     public void Mapping(Profile profile)
     {
+        profile.CreateMap<Class, Grade>()
+            .ForMember(up => up.GradeNumber,
+                opt => opt.MapFrom(u => u.Grade));
         profile.CreateMap<Class, ClassProfileDto>()
             .ForMember(up => up.ClassId,
                 opt => opt.MapFrom(u => u.ClassId))
@@ -33,9 +35,7 @@ public class ClassProfileDto : IMapWith<Class>
             .ForMember(up => up.UserReviewsCount,
                 opt => opt.MapFrom(u => u.User.ReceivedReviews.Count))
             .ForMember(up => up.Grade,
-                opt => opt.MapFrom(u => u.Grade))
-            .ForMember(up => up.Age,
-                opt => opt.MapFrom(u => u.Age))
+                opt => opt.MapFrom(u => u.Grade.GradeNumber))
             .ForMember(up => up.PhotoUrl,
                 opt => opt.MapFrom(u => u.PhotoUrl))
             .ForMember(up => up.Languages,

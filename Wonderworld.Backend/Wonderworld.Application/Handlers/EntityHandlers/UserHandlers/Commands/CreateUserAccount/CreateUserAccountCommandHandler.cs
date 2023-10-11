@@ -58,11 +58,11 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
     private async Task SeedUserLanguages(Guid userId, CreateUserAccountCommand request,
         CancellationToken cancellationToken = default)
     {
-        var handler = new UpdateUserLanguagesQueryHandler(_context);
-        await handler.Handle(new UpdateUserLanguagesQuery
+        var handler = new UpdateUserLanguagesCommandHandler(_context);
+        await handler.Handle(new UpdateUserLanguagesCommand
         {
             UserId = userId,
-            NewLanguages = request.Languages
+            NewLanguageIds = request.Languages
                 .Select(l => l.LanguageId)
                 .ToList()
         }, cancellationToken);
@@ -75,7 +75,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         await handler.Handle(new UpdateUserDisciplinesCommand()
         {
             UserId = userId,
-            NewDisciplines = request.Disciplines
+            NewDisciplineIds = request.Disciplines
                 .Select(d => d.DisciplineId)
                 .ToList()
         }, cancellationToken);

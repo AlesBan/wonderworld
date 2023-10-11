@@ -1,3 +1,4 @@
+using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.ProfileDtos;
 
 namespace Wonderworld.Application.Dtos.SearchDtos;

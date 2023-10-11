@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Persistence.EntityTypeConfiguration.Main;
+namespace Wonderworld.Persistence.EntityConfiguration.Main;
 
 public class ClassConfiguration : IEntityTypeConfiguration<Class>
 {
@@ -22,10 +22,6 @@ public class ClassConfiguration : IEntityTypeConfiguration<Class>
         
         builder.Property(c => c.Title)
             .HasMaxLength(40)
-            .IsRequired();
-
-        builder.Property(c => c.Age)
-            .HasColumnType("smallint")
             .IsRequired();
 
         builder.Property(c => c.PhotoUrl)

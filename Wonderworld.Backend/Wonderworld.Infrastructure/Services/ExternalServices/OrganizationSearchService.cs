@@ -18,7 +18,7 @@ public class OrganizationSearchService : IOrganizationSearchService
         _httpClient = httpClient;
     }
 
-    public async Task<IEnumerable<InstitutionSearchResponseDto>> GetEstablishments(InstitutionDto establishment)
+    public async Task<IEnumerable<InstitutionSearchResponseDto>> GetInstitutions(InstitutionDto establishment)
     {
         var token = _yandexAccountService.GeyAccessToken();
         var baseUrl = _yandexAccountService.GetBaseUrl();

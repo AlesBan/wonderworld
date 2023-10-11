@@ -8,5 +8,4 @@ public class Discipline
     public string Title { get; set; }
     public ICollection<ClassDiscipline> ClassDisciplines { get; set; } = new List<ClassDiscipline>();
     public ICollection<UserDiscipline> UserDisciplines { get; set; } = new List<UserDiscipline>();
-
 }
