@@ -1,33 +1,28 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
-using Wonderworld.API.Models.Authentication;
-using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Common.Exceptions.User;
-using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Commands.CreateCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
-using Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Commands.CreateEstablishment;
+using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
+using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByEmail;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
-using static Wonderworld.API.Constants.AuthConstants;
-using GetEstablishmentCommand =
-    Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Queries.GetEstablishmentByAddress.
-    GetEstablishmentCommand;
 
 namespace Wonderworld.API.Services.AccountServices;
 
@@ -44,107 +39,49 @@ public class UserAccountService : IUserAccountService
         _mapper = mapper;
     }
 
-    public async Task<IActionResult> GetUserProfile(Guid userId, IMediator mediator)
-    {
-        User user;
-        try
-        {
-            user = await mediator.Send(new GetUserByIdQuery(userId));
-        }
-        catch (UserNotFoundException e)
-        {
-            return GetBadRequest(e.Message);
-        }
-
-        var userProfileDto = _mapper.Map<UserProfileDto>(user);
-        return new OkObjectResult(userProfileDto);
-    }
-
     public async Task<IActionResult> RegisterUser(UserRegisterRequestDto requestUserDto, IMediator mediator)
     {
-        try
-        {
-            var user = await mediator.Send(new RegisterUserCommand(requestUserDto));
-            var token = JwtHelper.CreateToken(user, _configuration);
-            return GetAuthResultOk(token);
-        }
-        catch (UserAlreadyExistsException e)
-        {
-            return GetBadRequest(e.Message);
-        }
+        var user = await mediator.Send(new RegisterUserCommand(requestUserDto));
+        var token = JwtHelper.CreateToken(user, _configuration);
+        return ResponseHelper.GetAuthResultOk(token);
     }
 
     public async Task<IActionResult> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator)
     {
-        try
-        {
-            var user = await GetUser(requestUserDto.Email, mediator);
-            CheckLoginUserCredentials(user, requestUserDto.Password);
+        var user = await UserHelper.GetUser(requestUserDto.Email, mediator);
+        CheckLoginUserCredentials(user, requestUserDto.Password);
 
-            var token = JwtHelper.CreateToken(user, _configuration);
+        var token = JwtHelper.CreateToken(user, _configuration);
 
-            return GetAuthResultOk(token);
-        }
-        catch (UserNotFoundException e)
-        {
-            return GetBadRequest(e.Message);
-        }
-        catch (InvalidInputCredentialsException e)
-        {
-            return GetBadRequest(e.Message);
-        }
+        return ResponseHelper.GetAuthResultOk(token);
     }
 
-    public async Task<IActionResult> CreateUserAccount(Guid userId, UserCreateAccountRequestDto requestUserDto,
+    public async Task<IActionResult> CreateUserAccount(Guid userId, CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
-        try
-        {
-            var user = await GetUser(userId, mediator);
+        var user = await UserHelper.GetUser(userId, mediator);
 
-            CheckUserCreateAccountAbility(user);
+        CheckUserCreateAccountAbility(user);
 
-            var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
-            var userDto = _mapper.Map<UserProfileDto>(userWithAccount);
-            return new OkObjectResult(userDto);
-        }
-        catch (UserNotFoundException e)
-        {
-            return GetBadRequest(e.Message);
-        }
-        catch (UserAlreadyHasAccountException e)
-        {
-            return GetBadRequest(e.Message);
-        }
+        var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
+        var userProfileDto = _mapper.Map<UserProfileDto>(userWithAccount);
+        return ResponseHelper.GetOkResult(userProfileDto);
+    }
+
+    public async Task<IActionResult> GetUserProfile(Guid userId, IMediator mediator)
+    {
+        var user = await mediator.Send(new GetUserByIdQuery(userId));
+        var userProfileDto = _mapper.Map<UserProfileDto>(user);
+        return new OkObjectResult(userProfileDto);
     }
 
     public async Task<IActionResult> DeleteUser(Guid userId, IMediator mediator)
     {
-        try
-        {
-            await mediator.Send(new DeleteUserCommand(userId));
-        }
-        catch (NotFoundException)
-        {
-            return GetBadRequest(UserNotFoundErrorMessage);
-        }
+        await mediator.Send(new DeleteUserCommand(userId));
 
         return new OkResult();
     }
 
-    private static async Task<User> GetUser(Guid userId, IMediator mediator)
-    {
-        var user = await mediator.Send(new GetUserByIdQuery(userId));
-
-        return user;
-    }
-
-    private static async Task<User> GetUser(string email, IMediator mediator)
-    {
-        var user = await mediator.Send(new GetUserByEmailQuery(email));
-
-        return user;
-    }
 
     private static void CheckUserCreateAccountAbility(User user)
     {
@@ -164,7 +101,7 @@ public class UserAccountService : IUserAccountService
         }
     }
 
-    private async Task<User> GetUserWithAccount(Guid userId, UserCreateAccountRequestDto requestUserDto,
+    private async Task<User> GetUserWithAccount(Guid userId, CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
         var command = await GetCreateUserAccountCommand(userId, requestUserDto, mediator);
@@ -172,7 +109,7 @@ public class UserAccountService : IUserAccountService
     }
 
     private async Task<CreateUserAccountCommand> GetCreateUserAccountCommand(Guid userId,
-        UserCreateAccountRequestDto requestUserDto, IMediator mediator)
+        CreateUserAccountRequestDto requestUserDto, IMediator mediator)
     {
         var country = await GetCountry(requestUserDto.CountryLocation, mediator);
         var city = await GetCity(country, requestUserDto.CityLocation, mediator);
@@ -200,7 +137,7 @@ public class UserAccountService : IUserAccountService
 
     private static async Task<Country> GetCountry(string countryTitle, IMediator mediator)
     {
-        var query = new GetCountryByTitleCommand()
+        var query = new GetCountryByTitleQuery()
         {
             Title = countryTitle
         };
@@ -231,21 +168,21 @@ public class UserAccountService : IUserAccountService
         }
     }
 
-    private async Task<Institution> GetEstablishment(UserCreateAccountRequestDto requestUserDto,
+    private async Task<Institution> GetEstablishment(CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
-        var address = requestUserDto.EstablishmentDto.Address;
-        var establishmentTitle = requestUserDto.EstablishmentDto.Title;
-        var establishmentTypesTitles = requestUserDto.EstablishmentDto.Types;
-        var establishmentTypes = _context.EstablishmentTypes.ToList()
+        var address = requestUserDto.InstitutionDto.Address;
+        var establishmentTitle = requestUserDto.InstitutionDto.Title;
+        var establishmentTypesTitles = requestUserDto.InstitutionDto.Types;
+        var establishmentTypes = _context.InstitutionTypes.ToList()
             .Where(et =>
                 establishmentTypesTitles.Contains(et.Title));
 
-        var varGetQuery = new GetEstablishmentCommand()
+        var varGetQuery = new GetInstitutionQuery()
         {
             Address = address,
-            Title = establishmentTitle,
-            Types = establishmentTypes.Select(e => e.InstitutionTypeId).ToList()
+            InstitutionTitle = establishmentTitle,
+            Types = establishmentTypes.Select(e => e.Title).ToList()
         };
 
         Institution establishment;
@@ -255,10 +192,10 @@ public class UserAccountService : IUserAccountService
         }
         catch
         {
-            var createQuery = new CreateEstablishmentCommand()
+            var createQuery = new CreateInstitutionCommand()
             {
                 Address = address,
-                Title = establishmentTitle
+                InstitutionTitle = establishmentTitle
             };
             establishment = await mediator.Send(createQuery);
         }
@@ -268,7 +205,7 @@ public class UserAccountService : IUserAccountService
 
     private static async Task<IEnumerable<Language>> GetLanguages(IEnumerable<string> languages, IMediator mediator)
     {
-        var query = new GetLanguagesCommand()
+        var query = new GetLanguagesQuery()
         {
             LanguageTitles = languages
         };
@@ -279,29 +216,11 @@ public class UserAccountService : IUserAccountService
     private static async Task<IEnumerable<Discipline>> GetDisciplines(IEnumerable<string> disciplines,
         IMediator mediator)
     {
-        var query = new GetDisciplinesCommand()
+        var query = new GetDisciplinesQuery()
         {
             DisciplineTitles = disciplines
         };
 
         return await mediator.Send(query);
-    }
-
-    private static BadRequestObjectResult GetBadRequest(string message)
-    {
-        return new BadRequestObjectResult(new AuthResult
-        {
-            Result = false,
-            Errors = new List<string> { message }
-        });
-    }
-
-    private static OkObjectResult GetAuthResultOk(string token)
-    {
-        return new OkObjectResult(new AuthResult
-        {
-            Result = true,
-            Token = token
-        });
     }
 }

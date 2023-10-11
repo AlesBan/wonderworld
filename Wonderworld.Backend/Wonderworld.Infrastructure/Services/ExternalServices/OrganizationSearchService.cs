@@ -18,7 +18,7 @@ public class OrganizationSearchService : IOrganizationSearchService
         _httpClient = httpClient;
     }
 
-    public async Task<IEnumerable<EstablishmentSearchResponseDto>> GetEstablishments(EstablishmentDto establishment)
+    public async Task<IEnumerable<InstitutionSearchResponseDto>> GetInstitutions(InstitutionDto establishment)
     {
         var token = _yandexAccountService.GeyAccessToken();
         var baseUrl = _yandexAccountService.GetBaseUrl();
@@ -39,17 +39,17 @@ public class OrganizationSearchService : IOrganizationSearchService
 
         if (responseObject == null)
         {
-            return new List<EstablishmentSearchResponseDto>();
+            return new List<InstitutionSearchResponseDto>();
         }
 
         var establishmentSearchDtoList = GetEstablishmentSearchDtoList(responseObject);
         return establishmentSearchDtoList;
     }
 
-    private static IEnumerable<EstablishmentSearchResponseDto> GetEstablishmentSearchDtoList(Root responseObject)
+    private static IEnumerable<InstitutionSearchResponseDto> GetEstablishmentSearchDtoList(Root responseObject)
     {
         var establishmentSearchDtoList = responseObject.Features.Select(f =>
-            new EstablishmentSearchResponseDto()
+            new InstitutionSearchResponseDto()
             {
                 Title = f.Properties.Name + " " +
                         f.Properties.Description + " " +

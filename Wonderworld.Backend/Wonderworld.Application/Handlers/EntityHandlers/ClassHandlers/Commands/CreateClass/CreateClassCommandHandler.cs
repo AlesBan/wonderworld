@@ -61,7 +61,6 @@ public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand, Gui
             User = request.User,
             Title = request.Title,
             Grade = request.Grade,
-            Age = request.Age,
             PhotoUrl = request.PhotoUrl
         };
     }

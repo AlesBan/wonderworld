@@ -8,7 +8,7 @@ using Wonderworld.Domain.EntityConnections;
 using Wonderworld.Domain.Enums;
 using Wonderworld.Domain.Enums.EntityTypes;
 using Wonderworld.Persistence;
-using EstablishmentType = Wonderworld.Domain.Enums.EntityTypes.EstablishmentType;
+using InstitutionType = Wonderworld.Domain.Enums.EntityTypes.InstitutionType;
 
 namespace Application.UnitTests.Common;
 
@@ -87,17 +87,19 @@ public class SharedLessonDbContextFactory
                 UserId = UserRegisteredId,
                 Email = "emailR",
                 Password = "passwordR",
+                IsCreatedAccount = false
             },
             new User
             {
                 UserId = UserAId,
                 Email = "emailA",
                 Password = "passwordA",
+                IsCreatedAccount = true,
                 FirstName = "FirstNameA",
                 LastName = "LastNameA",
                 IsATeacher = true,
                 IsAnExpert = false,
-                Institution = context.Establishments.FirstOrDefault(e =>
+                Institution = context.Institutions.FirstOrDefault(e =>
                     e.InstitutionId == EstablishmentAId),
                 City = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityAId),
@@ -120,9 +122,10 @@ public class SharedLessonDbContextFactory
                 Password = "passwordB",
                 FirstName = "FirstNameB",
                 LastName = "LastNameB",
+                IsCreatedAccount = true,
                 IsATeacher = true,
                 IsAnExpert = true,
-                Institution = context.Establishments.FirstOrDefault(e =>
+                Institution = context.Institutions.FirstOrDefault(e =>
                     e.InstitutionId == EstablishmentAId)!,
                 City = context.Cities.FirstOrDefault(c =>
                     c.CityId == CityBId)!,
@@ -159,7 +162,6 @@ public class SharedLessonDbContextFactory
                 Title = "ClassAId",
                 Grade = context.Grades.FirstOrDefault(g =>
                     g.GradeNumber == 10)!,
-                Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             },
@@ -169,7 +171,6 @@ public class SharedLessonDbContextFactory
                 ClassId = ClassForUpdateId,
                 Title = "ClassForUpdateId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
-                Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             },
@@ -179,7 +180,6 @@ public class SharedLessonDbContextFactory
                 ClassId = ClassForDeleteId,
                 Title = "ClassForDeleteId",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 5)!,
-                Age = 10,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             },
@@ -189,7 +189,6 @@ public class SharedLessonDbContextFactory
                 ClassId = ClassBId,
                 Title = "titleB",
                 Grade = context.Grades.FirstOrDefault(g => g.GradeNumber == 6)!,
-                Age = 11,
                 PhotoUrl = "PhotoUrl",
                 CreatedAt = DateTime.Today
             }
@@ -458,7 +457,7 @@ public class SharedLessonDbContextFactory
 
     private static void AppendEstablishments(ISharedLessonDbContext context)
     {
-        context.Establishments.AddRange(
+        context.Institutions.AddRange(
             new Institution()
             {
                 InstitutionId = EstablishmentAId,
@@ -481,28 +480,28 @@ public class SharedLessonDbContextFactory
 
     private static void AppendEstablishmentTypesEstablishment(ISharedLessonDbContext context)
     {
-        context.EstablishmentTypesEstablishments.AddRange(
+        context.InstitutionTypesInstitutions.AddRange(
             new InstitutionTypeInstitution()
             {
-                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(
+                InstitutionTypeId = context.InstitutionTypes.SingleAsync(
                         et
-                            => et.Title == EstablishmentType.School.ToString())
+                            => et.Title == InstitutionType.School.ToString())
                     .Result.InstitutionTypeId,
 
                 InstitutionId = EstablishmentAId
             },
             new InstitutionTypeInstitution
             {
-                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(et
-                        => et.Title == EstablishmentType.Gymnasium.ToString())
+                InstitutionTypeId = context.InstitutionTypes.SingleAsync(et
+                        => et.Title == InstitutionType.Gymnasium.ToString())
                     .Result.InstitutionTypeId,
                 InstitutionId = EstablishmentAId
             },
             new InstitutionTypeInstitution
             {
-                InstitutionTypeId = context.EstablishmentTypes.SingleAsync(
+                InstitutionTypeId = context.InstitutionTypes.SingleAsync(
                         et
-                            => et.Title == EstablishmentType.School.ToString())
+                            => et.Title == InstitutionType.School.ToString())
                     .Result.InstitutionTypeId,
 
                 InstitutionId = EstablishmentBId

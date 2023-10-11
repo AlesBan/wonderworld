@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Interfaces.Services.DefaultDataServices;

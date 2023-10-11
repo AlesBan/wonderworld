@@ -21,8 +21,8 @@ public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
     public DbSet<Grade> Grades { get; set; }
     public DbSet<Discipline> Disciplines { get; set; }
     public DbSet<Language> Languages { get; set; }
-    public DbSet<Institution> Establishments { get; set; }
-    public DbSet<InstitutionType> EstablishmentTypes { get; set; }
+    public DbSet<Institution> Institutions { get; set; }
+    public DbSet<InstitutionType> InstitutionTypes { get; set; }
     public DbSet<City> Cities { get; set; }
     public DbSet<Country> Countries { get; set; }
     public DbSet<Review> Reviews { get; set; }
@@ -33,7 +33,7 @@ public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
     public DbSet<UserLanguage> UserLanguages { get; set; }
     public DbSet<ClassLanguage> ClassLanguages { get; set; }
     public DbSet<ClassDiscipline> ClassDisciplines { get; set; }
-    public DbSet<InstitutionTypeInstitution> EstablishmentTypesEstablishments { get; set; }
+    public DbSet<InstitutionTypeInstitution> InstitutionTypesInstitutions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -12,22 +12,28 @@ public static class JwtHelper
 {
     public static string CreateToken(User user, IConfiguration configuration)
     {
+        var signingKey = new SymmetricSecurityKey(Encoding.UTF8
+            .GetBytes(configuration
+                .GetValue<string>("JwtSettings:IssuerSigningKey")));
+
         var jwtClaims = GetClaims(user);
-
-        var singingKey = new SymmetricSecurityKey(Encoding.UTF8
-            .GetBytes(configuration.GetValue<string>("JwtSettings:IssuerSigningKey")));
         var expiresTime = AuthConstants.TokenLifeTime;
-        var credentials = new SigningCredentials(singingKey, SecurityAlgorithms.HmacSha256);
+        var credentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
 
-        var token = new JwtSecurityToken(
-            issuer: configuration.GetValue<string>("JwtSettings:ValidIssuer"),
-            audience: configuration.GetValue<string>("JwtSettings:ValidAudience"),
-            claims: jwtClaims,
-            expires: expiresTime,
-            signingCredentials: credentials
-        );
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(jwtClaims),
+            Expires = expiresTime,
+            Issuer = configuration.GetValue<string>("JwtSettings:ValidIssuer"),
+            Audience = configuration.GetValue<string>("JwtSettings:ValidAudience"),
+            SigningCredentials = credentials
+        };
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var signedToken = tokenHandler.WriteToken(token);
+
+        return signedToken;
     }
 
     public static Guid GetUserIdFromClaims(HttpContext httpContext)
@@ -36,13 +42,14 @@ public static class JwtHelper
 
         var nameIdentifier = decodedToken.Claims
             .FirstOrDefault(claim =>
-                claim.Type == ClaimTypes.NameIdentifier)?
+                claim.Type == "nameid")?
             .Value;
 
         if (nameIdentifier == null)
         {
             throw new InvalidNameIdentifierClaimException();
         }
+
         return Guid.Parse(nameIdentifier);
     }
 
@@ -67,7 +74,7 @@ public static class JwtHelper
             new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUniversalTime().ToString())
         };
 
-        claims.SetRoleClaims(user);
+        // claims.SetRoleClaims(user);
 
         return claims;
     }

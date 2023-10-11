@@ -1,30 +1,30 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
-using Wonderworld.Application.Handlers.EntityHandlers.EstablishmentHandlers.Commands.DeleteEstablishment;
+using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.DeleteEstablishment;
 using Wonderworld.Application.Handlers.EstablishmentHandlers.Commands.DeleteEstablishment;
 using Xunit;
 
-namespace Application.UnitTests.Handlers.EstablishmentHandlers.Commands;
+namespace Application.UnitTests.Handlers.EntityHandlers.EstablishmentHandlers.Commands;
 
-public class DeleteEstablishmentCommandHandlerTests: TestCommonBase
+public class DeleteInstitutionCommandHandlerTests: TestCommonBase
 {
     [Fact]
     public async Task DeleteEstablishmentCommandHandler_Handle_ShouldDeleteEstablishment()
     {
         // Arrange
         var establishmentId = SharedLessonDbContextFactory.EstablishmentForDeleteId;
-        var handler = new DeleteEstablishmentCommandHandler(Context);
+        var handler = new DeleteInstitutionCommandHandler(Context);
         
         // Act
-        await handler.Handle(new DeleteEstablishmentCommand()
+        await handler.Handle(new DeleteInstitutionCommand()
             {
                 EstablishmentId = establishmentId
             }, 
             CancellationToken.None);
         
         // Assert
-        Assert.Null(await Context.Establishments
+        Assert.Null(await Context.Institutions
             .SingleOrDefaultAsync(e => 
             e.InstitutionId == establishmentId));
     }
@@ -33,12 +33,12 @@ public class DeleteEstablishmentCommandHandlerTests: TestCommonBase
     public async Task DeleteEstablishmentCommandHandler_Handle_FailOnWrongId()
     {
         // Arrange
-        var handler = new DeleteEstablishmentCommandHandler(Context);
+        var handler = new DeleteInstitutionCommandHandler(Context);
 
         // Act
         // Assert
         await Assert.ThrowsAsync<NotFoundException>(async () =>
-            await handler.Handle(new DeleteEstablishmentCommand { EstablishmentId = Guid.NewGuid() },
+            await handler.Handle(new DeleteInstitutionCommand { EstablishmentId = Guid.NewGuid() },
                 CancellationToken.None));
     }
 }

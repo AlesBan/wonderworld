@@ -3,8 +3,8 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPassword;
 
-public class UpdateUserPasswordCommand : IRequest
+public class UpdateUserPasswordCommand : IRequest<User>
 {
-    public User User { get; set; }
-    public string NewPassword { get; set; }
+    public Guid UserId { get; set; }
+    public string Password { get; set; }
 }

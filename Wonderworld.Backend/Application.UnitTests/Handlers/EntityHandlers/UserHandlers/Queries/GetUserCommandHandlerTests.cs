@@ -1,5 +1,6 @@
 using Application.UnitTests.Common;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
 using Xunit;
 
@@ -31,7 +32,7 @@ public class GetUserCommandHandlerTests : TestCommonBase
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<NotFoundException>(() =>
+        await Assert.ThrowsAsync<UserNotFoundException>(() =>
             handler.Handle(new GetUserByIdQuery(userId), CancellationToken.None));
     }
 }

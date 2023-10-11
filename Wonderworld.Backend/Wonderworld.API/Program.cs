@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Wonderworld.API.Filters;
 using Wonderworld.API.Services.AccountServices;
+using Wonderworld.API.Services.ClassServices;
 using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
@@ -53,12 +54,13 @@ builder.Services.AddAuthentication(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = bool.Parse(config["JwtSettings:ValidateIssuer"]),
-            ValidateAudience = bool.Parse(config["JwtSettings:ValidateAudience"]),
-            ValidAudience = config["JwtSettings:ValidAudience"],
             ValidIssuer = config["JwtSettings:ValidIssuer"],
+            ValidAudience = config["JwtSettings:ValidAudience"],
             IssuerSigningKey = new SymmetricSecurityKey
                 (Encoding.UTF8.GetBytes(config["JwtSettings:IssuerSigningKey"])),
+            ValidateIssuer = bool.Parse(config["JwtSettings:ValidateIssuer"]),
+            ValidateAudience = bool.Parse(config["JwtSettings:ValidateAudience"]),
+            ValidateLifetime = bool.Parse(config["JwtSettings:ValidateLifetime"]),
             ValidateIssuerSigningKey = bool.Parse(config["JwtSettings:ValidateIssuerSigningKey"]),
         };
     });
@@ -91,6 +93,9 @@ builder.Services.AddSwaggerGen(options =>
             Array.Empty<string>()
         }
     });
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    options.IncludeXmlComments(xmlPath);
 });
 
 builder.Services.AddHttpClient<IOrganizationSearchService, OrganizationSearchService>(c =>
@@ -103,6 +108,7 @@ builder.Services.AddScoped<ISharedLessonDbContext, SharedLessonDbContext>();
 builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<IEditUserAccountService, EditUserAccountService>();
+builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService>();
 builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
@@ -135,11 +141,11 @@ app.UseSwaggerUI();
 
 app.UseRouting();
 app.UseHttpsRedirection();
+app.UseCors("AlloyAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors("AlloyAll");
 app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 app.Run();

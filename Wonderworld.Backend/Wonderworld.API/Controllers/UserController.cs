@@ -1,14 +1,16 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.AccountServices;
-using Wonderworld.Application.Dtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
+using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Application.Interfaces;
-using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.API.Controllers;
 
+[Produces("application/json")]
 public class UserController : BaseController
 {
     private readonly ISharedLessonDbContext _sharedLessonDbContext;
@@ -20,49 +22,158 @@ public class UserController : BaseController
         _userAccountService = userAccountService;
     }
 
+    /// <summary>
+    /// Gets all users
+    /// </summary>
+    /// <remarks>
+    ///GET /api/user/all-users
+    /// </remarks>
+    /// <returns>
+    ///Returns List of User
+    /// </returns>
+    /// <response code="200">Returns List of User</response>
     [HttpGet("all-users")]
-    public async Task<List<User>> GetAllUsers()
+    public async Task<IActionResult> GetAllUsers()
     {
-        return await _sharedLessonDbContext.Users.ToListAsync();
+        try
+        {
+            return Ok(await _sharedLessonDbContext.Users.ToListAsync());
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 
+    /// <summary>
+    /// Login user
+    /// </summary>
+    /// <remarks>
+    /// </remarks>
+    /// <param name="requestUserDto">UserLoginRequestDto object</param>
+    /// <returns>
+    /// AuthResult object
+    /// </returns>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
     {
-        var result = await _userAccountService.LoginUser(requestUserDto, Mediator);
-        return result;
+        try
+        {
+            var result = await _userAccountService.LoginUser(requestUserDto, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 
+    /// <summary>
+    /// Register` user
+    /// </summary>
+    /// <remarks>
+    /// POST /api/user/register
+    /// </remarks>
+    /// <param name="requestUserDto">UserRegisterRequestDto object</param>
+    /// <returns>
+    /// AuthResult object
+    /// /// </returns>
+    /// <response code="200">Returns AuthResult object</response>
+    /// <response code="400">Returns BadRequest object</response> 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
     {
-        return await _userAccountService.RegisterUser(requestUserDto, Mediator);
+        try
+        {
+            return await _userAccountService.RegisterUser(requestUserDto, Mediator);
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 
+    /// <summary>
+    /// Create account
+    /// </summary>
+    /// <remarks>
+    /// POST /api/user/create-account
+    /// </remarks>
+    /// <param name="requestUserDto"></param>
+    /// <returns>
+    /// AuthResult object
+    /// </returns>
+    /// <response code="200">Returns AuthResult object</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
+    [Authorize]
     [HttpPost("create-account")]
-    public async Task<IActionResult> CreateAccount([FromBody] UserCreateAccountRequestDto requestUserDto)
+    public async Task<IActionResult> CreateAccount([FromBody] CreateUserAccountRequestDto requestUserDto)
     {
-        var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
-        var result = await _userAccountService.CreateUserAccount(userId, requestUserDto, Mediator);
-
-        return result;
+        try
+        {
+            var result = await _userAccountService.CreateUserAccount(UserId, requestUserDto, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 
+    /// <summary>
+    /// Get user profile
+    /// </summary>
+    /// <remarks>
+    /// GET /api/user/get-userprofile
+    /// </remarks>
+    /// <returns>
+    /// Returns UserProfileDto
+    /// </returns>
+    /// <response code="200">Returns UserProfileDto</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
+    [Authorize]
     [HttpGet("get-userprofile")]
     public async Task<IActionResult> GetUser()
     {
-        var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
-        var result = await _userAccountService.GetUserProfile(userId, Mediator);
-        
-        return result;
+        try
+        {
+            var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
+            var result = await _userAccountService.GetUserProfile(userId, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 
+    /// <summary>
+    /// Delete user
+    /// </summary>
+    /// <remarks>
+    /// DELETE /api/user/delete-user
+    /// </remarks>
+    /// <returns>
+    /// No content
+    /// </returns>
+    /// <response code="200">Returns AuthResult object</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
+    [Authorize]
     [HttpDelete("delete-user")]
     public async Task<IActionResult> DeleteUser()
     {
-        var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
-        var result = await _userAccountService.DeleteUser(userId, Mediator);
+        try
+        {
+            var result = await _userAccountService.DeleteUser(UserId, Mediator);
 
-        return result;
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 }

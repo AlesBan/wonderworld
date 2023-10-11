@@ -26,7 +26,7 @@ public class UpdateUserDisciplineCommandHandlerTests : TestCommonBase
         await handler.Handle(new UpdateUserDisciplinesCommand()
         {
             UserId = user!.UserId,
-            NewDisciplines = newDisciplines.Select(d =>
+            NewDisciplineIds = newDisciplines.Select(d =>
                     d.DisciplineId)
                 .ToList()
         }, CancellationToken.None);

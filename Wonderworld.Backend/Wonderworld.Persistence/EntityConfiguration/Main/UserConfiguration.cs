@@ -36,7 +36,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 
         builder.HasOne(t => t.Institution)
             .WithMany(e => e.Users)
-            .HasForeignKey(t => t.EstablishmentId)
+            .HasForeignKey(t => t.InstitutionId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder.Property(u => u.Rating)

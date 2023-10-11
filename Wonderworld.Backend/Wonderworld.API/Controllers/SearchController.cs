@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Interfaces.Services;
@@ -5,6 +6,8 @@ using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
 
 namespace Wonderworld.API.Controllers;
 
+[Authorize]
+[Produces("application/json")]
 public class SearchController : BaseController
 {
     private readonly IDefaultSearchService _defaultSearchDataService;
@@ -16,6 +19,18 @@ public class SearchController : BaseController
         _searchService = searchService;
     }
 
+    /// <summary>
+    /// Get Teachers and Classes depending on search request
+    /// </summary>
+    /// <remarks>
+    /// GET /api/search-request
+    /// </remarks>
+    /// <param name="searchRequest"></param>
+    /// <returns>
+    /// Returns SearchResponse
+    /// </returns>
+    /// <response code="200">Returns SearchResponse</response>
+    /// <response code="400">Returns ResponseResult</response>
     [HttpGet("search-request")]
     public async Task<SearchResponseDto> GetTeachersAndClassesDependingOnSearchRequest(
         [FromBody] SearchRequestDto searchRequest)
@@ -23,9 +38,20 @@ public class SearchController : BaseController
         return await _searchService.GetTeacherAndClassProfilesDependingOnSearchRequest(searchRequest, Mediator);
     }
 
-    [HttpGet("default-search-request/{userId:guid}")]
-    public async Task<DefaultSearchResponseDto> GetTeachersAndClassesDependingOnDefaultSearchRequest(Guid userId)
+    /// <summary>
+    /// Get Teachers and Classes depending on default search request
+    /// </summary>
+    /// <remarks>
+    /// GET /api/default-search-request
+    /// </remarks>
+    /// <returns>
+    /// Returns DefaultSearchResponse
+    /// </returns>
+    /// <response code="200">Returns DefaultSearchResponse</response>
+    /// <response code="400">Returns ResponseResult</response>
+    [HttpGet("default-search-request")]
+    public async Task<DefaultSearchResponseDto> GetTeachersAndClassesDependingOnDefaultSearchRequest()
     {
-        return await _defaultSearchDataService.GetDefaultTeacherAndClassProfiles(userId, Mediator);
+        return await _defaultSearchDataService.GetDefaultTeacherAndClassProfiles(UserId, Mediator);
     }
 }

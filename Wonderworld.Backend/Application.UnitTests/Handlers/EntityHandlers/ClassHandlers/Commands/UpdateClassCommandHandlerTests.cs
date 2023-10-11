@@ -48,7 +48,6 @@ public class UpdateClassCommandHandlerTests : TestCommonBase
             c.Title == newTitle &&
             c.PhotoUrl == newPhotoUrl &&
             c.Grade == newGrade &&
-            c.Age == newAge &&
             c.ClassDisciplines.Count() == newDisciplines.Count() &&
             c.ClassLanguages.Count == newLanguages.Count);
 

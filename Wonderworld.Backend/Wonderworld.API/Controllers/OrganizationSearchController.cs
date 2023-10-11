@@ -14,10 +14,10 @@ public class OrganizationSearchController : BaseController
     }
 
     [HttpGet("get-establishments")]
-    public async Task<IEnumerable<EstablishmentSearchResponseDto>> GetEstablishments(
-        [FromQuery] EstablishmentDto establishment)
+    public async Task<IEnumerable<InstitutionSearchResponseDto>> GetEstablishments(
+        [FromQuery] InstitutionDto establishment)
     {
-        var result = await _organizationSearchService.GetEstablishments(establishment);
+        var result = await _organizationSearchService.GetInstitutions(establishment);
         return result;
     }
 }

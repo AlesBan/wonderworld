@@ -12,7 +12,6 @@ public class Class
     public string Title { get; set; } = string.Empty;
     public Guid GradeId { get; set; }
     public Grade Grade { get; set; }
-    public int Age { get; set; }
     public string? PhotoUrl { get; set; } = string.Empty;
     public ICollection<ClassLanguage> ClassLanguages { get; set; } = new List<ClassLanguage>();
     public DateTime CreatedAt { get; set; }

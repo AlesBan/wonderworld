@@ -1,5 +1,5 @@
 using MediatR;
-using Wonderworld.Application.Dtos.AuthenticationDtos;
+using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;

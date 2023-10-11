@@ -4,5 +4,5 @@ namespace Wonderworld.Application.Interfaces.Services.ExternalServices;
 
 public interface IOrganizationSearchService
 {
-    public Task<IEnumerable<EstablishmentSearchResponseDto>> GetEstablishments(EstablishmentDto establishment);
+    public Task<IEnumerable<InstitutionSearchResponseDto>> GetInstitutions(InstitutionDto establishment);
 }

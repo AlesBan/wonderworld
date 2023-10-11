@@ -11,8 +11,7 @@ public class UpdateUserEmailCommandHandlerTests : TestCommonBase
     public async Task UpdateUserEmailCommandHandler_Handle_ShouldUpdateUserEmail()
     {
         // Arrange
-        var user = await Context.Users.SingleOrDefaultAsync(u =>
-            u.UserId == SharedLessonDbContextFactory.UserAId);
+        var userId = SharedLessonDbContextFactory.UserAId;
         const string newEmail = "NewEmail";
 
         var handler = new UpdateUserEmailCommandHandler(Context);
@@ -20,13 +19,13 @@ public class UpdateUserEmailCommandHandlerTests : TestCommonBase
         // Act
         await handler.Handle(new UpdateUserEmailCommand()
         {
-            User = user!,
-            NewEmail = newEmail
+            UserId = userId,
+            Email = newEmail
         }, CancellationToken.None);
 
         // Assert
         Assert.NotNull(await Context.Users.SingleOrDefaultAsync(u =>
-            u.UserId == user!.UserId &&
+            u.UserId == userId &&
             u.Email == newEmail));
     }
 }

@@ -20,13 +20,13 @@ public class UpdateUserLanguagesCommandHandlerTests : TestCommonBase
             Context.Languages.SingleAsync(x =>
                 x.Title == "English").Result
         };
-        var handler = new UpdateUserLanguagesQueryHandler(Context);
+        var handler = new UpdateUserLanguagesCommandHandler(Context);
 
         // Act
-        await handler.Handle(new UpdateUserLanguagesQuery()
+        await handler.Handle(new UpdateUserLanguagesCommand()
         {
             UserId = user!.UserId,
-            NewLanguages = newLanguages.Select(l => l.LanguageId).ToList()
+            NewLanguageIds = newLanguages.Select(l => l.LanguageId).ToList()
         }, CancellationToken.None);
 
         // Assert

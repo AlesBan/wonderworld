@@ -20,7 +20,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
         var cityLocation = Context.Cities.FirstOrDefault(c =>
             c.CityId == SharedLessonDbContextFactory.CityAId);
 
-        var establishment = Context.Establishments.FirstOrDefault(e =>
+        var establishment = Context.Institutions.FirstOrDefault(e =>
             e.InstitutionId == SharedLessonDbContextFactory.EstablishmentAId);
         var disciplines = Extensions.PickRandom(Context.Disciplines.ToList(), 3).ToList();
         var languages = Extensions.PickRandom(Context.Languages.ToList(), 2).ToList();

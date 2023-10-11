@@ -1,54 +1,156 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Wonderworld.API.Helpers;
+using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application.Dtos.UpdateDtos;
 
 namespace Wonderworld.API.Controllers;
 
-[Route("api/[controller]/{userId:guid}")]
+[Authorize]
+[Route("api/[controller]")]
 public class EditUserController : BaseController
 {
     private readonly IEditUserAccountService _editUserAccountService;
+
     public EditUserController(IEditUserAccountService editUserAccountService)
     {
         _editUserAccountService = editUserAccountService;
     }
 
+    /// <summary>
+    /// Update user personal info
+    /// </summary>
+    /// <remarks>
+    /// PUT /api/edituser/personal-info
+    /// </remarks>
+    /// <param name="requestUserDto">UpdatePersonalInfoRequestDto object</param>
+    /// <returns>
+    /// Returns UserProfileDto object
+    /// </returns>
+    /// <response code="200">Returns UserProfileDto object</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
     [HttpPut("personal-info")]
-    public async Task<IActionResult> EditUserPersonalInfo(Guid userId, [FromBody] UpdatePersonalInfoRequestDto requestUserDto)
+    public async Task<IActionResult> EditUserPersonalInfo([FromBody] UpdatePersonalInfoRequestDto requestUserDto)
     {
-        var result = await _editUserAccountService.EditUserPersonalInfo(userId, requestUserDto, Mediator);
-        return result;
+        try
+        {
+            var result = await _editUserAccountService.EditUserPersonalInfoAsync(UserId, requestUserDto, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 
+    /// <summary>
+    /// Update user institution
+    /// </summary>
+    /// <remarks>
+    /// PUT /api/edituser/institution
+    /// </remarks>
+    /// <param name="requestUserDto">UpdateInstitutionRequestDto object</param>
+    /// <returns>
+    /// Returns UserProfileDto object
+    /// </returns>
+    /// <response code="200">Returns UserProfileDto object</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
     [HttpPut("institution")]
-    public async Task<IActionResult> EditUserInstitution(Guid userId,
-        [FromBody] UpdateInstitutionRequestDto requestUserDto)
+    public async Task<IActionResult> EditUserInstitution([FromBody] UpdateInstitutionRequestDto requestUserDto)
     {
-        var result = await _editUserAccountService.EditUserInstitution(userId, requestUserDto, Mediator);
-        return result;
+        try
+        {
+            var result = await _editUserAccountService.EditUserInstitutionAsync(UserId, requestUserDto, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
-    
+
+    /// <summary>
+    /// Update user professional info
+    /// </summary>
+    /// <remarks>
+    /// PUT /api/edituser/professional-info
+    /// </remarks>
+    /// <param name="requestUserDto">UpdateProfessionalInfoRequestDto object</param>
+    /// <returns>
+    /// Returns UserProfileDto object
+    /// </returns>
+    /// <response code="200">Returns UserProfileDto object</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
     [HttpPut("professional-info")]
-    public async Task<IActionResult> EditUserProfessionalInfo(Guid userId,
+    public async Task<IActionResult> EditUserProfessionalInfo(
         [FromBody] UpdateProfessionalInfoRequestDto requestUserDto)
     {
-        var result = await _editUserAccountService.EditUserProfessionalInfo(userId, requestUserDto, Mediator);
-        return result;
+        try
+        {
+            var result = await _editUserAccountService.EditUserProfessionalInfoAsync(UserId, requestUserDto, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
-    
+
+    /// <summary>
+    /// Update user email
+    /// </summary>
+    /// <remarks>
+    /// PUT /api/edituser/email
+    /// </remarks>
+    /// <param name="requestUserDto">UpdateUserEmailRequestDto object</param>
+    /// <returns>
+    /// Returns UserProfileDto object
+    /// </returns>
+    /// <response code="200">Returns UserProfileDto object</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
     [HttpPut("email")]
-    public async Task<IActionResult> EditUserEmail(Guid userId,
-        [FromBody] UpdateUserEmailRequestDto requestUserDto)
+    public async Task<IActionResult> EditUserEmail([FromBody] UpdateUserEmailRequestDto requestUserDto)
     {
-        var result = await _editUserAccountService.EditUserEmail(userId, requestUserDto, Mediator);
-        return result;
+        try
+        {
+            var result = await _editUserAccountService.EditUserEmailAsync(UserId, requestUserDto, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
-    
+
+    /// <summary>
+    /// Update user password
+    /// </summary>
+    /// <remarks>
+    /// PUT /api/edituser/password
+    /// </remarks>
+    /// <param name="requestUserDto">UpdateUserPasswordRequestDto object</param>
+    /// <returns>
+    /// Returns UserProfileDto object
+    /// </returns>
+    /// <response code="200">Returns UserProfileDto object</response>
+    /// <response code="400">Returns ResponseResult object</response>
+    /// <response code="401">Returns Unauthorized object</response>
     [HttpPut("password")]
-    public async Task<IActionResult> EditUserPassword(Guid userId,
-        [FromBody] UpdateUserPasswordRequestDto requestUserDto)
+    public async Task<IActionResult> EditUserPassword([FromBody] UpdateUserPasswordRequestDto requestUserDto)
     {
-        var result = await _editUserAccountService.EditUserPassword(userId, requestUserDto, Mediator);
-        return result;
+        try
+        {
+            var result = await _editUserAccountService.EditUserPasswordAsync(UserId, requestUserDto, Mediator);
+            return result;
+        }
+        catch (Exception e)
+        {
+            return ResponseHelper.GetBadRequest(e.Message);
+        }
     }
 }
