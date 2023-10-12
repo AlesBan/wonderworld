@@ -1,6 +1,7 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.CreateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands;
@@ -12,17 +13,17 @@ public class CreateUserDisciplineCommandHandlerTests : TestCommonBase
     {
         // Arrange
         var user = await Context.Users
-            .SingleOrDefaultAsync(x => 
-            x.UserId == SharedLessonDbContextFactory.UserRegisteredId);
+            .SingleOrDefaultAsync(x =>
+                x.UserId == SharedLessonDbContextFactory.UserRegisteredId);
         var discipline = Extensions.PickRandom(Context.Disciplines.ToList(), 1).ToList().First();
 
-        var handler = new CreateUserDisciplineCommandHandler(Context);
+        var handler = new CreateUserDisciplinesCommandHandler(Context);
 
         // Act
-        await handler.Handle(new CreateUserDisciplineCommand()
+        await handler.Handle(new CreateUserDisciplinesCommand()
         {
-            User = user!,
-            Discipline = discipline
+            UserId = user!.UserId,
+            DisciplineIds = new List<Guid> { discipline.DisciplineId }
         }, CancellationToken.None);
 
         // Assert

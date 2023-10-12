@@ -1,5 +1,7 @@
 using Application.UnitTests.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Domain.Entities.Education;
 using Xunit;
@@ -12,6 +14,7 @@ public class UpdateUserLanguagesCommandHandlerTests : TestCommonBase
     public async Task UpdateUserLanguagesCommandHandler_Handle_ShouldUpdateUserLanguages()
     {
         // Arrange
+        var mediatorMock = new Mock<IMediator>();
         var user = await Context.Users
             .SingleOrDefaultAsync(x =>
                 x.UserId == SharedLessonDbContextFactory.UserAId);
@@ -20,7 +23,7 @@ public class UpdateUserLanguagesCommandHandlerTests : TestCommonBase
             Context.Languages.SingleAsync(x =>
                 x.Title == "English").Result
         };
-        var handler = new UpdateUserLanguagesCommandHandler(Context);
+        var handler = new UpdateUserLanguagesCommandHandler(Context, mediatorMock.Object);
 
         // Act
         await handler.Handle(new UpdateUserLanguagesCommand()

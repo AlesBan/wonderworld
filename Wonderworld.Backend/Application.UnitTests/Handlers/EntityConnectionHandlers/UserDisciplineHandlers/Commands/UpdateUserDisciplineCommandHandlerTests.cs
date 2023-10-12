@@ -1,5 +1,7 @@
 using Application.UnitTests.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.UpdateUserDisciplines;
 using Wonderworld.Domain.Entities.Education;
 using Xunit;
@@ -12,6 +14,8 @@ public class UpdateUserDisciplineCommandHandlerTests : TestCommonBase
     public async Task UpdateUserDisciplineCommandHandler_Handle_ShouldUpdateUserDiscipline()
     {
         // Arrange
+        var mediatorMock = new Mock<IMediator>();
+
         var user = await Context.Users
             .SingleOrDefaultAsync(x =>
                 x.UserId == SharedLessonDbContextFactory.UserAId);
@@ -20,7 +24,7 @@ public class UpdateUserDisciplineCommandHandlerTests : TestCommonBase
             Context.Disciplines.SingleAsync(x =>
                 x.Title == "History").Result
         };
-        var handler = new UpdateUserDisciplinesCommandHandler(Context);
+        var handler = new UpdateUserDisciplinesCommandHandler(Context, mediatorMock.Object);
 
         // Act
         await handler.Handle(new UpdateUserDisciplinesCommand()

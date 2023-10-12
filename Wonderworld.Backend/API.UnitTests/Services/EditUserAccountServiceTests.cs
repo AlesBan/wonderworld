@@ -3,7 +3,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Wonderworld.API.Models;
 using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
@@ -13,7 +12,7 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHa
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.UpdateUserGrades;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
-using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries;
+using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
@@ -23,7 +22,6 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPassword;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
-using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
@@ -381,24 +379,15 @@ public class EditUserAccountServiceTests : TestCommonBase
             GradeNumbers = gradeNList
         };
         var updateProfessionalInfoHandler = new UpdateProfessionalInfoCommandHandler(Context, mediatorMock.Object);
-            
-        
-        var getLanguagesQuery = new GetLanguagesQuery()
-        {
-            LanguageTitles = languageTitles
-        };
+
+
+        var getLanguagesQuery = new GetLanguagesQuery(languageTitles);
         var getLanguagesHandler = new GetLanguagesQueryHandler(Context);
-        
-        var getDisciplinesQuery = new GetDisciplinesQuery()
-        {
-            DisciplineTitles = disciplineTitles
-        };
+
+        var getDisciplinesQuery = new GetDisciplinesQuery(disciplineTitles);
         var getDisciplinesHandler = new GetDisciplinesQueryHandler(Context);
-        
-        var getGradesQuery = new GetGradesQuery()
-        {
-            GradeNumbers = gradeNList
-        };
+
+        var getGradesQuery = new GetGradesQuery(gradeNList);
         var getGradesHandler = new GetGradesQueryHandler(Context);
         
         var languages = await getLanguagesHandler
@@ -415,14 +404,14 @@ public class EditUserAccountServiceTests : TestCommonBase
             UserId = user.UserId,
             NewLanguageIds = languages.Select(l => l.LanguageId).ToList()
         };
-        var updateUserLanguagesHandler = new UpdateUserLanguagesCommandHandler(Context);
+        var updateUserLanguagesHandler = new UpdateUserLanguagesCommandHandler(Context, mediatorMock.Object);
 
         var updateUserDisciplinesCommand = new UpdateUserDisciplinesCommand
         {
             UserId = user.UserId,
             NewDisciplineIds = disciplines.Select(d => d.DisciplineId).ToList()
         };
-        var updateUserDisciplinesHandler = new UpdateUserDisciplinesCommandHandler(Context);
+        var updateUserDisciplinesHandler = new UpdateUserDisciplinesCommandHandler(Context, mediatorMock.Object);
 
         
         var updateUserGradesCommand = new UpdateUserGradesCommand

@@ -1,4 +1,6 @@
 using MediatR;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.CreateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.EntityConnections;
 
@@ -8,10 +10,12 @@ namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDiscipli
 public class UpdateUserDisciplinesCommandHandler : IRequestHandler<UpdateUserDisciplinesCommand>
 {
     private readonly ISharedLessonDbContext _context;
+    private readonly IMediator _mediator;
 
-    public UpdateUserDisciplinesCommandHandler(ISharedLessonDbContext context)
+    public UpdateUserDisciplinesCommandHandler(ISharedLessonDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
 
     public async Task<Unit> Handle(UpdateUserDisciplinesCommand request, CancellationToken cancellationToken)
@@ -21,17 +25,11 @@ public class UpdateUserDisciplinesCommandHandler : IRequestHandler<UpdateUserDis
                 .Where(ud =>
                     ud.UserId == request.UserId));
 
-        var userDisciplines = request.NewDisciplineIds
-            .Select(discipline =>
-                new UserDiscipline()
-                {
-                    UserId = request.UserId,
-                    DisciplineId = discipline
-                });
-
-        await _context.UserDisciplines
-            .AddRangeAsync(userDisciplines, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        
+        return await _mediator.Send(new CreateUserDisciplinesCommand
+        {
+            UserId = request.UserId,
+            DisciplineIds = request.NewDisciplineIds
+        }, cancellationToken);
     }
 }

@@ -113,7 +113,7 @@ public class UserAccountService : IUserAccountService
     {
         var country = await GetCountry(requestUserDto.CountryLocation, mediator);
         var city = await GetCity(country, requestUserDto.CityLocation, mediator);
-        var establishment = await GetEstablishment(requestUserDto, mediator);
+        var establishment = await GetInstitution(requestUserDto, mediator);
         var disciplines = await GetDisciplines(requestUserDto.Disciplines, mediator);
         var languages = await GetLanguages(requestUserDto.Languages, mediator);
 
@@ -126,7 +126,7 @@ public class UserAccountService : IUserAccountService
             IsAnExpert = requestUserDto.IsAnExpert,
             Country = country,
             City = city,
-            Establishment = establishment,
+            Institution = establishment,
             Disciplines = disciplines,
             Languages = languages,
             PhotoUrl = requestUserDto.PhotoUrl,
@@ -168,7 +168,7 @@ public class UserAccountService : IUserAccountService
         }
     }
 
-    private async Task<Institution> GetEstablishment(CreateUserAccountRequestDto requestUserDto,
+    private async Task<Institution> GetInstitution(CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
         var address = requestUserDto.InstitutionDto.Address;
@@ -205,22 +205,14 @@ public class UserAccountService : IUserAccountService
 
     private static async Task<IEnumerable<Language>> GetLanguages(IEnumerable<string> languages, IMediator mediator)
     {
-        var query = new GetLanguagesQuery()
-        {
-            LanguageTitles = languages
-        };
-
+        var query = new GetLanguagesQuery(languages);
         return await mediator.Send(query);
     }
 
     private static async Task<IEnumerable<Discipline>> GetDisciplines(IEnumerable<string> disciplines,
         IMediator mediator)
     {
-        var query = new GetDisciplinesQuery()
-        {
-            DisciplineTitles = disciplines
-        };
-
+        var query = new GetDisciplinesQuery(disciplines);
         return await mediator.Send(query);
     }
 }

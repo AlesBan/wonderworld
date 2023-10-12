@@ -1,4 +1,6 @@
+using AutoMapper;
 using MediatR;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.EntityConnections;
 
@@ -7,10 +9,12 @@ namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguage
 public class UpdateUserLanguagesCommandHandler : IRequestHandler<UpdateUserLanguagesCommand>
 {
     private readonly ISharedLessonDbContext _context;
+    private readonly IMediator _mediator;
 
-    public UpdateUserLanguagesCommandHandler(ISharedLessonDbContext context)
+    public UpdateUserLanguagesCommandHandler(ISharedLessonDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
 
     public async Task<Unit> Handle(UpdateUserLanguagesCommand request, CancellationToken cancellationToken)
@@ -21,18 +25,12 @@ public class UpdateUserLanguagesCommandHandler : IRequestHandler<UpdateUserLangu
 
         _context.UserLanguages
             .RemoveRange(userLanguages);
-        var userLanguagesToAdd = request.NewLanguageIds
-            .Select(l =>
-                new UserLanguage()
-                {
-                    UserId = request.UserId,
-                    LanguageId = l
-                });
-
-        await _context.UserLanguages
-            .AddRangeAsync(userLanguagesToAdd, cancellationToken);
-
-        await _context.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        
+        return await _mediator.Send(new CreateUserLanguagesCommand()
+        {
+            UserId = request.UserId,
+            LanguageIds = request.NewLanguageIds
+            
+        }, cancellationToken);
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Education;
 
-namespace Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries;
+namespace Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
 
 public class GetGradesQueryHandler : IRequestHandler<GetGradesQuery, List<Grade>>
 {

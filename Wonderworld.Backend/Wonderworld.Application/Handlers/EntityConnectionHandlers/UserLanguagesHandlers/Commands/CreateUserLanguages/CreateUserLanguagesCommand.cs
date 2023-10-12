@@ -4,8 +4,9 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
 
-public class CreateUserLanguageCommand : IRequest
+public class CreateUserLanguagesCommand : IRequest
 {
-    public User User { get; set; }
-    public Language Language { get; set; }
+    public Guid UserId { get; set; }
+    public IEnumerable<Guid> LanguageIds { get; set; }
+
 }

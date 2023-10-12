@@ -15,13 +15,13 @@ public class CreateUserLanguageCommandHandlerTests : TestCommonBase
             x.UserId == SharedLessonDbContextFactory.UserRegisteredId);
         var language = Context.Languages.SingleOrDefault(x => x.Title == "English")!;
 
-        var handler = new CreateUserLanguageCommandHandler(Context);
+        var handler = new CreateUserLanguagesCommandHandler(Context);
 
         // Act
-        await handler.Handle(new CreateUserLanguageCommand()
+        await handler.Handle(new CreateUserLanguagesCommand()
         {
-            User = user!,
-            Language = language
+            UserId = user!.UserId,
+            LanguageIds = new[] { language.LanguageId }
         }, CancellationToken.None);
 
         // Assert

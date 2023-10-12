@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Interfaces;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPhoto;
@@ -15,8 +16,8 @@ public class UpdateUserPhotoCommandHandler : IRequestHandler<UpdateUserPhotoComm
     public async Task<Unit> Handle(UpdateUserPhotoCommand request, CancellationToken cancellationToken)
     {
         request.User.PhotoUrl = request.NewPhotoUrl;
-        _context.Users.Update(request.User);
 
+        _context.Users.Attach(request.User).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;

@@ -12,15 +12,13 @@ public class DeleteClassCommandHandlerTests : TestCommonBase
     public async Task DeleteClassCommand_Handle_ShouldDeleteClass()
     {
         // Arrange
+        var classForDeleteId = SharedLessonDbContextFactory.ClassForDeleteId;
         var handler = new DeleteClassCommandHandler(Context);
 
         // Act
-        await handler.Handle(new DeleteClassCommand()
-        {
-            Class = await Context.Classes.FirstAsync(c =>
-                c.ClassId == SharedLessonDbContextFactory.ClassForDeleteId),
-        }, CancellationToken.None);
-        
+        await handler.Handle(new DeleteClassCommand(classForDeleteId)
+            , CancellationToken.None);
+
         // Assert
         Assert.Null(await Context.Classes.SingleOrDefaultAsync(c =>
             c.ClassId == SharedLessonDbContextFactory.ClassForDeleteId));

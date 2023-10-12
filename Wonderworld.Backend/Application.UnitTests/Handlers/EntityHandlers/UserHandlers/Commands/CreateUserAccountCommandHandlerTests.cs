@@ -1,5 +1,7 @@
 using Application.UnitTests.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 using Xunit;
 
@@ -11,6 +13,8 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
     public async Task CreateUserAccountCommand_Handle_ShouldCreateUserAccount()
     {
         // Arrange
+        var mediatorMock = new Mock<IMediator>();
+
         var user = await Context.Users.SingleOrDefaultAsync(u =>
             u.UserId == SharedLessonDbContextFactory.UserRegisteredId);
         const string firstName = "FirstName";
@@ -34,7 +38,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             IsATeacher = isATeacher,
             IsAnExpert = isAnExpert,
             City = cityLocation!,
-            Establishment = establishment!,
+            Institution = establishment!,
             Disciplines = disciplines,
             Languages = languages,
             PhotoUrl = photoUrl
@@ -42,7 +46,7 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
 
 
         // Act
-        var handler = new CreateUserAccountCommandHandler(Context);
+        var handler = new CreateUserAccountCommandHandler(Context, mediatorMock.Object);
         await handler.Handle(createUserAccountCommand,
             CancellationToken.None);
 
