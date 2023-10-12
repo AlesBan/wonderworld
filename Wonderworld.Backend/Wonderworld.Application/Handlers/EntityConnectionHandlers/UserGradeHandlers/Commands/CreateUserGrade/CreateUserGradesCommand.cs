@@ -4,8 +4,8 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.CreateUserGrade;
 
-public class CreateUserGradeCommand : IRequest
+public class CreateUserGradesCommand : IRequest
 {
-    public User User { get; set; }
-    public Grade Grade { get; set; }
+    public Guid UserId { get; set; }
+    public IEnumerable<Guid> GradeIds { get; set; }
 }

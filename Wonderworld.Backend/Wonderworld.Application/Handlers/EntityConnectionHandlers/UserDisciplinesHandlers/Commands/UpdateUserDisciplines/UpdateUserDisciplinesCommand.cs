@@ -1,8 +1,6 @@
 using MediatR;
-using Wonderworld.Domain.Entities.Education;
-using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.
+namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.
     UpdateUserDisciplines;
 
 public class UpdateUserDisciplinesCommand : IRequest

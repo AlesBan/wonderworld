@@ -8,8 +8,14 @@ using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Dtos.UpdateDtos;
+using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.UpdateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.UpdateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.CreateUserGrade;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.UpdateUserGrades;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
@@ -364,8 +370,6 @@ public class EditUserAccountServiceTests : TestCommonBase
         {
             7, 8, 9
         };
-        
-
 
         var userId = SharedLessonDbContextFactory.UserAId;
         var user = Context.Users.FirstOrDefault(u =>
@@ -390,6 +394,7 @@ public class EditUserAccountServiceTests : TestCommonBase
         var getGradesQuery = new GetGradesQuery(gradeNList);
         var getGradesHandler = new GetGradesQueryHandler(Context);
         
+
         var languages = await getLanguagesHandler
             .Handle(getLanguagesQuery, CancellationToken.None);
         
@@ -398,6 +403,29 @@ public class EditUserAccountServiceTests : TestCommonBase
         
         var grades = await getGradesHandler
             .Handle(getGradesQuery, CancellationToken.None);
+        
+        var createUserLanguagesCommand = new CreateUserLanguagesCommand()
+        {
+            UserId = user.UserId,
+            LanguageIds = languages.Select(l => l.LanguageId).ToList()
+        };
+        var createUserLanguagesHandler = new CreateUserLanguagesCommandHandler(Context);
+        
+        var createUserDisciplinesCommand = new CreateUserDisciplinesCommand()
+        {
+            UserId = user.UserId,
+            DisciplineIds = disciplines.Select(d => d.DisciplineId).ToList()
+        };
+        var createUserDisciplinesHandler = new CreateUserDisciplinesCommandHandler(Context);
+        
+        var createUserGradesCommand = new CreateUserGradesCommand()
+        {
+            UserId = user.UserId,
+            GradeIds = grades.Select(g => g.GradeId).ToList()
+        };
+        var createUserGradesHandler = new CreateUserGradesCommandHandler(Context);
+
+        
         
         var updateUserLanguagesCommand = new UpdateUserLanguagesCommand
         {
@@ -419,8 +447,9 @@ public class EditUserAccountServiceTests : TestCommonBase
             UserId = user.UserId,
             NewGradeIds = grades.Select(g => g.GradeId).ToList()
         };
-        var updateUserGradesHandler = new UpdateUserGradesCommandHandler(Context);
-       
+        var updateUserGradesHandler = new UpdateUserGradesCommandHandler(Context, mediatorMock.Object);
+        
+        
             
         mediatorMock.Setup(m=>m.Send(It.IsAny<GetLanguagesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(languages);
@@ -487,3 +516,4 @@ public class EditUserAccountServiceTests : TestCommonBase
             .SequenceEqual(userProfileDto.Disciplines.OrderBy(x => x)));
     }
 }
+

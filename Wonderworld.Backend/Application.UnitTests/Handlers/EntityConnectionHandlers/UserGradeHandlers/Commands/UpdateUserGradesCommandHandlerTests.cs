@@ -1,5 +1,8 @@
 using Application.UnitTests.Common;
+using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.UpdateUserGrades;
 using Wonderworld.Domain.Entities.Education;
 using Xunit;
@@ -12,6 +15,7 @@ public class UpdateUserGradesCommandHandlerTests : TestCommonBase
     public async Task UpdateUserGradesCommandHandler_Handle_ShouldUpdateUserGrades()
     {
         // Arrange
+        var mediatorMock = new Mock<IMediator>();
         var user = await Context.Users
             .SingleOrDefaultAsync(x =>
                 x.UserId == SharedLessonDbContextFactory.UserAId);
@@ -20,7 +24,7 @@ public class UpdateUserGradesCommandHandlerTests : TestCommonBase
             Context.Grades.SingleAsync(x =>
                 x.GradeNumber == 8).Result
         };
-        var handler = new UpdateUserGradesCommandHandler(Context);
+        var handler = new UpdateUserGradesCommandHandler(Context, mediatorMock.Object);
 
         // Act
         await handler.Handle(new UpdateUserGradesCommand
