@@ -1,5 +1,7 @@
 using Application.UnitTests.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.UpdateClass;
 using Wonderworld.Domain.Entities.Education;
 using Xunit;
@@ -12,6 +14,7 @@ public class UpdateClassCommandHandlerTests : TestCommonBase
     public async Task UpdateClassCommand_Handle_ShouldUpdateClass()
     {
         // Arrange
+        var mediatorMock = new Mock<IMediator>();
         var @class = await Context.Classes.FirstAsync(c =>
             c.ClassId == SharedLessonDbContextFactory.ClassForUpdateId);
         const string newTitle = "New Title";
@@ -28,18 +31,17 @@ public class UpdateClassCommandHandlerTests : TestCommonBase
         var newGrade = await Context.Grades.FirstAsync(g => g.GradeNumber == 10);
         const int newAge = 16;
 
-        var handler = new UpdateClassCommandHandler(Context);
+        var handler = new UpdateClassCommandHandler(Context, mediatorMock.Object );
 
         // Act
         await handler.Handle(new UpdateClassCommand()
         {
-            Class = await Context.Classes.FirstAsync(c => c.ClassId == SharedLessonDbContextFactory.ClassForUpdateId),
+            ClassId = @class.ClassId,
             Title = newTitle,
             PhotoUrl = newPhotoUrl,
             Disciplines = newDisciplines,
             Languages = newLanguages,
-            Grade = newGrade,
-            Age = newAge,
+            GradeNumber = newGrade.GradeNumber,
         }, CancellationToken.None);
 
         // Assert

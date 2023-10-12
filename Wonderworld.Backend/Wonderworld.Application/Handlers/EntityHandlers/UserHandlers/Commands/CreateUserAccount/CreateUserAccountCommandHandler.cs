@@ -1,22 +1,23 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Common.Exceptions;
-using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.UpdateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Wonderworld.Application.Common.Exceptions.User;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.CreateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 
 public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccountCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
+    private readonly IMediator _mediator;
 
-    public CreateUserAccountCommandHandler(ISharedLessonDbContext serviceDbContext)
+    public CreateUserAccountCommandHandler(ISharedLessonDbContext serviceDbContext, IMediator mediator)
     {
         _context = serviceDbContext;
+        _mediator = mediator;
     }
 
     public async Task<User> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
@@ -39,7 +40,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         user.IsAnExpert = request.IsAnExpert;
         user.City = request.City;
         user.Country = request.Country;
-        user.Institution = request.Establishment;
+        user.Institution = request.Institution;
         user.PhotoUrl = request.PhotoUrl;
 
         user.IsCreatedAccount = true;
@@ -58,7 +59,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
     private async Task SeedUserLanguages(Guid userId, CreateUserAccountCommand request,
         CancellationToken cancellationToken = default)
     {
-        var handler = new UpdateUserLanguagesCommandHandler(_context);
+        var handler = new UpdateUserLanguagesCommandHandler(_context, _mediator);
         await handler.Handle(new UpdateUserLanguagesCommand
         {
             UserId = userId,
@@ -71,11 +72,11 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
     private async Task SeedUserDisciplines(Guid userId, CreateUserAccountCommand request,
         CancellationToken cancellationToken = default)
     {
-        var handler = new UpdateUserDisciplinesCommandHandler(_context);
-        await handler.Handle(new UpdateUserDisciplinesCommand()
+        var handler = new CreateUserDisciplinesCommandHandler(_context);
+        await handler.Handle(new CreateUserDisciplinesCommand()
         {
             UserId = userId,
-            NewDisciplineIds = request.Disciplines
+            DisciplineIds = request.Disciplines
                 .Select(d => d.DisciplineId)
                 .ToList()
         }, cancellationToken);

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Helpers;
 using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Dtos.UpdateDtos;
+using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdatePersonalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateProfessionalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;

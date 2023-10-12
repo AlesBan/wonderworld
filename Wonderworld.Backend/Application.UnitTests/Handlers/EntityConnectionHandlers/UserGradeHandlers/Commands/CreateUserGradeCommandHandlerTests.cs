@@ -16,13 +16,13 @@ public class CreateUserGradeCommandHandlerTests : TestCommonBase
             .ToList()
             .First();
 
-        var handler = new CreateUserGradeCommandHandler(Context);
+        var handler = new CreateUserGradesCommandHandler(Context);
 
         // Act
-        await handler.Handle(new CreateUserGradeCommand()
+        await handler.Handle(new CreateUserGradesCommand()
         {
-            User = user!,
-            Grade = grade
+            UserId = user!.UserId,
+            GradeIds = new List<Guid> { grade!.GradeId }
         }, CancellationToken.None);
 
         // Assert

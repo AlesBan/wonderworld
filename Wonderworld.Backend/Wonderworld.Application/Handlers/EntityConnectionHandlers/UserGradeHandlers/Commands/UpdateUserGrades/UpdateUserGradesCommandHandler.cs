@@ -1,4 +1,6 @@
+using AutoMapper;
 using MediatR;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.CreateUserGrade;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.EntityConnections;
 
@@ -7,10 +9,12 @@ namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHan
 public class UpdateUserGradesCommandHandler : IRequestHandler<UpdateUserGradesCommand>
 {
     private readonly ISharedLessonDbContext _context;
+    private readonly IMediator _mediator;
 
-    public UpdateUserGradesCommandHandler(ISharedLessonDbContext context)
+    public UpdateUserGradesCommandHandler(ISharedLessonDbContext context, IMediator mediator)
     {
         _context = context;
+        _mediator = mediator;
     }
 
     public async Task<Unit> Handle(UpdateUserGradesCommand request, CancellationToken cancellationToken)
@@ -20,15 +24,11 @@ public class UpdateUserGradesCommandHandler : IRequestHandler<UpdateUserGradesCo
                 .Where(ug =>
                     ug.User.UserId == request.UserId));
 
-        var userGrades = request.NewGradeIds.Select(gradeId =>
-            new UserGrade()
-            {
-                UserId = request.UserId,
-                GradeId = gradeId
-            });
+        return await _mediator.Send(new CreateUserGradesCommand()
+        {
+            UserId = request.UserId,
+            GradeIds = request.NewGradeIds
 
-        await _context.UserGrades.AddRangeAsync(userGrades, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
-        return Unit.Value;
+        }, cancellationToken);
     }
 }

@@ -5,5 +5,10 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Que
 
 public class GetDisciplinesQuery : IRequest<List<Discipline>>
 {
-    public IEnumerable<string> DisciplineTitles { get; set; } = new List<string>();
+    public IEnumerable<string> DisciplineTitles { get; set; }
+    
+    public GetDisciplinesQuery(IEnumerable<string> disciplineTitles)
+    {
+        DisciplineTitles = disciplineTitles;
+    }
 }

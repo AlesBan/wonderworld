@@ -5,6 +5,10 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queri
 
 public class GetLanguagesQuery : IRequest<List<Language>>
 {
-    public IEnumerable<string> LanguageTitles { get; set; } = new List<string>();
+    public IEnumerable<string> LanguageTitles { get; set; }
 
+    public GetLanguagesQuery(IEnumerable<string> languageTitles)
+    {
+        LanguageTitles = languageTitles;
+    }
 }

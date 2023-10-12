@@ -5,5 +5,10 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands
 
 public class DeleteClassCommand : IRequest
 {
-    public Class Class { get; set; }
+    public Guid ClassId { get; set; }
+
+    public DeleteClassCommand(Guid classId)
+    {
+        ClassId = classId;
+    }
 }

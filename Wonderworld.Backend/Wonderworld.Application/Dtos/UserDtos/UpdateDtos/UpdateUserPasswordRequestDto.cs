@@ -1,4 +1,4 @@
-namespace Wonderworld.Application.Dtos.UpdateDtos;
+namespace Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 
 public class UpdateUserPasswordRequestDto
 {

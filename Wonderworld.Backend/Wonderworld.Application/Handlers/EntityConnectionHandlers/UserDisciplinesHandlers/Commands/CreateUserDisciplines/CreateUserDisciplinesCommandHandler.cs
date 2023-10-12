@@ -1,27 +1,23 @@
 using MediatR;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.EntityConnections;
 
 namespace Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.
-    UpdateUserDisciplines;
+    CreateUserDisciplines;
 
-public class UpdateUserDisciplinesCommandHandler : IRequestHandler<UpdateUserDisciplinesCommand>
+public class CreateUserDisciplinesCommandHandler : IRequestHandler<CreateUserDisciplinesCommand>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public UpdateUserDisciplinesCommandHandler(ISharedLessonDbContext context)
+    public CreateUserDisciplinesCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<Unit> Handle(UpdateUserDisciplinesCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateUserDisciplinesCommand request, CancellationToken cancellationToken)
     {
-        _context.UserDisciplines
-            .RemoveRange(_context.UserDisciplines
-                .Where(ud =>
-                    ud.UserId == request.UserId));
-
-        var userDisciplines = request.NewDisciplineIds
+        var userDisciplines = request.DisciplineIds
             .Select(discipline =>
                 new UserDiscipline()
                 {
