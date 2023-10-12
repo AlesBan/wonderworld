@@ -5,9 +5,7 @@
     <projectFile profileName="Wonderworld.API">Wonderworld.API/Wonderworld.API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="new">
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="del xlm conf" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -202,7 +200,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697132595445</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="del xlm conf">
+      <created>1697132874150</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1697132874150</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -226,7 +231,8 @@
     <MESSAGE value="update diagram" />
     <MESSAGE value="class + ClassProfile query" />
     <MESSAGE value="new" />
-    <option name="LAST_COMMIT_MESSAGE" value="new" />
+    <MESSAGE value="del xlm conf" />
+    <option name="LAST_COMMIT_MESSAGE" value="del xlm conf" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
