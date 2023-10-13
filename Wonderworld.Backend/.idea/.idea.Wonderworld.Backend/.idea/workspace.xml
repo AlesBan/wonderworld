@@ -5,7 +5,25 @@
     <projectFile profileName="Wonderworld.API">Wonderworld.API/Wonderworld.API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="del xlm conf" />
+    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/postgres.edMnLQ/schema/information_schema.FNRwLQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/postgres.edMnLQ/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/information_schema.FNRwLQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/dataSources/b87c61b7-1539-47a6-a221-6cff8a471403/storage_v2/_src_/database/wonderworld.t1CjEw/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/EditUserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/EditUserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/UpdateDtos/UpdateInstitutionReqestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/UpdateDtos/UpdateInstitutionReqestDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/UpdateDtos/UpdatePersonalInfoRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/UpdateDtos/UpdatePersonalInfoRequestDto.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,11 +70,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cde0291933299f1e732d9436b8558e21577bcdf64c6d8ac7c6a0abeac6c6d/RuntimeMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d5f92893b4e362502fc4e02cf758f9ed02fdab36fa5d36b75d31416bdb3596/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/API.UnitTests/Services/EditUserAccountServiceTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/API.UnitTests/Services/EditUserAccountServiceTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/Application.UnitTests/Handlers/EntityConnectionHandlers/UserGradeHandlers/Commands/CreateUserGradeCommandHandlerTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/Application.UnitTests/Handlers/EntityConnectionHandlers/UserGradeHandlers/Commands/UpdateUserGradesCommandHandlerTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/Wonderworld.API/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/CreateAccountDtos/CreateUserAccountRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/CityHandlers/Queries/GetCity/GetCityQuery.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -128,7 +141,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d457eef0-b6e8-451a-9b7f-9f762fc0a167" name="Changes" comment="" />
+      <changelist id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="" />
       <created>1691094599434</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -164,6 +177,7 @@
       <workItem from="1692211688043" duration="24000" />
       <workItem from="1692212530375" duration="2019000" />
       <workItem from="1692215839098" duration="23000" />
+      <workItem from="1697199743074" duration="278000" />
     </task>
     <task id="LOCAL-00001" summary="user register + login">
       <created>1691322374733</created>
@@ -207,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697132874150</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="del sec">
+      <created>1697133296948</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697133296948</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,7 +253,8 @@
     <MESSAGE value="class + ClassProfile query" />
     <MESSAGE value="new" />
     <MESSAGE value="del xlm conf" />
-    <option name="LAST_COMMIT_MESSAGE" value="del xlm conf" />
+    <MESSAGE value="del sec" />
+    <option name="LAST_COMMIT_MESSAGE" value="del sec" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
