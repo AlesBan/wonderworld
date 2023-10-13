@@ -51,13 +51,13 @@ public class ClassServiceTests : TestCommonBase
             UserId = SharedLessonDbContextFactory.UserAId,
             Title = requestClassDto.Title,
             GradeNumber = requestClassDto.GradeNumber,
-            Disciplines = new List<Discipline>
+            DisciplineIds = new List<Guid>
             {
-                (await Context.Disciplines.SingleOrDefaultAsync(d => d.Title == "Chemistry"))!
+                (await Context.Disciplines.SingleOrDefaultAsync(d => d.Title == "Chemistry"))!.DisciplineId
             },
-            Languages = new List<Language>
+            LanguageIds = new List<Guid>
             {
-                (await Context.Languages.SingleOrDefaultAsync(l => l.Title == "English"))!
+                (await Context.Languages.SingleOrDefaultAsync(l => l.Title == "English"))!.LanguageId
             },
             PhotoUrl = requestClassDto.PhotoUrl
         };

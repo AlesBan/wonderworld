@@ -13,10 +13,10 @@ public class CreateUserAccountCommand : IRequest<User>
     public string LastName { get; set; }
     public bool? IsATeacher { get; set; }
     public bool? IsAnExpert { get; set; }
-    public City City { get; set; }
-    public Country Country { get; set; }
-    public Institution Institution { get; set; }
-    public IEnumerable<Discipline> Disciplines { get; set; } = new List<Discipline>();
-    public IEnumerable<Language> Languages { get; set; } = new List<Language>();
+    public Guid CityId { get; set; }
+    public Guid CountryId { get; set; }
+    public Guid InstitutionId { get; set; }
+    public IEnumerable<Guid> DisciplineIds { get; set; } = new List<Guid>();
+    public IEnumerable<Guid> LanguageIds { get; set; } = new List<Guid>();
     public string PhotoUrl { get; set; }
 }

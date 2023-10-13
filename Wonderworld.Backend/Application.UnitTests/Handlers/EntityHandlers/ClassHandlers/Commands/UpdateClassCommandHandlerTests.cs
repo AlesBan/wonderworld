@@ -29,7 +29,6 @@ public class UpdateClassCommandHandlerTests : TestCommonBase
         };
 
         var newGrade = await Context.Grades.FirstAsync(g => g.GradeNumber == 10);
-        const int newAge = 16;
 
         var handler = new UpdateClassCommandHandler(Context, mediatorMock.Object );
 

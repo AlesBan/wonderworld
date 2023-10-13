@@ -425,7 +425,12 @@ public class EditUserAccountServiceTests : TestCommonBase
         };
         var createUserGradesHandler = new CreateUserGradesCommandHandler(Context);
 
-        
+        mediatorMock.Setup(m=>m.Send(It.IsAny<CreateUserLanguagesCommand>(),
+            It.IsAny<CancellationToken>())).ReturnsAsync(await createUserLanguagesHandler.Handle(createUserLanguagesCommand, CancellationToken.None));
+        mediatorMock.Setup(m => m.Send(It.IsAny<CreateUserDisciplinesCommand>(),
+            It.IsAny<CancellationToken>())).ReturnsAsync(await createUserDisciplinesHandler.Handle(createUserDisciplinesCommand, CancellationToken.None));
+        mediatorMock.Setup(m => m.Send(It.IsAny<CreateUserGradesCommand>(),
+            It.IsAny<CancellationToken>())).ReturnsAsync(await createUserGradesHandler.Handle(createUserGradesCommand, CancellationToken.None));
         
         var updateUserLanguagesCommand = new UpdateUserLanguagesCommand
         {
@@ -440,7 +445,6 @@ public class EditUserAccountServiceTests : TestCommonBase
             NewDisciplineIds = disciplines.Select(d => d.DisciplineId).ToList()
         };
         var updateUserDisciplinesHandler = new UpdateUserDisciplinesCommandHandler(Context, mediatorMock.Object);
-
         
         var updateUserGradesCommand = new UpdateUserGradesCommand
         {
@@ -448,8 +452,6 @@ public class EditUserAccountServiceTests : TestCommonBase
             NewGradeIds = grades.Select(g => g.GradeId).ToList()
         };
         var updateUserGradesHandler = new UpdateUserGradesCommandHandler(Context, mediatorMock.Object);
-        
-        
             
         mediatorMock.Setup(m=>m.Send(It.IsAny<GetLanguagesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(languages);

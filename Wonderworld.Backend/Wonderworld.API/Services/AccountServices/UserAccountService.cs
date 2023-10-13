@@ -11,14 +11,12 @@ using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Commands.Crea
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
-using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
-using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
@@ -28,13 +26,11 @@ namespace Wonderworld.API.Services.AccountServices;
 
 public class UserAccountService : IUserAccountService
 {
-    private readonly ISharedLessonDbContext _context;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
 
-    public UserAccountService(ISharedLessonDbContext context, IConfiguration configuration, IMapper mapper)
+    public UserAccountService(IConfiguration configuration, IMapper mapper)
     {
-        _context = context;
         _configuration = configuration;
         _mapper = mapper;
     }
@@ -113,7 +109,7 @@ public class UserAccountService : IUserAccountService
     {
         var country = await GetCountry(requestUserDto.CountryLocation, mediator);
         var city = await GetCity(country, requestUserDto.CityLocation, mediator);
-        var establishment = await GetInstitution(requestUserDto, mediator);
+        var institution = await GetInstitution(requestUserDto, mediator);
         var disciplines = await GetDisciplines(requestUserDto.Disciplines, mediator);
         var languages = await GetLanguages(requestUserDto.Languages, mediator);
 
@@ -124,11 +120,11 @@ public class UserAccountService : IUserAccountService
             LastName = requestUserDto.LastName,
             IsATeacher = requestUserDto.IsATeacher,
             IsAnExpert = requestUserDto.IsAnExpert,
-            Country = country,
-            City = city,
-            Institution = establishment,
-            Disciplines = disciplines,
-            Languages = languages,
+            CountryId = country.CountryId,
+            CityId = city.CityId,
+            InstitutionId = institution.InstitutionId,
+            DisciplineIds = disciplines.Select(d => d.DisciplineId).ToList(),
+            LanguageIds = languages.Select(l => l.LanguageId).ToList(),
             PhotoUrl = requestUserDto.PhotoUrl,
         };
 
@@ -168,39 +164,23 @@ public class UserAccountService : IUserAccountService
         }
     }
 
-    private async Task<Institution> GetInstitution(CreateUserAccountRequestDto requestUserDto,
+    private static async Task<Institution> GetInstitution(CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
         var address = requestUserDto.InstitutionDto.Address;
-        var establishmentTitle = requestUserDto.InstitutionDto.Title;
-        var establishmentTypesTitles = requestUserDto.InstitutionDto.Types;
-        var establishmentTypes = _context.InstitutionTypes.ToList()
-            .Where(et =>
-                establishmentTypesTitles.Contains(et.Title));
+        var institutionTitle = requestUserDto.InstitutionDto.Title;
+        var institutionTypesTitles = requestUserDto.InstitutionDto.Types;
 
         var varGetQuery = new GetInstitutionQuery()
         {
             Address = address,
-            InstitutionTitle = establishmentTitle,
-            Types = establishmentTypes.Select(e => e.Title).ToList()
+            InstitutionTitle = institutionTitle,
+            Types = institutionTypesTitles
         };
 
-        Institution establishment;
-        try
-        {
-            establishment = await mediator.Send(varGetQuery);
-        }
-        catch
-        {
-            var createQuery = new CreateInstitutionCommand()
-            {
-                Address = address,
-                InstitutionTitle = establishmentTitle
-            };
-            establishment = await mediator.Send(createQuery);
-        }
+        var institution = await mediator.Send(varGetQuery);
 
-        return establishment;
+        return institution;
     }
 
     private static async Task<IEnumerable<Language>> GetLanguages(IEnumerable<string> languages, IMediator mediator)

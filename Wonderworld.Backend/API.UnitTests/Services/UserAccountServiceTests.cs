@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Moq;
 using Wonderworld.API.Services.AccountServices;
 using Wonderworld.Application.Common.Exceptions.User;
+using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 using Wonderworld.Domain.Entities.Main;
@@ -40,7 +41,7 @@ public class UserAccountServiceTests : TestCommonBase, IClassFixture<TestSetup>
             It.IsAny<CancellationToken>())).ReturnsAsync(user);
 
         var mapper = new Mock<IMapper>();
-        var service = new UserAccountService(Context, _configuration, mapper.Object);
+        var service = new UserAccountService(_configuration, mapper.Object);
 
         // Act
         var result = await service.RegisterUser(requestUserDto, mediatorMock.Object);
@@ -68,11 +69,51 @@ public class UserAccountServiceTests : TestCommonBase, IClassFixture<TestSetup>
             It.IsAny<CancellationToken>())).ThrowsAsync(new UserAlreadyExistsException(user.Email));
 
         var mapper = new Mock<IMapper>();
-        var service = new UserAccountService(Context, _configuration, mapper.Object);
+        var service = new UserAccountService(_configuration, mapper.Object);
 
         // Act
         // Assert
         await Assert.ThrowsAsync<UserAlreadyExistsException>(async () =>
             await service.RegisterUser(requestUserDto, mediatorMock.Object));
+    }
+
+    [Fact]
+    public async Task CreateUserAccount_ValidRequest_ReturnsOkResult()
+    {
+        // Arrange
+        var userId = Context.Users.FirstOrDefault(u=>
+            u.UserId == SharedLessonDbContextFactory.UserRegisteredId)!.UserId;
+
+        var firstName = "CreateAccountFirstName";
+        var lastName = "CreateAccountLastName";
+        var isATeacher = true;
+        var isAnExpert = false;
+        
+        var requestUserDto = new CreateUserAccountRequestDto
+        {
+            FirstName = firstName,
+            LastName = lastName,
+            IsATeacher = isATeacher,
+            IsAnExpert = isAnExpert,
+            CityLocation = null,
+            CountryLocation = null,
+            InstitutionDto = null,
+            Disciplines = null,
+            Languages = null,
+            PhotoUrl = null
+        };
+        
+        var mediatorMock = new Mock<IMediator>();
+        mediatorMock.Setup(m => m.Send(It.IsAny<RegisterUserCommand>(),
+            It.IsAny<CancellationToken>())).ReturnsAsync(new User());
+
+        var mapper = new Mock<IMapper>();
+        var service = new UserAccountService(_configuration, mapper.Object);
+
+        // Act
+        var result = await service.RegisterUser(new UserRegisterRequestDto(), mediatorMock.Object);
+
+        // Assert
+        Assert.IsType<OkObjectResult>(result);
     }
 }

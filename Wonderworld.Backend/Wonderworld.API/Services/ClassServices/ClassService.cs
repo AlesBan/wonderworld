@@ -23,8 +23,8 @@ public class ClassService : IClassService
             UserId = userId,
             Title = requestClassDto.Title,
             GradeNumber = requestClassDto.GradeNumber,
-            Disciplines = disciplines,
-            Languages = languages,
+            DisciplineIds = disciplines.Select(d => d.DisciplineId).ToList(),
+            LanguageIds = languages.Select(l => l.LanguageId).ToList(),
             PhotoUrl = requestClassDto.PhotoUrl
         };
 
