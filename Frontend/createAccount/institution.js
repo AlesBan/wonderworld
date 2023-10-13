@@ -29,7 +29,6 @@ function chooseInstitution() {
       </div>
     </div>
   </div>
-  <button onclick="searchOrg()" class="primary-button" id="search">Search</button>
     <button onclick="chooseWork()" class="primary-button">Continue</button>
   </div>
     `

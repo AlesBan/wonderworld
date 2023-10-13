@@ -47,15 +47,13 @@ EstablishmentDtoOutput.textContent = getEstablishmentDto;
             })
             .then(responseData => {
                 console.log(responseData);
+                localStorage.setItem('responseUserInfo', responseData)
             })
             .catch(error => {
                 console.log(error);
             });
         console.log(localStorage.getItem('accessToken'))
   }
-
-
-// })
 
 
 

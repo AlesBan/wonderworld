@@ -195,3 +195,9 @@
     line-height: 20px;
     color: #3E4C5B;
 }
+
+
+
+.invalid {
+    border: 2px solid red;
+}

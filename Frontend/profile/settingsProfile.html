@@ -55,31 +55,53 @@
                 <div class="change-photo">Change photo</div>
             </div>
         </div>
-        <div class="my-profile">
-            <div class="my-profile-title">My profile</div>
-            <div class="my-profile-text">
-                <span>Let us know how are you planning to use Hi,Class</span>
+        <div class="about-me">
+            <div class="position-verification-title">About me</div>
+            <div class="position-verification-text">
+                <span>Add a brief description for your profile</span>
             </div>
-            <div class="my-profile-options">
-                <div class="option">
-                    <div class="option-value">
-                        <div class="option-name">I’m a teacher</div>
-                        <input type="radio" class="radiobutton" name="radio">
-                    </div>
-                    <div class="option-text">As a teacher you can add your classes and organise lessons, as well as join
-                        lessons as an expert in your field.
-                    </div>
+            <div class="first-name">
+                <div class="input-title">First name</div>
+                <div class="">
+                    <label><input name="first-name" class="first-name-input" type="text"
+                                id="editFirstName"  placeholder="Enter your first name"></label>
                 </div>
-                <div class="option">
-                    <div class="option-value">
-                        <div class="option-name">I’m an expert</div>
-                        <input type="radio" class="radiobutton" name="radio">
-                    </div>
-                    <div class="option-text">As an expert you can connect with teacher and join lessons.</div>
+            </div>
+            <div class="last-name">
+                <div class="input-title">Last name</div>
+                <div class="">
+                    <label><input name="last-name" class="last-name-input" type="text"
+                                 id="editLastName" placeholder="Enter your last name"></label>
+                </div>
+            </div>
+            <div class="dropdown">
+                <div class="input-title">I’m a/an</div>
+                <div class="select-btn">
+                    <span class="btn-text">Select..</span>
+                    <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
+                </div>
+                <ul class="list-items">
+
+                </ul>
+            </div>
+            <div class="location">
+                <div class="input-title">Location</div>
+                <div class="">
+                    <label><input name="last-name" class="last-name-input" type="text"
+                                 id="editLocation" placeholder=""></label>
+                </div>
+            </div>
+            <div class="description">
+                <div class="input-title">Description</div>
+                <div class="">
+                    <label><input name="institution-name" class="institution-name-input" type="text"
+                                id="description"  placeholder="Let others know you better.."></label>
                 </div>
             </div>
             <div class="update">
-                <button class="update-btn">Update</button>
+                <button onclick="postEditPersonalInfo()" class="update-btn">Update</button>
             </div>
         </div>
         <div class="position-verification">
@@ -87,113 +109,81 @@
             <div class="position-verification-text">
                 <span>For your security, we need you to verify your identity</span>
             </div>
-            <div class="inputs">
-                <div class="first-name">
-                    <div class="input-title">First name</div>
-                    <div class="">
-                        <label><input name="first-name" class="first-name-input" type="text"
-                                      placeholder="Enter your first name"></label>
-                    </div>
-                </div>
-                <div class="last-name">
-                    <div class="input-title">Last name</div>
-                    <div class="">
-                        <label><input name="last-name" class="last-name-input" type="text"
-                                      placeholder="Enter your last name"></label>
-                    </div>
-                </div>
-            </div>
             <div class="dropdown-input">
                 <div class="institution-name">
                     <div class="input-title">Institution name</div>
                     <div class="">
                         <label><input name="institution-name" class="institution-name-input" type="text"
-                                      placeholder="Enter your institution name"></label>
+                                      oninput="searchInstitution()" id="changeInstitution" placeholder="Enter your institution name"></label>
                     </div>
+                    <ul class="institution-items">
+
+                    </ul>
                 </div>
             </div>
             <div class="verify-update">
                 <button class="update-btn">Verify</button>
-                <button class="verify-btn">Update</button>
-            </div>
-        </div>
-        <div class="about-me">
-            <div class="position-verification-title">About me</div>
-            <div class="position-verification-text">
-                <span>Add a brief description for your profile</span>
-            </div>
-            <div class="description">
-                <div class="input-title">Description</div>
-                <div class="">
-                    <label><input name="institution-name" class="institution-name-input" type="text"
-                                  placeholder="Let others know you better.."></label>
-                </div>
-            </div>
-            <div class="update">
-                <button class="update-btn">Update</button>
+                <button onclick="postChangeInstitution()" class="verify-btn">Update</button>
             </div>
         </div>
         <div class="basic-info">
-            <div class="position-verification-title">Basic information</div>
+            <div class="position-verification-title">Professional details</div>
             <div class="position-verification-text">
                 <span>Lorem ipsum dolor sit amet consectetur. Euismod nunc cursus risus at egestas. Nec mi.</span>
             </div>
             <div class="dropdowns">
                 <div class="dropdown">
                     <div class="input-title">Languages</div>
-                    <div class="select-btn">
-                        <span class="btn-text">Select..</span>
+                    <div class="select-btn" id="select-languages">
+                        <span class="btn-text" id="output-languages">Select..</span>
                         <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
                     </div>
-                    <ul class="list-items">
-
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <div class="input-title">Location</div>
-                    <div class="select-btn">
-                        <span class="btn-text">Select..</span>
-                        <span class="arrow-dwn">
-        <img src="../images/chevron-down.svg" alt="">
-    </span>
-                    </div>
-                    <ul class="list-items">
+                    <ul class="list-items" id="list-languages">
 
                     </ul>
                 </div>
                 <div class="dropdown">
                     <div class="input-title">Grades</div>
-                    <div class="select-btn">
-                        <span class="btn-text">Select..</span>
+                    <div class="select-btn" id="select-grades">
+                        <span class="btn-text" id="output-grades">Select..</span>
                         <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
                     </div>
-                    <ul class="list-items">
+                    <ul class="list-items" id="list-grades">
 
                     </ul>
                 </div>
                 <div class="dropdown">
                     <div class="input-title">Areas of work</div>
-                    <div class="select-btn">
-                        <span class="btn-text">Select..</span>
+                    <div class="select-btn" id="select-subjects">
+                        <span class="btn-text" id="output-subjects">Select..</span>
                         <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
                     </div>
-                    <ul class="list-items">
+                    <ul class="list-items" id="list-subjects">
 
                     </ul>
                 </div>
             </div>
             <div class="update">
-                <button class="update-btn">Update</button>
+                <button onclick="postChangeProfessionalDetails()" class="update-btn">Update</button>
             </div>
         </div>
     </div>
 </div>
 </body>
+<script src="../createAccount/dataLessons.js"></script>
+<script src="../createAccount/dataGrades.js"></script>
+<script src="../createAccount/dataLanguages.js"></script>
+<script src="../createAccount/institution.js"></script>
 <script src="settingsProfile.js"></script>
+<script src="postChangeEmail.js"></script>
+<script src="postEditPersonalInfo.js"></script>
+<script src="postChangeInstitution.js"></script>
+<script src="postChangeProfessionalDetails.js"></script>
+<script src="postResetPassword.js"></script>
 </html>

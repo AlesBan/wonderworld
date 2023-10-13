@@ -36,7 +36,7 @@ async function postCreateAccount() {
         CityLocation: location.split(' ')[0],
         CountryLocation: location.split(' ')[1],
         Languages: languages.split(' '),
-        EstablishmentDto: {
+        InstitutionDto: {
             Types: types,
             Address: establishmentFields.description,
             Title: establishmentFields.name,

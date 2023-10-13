@@ -10,6 +10,28 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    let emailInput = document.getElementById('email');
+
+    if (emailInput) {
+        emailInput.addEventListener('input', function() {
+            let email = this.value;
+            let isValid = validateEmail(email);
+
+            if (isValid) {
+                this.classList.remove('invalid');
+            } else {
+                this.classList.add('invalid');
+            }
+        });
+    }
+});
+
+function validateEmail(email) {
+    let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     let input = document.querySelector('[name="password"].password-input');
 
@@ -35,19 +57,30 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+function validatePassword(password) {
+    return password.length >= 6;
+}
+
 async function postData() {
 
     const url = 'http://localhost:7280/api/user/register';
+    const password = document.getElementById("password").value;
     const data = {
         Email: document.getElementById("email").value,
         Password: document.getElementById("password").value
     };
 
+    if (!validatePassword(password)) {
+        // Введите дополнительные действия для обработки неправильного пароля
+        document.getElementById("password").classList.add("invalid");
+        return;
+    }
+
+
     console.log(JSON.stringify(data));
 
     fetch(url, {
         method: 'POST',
-        referrerPolicy: "origin-when-cross-origin",
         headers: {
             'content-type': 'application/json; charset=utf-8',
             'Transfer-Encoding': 'chunked',
