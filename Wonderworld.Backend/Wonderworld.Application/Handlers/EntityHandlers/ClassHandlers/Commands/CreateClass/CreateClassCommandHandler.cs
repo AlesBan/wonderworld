@@ -36,7 +36,7 @@ public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand, Cla
         await _mediator.Send(new CreateClassLanguagesCommand()
         {
             ClassId = newClass.ClassId,
-            LanguageIds = request.Languages.Select(lang => lang.LanguageId).ToList()
+            LanguageIds = request.LanguageIds
         }, CancellationToken.None);
     }
 
@@ -45,7 +45,7 @@ public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand, Cla
         await _mediator.Send(new CreateClassDisciplinesCommand()
         {
             ClassId = newClass.ClassId,
-            DisciplineIds = request.Disciplines.Select(discipline => discipline.DisciplineId).ToList()
+            DisciplineIds = request.DisciplineIds
         }, CancellationToken.None);
     }
 
