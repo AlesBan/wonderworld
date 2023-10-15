@@ -1,7 +1,4 @@
-using Wonderworld.Domain.Entities.Education;
-using Wonderworld.Domain.Entities.Location;
-
-namespace Wonderworld.Application.Dtos.UpdateDtos;
+namespace Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 
 public class UpdateProfessionalInfoRequestDto
 {

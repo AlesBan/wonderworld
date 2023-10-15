@@ -17,9 +17,17 @@ public class UpdateUserPasswordCommandHandler : IRequestHandler<UpdateUserPasswo
 
     public async Task<User> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users
-            .FirstOrDefaultAsync(u =>
-                u.UserId == request.UserId, cancellationToken: cancellationToken);
+        var user = _context.Users
+            .Include(u => u.City)
+            .Include(u => u.Country)
+            .Include(u => u.Institution)
+            .Include(u => u.Classes)
+            .Include(u => u.UserDisciplines)
+            .ThenInclude(ud => ud.Discipline)
+            .Include(u => u.UserLanguages)
+            .ThenInclude(ul => ul.Language)
+            .FirstOrDefault(u =>
+                u.UserId == request.UserId);
 
         if (user == null)
         {
@@ -29,6 +37,25 @@ public class UpdateUserPasswordCommandHandler : IRequestHandler<UpdateUserPasswo
         user.Password = request.Password;
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
+        
+        user = _context.Users
+            .Include(u => u.City)
+            .Include(u => u.Country)
+            .Include(u => u.Institution)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.ClassLanguages)
+            .ThenInclude(cl => cl.Language)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.ClassDisciplines)
+            .ThenInclude(cd => cd.Discipline)
+            .Include(u => u.UserDisciplines)
+            .ThenInclude(ud => ud.Discipline)
+            .Include(u => u.UserLanguages)
+            .ThenInclude(ul => ul.Language)
+            .Include(u => u.UserGrades)
+            .ThenInclude(ug => ug.Grade)
+            .FirstOrDefault(u =>
+                u.UserId == request.UserId);
 
         return user;
     }

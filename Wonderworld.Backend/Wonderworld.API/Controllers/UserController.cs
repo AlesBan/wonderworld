@@ -6,6 +6,7 @@ using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.AccountServices;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
+using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
 using Wonderworld.Application.Interfaces;
 
 namespace Wonderworld.API.Controllers;

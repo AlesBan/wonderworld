@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using MediatR;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.EntityConnections;
@@ -21,13 +22,18 @@ public class CreateUserLanguagesCommandHandler : IRequestHandler<CreateUserLangu
     /// <returns></returns>
     public async Task<Unit> Handle(CreateUserLanguagesCommand request, CancellationToken cancellationToken)
     {
-        var userLanguagesToAdd = request.LanguageIds
-            .Select(l =>
-                new UserLanguage()
-                {
-                    UserId = request.UserId,
-                    LanguageId = l
-                });
+        var userLanguagesToAdd = (from languageId in request.LanguageIds
+                let exists = _context.UserLanguages.Any(l =>
+                    l.LanguageId == languageId && l.UserId == request.UserId)
+                where !exists
+                select new UserLanguage()
+                    { UserId = request.UserId, LanguageId = languageId })
+            .ToList();
+        
+        if (userLanguagesToAdd.Count == 0)
+        {
+            return Unit.Value;
+        }
 
         await _context.UserLanguages
             .AddRangeAsync(userLanguagesToAdd, cancellationToken);

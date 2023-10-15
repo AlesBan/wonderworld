@@ -1,14 +1,14 @@
-using System.Reflection.Metadata.Ecma335;
 using AutoMapper;
 using Wonderworld.Application.Common.Mappings;
+using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
+using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Domain.EntityConnections;
 
-namespace Wonderworld.Application.Dtos.ProfileDtos;
+namespace Wonderworld.Application.Dtos.UserDtos;
 
 public class UserProfileDto : IMapWith<User>
 {
@@ -20,17 +20,28 @@ public class UserProfileDto : IMapWith<User>
     public string BannerPhotoUrl { get; set; } = string.Empty;
     public bool IsATeacher { get; set; }
     public bool IsAnExpert { get; set; }
-    public string CityTitle { get; set; }
-    public string CountryTitle { get; set; }
+    public string CityTitle { get; set; } = string.Empty;
+    public string CountryTitle { get; set; } = string.Empty;
     public InstitutionDto Institution { get; set; }
     public double Rating { get; set; }
-    public ICollection<Class> Classes { get; set; } = new List<Class>();
+    public IEnumerable<ClassProfileDto> ClasseDtos { get; set; } = new List<ClassProfileDto>();
     public List<string> Languages { get; set; } = new();
     public List<string> Disciplines { get; set; } = new();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     public void Mapping(Profile profile)
     {
+        profile.CreateMap<City, UserProfileDto>()
+            .ForMember(up => up.CityTitle,
+                opt => opt.MapFrom(c => c.Title));
+        profile.CreateMap<Country, UserProfileDto>()
+            .ForMember(up => up.CountryTitle,
+                opt => opt.MapFrom(c => c.Title));
+        profile.CreateMap<Institution, InstitutionDto>()
+            .ForMember(dest => dest.Address,
+                opt => opt.MapFrom(src => src.Address))
+            .ForMember(dest => dest.Title,
+                opt => opt.MapFrom(src => src.Title));
         profile.CreateMap<User, UserProfileDto>()
             .ForMember(up => up.Email,
                 opt => opt.MapFrom(u => u.Email))
@@ -48,24 +59,12 @@ public class UserProfileDto : IMapWith<User>
                 opt => opt.MapFrom(u => u.IsATeacher))
             .ForMember(up => up.IsAnExpert,
                 opt => opt.MapFrom(u => u.IsAnExpert))
-            .ForMember(up => up.CityTitle,
-                opt => opt.MapFrom(u => u.City.Title))
-            .ForMember(up => up.CountryTitle,
-                opt => opt.MapFrom(u => u.Country.Title))
             .ForMember(up => up.Rating,
                 opt => opt.MapFrom(u => u.Rating))
-            .ForMember(up => up.Classes,
-                opt => opt.MapFrom(u => u.Classes))
-            .ForMember(up => up.Languages,
-                opt => opt.MapFrom(u =>
-                    u.UserLanguages.Select(ul =>
-                        ul.Language.Title).ToList()))
-            .ForMember(up => up.Disciplines,
-                opt => opt.MapFrom(u =>
-                    u.UserDisciplines.Select(ud =>
-                        ud.Discipline.Title).ToList()))
-            .ForMember(up => up.Reviews,
-                opt => opt.MapFrom(u => u.ReceivedReviews))
+            .ForMember(up => up.CityTitle,
+                opt => opt.MapFrom(c => c.City.Title))
+            .ForMember(up => up.CountryTitle,
+                opt => opt.MapFrom(c => c.Country.Title))
             .ForMember(dest => dest.Institution,
                 opt => opt.MapFrom(src => new InstitutionDto
                 {

@@ -2,7 +2,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.Application.Dtos.ClassDtos;
-using Wonderworld.Application.Dtos.ProfileDtos;
 
 namespace Wonderworld.API.Services.ClassServices;
 

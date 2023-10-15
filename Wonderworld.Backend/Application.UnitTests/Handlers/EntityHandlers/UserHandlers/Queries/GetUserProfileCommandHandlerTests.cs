@@ -1,7 +1,7 @@
 using Application.UnitTests.Common;
 using AutoMapper;
 using Shouldly;
-using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetProfileUser;
 using Xunit;
 
@@ -43,7 +43,7 @@ public class GetUserProfileCommandHandlerTests : TestCommonBase
         result.Description.ShouldBe("DescriptionA");
         result.PhotoUrl.ShouldBe("PhotoUrlA");
         result.BannerPhotoUrl.ShouldBe("BannerPhotoUrlA");
-        result.Classes.Count.ShouldBe(3);
+        result.ClasseDtos.Count().ShouldBe(3);
         result.Languages.Count.ShouldBe(3);
         result.Disciplines.Count.ShouldBe(2);
         result.Reviews.Count.ShouldBe(1);

@@ -7,7 +7,7 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandler
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
@@ -27,9 +27,17 @@ public class UpdateProfessionalInfoCommandHandler : IRequestHandler<UpdateProfes
 
     public async Task<User> Handle(UpdateProfessionalInfoCommand request, CancellationToken cancellationToken)
     {
-        var user = await _context.Users
-            .FirstOrDefaultAsync(u =>
-                u.UserId == request.UserId, cancellationToken: cancellationToken);
+        var user = _context.Users
+            .Include(u => u.City)
+            .Include(u => u.Country)
+            .Include(u => u.Institution)
+            .Include(u => u.Classes)
+            .Include(u => u.UserDisciplines)
+            .ThenInclude(ud => ud.Discipline)
+            .Include(u => u.UserLanguages)
+            .ThenInclude(ul => ul.Language)
+            .FirstOrDefault(u =>
+                u.UserId == request.UserId);
 
         if (user == null)
         {
@@ -67,13 +75,31 @@ public class UpdateProfessionalInfoCommandHandler : IRequestHandler<UpdateProfes
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 
+        user = _context.Users
+            .Include(u => u.City)
+            .Include(u => u.Country)
+            .Include(u => u.Institution)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.ClassLanguages)
+            .ThenInclude(cl => cl.Language)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.ClassDisciplines)
+            .ThenInclude(cd => cd.Discipline)
+            .Include(u => u.UserDisciplines)
+            .ThenInclude(ud => ud.Discipline)
+            .Include(u => u.UserLanguages)
+            .ThenInclude(ul => ul.Language)
+            .Include(u => u.UserGrades)
+            .ThenInclude(ug => ug.Grade)
+            .FirstOrDefault(u =>
+                u.UserId == request.UserId);
         return user;
     }
 
     private async Task<List<Language>> GetLanguages(IEnumerable<string> languageTitles,
         CancellationToken cancellationToken)
     {
-        var query = new GetLanguagesQuery(languageTitles);
+        var query = new GetLanguagesByTitlesQuery(languageTitles);
         var languages = await _mediator.Send(query, cancellationToken);
 
         return languages;
@@ -82,7 +108,7 @@ public class UpdateProfessionalInfoCommandHandler : IRequestHandler<UpdateProfes
     private async Task<List<Discipline>> GetDisciplines(IEnumerable<string> disciplineTitles,
         CancellationToken cancellationToken)
     {
-        var query = new GetDisciplinesQuery(disciplineTitles);
+        var query = new GetDisciplinesByTitlesQuery(disciplineTitles);
         var disciplines = await _mediator.Send(query, cancellationToken);
 
         return disciplines;

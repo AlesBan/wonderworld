@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
+using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Interfaces.Services.ExternalServices;
 using Wonderworld.Infrastructure.Models.YandexOrganizationSearch;
 

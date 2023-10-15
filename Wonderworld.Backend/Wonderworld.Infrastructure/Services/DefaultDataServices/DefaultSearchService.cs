@@ -2,8 +2,8 @@ using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Dtos.ClassDtos;
-using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
+using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Location;
@@ -147,7 +147,7 @@ public class DefaultSearchService : IDefaultSearchService
 
     private IEnumerable<ClassProfileDto> GetClassProfiles(IEnumerable<UserProfileDto> userProfileList)
     {
-        var classList = userProfileList.Select(up => up.Classes).ToList();
+        var classList = userProfileList.Select(up => up.ClasseDtos).ToList();
 
         var classProfileList = classList.Select(cp =>
                 _mapper.Map<ClassProfileDto>(cp))

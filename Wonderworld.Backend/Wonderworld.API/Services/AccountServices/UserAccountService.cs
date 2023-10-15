@@ -4,15 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.Application.Common.Exceptions.User;
-using Wonderworld.Application.Dtos.CreateAccountDtos;
-using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.InstitutionDtos;
+using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
-using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Commands.CreateCity;
+using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
+using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByIds;
+using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByIds;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
@@ -61,13 +64,41 @@ public class UserAccountService : IUserAccountService
 
         var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
         var userProfileDto = _mapper.Map<UserProfileDto>(userWithAccount);
+
+        var languageIds = userWithAccount.UserLanguages
+            .Select(ul => ul.LanguageId).AsEnumerable();
+        var disciplineIds = userWithAccount.UserDisciplines
+            .Select(ud => ud.DisciplineId).ToList();
+        var institution = userWithAccount.Institution;
+        
+        var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
+        var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
+
+        userProfileDto.Languages = languages.Select(l => l.Title).ToList();
+        userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
+        userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
+
         return ResponseHelper.GetOkResult(userProfileDto);
     }
 
     public async Task<IActionResult> GetUserProfile(Guid userId, IMediator mediator)
     {
         var user = await mediator.Send(new GetUserByIdQuery(userId));
+        
         var userProfileDto = _mapper.Map<UserProfileDto>(user);
+        var languageIds = user.UserLanguages
+            .Select(ul => ul.LanguageId).AsEnumerable();
+        var disciplineIds = user.UserDisciplines
+            .Select(ud => ud.DisciplineId).ToList();
+        var institution = user.Institution;
+        
+        var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
+        var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
+
+        userProfileDto.Languages = languages.Select(l => l.Title).ToList();
+        userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
+        userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
+        
         return new OkObjectResult(userProfileDto);
     }
 
@@ -97,14 +128,14 @@ public class UserAccountService : IUserAccountService
         }
     }
 
-    private async Task<User> GetUserWithAccount(Guid userId, CreateUserAccountRequestDto requestUserDto,
+    private static async Task<User> GetUserWithAccount(Guid userId, CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
         var command = await GetCreateUserAccountCommand(userId, requestUserDto, mediator);
         return await mediator.Send(command);
     }
 
-    private async Task<CreateUserAccountCommand> GetCreateUserAccountCommand(Guid userId,
+    private static async Task<CreateUserAccountCommand> GetCreateUserAccountCommand(Guid userId,
         CreateUserAccountRequestDto requestUserDto, IMediator mediator)
     {
         var country = await GetCountry(requestUserDto.CountryLocation, mediator);
@@ -112,6 +143,7 @@ public class UserAccountService : IUserAccountService
         var institution = await GetInstitution(requestUserDto, mediator);
         var disciplines = await GetDisciplines(requestUserDto.Disciplines, mediator);
         var languages = await GetLanguages(requestUserDto.Languages, mediator);
+        var grades = await GetGrades(requestUserDto.Grades, mediator);
 
         var query = new CreateUserAccountCommand
         {
@@ -126,6 +158,7 @@ public class UserAccountService : IUserAccountService
             DisciplineIds = disciplines.Select(d => d.DisciplineId).ToList(),
             LanguageIds = languages.Select(l => l.LanguageId).ToList(),
             PhotoUrl = requestUserDto.PhotoUrl,
+            GradeIds = grades.Select(g => g.GradeId).ToList()
         };
 
         return query;
@@ -133,10 +166,7 @@ public class UserAccountService : IUserAccountService
 
     private static async Task<Country> GetCountry(string countryTitle, IMediator mediator)
     {
-        var query = new GetCountryByTitleQuery()
-        {
-            Title = countryTitle
-        };
+        var query = new GetCountryByTitleQuery(countryTitle);
         return await mediator.Send(query);
     }
 
@@ -148,20 +178,8 @@ public class UserAccountService : IUserAccountService
             Title = cityTitle
         };
 
-        try
-        {
-            var city = await mediator.Send(query);
-            return city;
-        }
-        catch
-        {
-            var createQuery = new CreateCityCommand()
-            {
-                CountryId = country.CountryId,
-                Title = cityTitle
-            };
-            return await mediator.Send(createQuery);
-        }
+        var city = await mediator.Send(query);
+        return city;
     }
 
     private static async Task<Institution> GetInstitution(CreateUserAccountRequestDto requestUserDto,
@@ -185,14 +203,20 @@ public class UserAccountService : IUserAccountService
 
     private static async Task<IEnumerable<Language>> GetLanguages(IEnumerable<string> languages, IMediator mediator)
     {
-        var query = new GetLanguagesQuery(languages);
+        var query = new GetLanguagesByTitlesQuery(languages);
         return await mediator.Send(query);
     }
 
     private static async Task<IEnumerable<Discipline>> GetDisciplines(IEnumerable<string> disciplines,
         IMediator mediator)
     {
-        var query = new GetDisciplinesQuery(disciplines);
+        var query = new GetDisciplinesByTitlesQuery(disciplines);
+        return await mediator.Send(query);
+    }
+
+    private static async Task<IEnumerable<Grade>> GetGrades(IEnumerable<int> grades, IMediator mediator)
+    {
+        var query = new GetGradesQuery(grades);
         return await mediator.Send(query);
     }
 }

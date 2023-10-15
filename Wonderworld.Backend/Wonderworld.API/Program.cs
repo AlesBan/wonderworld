@@ -1,14 +1,13 @@
 using System.Reflection;
-using System.Security.Claims;
 using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Wonderworld.API.Filters;
 using Wonderworld.API.Services.AccountServices;
 using Wonderworld.API.Services.ClassServices;
 using Wonderworld.API.Services.EditUserData;
+using Wonderworld.API.Services.EditUserServices;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
@@ -101,7 +100,7 @@ builder.Services.AddHttpClient<IOrganizationSearchService, OrganizationSearchSer
 });
 
 
-builder.Services.AddScoped<ISharedLessonDbContext, SharedLessonDbContext>();
+builder.Services.AddTransient<ISharedLessonDbContext, SharedLessonDbContext>();
 builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<IEditUserAccountService, EditUserAccountService>();

@@ -1,7 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Interfaces;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListBySearchRequest;

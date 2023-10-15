@@ -2,9 +2,15 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Helpers;
-using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.API.Services.EditUserData;
+using Wonderworld.Application.Dtos.ClassDtos;
+using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UpdateDtos;
+using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
+using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClasses;
+using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByIds;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByIds;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdatePersonalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateProfessionalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
@@ -12,7 +18,7 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPassword;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.API.Services.EditUserData;
+namespace Wonderworld.API.Services.EditUserServices;
 
 public class EditUserAccountService : IEditUserAccountService
 {
@@ -61,12 +67,37 @@ public class EditUserAccountService : IEditUserAccountService
 
         var userProfileDto = _mapper.Map<UserProfileDto>(updatedUser);
 
-        userProfileDto.Disciplines = updatedUser.UserDisciplines
-            .Select(d => d.Discipline.Title)
-            .ToList();
-        userProfileDto.Languages = updatedUser.UserLanguages
-            .Select(l => l.Language.Title)
-            .ToList();
+        var languageIds = updatedUser.UserLanguages
+            .Select(ul => ul.LanguageId).AsEnumerable();
+        var disciplineIds = updatedUser.UserDisciplines
+            .Select(ud => ud.DisciplineId).ToList();
+        var classesIds = updatedUser.Classes
+            .Select(c => c.ClassId).ToList();
+        var institution = userProfileDto.Institution;
+
+        var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
+        var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
+        var classes = await mediator.Send(new GetClassesCommand(userId, classesIds));
+
+        userProfileDto.Languages = languages.Select(l => l.Title).ToList();
+        userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
+        
+        userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
+        
+        await Task.Delay(20);
+        var classProfileDtos = classes.ToList().Select(c =>
+            new ClassProfileDto
+            {
+                Title = c.Title,
+                UserFullName = c.User.FullName,
+                UserRating = c.User.Rating,
+                Grade = c.Grade.GradeNumber,
+                // Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
+                // Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
+                PhotoUrl = c.PhotoUrl!
+            }).ToList();
+
+        userProfileDto.ClasseDtos = classProfileDtos;
 
         return new OkObjectResult(userProfileDto);
     }

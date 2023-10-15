@@ -7,7 +7,6 @@ namespace Wonderworld.Application.Dtos.ClassDtos;
 
 public class ClassProfileDto : IMapWith<Class>
 {
-    public Guid ClassId { get; set; }
     public string Title { get; set; } = string.Empty;
     public string UserFullName { get; set; } = string.Empty;
     public double UserRating { get; set; }
@@ -23,8 +22,6 @@ public class ClassProfileDto : IMapWith<Class>
             .ForMember(up => up.GradeNumber,
                 opt => opt.MapFrom(u => u.Grade));
         profile.CreateMap<Class, ClassProfileDto>()
-            .ForMember(up => up.ClassId,
-                opt => opt.MapFrom(u => u.ClassId))
             .ForMember(up => up.Title,
                 opt => opt.MapFrom(u => u.Title))
             .ForMember(up => up.UserFullName,

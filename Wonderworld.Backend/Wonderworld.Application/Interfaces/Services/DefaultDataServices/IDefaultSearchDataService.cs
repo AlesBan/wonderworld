@@ -1,5 +1,4 @@
 using MediatR;
-using Wonderworld.Application.Dtos.ProfileDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 
 namespace Wonderworld.Application.Interfaces.Services.DefaultDataServices;

@@ -7,7 +7,7 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHa
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrade;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Main;
@@ -66,7 +66,7 @@ public class UpdateClassCommandHandler : IRequestHandler<UpdateClassCommand, Cla
     private async Task<List<Language>> GetLanguages(IEnumerable<string> languageTitles,
         CancellationToken cancellationToken)
     {
-        var query = new GetLanguagesQuery(languageTitles);
+        var query = new GetLanguagesByTitlesQuery(languageTitles);
         var languages = await _mediator.Send(query, cancellationToken);
 
         return languages;
@@ -75,7 +75,7 @@ public class UpdateClassCommandHandler : IRequestHandler<UpdateClassCommand, Cla
     private async Task<List<Discipline>> GetDisciplines(IEnumerable<string> disciplineTitles,
         CancellationToken cancellationToken)
     {
-        var query = new GetDisciplinesQuery(disciplineTitles);
+        var query = new GetDisciplinesByTitlesQuery(disciplineTitles);
         var disciplines = await _mediator.Send(query, cancellationToken);
 
         return disciplines;
