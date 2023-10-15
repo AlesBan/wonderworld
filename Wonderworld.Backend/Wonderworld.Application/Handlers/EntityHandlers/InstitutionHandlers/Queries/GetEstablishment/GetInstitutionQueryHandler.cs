@@ -1,6 +1,5 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Job;
@@ -38,8 +37,6 @@ public class GetInstitutionQueryHandler : IRequestHandler<GetInstitutionQuery, I
                 Address = request.Address
             }, cancellationToken);
         
-        await _context.Institutions.AddAsync(newInstitution, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken: cancellationToken);
         return newInstitution;
     }
 }

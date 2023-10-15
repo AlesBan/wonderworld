@@ -5,7 +5,7 @@ using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.Cre
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.DeleteClass;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.UpdateClass;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 
 namespace Wonderworld.API.Services.ClassServices;
 
@@ -13,9 +13,9 @@ public class ClassService : IClassService
 {
     public async Task<IActionResult> CreateClass(Guid userId, CreateClassRequestDto requestClassDto, IMediator mediator)
     {
-        var disciplines = await mediator.Send(new GetDisciplinesQuery(requestClassDto.DisciplineTitles),
+        var disciplines = await mediator.Send(new GetDisciplinesByTitlesQuery(requestClassDto.DisciplineTitles),
             CancellationToken.None);
-        var languages = await mediator.Send(new GetLanguagesQuery(requestClassDto.LanguageTitles),
+        var languages = await mediator.Send(new GetLanguagesByTitlesQuery(requestClassDto.LanguageTitles),
             CancellationToken.None);
 
         var command = new CreateClassCommand
@@ -36,9 +36,9 @@ public class ClassService : IClassService
     public async Task<IActionResult> UpdateClass(Guid classId, UpdateClassRequestDto requestClassDto,
         IMediator mediator)
     {
-        var disciplines = await mediator.Send(new GetDisciplinesQuery(requestClassDto.DisciplineTitles),
+        var disciplines = await mediator.Send(new GetDisciplinesByTitlesQuery(requestClassDto.DisciplineTitles),
             CancellationToken.None);
-        var languages = await mediator.Send(new GetLanguagesQuery(requestClassDto.LanguageTitles),
+        var languages = await mediator.Send(new GetLanguagesByTitlesQuery(requestClassDto.LanguageTitles),
             CancellationToken.None);
 
         var command = new UpdateClassCommand

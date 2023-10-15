@@ -6,4 +6,9 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Querie
 public class GetCountryByTitleQuery : IRequest<Country>
 {
     public string Title { get; set; }
+
+    public GetCountryByTitleQuery(string title) 
+    {
+        Title = title;
+    }
 }

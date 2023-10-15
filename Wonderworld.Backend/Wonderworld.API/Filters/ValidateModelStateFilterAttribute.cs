@@ -24,6 +24,7 @@ public class ValidateModelStateFilterAttribute : TypeFilterAttribute
         {
             if (!context.ModelState.IsValid)
             {
+                
                 context.Result = new BadRequestObjectResult(new AuthResult()
                 {
                     Result = false,

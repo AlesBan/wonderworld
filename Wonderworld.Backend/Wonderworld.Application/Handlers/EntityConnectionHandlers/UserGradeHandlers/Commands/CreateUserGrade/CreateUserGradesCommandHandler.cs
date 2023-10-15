@@ -15,13 +15,13 @@ public class CreateUserGradesCommandHandler : IRequestHandler<CreateUserGradesCo
 
     public async Task<Unit> Handle(CreateUserGradesCommand request, CancellationToken cancellationToken)
     {
-        var userGradesAdd = request.GradeIds
-            .Select(g =>
-                new UserGrade
-                {
-                    GradeId = g,
-                    UserId = request.UserId,
-                });
+        var userGradesAdd = (from gradeId in request.GradeIds 
+                let exists = _context.UserGrades.Any(d => 
+                    d.GradeId == gradeId && d.UserId == request.UserId) 
+                where !exists 
+                select new UserGrade() 
+                    { UserId = request.UserId, GradeId = gradeId })
+            .ToList();
 
         await _context.UserGrades
             .AddRangeAsync(userGradesAdd, cancellationToken);

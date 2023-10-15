@@ -18,5 +18,6 @@ public class CreateUserAccountCommand : IRequest<User>
     public Guid InstitutionId { get; set; }
     public IEnumerable<Guid> DisciplineIds { get; set; } = new List<Guid>();
     public IEnumerable<Guid> LanguageIds { get; set; } = new List<Guid>();
+    public IEnumerable<Guid> GradeIds { get; set; } = new List<Guid>();
     public string PhotoUrl { get; set; }
 }

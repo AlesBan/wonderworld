@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Application.Common.Exceptions.User;
-using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
+using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.CreateUserGrade;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
@@ -48,8 +48,22 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
 
         await SeedUserLanguages(user.UserId, request, cancellationToken);
         await SeedUserDisciplines(user.UserId, request, cancellationToken);
+        await SeedUserGrades(user.UserId, request, cancellationToken);
 
         await _context.SaveChangesAsync(cancellationToken);
+
+        user = _context
+            .Users
+            .Include(u => u.Country)
+            .Include(u => u.City)
+            .Include(u => u.Institution)
+            .Include(u => u.UserDisciplines)
+            .ThenInclude(ud => ud.Discipline)
+            .Include(u => u.UserLanguages)
+            .ThenInclude(ul => ul.Language)
+            .Include(u => u.UserGrades)
+            .ThenInclude(ug => ug.Grade)
+            .FirstOrDefault(u => u.UserId == request.UserId);
 
         return user;
     }
@@ -73,6 +87,17 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         {
             UserId = userId,
             DisciplineIds = request.DisciplineIds
+        }, cancellationToken);
+    }
+
+    private async Task SeedUserGrades(Guid userId, CreateUserAccountCommand request,
+        CancellationToken cancellationToken = default)
+    {
+        var handler = new CreateUserGradesCommandHandler(_context);
+        await handler.Handle(new CreateUserGradesCommand()
+        {
+            UserId = userId,
+            GradeIds = request.GradeIds
         }, cancellationToken);
     }
 }

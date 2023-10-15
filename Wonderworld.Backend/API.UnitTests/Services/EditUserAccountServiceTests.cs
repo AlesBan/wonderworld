@@ -4,12 +4,13 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Wonderworld.API.Services.EditUserData;
+using Wonderworld.API.Services.EditUserServices;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
-using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UpdateDtos;
+using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
-using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.UpdateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.UpdateUserDisciplines;
@@ -18,10 +19,11 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandler
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
+using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdatePersonalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateProfessionalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
@@ -385,11 +387,11 @@ public class EditUserAccountServiceTests : TestCommonBase
         var updateProfessionalInfoHandler = new UpdateProfessionalInfoCommandHandler(Context, mediatorMock.Object);
 
 
-        var getLanguagesQuery = new GetLanguagesQuery(languageTitles);
-        var getLanguagesHandler = new GetLanguagesQueryHandler(Context);
+        var getLanguagesQuery = new GetLanguagesByTitlesQuery(languageTitles);
+        var getLanguagesHandler = new GetLanguagesByTitlesQueryHandler(Context);
 
-        var getDisciplinesQuery = new GetDisciplinesQuery(disciplineTitles);
-        var getDisciplinesHandler = new GetDisciplinesQueryHandler(Context);
+        var getDisciplinesQuery = new GetDisciplinesByTitlesQuery(disciplineTitles);
+        var getDisciplinesHandler = new GetDisciplinesByTitlesQueryHandler(Context);
 
         var getGradesQuery = new GetGradesQuery(gradeNList);
         var getGradesHandler = new GetGradesQueryHandler(Context);
@@ -453,9 +455,9 @@ public class EditUserAccountServiceTests : TestCommonBase
         };
         var updateUserGradesHandler = new UpdateUserGradesCommandHandler(Context, mediatorMock.Object);
             
-        mediatorMock.Setup(m=>m.Send(It.IsAny<GetLanguagesQuery>(),
+        mediatorMock.Setup(m=>m.Send(It.IsAny<GetLanguagesByTitlesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(languages);
-        mediatorMock.Setup(m => m.Send(It.IsAny<GetDisciplinesQuery>(),
+        mediatorMock.Setup(m => m.Send(It.IsAny<GetDisciplinesByTitlesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(disciplines);
         mediatorMock.Setup(m => m.Send(It.IsAny<GetGradesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(grades);

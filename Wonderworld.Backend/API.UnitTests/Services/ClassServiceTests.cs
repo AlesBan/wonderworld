@@ -5,7 +5,8 @@ using Moq;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.CreateClass;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
+using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Domain.Entities.Education;
 using Xunit;
 using static System.Threading.CancellationToken;
@@ -29,19 +30,19 @@ public class ClassServiceTests : TestCommonBase
             PhotoUrl = "PhotoUrl"
         };
 
-        var getDisciplinesQueryHandler = new GetDisciplinesQueryHandler(Context);
-        var getDisciplineQuery = new GetDisciplinesQuery(requestClassDto.DisciplineTitles);
+        var getDisciplinesQueryHandler = new GetDisciplinesByTitlesQueryHandler(Context);
+        var getDisciplineQuery = new GetDisciplinesByTitlesQuery(requestClassDto.DisciplineTitles);
         var disciplines = await getDisciplinesQueryHandler.Handle(getDisciplineQuery, None);
         
-        mediatorMock.Setup(m => m.Send(It.IsAny<GetDisciplinesQuery>(),
+        mediatorMock.Setup(m => m.Send(It.IsAny<GetDisciplinesByTitlesQuery>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(disciplines);
         
-        var getLanguagesQueryHandler = new GetLanguagesQueryHandler(Context);
-        var getLanguageQuery = new GetLanguagesQuery(requestClassDto.LanguageTitles);
+        var getLanguagesQueryHandler = new GetLanguagesByTitlesQueryHandler(Context);
+        var getLanguageQuery = new GetLanguagesByTitlesQuery(requestClassDto.LanguageTitles);
         var languages = await getLanguagesQueryHandler.Handle(getLanguageQuery, None);
 
-        mediatorMock.Setup(m => m.Send(It.IsAny<GetLanguagesQuery>(),
+        mediatorMock.Setup(m => m.Send(It.IsAny<GetLanguagesByTitlesQuery>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(languages);
 

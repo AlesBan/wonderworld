@@ -1,6 +1,5 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
 using Xunit;
 

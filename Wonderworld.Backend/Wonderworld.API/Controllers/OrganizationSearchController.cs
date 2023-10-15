@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
+using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Interfaces.Services.ExternalServices;
 
 namespace Wonderworld.API.Controllers;

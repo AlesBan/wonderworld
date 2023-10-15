@@ -1,5 +1,5 @@
 using Wonderworld.Application.Dtos.ClassDtos;
-using Wonderworld.Application.Dtos.ProfileDtos;
+using Wonderworld.Application.Dtos.UserDtos;
 
 namespace Wonderworld.Application.Dtos.SearchDtos;
 
