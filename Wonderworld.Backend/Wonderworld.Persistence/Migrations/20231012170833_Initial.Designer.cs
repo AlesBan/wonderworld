@@ -12,7 +12,11 @@ using Wonderworld.Persistence;
 namespace Wonderworld.Persistence.Migrations
 {
     [DbContext(typeof(SharedLessonDbContext))]
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
     [Migration("20231012170833_Initial")]
+========
+    [Migration("20231016160037_Initial")]
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,52 +147,92 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("2e6785f8-37f5-431f-9a06-ddc09e72729f"),
+========
+                            DisciplineId = new Guid("3e2c055f-e9cf-4da4-ac31-ee5807ce84b2"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Biology"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("777ae577-900a-46cb-9f78-cafa8f1f74d3"),
+========
+                            DisciplineId = new Guid("20d9f406-6e62-41c7-8d35-2d746e2dae9d"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Chemistry"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("2f6d24f5-8f6d-49df-8d28-036349f6a097"),
+========
+                            DisciplineId = new Guid("1012fa7c-13e3-41a9-b48c-50e2083d7580"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Physics"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("8651b278-aaf9-4b5a-9c47-2a6ed5b61c02"),
+========
+                            DisciplineId = new Guid("51b7d7fe-9993-4de7-85a3-9a2d74d2c69d"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Mathematics"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("8cf0c023-5717-4bcb-8eb2-b310adc98ef9"),
+========
+                            DisciplineId = new Guid("1b07a4bc-38e3-4a56-80c4-9c0abbd47271"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Literature"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("b85d0f51-ea28-466e-aa9a-ea70f4a53868"),
+========
+                            DisciplineId = new Guid("3890b37e-c1af-45c5-836c-99a90d5bac44"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "ComputerScience"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("18918edf-9ec8-4b76-a6f5-5f03f9f90451"),
+========
+                            DisciplineId = new Guid("96f93fad-28f6-4fa3-8c34-fff57d69f075"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Geography"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("dc09e61a-107c-434b-909c-d864405762cb"),
+========
+                            DisciplineId = new Guid("ec5ffd0f-080c-4f25-849c-d6e38f101eb7"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "History"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("2d43dfd1-8283-4afd-bcda-14fbf979e8d4"),
+========
+                            DisciplineId = new Guid("9932dd33-dfc4-47c9-8edb-252aec115e8b"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Music"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             DisciplineId = new Guid("83252af8-4f24-4970-bc4b-06202f11a9f1"),
+========
+                            DisciplineId = new Guid("25052923-eea0-4dc4-9eea-3567307fd398"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Art"
                         });
                 });
@@ -214,62 +258,110 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("4125c72d-3d77-4a6f-b1c0-ea7f7800ef31"),
+========
+                            GradeId = new Guid("fd474218-81d2-433f-882f-0a2d1c071b9e"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 1
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("1ed89b6e-9da2-4f6f-8b7c-4cb098915226"),
+========
+                            GradeId = new Guid("dc63487f-b919-43d2-bfb3-12f1a8030455"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 2
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("07f2cca5-c586-48e8-a779-084baad8ee9b"),
+========
+                            GradeId = new Guid("4614dd2a-8799-4118-b8e4-5cc3972c1d63"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 3
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("da69c393-01e6-4bbc-a141-9106806ed4c9"),
+========
+                            GradeId = new Guid("7601508d-cde4-41fc-a5d8-b743acfc5622"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 4
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("30cdc179-bd1b-4088-9a32-e12263c9e5ce"),
+========
+                            GradeId = new Guid("7bbc567e-33c2-4df3-84f4-0fa02464f124"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 5
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("c5923ad0-b41c-47a5-b225-1ecfa8fd4042"),
+========
+                            GradeId = new Guid("44fd6c3c-484e-4adf-ac1c-807b2e608c5e"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 6
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("2cb72052-aef3-4e20-90af-348f55537f39"),
+========
+                            GradeId = new Guid("393c5e7d-5131-44c1-80a0-78d810c94288"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 7
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("a1e41239-4597-4875-be6e-c0e63bba2ade"),
+========
+                            GradeId = new Guid("148b2690-e624-4245-9cb6-b2ef35275016"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 8
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("0894be82-effe-4147-a41c-92917125452a"),
+========
+                            GradeId = new Guid("b2733d2d-199f-4d21-91ab-067d498745d2"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 9
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("e2c174b1-1410-451b-8104-013bbb2c3aa5"),
+========
+                            GradeId = new Guid("6980aa47-a522-4bfa-a035-f0e60ff52031"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 10
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("57ea8377-51d4-4aba-bf67-9beae03cbc3f"),
+========
+                            GradeId = new Guid("fc7d5e0b-6039-47bd-84ac-906f0493a96d"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 11
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             GradeId = new Guid("d012865a-7190-4e61-9d3d-565031c32618"),
+========
+                            GradeId = new Guid("50cb8ae6-be1b-4d20-a8b6-149d4ba3be79"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             GradeNumber = 12
                         });
                 });
@@ -296,87 +388,155 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("9cbe5adb-aaac-4e1e-8677-a24cff5aa5ff"),
+========
+                            LanguageId = new Guid("4b5e3e56-e8d0-4075-9932-11d2d1ecf781"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Russian"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("393612e4-005c-441c-922f-690190d51520"),
+========
+                            LanguageId = new Guid("5fc6f5be-ea44-4a4f-9668-8d03c79fc5a0"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "English"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("678b43a6-74c8-415a-993f-623490dfc591"),
+========
+                            LanguageId = new Guid("32fdfdfd-a357-42ad-bd24-63e406f8681f"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "German"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("b7664e4a-4fc6-456a-b91d-d068797a422f"),
+========
+                            LanguageId = new Guid("9495fbf4-97c5-4191-b279-9de52beb57c3"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Italian"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("57b42ee1-8662-44eb-b3a9-c9ab3b2d67da"),
+========
+                            LanguageId = new Guid("159cd2e2-b0d8-4753-9ac2-a1aafa1c62ed"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Spanish"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("89f2db5a-dad8-4d0d-8b83-e46dbd3be684"),
+========
+                            LanguageId = new Guid("ab0cc68c-b75b-4c73-922c-240e8639ffa5"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "French"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("65e155f2-8a44-4f87-9b0c-2b179a3cf364"),
+========
+                            LanguageId = new Guid("73783080-a6d5-4b17-9448-bb77956b1358"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Hungarian"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("753d68c9-0d80-41b2-8270-c3f971f94ce7"),
+========
+                            LanguageId = new Guid("b8f794c3-a7a4-4149-b12c-eba7e93919e1"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Portuguese"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("25846d61-18ee-48ea-a101-9fe14c40fe26"),
+========
+                            LanguageId = new Guid("1cf953ef-8f0c-45c7-8c5a-a6481708970a"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Belarusian"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("ccc5c4f6-a634-4204-91df-e1b9d206d349"),
+========
+                            LanguageId = new Guid("08434faf-3993-4a01-998f-010131f826cc"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Ukrainian"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("0d14e1c6-c221-4eb5-93e3-df071e25166f"),
+========
+                            LanguageId = new Guid("4d630f97-1e28-4ab0-8eaf-bf374d844304"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Armenian"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("84c6f09d-f22d-4552-acb4-f0e4918f085c"),
+========
+                            LanguageId = new Guid("572300a7-ec81-4ecf-9a8f-6cccfa75d0d2"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Georgian"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("f18c882f-2582-4d18-8849-7812c7fd2424"),
+========
+                            LanguageId = new Guid("8e81bcfb-f256-4bf4-86c2-1116b010794f"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Azerbaijani"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("82a061f6-8fe4-4d38-b397-2b69bbcdf5e5"),
+========
+                            LanguageId = new Guid("3289538d-dcdb-44b0-8d3c-e691d7f5a44c"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Kazakh"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("509b8b5a-28b0-4170-bd48-961247cb8029"),
+========
+                            LanguageId = new Guid("9127abbb-b393-484e-bc78-6b0d1591da2c"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Kyrgyz"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("d0d2bf35-d7d3-48fb-aa19-65d87e785437"),
+========
+                            LanguageId = new Guid("33e7beeb-c01d-4c71-a850-6ae66dfbf992"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Tajik"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             LanguageId = new Guid("00e6c22b-cf1b-4787-bdb7-b723d97275a9"),
+========
+                            LanguageId = new Guid("fbbc523c-7f71-4dd7-bdb2-b1459a6b0078"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Uzbek"
                         });
                 });
@@ -433,22 +593,38 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             InstitutionTypeId = new Guid("8b2d725f-b557-4e07-95c1-1bbd07a81384"),
+========
+                            InstitutionTypeId = new Guid("cdbd52d8-ee4f-4758-974c-84e573d3b042"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "School"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             InstitutionTypeId = new Guid("5dea9ea9-4c1d-4584-b224-3224491d0391"),
+========
+                            InstitutionTypeId = new Guid("4d594e01-1c9c-4edd-bcd2-d8ca95d52fdb"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Gymnasium"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             InstitutionTypeId = new Guid("a18951e2-c8e4-4e84-82cf-e85334b20d36"),
+========
+                            InstitutionTypeId = new Guid("e80411df-a2ac-4235-bb89-60bb71f5fcf1"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Lyceum"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             InstitutionTypeId = new Guid("3d2a5998-5a06-4dc1-b5c7-c6d57f7c41cd"),
+========
+                            InstitutionTypeId = new Guid("74bc084b-2e66-4955-929b-3bc34be68b32"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "College"
                         });
                 });
@@ -561,17 +737,29 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             RoleId = new Guid("992b818a-ed7d-4536-badc-23952947abaf"),
+========
+                            RoleId = new Guid("7662f593-620f-4d0b-9bdb-6235fe0ddefe"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Admin"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             RoleId = new Guid("90f21c69-34c6-4f3c-a54e-d88292caec35"),
+========
+                            RoleId = new Guid("b1e6a379-f571-498a-ab3d-94d6bba4782a"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "User"
                         },
                         new
                         {
+<<<<<<<< HEAD:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231012170833_Initial.Designer.cs
                             RoleId = new Guid("efa0a773-85d5-410e-a81c-21d120a942f2"),
+========
+                            RoleId = new Guid("2cb8a171-f1f8-474c-a72f-4b3872a84e9a"),
+>>>>>>>> DevelopBackend:Wonderworld.Backend/Wonderworld.Persistence/Migrations/20231016160037_Initial.Designer.cs
                             Title = "Manager"
                         });
                 });

@@ -1,5 +1,7 @@
 using MediatR;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Common;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;

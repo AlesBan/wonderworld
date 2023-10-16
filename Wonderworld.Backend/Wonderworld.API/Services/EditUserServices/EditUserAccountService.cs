@@ -86,12 +86,13 @@ public class EditUserAccountService : IEditUserAccountService
         var classProfileDtos = classes.ToList().Select(c =>
             new ClassProfileDto
             {
+                ClassId = c.ClassId,
                 Title = c.Title,
                 UserFullName = c.User.FullName,
                 UserRating = c.User.Rating,
                 Grade = c.Grade.GradeNumber,
-                // Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
-                // Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
+                Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
+                Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
                 PhotoUrl = c.PhotoUrl!
             }).ToList();
 

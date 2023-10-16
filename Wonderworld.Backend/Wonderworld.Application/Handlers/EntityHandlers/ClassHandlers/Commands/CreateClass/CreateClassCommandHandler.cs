@@ -1,6 +1,7 @@
 using MediatR;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.ClassDisciplineHandlers.Commands.CreateClassDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.ClassLanguagesHandlers.Commands.CreateClassLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClass;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrade;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
@@ -28,7 +29,7 @@ public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand, Cla
         await SeedClassLanguages(newClass, request);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return newClass;
+        return await _mediator.Send(new GetClassCommand(newClass.ClassId), cancellationToken);
     }
 
     private async Task SeedClassLanguages(Class newClass, CreateClassCommand request)
@@ -57,11 +58,12 @@ public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand, Cla
 
     private async Task<Class> MapClass(CreateClassCommand request, CancellationToken cancellationToken)
     {
+        var grade = await _mediator.Send(new GetGradeQuery(request.GradeNumber), cancellationToken);
         return new Class()
         {
             UserId = request.UserId,
             Title = request.Title,
-            Grade = await _mediator.Send(new GetGradeQuery(request.GradeNumber), cancellationToken),
+            GradeId = grade.GradeId,
             PhotoUrl = request.PhotoUrl
         };
     }

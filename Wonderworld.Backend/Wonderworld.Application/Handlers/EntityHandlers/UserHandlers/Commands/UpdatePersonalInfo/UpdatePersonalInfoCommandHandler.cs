@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;

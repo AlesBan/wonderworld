@@ -6,4 +6,9 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.
 public class GetClassCommand : IRequest<Class>
 {
     public Guid ClassId { get; set; }
+
+    public GetClassCommand(Guid classId)
+    {
+        ClassId = classId;
+    }
 }

@@ -1,6 +1,8 @@
-namespace Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Interfaces.Exceptions;
 
-public class NotFoundException : Exception
+namespace Wonderworld.Application.Common.Exceptions.Database;
+
+public class NotFoundException : Exception, IDbException
 {
     /// <summary>
     /// NotFoundException entity

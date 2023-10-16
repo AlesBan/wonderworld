@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -24,6 +24,7 @@ public class DeleteClassCommandHandler : IRequestHandler<DeleteClassCommand>
         {
             throw new NotFoundException(nameof(Class), request.ClassId);
         }
+        
         _context.Classes.Remove(@class);
         await _context.SaveChangesAsync(cancellationToken);
 

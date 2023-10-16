@@ -16,6 +16,7 @@ public class CreateClassDisciplinesCommandHandler : IRequestHandler<CreateClassD
 
     public async Task<Unit> Handle(CreateClassDisciplinesCommand request, CancellationToken cancellationToken)
     {
+        
         var classDisciplines = request.DisciplineIds
             .Select(discipline =>
                 new ClassDiscipline()

@@ -18,43 +18,21 @@ public class ClassController : BaseController
     [HttpPost("create-class")]
     public async Task<IActionResult> CreateClass([FromBody] CreateClassRequestDto requestClassDto)
     {
-        try
-        {
-            var result = await _classService.CreateClass(UserId, requestClassDto, Mediator);
-
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _classService.CreateClass(UserId, requestClassDto, Mediator);
+        return result;
     }
 
     [HttpPut("update-class/{classId:guid}")]
     public async Task<IActionResult> UpdateClass([FromBody] UpdateClassRequestDto requestClassDto, Guid classId)
     {
-        try
-        {
-            var result = await _classService.UpdateClass(classId, requestClassDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _classService.UpdateClass(classId, requestClassDto, Mediator);
+        return result;
     }
 
     [HttpDelete("delete-class/{classId:guid}")]
     public async Task<IActionResult> DeleteClass(Guid classId)
     {
-        try
-        {
-            var result = await _classService.DeleteClass(classId, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _classService.DeleteClass(classId, Mediator);
+        return result;
     }
 }

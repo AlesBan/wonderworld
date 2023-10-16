@@ -1,6 +1,8 @@
-namespace Wonderworld.Application.Common.Exceptions.User;
+using Wonderworld.Application.Interfaces.Exceptions;
 
-public class UserNotFoundException : Exception
+namespace Wonderworld.Application.Common.Exceptions.Database;
+
+public class UserNotFoundException : Exception, IDbException
 {
     public UserNotFoundException(string email) :
         base("User with email " + email + " was not found.")

@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.Application.Common.Exceptions.User;
+using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
+using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClasses;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByIds;
@@ -65,18 +67,37 @@ public class UserAccountService : IUserAccountService
         var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
         var userProfileDto = _mapper.Map<UserProfileDto>(userWithAccount);
 
-        var languageIds = userWithAccount.UserLanguages
+        var languageIds = user.UserLanguages
             .Select(ul => ul.LanguageId).AsEnumerable();
-        var disciplineIds = userWithAccount.UserDisciplines
+        var disciplineIds = user.UserDisciplines
             .Select(ud => ud.DisciplineId).ToList();
-        var institution = userWithAccount.Institution;
+        var classesIds = user.Classes
+            .Select(c => c.ClassId).ToList();
+        var institution = user.Institution;
         
         var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
         var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
+        var classes = await mediator.Send(new GetClassesCommand(userId, classesIds));
 
         userProfileDto.Languages = languages.Select(l => l.Title).ToList();
         userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
         userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
+        
+        await Task.Delay(20);
+        var classProfileDtos = classes.ToList().Select(c =>
+            new ClassProfileDto
+            {
+                ClassId = c.ClassId,
+                Title = c.Title,
+                UserFullName = c.User.FullName,
+                UserRating = c.User.Rating,
+                Grade = c.Grade.GradeNumber,
+                Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
+                Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
+                PhotoUrl = c.PhotoUrl!
+            }).ToList();
+
+        userProfileDto.ClasseDtos = classProfileDtos;
 
         return ResponseHelper.GetOkResult(userProfileDto);
     }
@@ -90,16 +111,35 @@ public class UserAccountService : IUserAccountService
             .Select(ul => ul.LanguageId).AsEnumerable();
         var disciplineIds = user.UserDisciplines
             .Select(ud => ud.DisciplineId).ToList();
+        var classesIds = user.Classes
+            .Select(c => c.ClassId).ToList();
         var institution = user.Institution;
         
         var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
         var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
+        var classes = await mediator.Send(new GetClassesCommand(userId, classesIds));
 
         userProfileDto.Languages = languages.Select(l => l.Title).ToList();
         userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
         userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
         
-        return new OkObjectResult(userProfileDto);
+        await Task.Delay(20);
+        var classProfileDtos = classes.ToList().Select(c =>
+            new ClassProfileDto
+            {
+                ClassId = c.ClassId,
+                Title = c.Title,
+                UserFullName = c.User.FullName,
+                UserRating = c.User.Rating,
+                Grade = c.Grade.GradeNumber,
+                Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
+                Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
+                PhotoUrl = c.PhotoUrl!
+            }).ToList();
+
+        userProfileDto.ClasseDtos = classProfileDtos;
+        
+        return ResponseHelper.GetOkResult(userProfileDto);
     }
 
     public async Task<IActionResult> DeleteUser(Guid userId, IMediator mediator)
@@ -108,7 +148,6 @@ public class UserAccountService : IUserAccountService
 
         return new OkResult();
     }
-
 
     private static void CheckUserCreateAccountAbility(User user)
     {

@@ -15,6 +15,7 @@ public class ClassDisciplineConfiguration : IEntityTypeConfiguration<ClassDiscip
             .WithMany(c => c.ClassDisciplines)
             .HasForeignKey(cd => cd.ClassId)
             .OnDelete(DeleteBehavior.Cascade);
+        
         builder.HasOne(cd => cd.Discipline)
             .WithMany(d => d.ClassDisciplines)
             .HasForeignKey(cd => cd.DisciplineId)

@@ -8,6 +8,7 @@ namespace Wonderworld.API.Services.ClassServices;
 public interface IClassService
 {
     public Task<IActionResult> CreateClass(Guid userId, CreateClassRequestDto requestClassDto, IMediator mediator);
+    public Task<IActionResult> GetClassProfile(Guid classId, IMediator mediator);
     public Task<IActionResult> UpdateClass(Guid classId, UpdateClassRequestDto requestClassDto, IMediator mediator);
     public Task<IActionResult> DeleteClass(Guid classId, IMediator mediator);
 }

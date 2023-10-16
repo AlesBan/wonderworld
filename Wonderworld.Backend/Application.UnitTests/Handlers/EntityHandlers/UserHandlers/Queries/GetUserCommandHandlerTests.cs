@@ -1,5 +1,6 @@
 using Application.UnitTests.Common;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
 using Xunit;

@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Wonderworld.API.Services.EditUserServices;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
