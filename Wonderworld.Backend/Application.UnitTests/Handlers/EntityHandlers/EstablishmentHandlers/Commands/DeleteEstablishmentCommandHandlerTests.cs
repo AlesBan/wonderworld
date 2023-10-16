@@ -1,6 +1,8 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Common;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.DeleteEstablishment;
 using Wonderworld.Application.Handlers.EstablishmentHandlers.Commands.DeleteEstablishment;
 using Xunit;

@@ -1,14 +1,14 @@
-using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers.JwtHelpers;
-using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Common;
 
 namespace Wonderworld.API.Controllers;
 
 [Route("api/[controller]")]
-// [ValidateModelStateFilter]
+[ValidateModelStateFilter]
+[ExceptionFilter]
 [ApiController]
 public class BaseController : ControllerBase
 {

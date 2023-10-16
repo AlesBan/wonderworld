@@ -1,6 +1,8 @@
-namespace Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Interfaces.Exceptions;
 
-public class DeserializationOfYandexResponseException : Exception
+namespace Wonderworld.Application.Common.Exceptions.ExternalServices;
+
+public class DeserializationOfYandexResponseException : Exception, IServerException
 {
     public DeserializationOfYandexResponseException()
     {

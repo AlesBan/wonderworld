@@ -1,5 +1,7 @@
 using Application.UnitTests.Common;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Common;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.DeleteUserGrade;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.DeleteUserLanguages;
 using Xunit;

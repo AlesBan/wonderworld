@@ -1,6 +1,8 @@
 using Application.UnitTests.Common;
 using Shouldly;
 using Wonderworld.Application.Common.Exceptions;
+using Wonderworld.Application.Common.Exceptions.Common;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClass;
 using Wonderworld.Domain.Entities.Main;
 using Xunit;
