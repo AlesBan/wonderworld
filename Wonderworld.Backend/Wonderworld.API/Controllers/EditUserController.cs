@@ -35,15 +35,8 @@ public class EditUserController : BaseController
     [HttpPut("personal-info")]
     public async Task<IActionResult> EditUserPersonalInfo([FromBody] UpdatePersonalInfoRequestDto requestUserDto)
     {
-        try
-        {
-            var result = await _editUserAccountService.EditUserPersonalInfoAsync(UserId, requestUserDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _editUserAccountService.EditUserPersonalInfoAsync(UserId, requestUserDto, Mediator);
+        return result;
     }
 
     /// <summary>
@@ -62,15 +55,8 @@ public class EditUserController : BaseController
     [HttpPut("institution")]
     public async Task<IActionResult> EditUserInstitution([FromBody] UpdateInstitutionRequestDto requestUserDto)
     {
-        try
-        {
-            var result = await _editUserAccountService.EditUserInstitutionAsync(UserId, requestUserDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _editUserAccountService.EditUserInstitutionAsync(UserId, requestUserDto, Mediator);
+        return result;
     }
 
     /// <summary>
@@ -90,15 +76,8 @@ public class EditUserController : BaseController
     public async Task<IActionResult> EditUserProfessionalInfo(
         [FromBody] UpdateProfessionalInfoRequestDto requestUserDto)
     {
-        try
-        {
-            var result = await _editUserAccountService.EditUserProfessionalInfoAsync(UserId, requestUserDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _editUserAccountService.EditUserProfessionalInfoAsync(UserId, requestUserDto, Mediator);
+        return result;
     }
 
     /// <summary>
@@ -117,15 +96,9 @@ public class EditUserController : BaseController
     [HttpPut("email")]
     public async Task<IActionResult> EditUserEmail([FromBody] UpdateUserEmailRequestDto requestUserDto)
     {
-        try
-        {
-            var result = await _editUserAccountService.EditUserEmailAsync(UserId, requestUserDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+
+        var result = await _editUserAccountService.EditUserEmailAsync(UserId, requestUserDto, Mediator);
+        return result;
     }
 
     /// <summary>
@@ -144,14 +117,7 @@ public class EditUserController : BaseController
     [HttpPut("password")]
     public async Task<IActionResult> EditUserPassword([FromBody] UpdateUserPasswordRequestDto requestUserDto)
     {
-        try
-        {
-            var result = await _editUserAccountService.EditUserPasswordAsync(UserId, requestUserDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _editUserAccountService.EditUserPasswordAsync(UserId, requestUserDto, Mediator);
+        return result;
     }
 }

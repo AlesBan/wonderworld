@@ -139,6 +139,7 @@ public class DefaultSearchService : IDefaultSearchService
             .Select(ud =>
                 ud.Discipline)
             .ToList();
+        
         if (userDisciplines == null)
         {
             throw new NotFoundException(nameof(Discipline), user.UserId);

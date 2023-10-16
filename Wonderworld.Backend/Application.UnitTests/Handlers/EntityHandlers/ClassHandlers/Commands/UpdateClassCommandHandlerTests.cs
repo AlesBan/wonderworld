@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.UpdateClass;
-using Wonderworld.Domain.Entities.Education;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.EntityHandlers.ClassHandlers.Commands;
@@ -19,18 +18,18 @@ public class UpdateClassCommandHandlerTests : TestCommonBase
             c.ClassId == SharedLessonDbContextFactory.ClassForUpdateId);
         const string newTitle = "New Title";
         const string newPhotoUrl = "New PhotoUrl";
-        var newDisciplines = new List<Discipline>
+        var newDisciplines = new List<string>
         {
-            await Context.Disciplines.FirstAsync(d => d.Title == "Mathematics"),
+            "Mathematics"
         };
-        var newLanguages = new List<Language>
+        var newLanguages = new List<string>
         {
-            await Context.Languages.FirstAsync(d => d.Title == "Russian"),
+            "Russian"
         };
 
         var newGrade = await Context.Grades.FirstAsync(g => g.GradeNumber == 10);
 
-        var handler = new UpdateClassCommandHandler(Context, mediatorMock.Object );
+        var handler = new UpdateClassCommandHandler(Context, mediatorMock.Object);
 
         // Act
         await handler.Handle(new UpdateClassCommand()
@@ -38,8 +37,8 @@ public class UpdateClassCommandHandlerTests : TestCommonBase
             ClassId = @class.ClassId,
             Title = newTitle,
             PhotoUrl = newPhotoUrl,
-            Disciplines = newDisciplines,
-            Languages = newLanguages,
+            DisciplineTitles = newDisciplines,
+            LanguageTitles = newLanguages,
             GradeNumber = newGrade.GradeNumber,
         }, CancellationToken.None);
 
@@ -53,14 +52,15 @@ public class UpdateClassCommandHandlerTests : TestCommonBase
             c.ClassLanguages.Count == newLanguages.Count);
 
         Assert.NotNull(result);
-        Assert.True(result != null 
+        Assert.True(result != null
                     && result.ClassLanguages.Select(l =>
-                l.Language)
-                         
-            .SequenceEqual(newLanguages));
-        Assert.True(result != null 
+                            l.Language)
+                        .Select(l => l.Title)
+                        .SequenceEqual(newLanguages));
+        Assert.True(result != null
                     && result.ClassDisciplines.Select(d =>
-                d.Discipline)
-            .SequenceEqual(newDisciplines));
+                            d.Discipline)
+                        .Select(l => l.Title)
+                        .SequenceEqual(newDisciplines));
     }
 }

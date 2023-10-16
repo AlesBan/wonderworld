@@ -19,10 +19,7 @@ public class GetClassCommandHandlerTests : TestCommonBase
         var handler = new GetClassCommandHandler(Context);
 
         // Act
-        var result = await handler.Handle(new GetClassCommand
-        {
-            ClassId = classId
-        }, CancellationToken.None);
+        var result = await handler.Handle(new GetClassCommand(classId), CancellationToken.None);
 
         // Assert
         result.ShouldBeOfType<Class>();
@@ -39,9 +36,6 @@ public class GetClassCommandHandlerTests : TestCommonBase
 
         // Act
         await Should.ThrowAsync<NotFoundException>(async () =>
-            await handler.Handle(new GetClassCommand
-            {
-                ClassId = classId
-            }, CancellationToken.None));
+            await handler.Handle(new GetClassCommand(classId), CancellationToken.None));
     }
 }

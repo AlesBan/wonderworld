@@ -9,7 +9,7 @@ public class UpdateClassCommand : IRequest<Class>
     public Guid ClassId { get; set; }
     public string Title { get; set; }
     public int GradeNumber { get; set; }
-    public ICollection<Discipline> Disciplines { get; set; } = new List<Discipline>();
-    public ICollection<Language> Languages { get; set; } = new List<Language>();
+    public IEnumerable<string> DisciplineTitles { get; set; } = new List<string>();
+    public IEnumerable<string> LanguageTitles { get; set; } = new List<string>();
     public string? PhotoUrl { get; set; }
 }

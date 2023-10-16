@@ -33,7 +33,7 @@ namespace Wonderworld.API.Filters
                     IUiException => Handle400Exception(context, controllerName, actionName, contextType),
                     IDbException => Handle400Exception(context, controllerName, actionName, contextType),
                     IServerException => Handle500Exception(context, controllerName, actionName, contextType),
-                    _ => HandleUnknownException()
+                    _ => HandleUnknownException(context, controllerName, actionName, contextType)
                 };
             }
 
@@ -45,7 +45,7 @@ namespace Wonderworld.API.Filters
                 var result = ResponseHelper.GetBadRequest(context.Exception.Message);
 
                 context.HttpContext.Response.StatusCode = 400;
-                
+
                 context.Result = result;
                 context.ExceptionHandled = true;
 
@@ -65,13 +65,21 @@ namespace Wonderworld.API.Filters
                 return Task.CompletedTask;
             }
 
-            private Task HandleUnknownException()
+            private Task HandleUnknownException(ExceptionContext context, object controllerName,
+                object actionName, MemberInfo contextType)
             {
-                _logger.LogError("Unknown exception\n");
+                context.HttpContext.Response.StatusCode = 500;
+
+                context.Result = new StatusCodeResult(500);
+                
+                _logger.LogError("Unhandled exception\n");
+                LogException(context, controllerName, actionName, contextType);
+
+                context.ExceptionHandled = true;
 
                 return Task.CompletedTask;
             }
-            
+
             private void LogException(ExceptionContext context, object controllerName,
                 object actionName, MemberInfo contextType)
             {

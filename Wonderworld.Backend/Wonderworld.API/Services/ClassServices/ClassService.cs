@@ -4,6 +4,7 @@ using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.CreateClass;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.DeleteClass;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.UpdateClass;
+using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClass;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 
@@ -33,21 +34,27 @@ public class ClassService : IClassService
         return new OkObjectResult(@class);
     }
 
+    public async Task<IActionResult> GetClassProfile(Guid classId, IMediator mediator)
+    {
+        var command = new GetClassCommand(classId);
+
+        var @class = await mediator.Send(command);
+        
+        var classProfile = 
+        
+        return new OkObjectResult(@class);
+    }
+
     public async Task<IActionResult> UpdateClass(Guid classId, UpdateClassRequestDto requestClassDto,
         IMediator mediator)
     {
-        var disciplines = await mediator.Send(new GetDisciplinesByTitlesQuery(requestClassDto.DisciplineTitles),
-            CancellationToken.None);
-        var languages = await mediator.Send(new GetLanguagesByTitlesQuery(requestClassDto.LanguageTitles),
-            CancellationToken.None);
-
         var command = new UpdateClassCommand
         {
             ClassId = classId,
             Title = requestClassDto.Title,
             GradeNumber = requestClassDto.GradeNumber,
-            Disciplines = disciplines,
-            Languages = languages,
+            DisciplineTitles = requestClassDto.DisciplineTitles,
+            LanguageTitles = requestClassDto.LanguageTitles,
             PhotoUrl = requestClassDto.PhotoUrl
         };
 

@@ -99,7 +99,6 @@ builder.Services.AddHttpClient<IOrganizationSearchService, OrganizationSearchSer
     c.BaseAddress = new Uri("https://search-maps.yandex.ru/v1/");
 });
 
-
 builder.Services.AddTransient<ISharedLessonDbContext, SharedLessonDbContext>();
 builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
@@ -133,8 +132,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
-
 app.UseRouting();
 app.UseHttpsRedirection();
 app.UseCors("AlloyAll");
@@ -142,6 +139,10 @@ app.UseCors("AlloyAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    
+});
 
 app.Run();

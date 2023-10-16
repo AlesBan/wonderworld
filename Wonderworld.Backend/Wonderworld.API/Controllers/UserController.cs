@@ -36,14 +36,7 @@ public class UserController : BaseController
     [HttpGet("all-users")]
     public async Task<IActionResult> GetAllUsers()
     {
-        try
-        {
-            return Ok(await _sharedLessonDbContext.Users.ToListAsync());
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        return Ok(await _sharedLessonDbContext.Users.ToListAsync());
     }
 
     /// <summary>
@@ -58,15 +51,8 @@ public class UserController : BaseController
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
     {
-        try
-        {
-            var result = await _userAccountService.LoginUser(requestUserDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _userAccountService.LoginUser(requestUserDto, Mediator);
+        return result;
     }
 
     /// <summary>
@@ -84,14 +70,7 @@ public class UserController : BaseController
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
     {
-        try
-        {
-            return await _userAccountService.RegisterUser(requestUserDto, Mediator);
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        return await _userAccountService.RegisterUser(requestUserDto, Mediator);
     }
 
     /// <summary>
@@ -111,15 +90,8 @@ public class UserController : BaseController
     [HttpPost("create-account")]
     public async Task<IActionResult> CreateAccount([FromBody] CreateUserAccountRequestDto requestUserDto)
     {
-        try
-        {
-            var result = await _userAccountService.CreateUserAccount(UserId, requestUserDto, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var result = await _userAccountService.CreateUserAccount(UserId, requestUserDto, Mediator);
+        return result;
     }
 
     /// <summary>
@@ -138,16 +110,9 @@ public class UserController : BaseController
     [HttpGet("get-userprofile")]
     public async Task<IActionResult> GetUser()
     {
-        try
-        {
-            var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
-            var result = await _userAccountService.GetUserProfile(userId, Mediator);
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        var userId = JwtHelper.GetUserIdFromClaims(HttpContext);
+        var result = await _userAccountService.GetUserProfile(userId, Mediator);
+        return result;
     }
 
     /// <summary>
@@ -166,15 +131,8 @@ public class UserController : BaseController
     [HttpDelete("delete-user")]
     public async Task<IActionResult> DeleteUser()
     {
-        try
-        {
-            var result = await _userAccountService.DeleteUser(UserId, Mediator);
+        var result = await _userAccountService.DeleteUser(UserId, Mediator);
 
-            return result;
-        }
-        catch (Exception e)
-        {
-            return ResponseHelper.GetBadRequest(e.Message);
-        }
+        return result;
     }
 }

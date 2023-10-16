@@ -12,6 +12,7 @@ namespace Wonderworld.Application.Dtos.UserDtos;
 
 public class UserProfileDto : IMapWith<User>
 {
+    public Guid UserId { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Email { get; set; } = string.Empty;
@@ -43,6 +44,8 @@ public class UserProfileDto : IMapWith<User>
             .ForMember(dest => dest.Title,
                 opt => opt.MapFrom(src => src.Title));
         profile.CreateMap<User, UserProfileDto>()
+            .ForMember(up => up.UserId,
+                opt => opt.MapFrom(u => u.UserId))
             .ForMember(up => up.Email,
                 opt => opt.MapFrom(u => u.Email))
             .ForMember(up => up.FirstName,
