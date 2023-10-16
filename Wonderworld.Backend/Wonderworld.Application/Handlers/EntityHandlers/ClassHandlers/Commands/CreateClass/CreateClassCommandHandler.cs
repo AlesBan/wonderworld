@@ -58,11 +58,12 @@ public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand, Cla
 
     private async Task<Class> MapClass(CreateClassCommand request, CancellationToken cancellationToken)
     {
+        var grade = await _mediator.Send(new GetGradeQuery(request.GradeNumber), cancellationToken);
         return new Class()
         {
             UserId = request.UserId,
             Title = request.Title,
-            Grade = await _mediator.Send(new GetGradeQuery(request.GradeNumber), cancellationToken),
+            GradeId = grade.GradeId,
             PhotoUrl = request.PhotoUrl
         };
     }

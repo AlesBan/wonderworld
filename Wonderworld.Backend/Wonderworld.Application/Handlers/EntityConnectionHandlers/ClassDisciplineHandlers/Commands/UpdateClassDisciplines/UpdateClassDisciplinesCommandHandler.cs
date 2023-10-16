@@ -24,6 +24,8 @@ public class UpdateClassDisciplinesCommandHandler: IRequestHandler<UpdateClassDi
         _context.ClassDisciplines
             .RemoveRange(classDisciplines);
         
+        await _context.SaveChangesAsync(cancellationToken);
+        
         return await _mediator.Send(new CreateClassDisciplinesCommand()
         {
             ClassId = request.ClassId,

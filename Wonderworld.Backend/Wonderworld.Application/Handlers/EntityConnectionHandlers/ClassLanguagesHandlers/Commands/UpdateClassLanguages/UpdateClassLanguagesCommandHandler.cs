@@ -24,6 +24,8 @@ public class UpdateClassLanguagesCommandHandler : IRequestHandler<UpdateClassLan
 
         _context.ClassLanguages
             .RemoveRange(classLanguages);
+        
+        await _context.SaveChangesAsync(cancellationToken);
 
         return await _mediator.Send(new CreateClassLanguagesCommand()
         {

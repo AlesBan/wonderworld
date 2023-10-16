@@ -1,3 +1,4 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.Application.Dtos.ClassDtos;
@@ -12,6 +13,13 @@ namespace Wonderworld.API.Services.ClassServices;
 
 public class ClassService : IClassService
 {
+    private readonly IMapper _mapper;
+
+    public ClassService(IMapper mapper)
+    {
+        _mapper = mapper;
+    }
+
     public async Task<IActionResult> CreateClass(Guid userId, CreateClassRequestDto requestClassDto, IMediator mediator)
     {
         var disciplines = await mediator.Send(new GetDisciplinesByTitlesQuery(requestClassDto.DisciplineTitles),
@@ -31,7 +39,16 @@ public class ClassService : IClassService
 
         var @class = await mediator.Send(command, CancellationToken.None);
 
-        return new OkObjectResult(@class);
+        await Task.Delay(20);
+
+        var classProfile = _mapper.Map<ClassProfileDto>(@class);
+
+        await Task.Delay(20);
+
+        classProfile.Languages = @class.ClassLanguages.Select(cl => cl.Language.Title).ToList();
+        classProfile.Disciplines = @class.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList();
+        
+        return new OkObjectResult(classProfile);
     }
 
     public async Task<IActionResult> GetClassProfile(Guid classId, IMediator mediator)
@@ -39,10 +56,17 @@ public class ClassService : IClassService
         var command = new GetClassCommand(classId);
 
         var @class = await mediator.Send(command);
+
+        await Task.Delay(20);
+
+        var classProfile = _mapper.Map<ClassProfileDto>(@class);
+
+        await Task.Delay(20);
+
+        classProfile.Languages = @class.ClassLanguages.Select(cl => cl.Language.Title).ToList();
+        classProfile.Disciplines = @class.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList();
         
-        var classProfile = 
-        
-        return new OkObjectResult(@class);
+        return new OkObjectResult(classProfile);
     }
 
     public async Task<IActionResult> UpdateClass(Guid classId, UpdateClassRequestDto requestClassDto,
@@ -59,8 +83,17 @@ public class ClassService : IClassService
         };
 
         var @class = await mediator.Send(command, CancellationToken.None);
+        
+        await Task.Delay(20);
 
-        return new OkObjectResult(@class);
+        var classProfile = _mapper.Map<ClassProfileDto>(@class);
+
+        await Task.Delay(20);
+
+        classProfile.Languages = @class.ClassLanguages.Select(cl => cl.Language.Title).ToList();
+        classProfile.Disciplines = @class.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList();
+
+        return new OkObjectResult(classProfile);
     }
 
     public async Task<IActionResult> DeleteClass(Guid classId, IMediator mediator)

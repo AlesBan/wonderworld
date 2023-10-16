@@ -2,7 +2,6 @@ namespace Wonderworld.Application.Dtos.ClassDtos;
 
 public class UpdateClassRequestDto
 {
-    public Guid ClassId { get; set; }
     public string Title { get; set; } = string.Empty;
     public int GradeNumber { get; set; }
     public string? PhotoUrl { get; set; } = string.Empty;

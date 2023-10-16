@@ -26,15 +26,32 @@ namespace Wonderworld.API.Filters
             {
                 var controllerName = context.RouteData.Values["controller"]?.ToString() ?? string.Empty;
                 var actionName = context.RouteData.Values["action"]?.ToString() ?? string.Empty;
-                var contextType = context.Exception.InnerException?.GetType();
-
-                return contextType!.GetInterfaces().First() switch
+                var contextType = context.Exception.InnerException?.GetType() ?? context.Exception.GetType();
+                
+                try
                 {
-                    IUiException => Handle400Exception(context, controllerName, actionName, contextType),
-                    IDbException => Handle400Exception(context, controllerName, actionName, contextType),
-                    IServerException => Handle500Exception(context, controllerName, actionName, contextType),
-                    _ => HandleUnknownException(context, controllerName, actionName, contextType)
-                };
+                    if (contextType.GetInterfaces().Contains(typeof(IUiException)))
+                    {
+                        return Handle400Exception(context, controllerName, actionName, contextType);
+                    }
+
+                    if (contextType.GetInterfaces().Contains(typeof(IDbException)))
+                    {
+                        return Handle400Exception(context, controllerName, actionName, contextType);
+                    }
+
+                    if (contextType.GetInterfaces().Contains(typeof(IDbException)))
+                    {
+                        return Handle500Exception(context, controllerName, actionName, contextType);
+                    }
+
+                    return HandleUnknownException(context, controllerName, actionName, contextType);
+                }
+                catch (Exception exception)
+                {
+                     _logger.LogError(exception.Message);
+                     return Task.CompletedTask;
+                }
             }
 
             private Task Handle400Exception(ExceptionContext context, object controllerName,

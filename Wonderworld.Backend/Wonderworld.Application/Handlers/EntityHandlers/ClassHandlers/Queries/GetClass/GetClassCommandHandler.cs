@@ -20,6 +20,9 @@ public class GetClassCommandHandler : IRequestHandler<GetClassCommand, Class>
     public async Task<Class> Handle(GetClassCommand request, CancellationToken cancellationToken)
     {
         var @class = await _context.Classes
+            .Include(c => c.User)
+            .ThenInclude(u => u.ReceivedReviews)
+            .Include(c => c.Grade)
             .Include(c => c.ClassDisciplines)
             .ThenInclude(cd => cd.Discipline)
             .Include(c => c.ClassLanguages)
