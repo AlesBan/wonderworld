@@ -1,6 +1,63 @@
-let addClassBtn = document.querySelector('#addClass');
+// // let addClassBtn = document.querySelector('#addClass');
+// let emptyProfile = document.querySelector('.emptyProfile');
+//
+// addClassBtn.addEventListener('click', () => {
+//     openModal();
+// });
+//
+// function openModal() {
+//     let modal = document.createElement('div');
+//     modal.classList.add('modal');
+//     document.body.append(modal);
+//
+//     let modalContent = document.createElement('div');
+//     modalContent.classList.add('modal-content');
+//     modal.append(modalContent);
+//
+//     let modalCloseBtn = document.createElement('span');
+//     modalCloseBtn.classList.add('modal-close');
+//     modalCloseBtn.innerHTML = '&times;';
+//     modalContent.append(modalCloseBtn);
+//
+//     let createBtn = document.createElement('button');
+//     createBtn.classList.add('create-btn');
+//     createBtn.innerHTML = 'Create';
+//     modalContent.append(createBtn);
+//
+//     modalCloseBtn.addEventListener('click', () => {
+//         closeModal();
+//     });
+//
+//     createBtn.addEventListener('click', () => {
+//         createClass();
+//         closeModal();
+//     });
+// }
+//
+// function createClass() {
+//     let classPreview = document.createElement('div');
+//     classPreview.classList.add('class-preview');
+//     // Добавьте необходимое содержимое предварительного просмотра класса
+//
+//     emptyProfile.innerHTML = '';
+//     emptyProfile.append(classPreview);
+// }
+//
+// function closeModal() {
+//     let modal = document.querySelector('.modal');
+//     if (modal) {
+//         modal.remove();
+//     }
+// }
+
+
+
+
+let addClassBtn = document.querySelector('.add-class');
 
 addClassBtn.addEventListener('click', () => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 
     let addClass = document.createElement('div');
     document.body.append(addClass)
@@ -19,7 +76,7 @@ addClassBtn.addEventListener('click', () => {
                 <div class="input-title">Title</div>
                 <div class="">
                     <label><input name="institution-name" class="class-title-input" type="text"
-                                  placeholder="Class title"></label>
+                                id="class-title"  placeholder="Class title"></label>
                 </div>
             </div>
             <div class="class-grade-and-age">
@@ -74,8 +131,10 @@ addClassBtn.addEventListener('click', () => {
         <div class="update-btn" id="create-btn">create</div>
     </div>
 </div>
-    
+
     `
+
+
 
     const inputDescription = document.querySelector('#class-description');
 
@@ -111,6 +170,8 @@ addClassBtn.addEventListener('click', () => {
         lessons.innerHTML = html;
 
 
+
+
         items = document.querySelectorAll('.item');
         items.forEach(item => {
             item.addEventListener("click", () => {
@@ -125,7 +186,10 @@ addClassBtn.addEventListener('click', () => {
                     }
                 }
                 selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
+
+                localStorage.setItem('disciplines', selectedValues)
             });
+
 
         })
 
@@ -168,6 +232,8 @@ addClassBtn.addEventListener('click', () => {
         grades.innerHTML = html;
 
 
+
+
         items = document.querySelectorAll('.item');
         items.forEach(item => {
             item.addEventListener("click", () => {
@@ -182,6 +248,9 @@ addClassBtn.addEventListener('click', () => {
                     }
                 }
                 selectedGradesDiv.innerHTML = selectedGrades.map(value => `<span>${value}</span>`).join(", ");
+
+                localStorage.setItem('grades', selectedGrades)
+
             });
 
         })
@@ -225,7 +294,7 @@ addClassBtn.addEventListener('click', () => {
 
         items = document.querySelectorAll('.item');
         items.forEach(item => {
-            item.addEventListener("click", () => {
+            item.addEventListener("click", (key, value) => {
                 item.classList.toggle("checked");
                 const itemText = item.querySelector("#item-ages").textContent;
                 if (item.classList.contains("checked")) {
@@ -239,13 +308,49 @@ addClassBtn.addEventListener('click', () => {
                 selectedAgeDiv.innerHTML = selectedAge.map(value => `<span>${value}</span>`).join(", ");
             });
 
+
         })
 
     }
 
-    let createBtn = document.querySelector('#create-btn');
 
+
+
+
+    // let createBtn = document.querySelector('#create-btn');
+    //
+    // createBtn.addEventListener('click', () => {
+    //     let createClass = document.createElement('div');
+    //     document.body.append(createClass)
+    //     createClass.innerHTML = `
+    //    <div class="class-preview">
+    //             <div class="class-preview-image"><img src="../images/class-preview-image.svg" alt=""></div>
+    //             <div class="class-preview-text">${inputDescription.value}
+    //             </div>
+    //             <div class="class-preview-footer">
+    //                 <div class="class-preview-tags">
+    //                     ${selectedValues.map(value => `<span class="class-preview-tag">${value}</span>`).join("")}
+    //                 </div>
+    //                 <div class="menu-action">
+    //                     <img src="../images/menu-action.svg" alt="">
+    //                 </div>
+    //             </div>
+    //         </div>
+    //
+    //     `
+    //     document.querySelector('.add-classes').replaceWith(createClass)
+    //
+    // })
+
+    let createBtn = document.querySelector('#create-btn');
     createBtn.addEventListener('click', () => {
+        createClass();
+        closeModal()
+        postCreateClass();
+    } )
+
+    function createClass() {
+
         let createClass = document.createElement('div');
         document.body.append(createClass)
         createClass.innerHTML = `
@@ -262,15 +367,30 @@ addClassBtn.addEventListener('click', () => {
                     </div>
                 </div>
             </div>
-       
+
         `
         document.querySelector('.add-classes').replaceWith(createClass)
-    })
+
+        let classTitle = document.querySelector('#class-title').value;
+        localStorage.setItem('classTitle', classTitle)
+
+        // localStorage.setItem('disciplines', selectedValues)
+
+    }
+
+    function closeModal() {
+        let modal = document.querySelector('.modal');
+        if (modal) {
+            modal.remove();
+        }
+    }
 
 
 
 })
 
-// voice:.idea/1696947139042.wav
+
+
+
 
 

@@ -1,25 +1,30 @@
-async function postChangeInstitution() {
-    const url = 'http://localhost:7280/api/edituser/institution';
-    const apiData = await fetchInstitution(document.querySelector('#changeInstitution').value);
-    let types = ["School"];
-    const establishmentFields = apiData.features[0].properties;
+
+
+async function postCreateClass() {
+    const url = 'http://localhost:7280/api/class/create-class';
+    const disciplines = localStorage.getItem('disciplines').split(',');
+    const grades = localStorage.getItem('grades');
     const data = {
-        InstitutionTitle: establishmentFields.name,
-        Address: establishmentFields.description,
-        Types: types,
+        Title: localStorage.getItem('classTitle'),
+        GradeNumber: grades,
+        PhotoUrl: "photoUrl",
+        LanguageTitles:  [
+            localStorage.getItem('languages')
+        ],
+        DisciplineTitles: disciplines
     };
 
     console.log(JSON.stringify(data));
 
     fetch(url, {
-        method: 'PUT',
+        method: 'POST',
         referrerPolicy: "origin-when-cross-origin",
         headers: {
             'content-type': 'application/json; charset=utf-8',
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            'Authorization':`Bearer ${localStorage.getItem('accessToken')}`
         },
         body: JSON.stringify(data)
     })
@@ -37,3 +42,4 @@ async function postChangeInstitution() {
             console.log(error);
         });
 }
+
