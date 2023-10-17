@@ -17,7 +17,6 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesH
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
@@ -264,8 +263,8 @@ public class UserAccountServiceTests : TestCommonBase, IClassFixture<TestSetup>
         Assert.Equal(countryLocation, userProfileDto.CountryTitle);
         Assert.Equal(institutionDto.Title, userProfileDto.Institution.Title);
         Assert.Equal(institutionDto.Address, userProfileDto.Institution.Address);
-        Assert.Equal(disciplineTitles, userProfileDto.Disciplines);
-        Assert.Equal(languageTitles, userProfileDto.Languages);
+        Assert.Equal(disciplineTitles, userProfileDto.DisciplineTitles);
+        Assert.Equal(languageTitles, userProfileDto.LanguageTitles);
         Assert.Equal(photoUrl, userProfileDto.PhotoUrl);
     }
 }

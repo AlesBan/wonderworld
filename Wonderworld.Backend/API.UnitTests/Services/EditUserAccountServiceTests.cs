@@ -17,7 +17,6 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandler
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.UpdateUserGrades;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Commands.CreateInstitution;
@@ -510,13 +509,13 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         Assert.NotNull(userProfileDto);
         
-        Assert.Equal(languageTitles.Count, userProfileDto.Languages.Count);
-        Assert.Equal(disciplineTitles.Count, userProfileDto.Disciplines.Count);
+        Assert.Equal(languageTitles.Count, userProfileDto.LanguageTitles.Count);
+        Assert.Equal(disciplineTitles.Count, userProfileDto.DisciplineTitles.Count);
         
         Assert.True(languageTitles.OrderBy(x => x)
-            .SequenceEqual(userProfileDto.Languages.OrderBy(x => x)));
+            .SequenceEqual(userProfileDto.LanguageTitles.OrderBy(x => x)));
         Assert.True(disciplineTitles.OrderBy(x => x)
-            .SequenceEqual(userProfileDto.Disciplines.OrderBy(x => x)));
+            .SequenceEqual(userProfileDto.DisciplineTitles.OrderBy(x => x)));
     }
 }
 

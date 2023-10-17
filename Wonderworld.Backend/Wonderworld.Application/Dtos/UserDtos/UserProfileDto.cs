@@ -4,6 +4,7 @@ using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Domain.Entities.Communication;
+using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
@@ -26,8 +27,9 @@ public class UserProfileDto : IMapWith<User>
     public InstitutionDto Institution { get; set; }
     public double Rating { get; set; }
     public IEnumerable<ClassProfileDto> ClasseDtos { get; set; } = new List<ClassProfileDto>();
-    public List<string> Languages { get; set; } = new();
-    public List<string> Disciplines { get; set; } = new();
+    public List<string> LanguageTitles { get; set; } = new();
+    public List<string> DisciplineTitles { get; set; } = new();
+    public List<int> GradeNumbers { get; set; } = new();
     public ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     public void Mapping(Profile profile)

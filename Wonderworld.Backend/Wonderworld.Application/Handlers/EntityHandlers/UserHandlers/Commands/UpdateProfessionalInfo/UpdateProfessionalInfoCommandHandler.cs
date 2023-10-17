@@ -6,7 +6,7 @@ using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHa
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.UpdateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.UpdateUserGrades;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.UpdateUserLanguages;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
+using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Application.Interfaces;
@@ -29,14 +29,6 @@ public class UpdateProfessionalInfoCommandHandler : IRequestHandler<UpdateProfes
     public async Task<User> Handle(UpdateProfessionalInfoCommand request, CancellationToken cancellationToken)
     {
         var user = _context.Users
-            .Include(u => u.City)
-            .Include(u => u.Country)
-            .Include(u => u.Institution)
-            .Include(u => u.Classes)
-            .Include(u => u.UserDisciplines)
-            .ThenInclude(ud => ud.Discipline)
-            .Include(u => u.UserLanguages)
-            .ThenInclude(ul => ul.Language)
             .FirstOrDefault(u =>
                 u.UserId == request.UserId);
 
@@ -46,7 +38,7 @@ public class UpdateProfessionalInfoCommandHandler : IRequestHandler<UpdateProfes
         }
 
         var languages = await GetLanguages(request.LanguageTitles, cancellationToken);
-        
+
         var disciplines = await GetDisciplines(request.DisciplineTitles, cancellationToken);
 
         var grades = await GetGrades(request.GradeNumbers, cancellationToken);
@@ -119,7 +111,7 @@ public class UpdateProfessionalInfoCommandHandler : IRequestHandler<UpdateProfes
     {
         var query = new GetGradesQuery(gradeNumbers);
         var grades = await _mediator.Send(query, cancellationToken);
-        
+
         return grades;
     }
 }

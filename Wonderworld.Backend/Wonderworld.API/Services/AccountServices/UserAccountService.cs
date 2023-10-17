@@ -10,13 +10,10 @@ using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
-using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClasses;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByIds;
+using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetGrades;
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByIds;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
@@ -61,43 +58,12 @@ public class UserAccountService : IUserAccountService
         IMediator mediator)
     {
         var user = await UserHelper.GetUser(userId, mediator);
-
         CheckUserCreateAccountAbility(user);
 
         var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
-        var userProfileDto = _mapper.Map<UserProfileDto>(userWithAccount);
+        var userProfileDto = await MapUserToUserProfileDto(userWithAccount);
 
-        var languageIds = user.UserLanguages
-            .Select(ul => ul.LanguageId).AsEnumerable();
-        var disciplineIds = user.UserDisciplines
-            .Select(ud => ud.DisciplineId).ToList();
-        var classesIds = user.Classes
-            .Select(c => c.ClassId).ToList();
-        var institution = user.Institution;
-        
-        var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
-        var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
-        var classes = await mediator.Send(new GetClassesCommand(userId, classesIds));
-
-        userProfileDto.Languages = languages.Select(l => l.Title).ToList();
-        userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
-        userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
-        
-        await Task.Delay(20);
-        var classProfileDtos = classes.ToList().Select(c =>
-            new ClassProfileDto
-            {
-                ClassId = c.ClassId,
-                Title = c.Title,
-                UserFullName = c.User.FullName,
-                UserRating = c.User.Rating,
-                Grade = c.Grade.GradeNumber,
-                Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
-                Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
-                PhotoUrl = c.PhotoUrl!
-            }).ToList();
-
-        userProfileDto.ClasseDtos = classProfileDtos;
+        userProfileDto.ClasseDtos = await GetClassProfileDtos(userWithAccount.Classes.ToList());
 
         return ResponseHelper.GetOkResult(userProfileDto);
     }
@@ -105,27 +71,26 @@ public class UserAccountService : IUserAccountService
     public async Task<IActionResult> GetUserProfile(Guid userId, IMediator mediator)
     {
         var user = await mediator.Send(new GetUserByIdQuery(userId));
-        
-        var userProfileDto = _mapper.Map<UserProfileDto>(user);
-        var languageIds = user.UserLanguages
-            .Select(ul => ul.LanguageId).AsEnumerable();
-        var disciplineIds = user.UserDisciplines
-            .Select(ud => ud.DisciplineId).ToList();
-        var classesIds = user.Classes
-            .Select(c => c.ClassId).ToList();
-        var institution = user.Institution;
-        
-        var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
-        var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
-        var classes = await mediator.Send(new GetClassesCommand(userId, classesIds));
+        var userProfileDto = await MapUserToUserProfileDto(user);
 
-        userProfileDto.Languages = languages.Select(l => l.Title).ToList();
-        userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
-        userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
-        
-        await Task.Delay(20);
-        var classProfileDtos = classes.ToList().Select(c =>
-            new ClassProfileDto
+        userProfileDto.ClasseDtos = await GetClassProfileDtos(user.Classes.ToList());
+
+        return ResponseHelper.GetOkResult(userProfileDto);
+    }
+
+    private async Task<UserProfileDto> MapUserToUserProfileDto(User user)
+    {
+        var userProfileDto = _mapper.Map<UserProfileDto>(user);
+        userProfileDto.LanguageTitles = user.UserLanguages.Select(ul => ul.Language.Title).ToList();
+        userProfileDto.DisciplineTitles = user.UserDisciplines.Select(ud => ud.Discipline.Title).ToList();
+        userProfileDto.Institution = _mapper.Map<InstitutionDto>(user.Institution);
+        userProfileDto.GradeNumbers = user.UserGrades.Select(ug => ug.Grade.GradeNumber).ToList();
+        return userProfileDto;
+    }
+
+    private static async Task<List<ClassProfileDto>> GetClassProfileDtos(List<Class> classes)
+    {
+        return classes.Select(c => new ClassProfileDto
             {
                 ClassId = c.ClassId,
                 Title = c.Title,
@@ -135,11 +100,8 @@ public class UserAccountService : IUserAccountService
                 Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
                 Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
                 PhotoUrl = c.PhotoUrl!
-            }).ToList();
-
-        userProfileDto.ClasseDtos = classProfileDtos;
-        
-        return ResponseHelper.GetOkResult(userProfileDto);
+            })
+            .ToList();
     }
 
     public async Task<IActionResult> DeleteUser(Guid userId, IMediator mediator)

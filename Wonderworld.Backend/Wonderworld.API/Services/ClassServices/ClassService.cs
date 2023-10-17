@@ -6,7 +6,7 @@ using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.Cre
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.DeleteClass;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Commands.UpdateClass;
 using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClass;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
+using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 
 namespace Wonderworld.API.Services.ClassServices;

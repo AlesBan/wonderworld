@@ -10,7 +10,7 @@ public class NotFoundException : Exception, IDbException
     /// <param name="entityName"></param>
     /// <param name="key"></param>
     public NotFoundException(string entityName, object key) :
-        base($"Entity \"{entityName}\" ({key}) was not found.")
+        base($"Entity {entityName} ({key}) was not found.")
     {
     }
 
@@ -21,7 +21,7 @@ public class NotFoundException : Exception, IDbException
     /// <param name="connectionId1"></param>
     /// <param name="connectionId2"></param>
     public NotFoundException(string entityName, object connectionId1, object connectionId2) :
-        base($"EntityConnection \"{entityName}\" " +
+        base($"EntityConnection {entityName} " +
              $"(First entityId: {connectionId1}, " +
              $"Second entityId: {connectionId2}) was not found.")
     {

@@ -7,7 +7,6 @@ using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 namespace Wonderworld.API.Controllers;
 
 [Authorize]
-[Route("api/[controller]")]
 public class EditUserController : BaseController
 {
     private readonly IEditUserAccountService _editUserAccountService;
