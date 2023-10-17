@@ -1,5 +1,5 @@
 using MediatR;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
+using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Education;
 
@@ -18,8 +18,14 @@ public class GetDisciplinesByTitlesQueryHandler : IRequestHandler<GetDisciplines
     {
         var requiredDisciplines = request.DisciplineTitles;
         var disciplines = _context.Disciplines
-            .Where(d =>
-                requiredDisciplines.Contains(d.Title));
+            .Where(d => requiredDisciplines.Contains(d.Title))
+            .ToList();
+
+        foreach (var disciplineTitle in requiredDisciplines.Where(discipline =>
+                     !disciplines.Select(d => d.Title).Contains(discipline)))
+        {
+            throw new NotFoundException(nameof(Discipline), disciplineTitle);
+        }
 
         return Task.FromResult(disciplines.ToList());
     }

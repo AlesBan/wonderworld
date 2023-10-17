@@ -67,20 +67,15 @@ public class EditUserAccountService : IEditUserAccountService
 
         var userProfileDto = _mapper.Map<UserProfileDto>(updatedUser);
 
-        var languageIds = updatedUser.UserLanguages
-            .Select(ul => ul.LanguageId).AsEnumerable();
-        var disciplineIds = updatedUser.UserDisciplines
-            .Select(ud => ud.DisciplineId).ToList();
-        var classesIds = updatedUser.Classes
-            .Select(c => c.ClassId).ToList();
-        var institution = userProfileDto.Institution;
+        var languageTitles = updatedUser.UserLanguages
+            .Select(ul => ul.Language.Title).ToList();
+        var disciplineTitles = updatedUser.UserDisciplines
+            .Select(ud => ud.Discipline.Title).ToList();
+        var classes = updatedUser.Classes;
+        var institution = updatedUser.Institution;
 
-        var languages = await mediator.Send(new GetLanguagesByIdsCommand(languageIds));
-        var disciplines = await mediator.Send(new GetDisciplinesByIdsCommand(disciplineIds));
-        var classes = await mediator.Send(new GetClassesCommand(userId, classesIds));
-
-        userProfileDto.Languages = languages.Select(l => l.Title).ToList();
-        userProfileDto.Disciplines = disciplines.Select(d => d.Title).ToList();
+        userProfileDto.LanguageTitles = languageTitles;
+        userProfileDto.DisciplineTitles = disciplineTitles;
         
         userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
         

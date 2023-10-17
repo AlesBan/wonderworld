@@ -82,7 +82,7 @@ public class DefaultSearchService : IDefaultSearchService
     {
         var expertProfilesByDisciplines = userProfileList
             .Where(up => userDisciplines.Any(ud =>
-                             up.Disciplines.Any(d =>
+                             up.DisciplineTitles.Any(d =>
                                  d == ud.Title)) &&
                          up.IsAnExpert && !up.IsATeacher);
 
@@ -104,7 +104,7 @@ public class DefaultSearchService : IDefaultSearchService
     {
         var teacherProfilesByDisciplines = userProfileList
             .Where(up => userDisciplines.Any(ud =>
-                             up.Disciplines.Any(d =>
+                             up.DisciplineTitles.Any(d =>
                                  d == ud.Title)) &&
                          up.IsATeacher);
 

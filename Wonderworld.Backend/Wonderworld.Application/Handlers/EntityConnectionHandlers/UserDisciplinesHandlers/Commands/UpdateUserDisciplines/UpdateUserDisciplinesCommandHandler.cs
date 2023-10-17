@@ -24,7 +24,8 @@ public class UpdateUserDisciplinesCommandHandler : IRequestHandler<UpdateUserDis
             .RemoveRange(_context.UserDisciplines
                 .Where(ud =>
                     ud.UserId == request.UserId));
-
+        
+        await _context.SaveChangesAsync(cancellationToken);
         
         return await _mediator.Send(new CreateUserDisciplinesCommand
         {

@@ -1,7 +1,7 @@
 using MediatR;
 using Wonderworld.Domain.Entities.Education;
 
-namespace Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplines;
+namespace Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
 
 public class GetDisciplinesByTitlesQuery : IRequest<List<Discipline>>
 {

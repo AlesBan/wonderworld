@@ -24,11 +24,12 @@ public class UpdateUserGradesCommandHandler : IRequestHandler<UpdateUserGradesCo
                 .Where(ug =>
                     ug.User.UserId == request.UserId));
 
+        await _context.SaveChangesAsync(cancellationToken);
+
         return await _mediator.Send(new CreateUserGradesCommand()
         {
             UserId = request.UserId,
             GradeIds = request.NewGradeIds
-
         }, cancellationToken);
     }
 }
