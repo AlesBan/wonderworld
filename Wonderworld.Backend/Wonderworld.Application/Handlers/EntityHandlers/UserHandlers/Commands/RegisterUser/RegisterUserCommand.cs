@@ -6,15 +6,10 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.
 
 public class RegisterUserCommand : IRequest<User>
 {
-    public UserRegisterRequestDto UserRegister { get; set; }
+    public User User { get; set; }
 
-    public RegisterUserCommand(UserRegisterRequestDto userRegisterRequestDto)
+    public RegisterUserCommand(User user)
     {
-        UserRegister = userRegisterRequestDto;
-    }
-
-    public RegisterUserCommand(string email, string password)
-    {
-        UserRegister = new UserRegisterRequestDto { Email = email, Password = password };
+        User = user;
     }
 }

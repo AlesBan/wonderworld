@@ -86,14 +86,14 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserRegisteredId,
                 Email = "emailR",
-                Password = "passwordR",
+                // Password = "passwordR",
                 IsCreatedAccount = false
             },
             new User
             {
                 UserId = UserAId,
                 Email = "emailA",
-                Password = "passwordA",
+                // Password = "passwordA",
                 IsCreatedAccount = true,
                 FirstName = "FirstNameA",
                 LastName = "LastNameA",
@@ -119,7 +119,7 @@ public class SharedLessonDbContextFactory
             {
                 UserId = UserBId,
                 Email = "emailB",
-                Password = "passwordB",
+                // Password = "passwordB",
                 FirstName = "FirstNameB",
                 LastName = "LastNameB",
                 IsCreatedAccount = true,
@@ -147,7 +147,7 @@ public class SharedLessonDbContextFactory
                 FirstName = "FirstNameForDelete",
                 LastName = "LastNameForDelete",
                 Email = "emailForDelete",
-                Password = "passwordForDelete",
+                // Password = "passwordForDelete",
                 IsVerified = true
             });
     }

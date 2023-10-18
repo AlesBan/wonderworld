@@ -9,9 +9,15 @@ public class User
 {
     public Guid UserId { get; set; } = Guid.NewGuid();
     public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
+    public byte[] PasswordHash { get; set; } = new byte[32];
+    public byte[] PasswordSalt { get; set; } = new byte[32];
+    public string? VerificationToken { get; set; } = string.Empty;
+    public string? PasswordResetToken { get; set; } = string.Empty;
+    public DateTime? ResetTokenExpires { get; set; }
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     public bool IsCreatedAccount { get; set; }
+    public bool IsVerified { get; set; }
+    public bool IsInstitutionVerified { get; set; }
     public string? FirstName { get; set; } = string.Empty;
     public string? LastName { get; set; } = string.Empty;
     public bool? IsATeacher { get; set; }
@@ -36,9 +42,9 @@ public class User
     public string? BannerPhotoUrl { get; set; } = string.Empty;
     public DateTime RegisteredAt { get; set; }
     public DateTime? CreatedAt { get; set; }
-    public bool? IsVerified { get; set; }
     public DateTime? VerifiedAt { get; set; }
     public DateTime LastOnlineAt { get; set; }
     public DateTime? DeletedAt { get; set; }
     public string FullName => $"{FirstName} {LastName}";
+    
 }

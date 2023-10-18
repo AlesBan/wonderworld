@@ -43,6 +43,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         user.PhotoUrl = request.PhotoUrl;
 
         user.IsCreatedAccount = true;
+        user.CreatedAt = DateTime.Now;
 
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);

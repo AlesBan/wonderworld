@@ -1,32 +1,23 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions.Database;
-using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPassword;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPasswordHash;
 
-public class UpdateUserPasswordCommandHandler : IRequestHandler<UpdateUserPasswordCommand, User>
+public class UpdateUserPasswordHashCommandHandler : IRequestHandler<UpdateUserPasswordHashCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public UpdateUserPasswordCommandHandler(ISharedLessonDbContext context)
+    public UpdateUserPasswordHashCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<User> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(UpdateUserPasswordHashCommand request, CancellationToken cancellationToken)
     {
         var user = _context.Users
-            .Include(u => u.City)
-            .Include(u => u.Country)
-            .Include(u => u.Institution)
-            .Include(u => u.Classes)
-            .Include(u => u.UserDisciplines)
-            .ThenInclude(ud => ud.Discipline)
-            .Include(u => u.UserLanguages)
-            .ThenInclude(ul => ul.Language)
             .FirstOrDefault(u =>
                 u.UserId == request.UserId);
 
@@ -35,10 +26,12 @@ public class UpdateUserPasswordCommandHandler : IRequestHandler<UpdateUserPasswo
             throw new UserNotFoundException(request.UserId);
         }
 
-        user.Password = request.Password;
+        user.PasswordHash = request.PasswordHash;
+        user.PasswordSalt = request.PasswordSalt;
+        
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
-        
+
         user = _context.Users
             .Include(u => u.City)
             .Include(u => u.Country)

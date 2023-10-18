@@ -16,6 +16,7 @@ using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
 using Wonderworld.Application.Interfaces.Services.ExternalServices;
 using Wonderworld.Infrastructure.Services;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Services.EmailHandlerService;
 using Wonderworld.Infrastructure.Services.ExternalServices;
 using Wonderworld.Persistence;
 
@@ -107,6 +108,7 @@ builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService>();
 builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
+builder.Services.AddScoped<IEmailHandlerService, EmailHandlerService>();
 
 
 var app = builder.Build();

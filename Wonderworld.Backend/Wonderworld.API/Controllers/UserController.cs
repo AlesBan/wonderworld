@@ -1,10 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.AccountServices;
-using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
 using Wonderworld.Application.Interfaces;
@@ -40,6 +38,24 @@ public class UserController : BaseController
     }
 
     /// <summary>
+    /// Register` user
+    /// </summary>
+    /// <remarks>
+    /// POST /api/user/register
+    /// </remarks>
+    /// <param name="requestUserDto">UserRegisterRequestDto object</param>
+    /// <returns>
+    /// AuthResult object
+    /// /// </returns>
+    /// <response code="200">Returns AuthResult object</response>
+    /// <response code="400">Returns BadRequest object</response> 
+    [HttpPost("register")]
+    public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
+    {
+        return await _userAccountService.RegisterUser(requestUserDto, Mediator);
+    }
+
+    /// <summary>
     /// Login user
     /// </summary>
     /// <remarks>
@@ -56,21 +72,20 @@ public class UserController : BaseController
     }
 
     /// <summary>
-    /// Register` user
+    /// Verify email
     /// </summary>
-    /// <remarks>
-    /// POST /api/user/register
-    /// </remarks>
-    /// <param name="requestUserDto">UserRegisterRequestDto object</param>
-    /// <returns>
-    /// AuthResult object
-    /// /// </returns>
-    /// <response code="200">Returns AuthResult object</response>
-    /// <response code="400">Returns BadRequest object</response> 
-    [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
+    /// <param name="token"></param>
+    /// <returns></returns>
+    [HttpGet("verify-email")]
+    public async Task<IActionResult> VerifyEmail(string token)
     {
-        return await _userAccountService.RegisterUser(requestUserDto, Mediator);
+        return Ok(await _userAccountService.VerifyEmail(token, Mediator));
+    }
+
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword(string email)
+    {
+        return Ok(await _userAccountService.ForgotPassword(email, Mediator));
     }
 
     /// <summary>
