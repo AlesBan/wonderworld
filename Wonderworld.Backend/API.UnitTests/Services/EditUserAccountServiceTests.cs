@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Wonderworld.API.Services.EditUserServices;
 using Wonderworld.Application.Common.Exceptions.Database;
-using Wonderworld.Application.Common.Exceptions.User;
-using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
@@ -26,7 +24,6 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateProfessionalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserInstitution;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPassword;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
@@ -117,7 +114,7 @@ public class EditUserAccountServiceTests : TestCommonBase
         {
             UserId = userId,
             Email = "Email",
-            Password = "Password"
+            // Password = "Password"
         };
 
         mediatorMock.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(),
@@ -310,20 +307,20 @@ public class EditUserAccountServiceTests : TestCommonBase
         var userId = SharedLessonDbContextFactory.UserAId;
         var user = Context.Users.FirstOrDefault(u =>
             u.UserId == userId);
-        var updateUserPasswordCommand = new UpdateUserPasswordCommand()
-        {
-            UserId = user!.UserId,
-            Password = newPassword
-        };
-        var updateUserPasswordHandler = new UpdateUserPasswordCommandHandler(Context);
-        mediatorMock.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(),
-            It.IsAny<CancellationToken>())).ReturnsAsync(user);
-        mediatorMock.Setup(m => m.Send(It.IsAny<UpdateUserPasswordCommand>(),
-                It.IsAny<CancellationToken>()))
-            .ReturnsAsync(await updateUserPasswordHandler
-                .Handle(updateUserPasswordCommand, CancellationToken.None));
+        // var updateUserPasswordCommand = new UpdateUserPasswordCommand()
+        // {
+        //     UserId = user!.UserId,
+        //     Password = newPassword
+        // };
+        // var updateUserPasswordHandler = new UpdateUserPasswordCommandHandler(Context);
+        // mediatorMock.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(),
+        //     It.IsAny<CancellationToken>())).ReturnsAsync(user);
+        // mediatorMock.Setup(m => m.Send(It.IsAny<UpdateUserPasswordCommand>(),
+        //         It.IsAny<CancellationToken>()))
+        //     .ReturnsAsync(await updateUserPasswordHandler
+        //         .Handle(updateUserPasswordCommand, CancellationToken.None));
 
-        var requestUserDto = new UpdateUserPasswordRequestDto()
+        var requestUserDto = new UpdateUserPasswordHashRequestDto()
         {
             Password = newPassword
         };

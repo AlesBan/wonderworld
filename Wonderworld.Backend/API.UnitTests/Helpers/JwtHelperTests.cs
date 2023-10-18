@@ -15,7 +15,7 @@ public class JwtHelperTests
         {
             UserId = Guid.NewGuid(),
             Email = "John@amogus", 
-            Password = "123"
+            // Password = "123"
         };
         
         var configuration = new ConfigurationBuilder()

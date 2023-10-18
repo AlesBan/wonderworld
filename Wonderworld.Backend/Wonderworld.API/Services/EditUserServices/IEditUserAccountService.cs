@@ -14,5 +14,5 @@ public interface IEditUserAccountService
 
     public Task<IActionResult> EditUserEmailAsync(Guid userId, UpdateUserEmailRequestDto requestUserDto, IMediator mediator);
 
-    public Task<IActionResult> EditUserPasswordAsync(Guid userId, UpdateUserPasswordRequestDto requestUserDto, IMediator mediator);
+    public Task<IActionResult> EditUserPasswordAsync(Guid userId, UpdateUserPasswordHashRequestDto requestUserDto, IMediator mediator);
 }

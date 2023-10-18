@@ -112,7 +112,7 @@ public class EditUserController : BaseController
     /// <response code="400">Returns ResponseResult object</response>
     /// <response code="401">Returns Unauthorized object</response>
     [HttpPut("password")]
-    public async Task<IActionResult> EditUserPassword([FromBody] UpdateUserPasswordRequestDto requestUserDto)
+    public async Task<IActionResult> EditUserPassword([FromBody] UpdateUserPasswordHashRequestDto requestUserDto)
     {
         var result = await _editUserAccountService.EditUserPasswordAsync(UserId, requestUserDto, Mediator);
         return result;
