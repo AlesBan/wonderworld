@@ -27,7 +27,7 @@ namespace Wonderworld.API.Filters
                 var controllerName = context.RouteData.Values["controller"]?.ToString() ?? string.Empty;
                 var actionName = context.RouteData.Values["action"]?.ToString() ?? string.Empty;
                 var contextType = context.Exception.InnerException?.GetType() ?? context.Exception.GetType();
-                
+
                 try
                 {
                     if (contextType.GetInterfaces().Contains(typeof(IUiException)))
@@ -40,7 +40,12 @@ namespace Wonderworld.API.Filters
                         return Handle400Exception(context, controllerName, actionName, contextType);
                     }
 
-                    if (contextType.GetInterfaces().Contains(typeof(IDbException)))
+                    if (contextType.GetInterfaces().Contains(typeof(IUiForbiddenException)))
+                    {
+                        return Handle403Exception(context, controllerName, actionName, contextType);
+                    }
+
+                    if (contextType.GetInterfaces().Contains(typeof(IServerException)))
                     {
                         return Handle500Exception(context, controllerName, actionName, contextType);
                     }
@@ -49,8 +54,8 @@ namespace Wonderworld.API.Filters
                 }
                 catch (Exception exception)
                 {
-                     _logger.LogError(exception.Message);
-                     return Task.CompletedTask;
+                    _logger.LogError(exception.Message);
+                    return Task.CompletedTask;
                 }
             }
 
@@ -63,6 +68,21 @@ namespace Wonderworld.API.Filters
 
                 context.HttpContext.Response.StatusCode = 400;
 
+                context.Result = result;
+                context.ExceptionHandled = true;
+
+                return Task.CompletedTask;
+            }
+
+            private Task Handle403Exception(ExceptionContext context, object controllerName,
+                object actionName, MemberInfo contextType)
+            {
+                LogException(context, controllerName, actionName, contextType);
+
+                var result = ResponseHelper.GetBadRequest(context.Exception.Message);
+
+                context.HttpContext.Response.StatusCode = 403;
+                    
                 context.Result = result;
                 context.ExceptionHandled = true;
 
@@ -88,7 +108,7 @@ namespace Wonderworld.API.Filters
                 context.HttpContext.Response.StatusCode = 500;
 
                 context.Result = new StatusCodeResult(500);
-                
+
                 _logger.LogError("Unhandled exception\n");
                 LogException(context, controllerName, actionName, contextType);
 

@@ -14,4 +14,7 @@ public interface IUserAccountService
     public Task<IActionResult> ForgotPassword(string userEmail, IMediator mediator);
     public Task<IActionResult> CreateUserAccount(Guid userId, CreateUserAccountRequestDto requestUserDto, IMediator mediator);
     public Task<IActionResult> DeleteUser(Guid userId, IMediator mediator);
+    public Task<IActionResult> DeleteAllUsers(IMediator mediator);
+    
+    
 }

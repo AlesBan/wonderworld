@@ -2,9 +2,9 @@ using Wonderworld.Application.Interfaces.Exceptions;
 
 namespace Wonderworld.Application.Common.Exceptions.Authentication;
 
-public class InvalidNameIdentifierClaimException : Exception, IServerException
+public class InvalidTokenProvidedException : Exception, IUiException
 {
-    public InvalidNameIdentifierClaimException() : 
+    public InvalidTokenProvidedException() : 
         base("Invalid NameIdentifier claim")
     { 
         

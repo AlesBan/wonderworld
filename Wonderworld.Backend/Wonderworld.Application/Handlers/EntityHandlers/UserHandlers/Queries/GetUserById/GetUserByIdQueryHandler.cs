@@ -1,13 +1,10 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Common.Exceptions.Database;
-using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 
 public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, User>
 {

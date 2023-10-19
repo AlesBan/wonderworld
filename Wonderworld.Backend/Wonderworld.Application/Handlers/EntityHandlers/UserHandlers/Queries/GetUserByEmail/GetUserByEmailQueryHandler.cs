@@ -27,6 +27,25 @@ public class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery, U
             throw new UserNotFoundException(request.Email);
         }
 
+        user = await _context.Users
+            .Include(u => u.City)
+            .Include(u => u.Country)
+            .Include(u => u.Institution)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.ClassLanguages)
+            .ThenInclude(cl => cl.Language)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.ClassDisciplines)
+            .ThenInclude(cd => cd.Discipline)
+            .Include(u => u.UserDisciplines)
+            .ThenInclude(ud => ud.Discipline)
+            .Include(u => u.UserLanguages)
+            .ThenInclude(ul => ul.Language)
+            .Include(u => u.UserGrades)
+            .ThenInclude(ug => ug.Grade)
+            .FirstOrDefaultAsync(u =>
+                u.UserId == user.UserId, cancellationToken: cancellationToken);
+        
         return user;
     }
 }

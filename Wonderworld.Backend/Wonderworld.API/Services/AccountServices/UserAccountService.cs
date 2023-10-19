@@ -16,11 +16,13 @@ using Wonderworld.Application.Handlers.EntityHandlers.GradeHandlers.Queries.GetG
 using Wonderworld.Application.Handlers.EntityHandlers.InstitutionHandlers.Queries.GetEstablishment;
 using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByTitles;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteAllUsers;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserResetToken;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserToken;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserVerification;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
@@ -60,7 +62,8 @@ public class UserAccountService : IUserAccountService
             throw new Exception();
         }
 
-        var message = @"Click this link to verify your email: https://localhost:7280/api/user/verify-email?token=" + registeredUser.VerificationToken;
+        var message = @"Click this link to verify your email: http://localhost:7280/api/user/verify-email?token=" +
+                      registeredUser.VerificationToken;
         await _emailHandlerService.SendAsync(_configuration, user.Email, "Wonderworld", message);
 
         return ResponseHelper.GetAuthResultOk(registeredUser.VerificationToken);
@@ -70,21 +73,33 @@ public class UserAccountService : IUserAccountService
     {
         var user = await UserHelper.GetUserByEmail(requestUserDto.Email, mediator);
 
-        UserHelper.CheckUserLoginAbility(user);
+        UserHelper.CheckUserVerification(user);
         UserHelper.VerifyPasswordHash(user, requestUserDto.Password);
+        
+        var userProfileDto = await MapUserToUserProfileDto(user);
 
-        var token = JwtHelper.CreateToken(user, _configuration);
+        userProfileDto.ClasseDtos = await GetClassProfileDtos(user.Classes.ToList());
+        
+        var newToken = JwtHelper.CreateToken(user, _configuration);
+        
+        userProfileDto.VerificationToken = newToken;
 
-        return ResponseHelper.GetAuthResultOk(token);
+        await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
+
+        return ResponseHelper.GetOkResult(userProfileDto);
     }
 
     public async Task<IActionResult> VerifyEmail(string token, IMediator mediator)
     {
         var user = await UserHelper.GetUserByToken(token, mediator);
+        
+       var verifiedUser =  await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
 
-        await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
+        var newToken = JwtHelper.CreateToken(verifiedUser, _configuration);
 
-        return ResponseHelper.GetOkResult("Email verified");
+        await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
+
+        return ResponseHelper.GetOkResult(newToken);
     }
 
     public async Task<IActionResult> ForgotPassword(string userEmail, IMediator mediator)
@@ -98,14 +113,21 @@ public class UserAccountService : IUserAccountService
         return ResponseHelper.GetOkResult(resetToken);
     }
 
-    public async Task<IActionResult> CreateUserAccount(Guid userId, CreateUserAccountRequestDto requestUserDto,
+    public async Task<IActionResult> CreateUserAccount(Guid userId,
+        CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
         var user = await UserHelper.GetUserById(userId, mediator);
+
         UserHelper.CheckUserCreateAccountAbility(user);
 
         var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
-        var userProfileDto = await MapUserToUserProfileDto(userWithAccount);
+       
+        var newToken = JwtHelper.CreateToken(userWithAccount, _configuration);
+
+        var userWithNewToken = await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
+        
+        var userProfileDto = await MapUserToUserProfileDto(userWithNewToken);
 
         userProfileDto.ClasseDtos = await GetClassProfileDtos(userWithAccount.Classes.ToList());
 
@@ -155,6 +177,12 @@ public class UserAccountService : IUserAccountService
         return new OkResult();
     }
 
+    public async Task<IActionResult> DeleteAllUsers(IMediator mediator)
+    {
+        await mediator.Send(new DeleteAllUsersCommand());
+
+        return new OkResult();
+    }
 
     private static async Task<User> GetUserWithAccount(Guid userId, CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)

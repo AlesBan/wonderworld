@@ -2,7 +2,7 @@ using Application.UnitTests.Common;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Common.Exceptions.User;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.EntityHandlers.UserHandlers.Queries;

@@ -7,7 +7,7 @@ namespace Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 
 public class UserRegisterRequestDto : IMapWith<User>
 {
-    [Required] public string Email { get; set; } = string.Empty;
+    [Required, EmailAddress] public string Email { get; set; } = string.Empty;
 
     [Required] public string Password { get; set; } = string.Empty;
     

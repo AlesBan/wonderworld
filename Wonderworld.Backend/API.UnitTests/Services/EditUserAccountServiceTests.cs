@@ -24,7 +24,7 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateProfessionalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserInstitution;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
