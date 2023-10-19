@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Wonderworld.API.Filters;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
@@ -7,6 +8,7 @@ using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
 namespace Wonderworld.API.Controllers;
 
 [Authorize]
+[CheckUserCreateAccount]
 [Produces("application/json")]
 public class SearchController : BaseController
 {

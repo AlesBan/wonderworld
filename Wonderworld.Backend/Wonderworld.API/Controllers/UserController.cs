@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.AccountServices;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
@@ -55,15 +56,7 @@ public class UserController : BaseController
         return await _userAccountService.RegisterUser(requestUserDto, Mediator);
     }
 
-    /// <summary>
-    /// Login user
-    /// </summary>
-    /// <remarks>
-    /// </remarks>
-    /// <param name="requestUserDto">UserLoginRequestDto object</param>
-    /// <returns>
-    /// AuthResult object
-    /// </returns>
+    [CheckUserVerified]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
     {
@@ -88,20 +81,9 @@ public class UserController : BaseController
         return Ok(await _userAccountService.ForgotPassword(email, Mediator));
     }
 
-    /// <summary>
-    /// Create account
-    /// </summary>
-    /// <remarks>
-    /// POST /api/user/create-account
-    /// </remarks>
-    /// <param name="requestUserDto"></param>
-    /// <returns>
-    /// AuthResult object
-    /// </returns>
-    /// <response code="200">Returns AuthResult object</response>
-    /// <response code="400">Returns ResponseResult object</response>
-    /// <response code="401">Returns Unauthorized object</response>
     [Authorize]
+    [CheckUserVerified]
+    [CheckUserCreateAccountAbility]
     [HttpPost("create-account")]
     public async Task<IActionResult> CreateAccount([FromBody] CreateUserAccountRequestDto requestUserDto)
     {
@@ -122,6 +104,7 @@ public class UserController : BaseController
     /// <response code="400">Returns ResponseResult object</response>
     /// <response code="401">Returns Unauthorized object</response>
     [Authorize]
+    [CheckUserCreateAccount]
     [HttpGet("get-userprofile")]
     public async Task<IActionResult> GetUser()
     {
@@ -130,23 +113,20 @@ public class UserController : BaseController
         return result;
     }
 
-    /// <summary>
-    /// Delete user
-    /// </summary>
-    /// <remarks>
-    /// DELETE /api/user/delete-user
-    /// </remarks>
-    /// <returns>
-    /// No content
-    /// </returns>
-    /// <response code="200">Returns AuthResult object</response>
-    /// <response code="400">Returns ResponseResult object</response>
-    /// <response code="401">Returns Unauthorized object</response>
     [Authorize]
+    [CheckUserCreateAccount]
     [HttpDelete("delete-user")]
     public async Task<IActionResult> DeleteUser()
     {
         var result = await _userAccountService.DeleteUser(UserId, Mediator);
+
+        return result;
+    }
+    
+    [HttpDelete("delete-all-users")]
+    public async Task<IActionResult> DeleteAllUsers()
+    {
+        var result = await _userAccountService.DeleteAllUsers(Mediator);
 
         return result;
     }

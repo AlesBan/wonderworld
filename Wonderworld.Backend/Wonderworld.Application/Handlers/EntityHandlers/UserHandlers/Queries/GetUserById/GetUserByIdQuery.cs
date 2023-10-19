@@ -1,7 +1,7 @@
 using MediatR;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
+namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 
 public class GetUserByIdQuery : IRequest<User>
 {

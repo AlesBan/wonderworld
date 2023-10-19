@@ -1,8 +1,9 @@
 using MediatR;
 using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Common.Exceptions.User;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUser;
+using Wonderworld.Application.Common.Exceptions.User.Forbidden;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByEmail;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByToken;
 using Wonderworld.Domain.Entities.Main;
 
@@ -75,7 +76,7 @@ public static class UserHelper
         }
     }
 
-    public static void CheckUserLoginAbility(User user)
+    public static void CheckUserVerification(User user)
     {
         if (!user.IsVerified)
         {

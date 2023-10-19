@@ -4,7 +4,7 @@ namespace Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 
 public class UserLoginRequestDto
 {
-    [Required]
+    [Required, EmailAddress]
     public string Email { get; set; }
     
     [Required]

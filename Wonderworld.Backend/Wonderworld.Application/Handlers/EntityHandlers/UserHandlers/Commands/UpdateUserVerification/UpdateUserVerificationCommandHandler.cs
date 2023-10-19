@@ -2,10 +2,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Interfaces;
+using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserVerification;
 
-public class UpdateUserVerificationCommandHandler : IRequestHandler<UpdateUserVerificationCommand, Unit>
+public class UpdateUserVerificationCommandHandler : IRequestHandler<UpdateUserVerificationCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -14,7 +15,7 @@ public class UpdateUserVerificationCommandHandler : IRequestHandler<UpdateUserVe
         _context = sharedLessonDbContext;
     }
 
-    public async Task<Unit> Handle(UpdateUserVerificationCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(UpdateUserVerificationCommand request, CancellationToken cancellationToken)
     {
         var user = await _context.Users
             .FirstOrDefaultAsync(x =>
@@ -31,6 +32,6 @@ public class UpdateUserVerificationCommandHandler : IRequestHandler<UpdateUserVe
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 
-        return Unit.Value;
+        return user;
     }
 }

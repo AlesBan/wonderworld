@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.EditUserData;
@@ -9,6 +10,7 @@ using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 namespace Wonderworld.API.Controllers;
 
 [Authorize]
+[CheckUserCreateAccount]
 public class EditUserController : BaseController
 {
     private readonly IEditUserAccountService _editUserAccountService;

@@ -75,6 +75,9 @@ public class EditUserAccountService : IEditUserAccountService
         userProfileDto.DisciplineTitles = disciplineTitles;
 
         userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
+        
+        userProfileDto.GradeNumbers = updatedUser.UserGrades
+            .Select(ug => ug.Grade.GradeNumber).ToList();
 
         await Task.Delay(20);
         var classProfileDtos = classes.ToList().Select(c =>
@@ -91,6 +94,7 @@ public class EditUserAccountService : IEditUserAccountService
             }).ToList();
 
         userProfileDto.ClasseDtos = classProfileDtos;
+
 
         return new OkObjectResult(userProfileDto);
     }
