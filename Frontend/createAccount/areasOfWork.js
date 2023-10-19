@@ -74,6 +74,8 @@ function chooseWork() {
                     }
                 }
                 selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
+
+                localStorage.setItem('areasOfWork', selectedValues);
             });
 
         })

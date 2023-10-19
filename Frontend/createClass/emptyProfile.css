@@ -210,3 +210,74 @@
 .item.checked .check-icon {
     transform: scale(1);
 }
+
+
+/* popOverMenu */
+
+.menu-action {
+    cursor: pointer;
+}
+
+.pop-over-menu {
+    display: none;
+}
+
+.pop-over-menu.show {
+    position: absolute;
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: 'Inter', serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+
+.edit-class-btn:hover,
+.delete-class-btn:hover {
+    color: #216C5E;
+    background-color: #F0F6F5;
+}
+
+
+/* modal delete class */
+
+.modal-delete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-delete-top {
+    background-color: #fff;
+    padding: 20px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-delete-content {
+    margin-bottom: 20px;
+}
+
+.modal-delete-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.modal-delete-buttons button {
+    margin: 0 10px;
+}
+
+
+.class-container {
+    display: grid;
+    grid-gap: 32px;
+    grid-template-columns:repeat(2, 1fr);
+}

@@ -236,6 +236,7 @@ input[type='radio']:checked::after {
 .institution-items {
     display: none;
     /* Other existing styles */
+    cursor: pointer;
 }
 
 .list-items, .grades-items, .institution-items {

@@ -1,9 +1,8 @@
 function chooseInstitution() {
     const inputValueLocation = document.querySelector('#locationValue').value;
-    const inputValueLanguages = document.querySelector('#languagesValue').value;
+
 
     localStorage.setItem('location', inputValueLocation);
-    localStorage.setItem('languages', inputValueLanguages);
 
     let institution = document.createElement('div');
     document.body.append(institution)
@@ -56,7 +55,7 @@ function renderOrg(items) {
         return `
 
  <li class="item">
-        <span class="item-text">${item.properties.description}</span>
+        <span class="item-text">${item.properties.name + ', ' + item.properties.description}</span>
     </li>
     `;
     })

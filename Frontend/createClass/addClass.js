@@ -1,58 +1,3 @@
-// // let addClassBtn = document.querySelector('#addClass');
-// let emptyProfile = document.querySelector('.emptyProfile');
-//
-// addClassBtn.addEventListener('click', () => {
-//     openModal();
-// });
-//
-// function openModal() {
-//     let modal = document.createElement('div');
-//     modal.classList.add('modal');
-//     document.body.append(modal);
-//
-//     let modalContent = document.createElement('div');
-//     modalContent.classList.add('modal-content');
-//     modal.append(modalContent);
-//
-//     let modalCloseBtn = document.createElement('span');
-//     modalCloseBtn.classList.add('modal-close');
-//     modalCloseBtn.innerHTML = '&times;';
-//     modalContent.append(modalCloseBtn);
-//
-//     let createBtn = document.createElement('button');
-//     createBtn.classList.add('create-btn');
-//     createBtn.innerHTML = 'Create';
-//     modalContent.append(createBtn);
-//
-//     modalCloseBtn.addEventListener('click', () => {
-//         closeModal();
-//     });
-//
-//     createBtn.addEventListener('click', () => {
-//         createClass();
-//         closeModal();
-//     });
-// }
-//
-// function createClass() {
-//     let classPreview = document.createElement('div');
-//     classPreview.classList.add('class-preview');
-//     // Добавьте необходимое содержимое предварительного просмотра класса
-//
-//     emptyProfile.innerHTML = '';
-//     emptyProfile.append(classPreview);
-// }
-//
-// function closeModal() {
-//     let modal = document.querySelector('.modal');
-//     if (modal) {
-//         modal.remove();
-//     }
-// }
-
-
-
-
 let addClassBtn = document.querySelector('.add-class');
 
 addClassBtn.addEventListener('click', () => {
@@ -314,34 +259,6 @@ addClassBtn.addEventListener('click', () => {
     }
 
 
-
-
-
-    // let createBtn = document.querySelector('#create-btn');
-    //
-    // createBtn.addEventListener('click', () => {
-    //     let createClass = document.createElement('div');
-    //     document.body.append(createClass)
-    //     createClass.innerHTML = `
-    //    <div class="class-preview">
-    //             <div class="class-preview-image"><img src="../images/class-preview-image.svg" alt=""></div>
-    //             <div class="class-preview-text">${inputDescription.value}
-    //             </div>
-    //             <div class="class-preview-footer">
-    //                 <div class="class-preview-tags">
-    //                     ${selectedValues.map(value => `<span class="class-preview-tag">${value}</span>`).join("")}
-    //                 </div>
-    //                 <div class="menu-action">
-    //                     <img src="../images/menu-action.svg" alt="">
-    //                 </div>
-    //             </div>
-    //         </div>
-    //
-    //     `
-    //     document.querySelector('.add-classes').replaceWith(createClass)
-    //
-    // })
-
     let createBtn = document.querySelector('#create-btn');
     createBtn.addEventListener('click', () => {
         createClass();
@@ -364,17 +281,80 @@ addClassBtn.addEventListener('click', () => {
                     </div>
                     <div class="menu-action">
                         <img src="../images/menu-action.svg" alt="">
+                        <div class="pop-over-menu">
+                            <div class="edit-class-btn">Edit</div>
+                            <div class="delete-class-btn">Delete</button>
+                        </div>
                     </div>
+                    </div>
+            <div class="modal-delete-overlay">
+  <div class="modal-delete-top">
+    <div class="modal-delete-content">
+      <p>Deleting this class will remove it from your account forever. Are you sure you want to continue?</p>
+    </div>
+    <div class="modal-delete-buttons">
+      <button class="cancel-button">Cancel</button>
+      <button class="delete-button">Delete</button>
+    </div>
+  </div>
+</div>
                 </div>
-            </div>
-
+        </div>
         `
-        document.querySelector('.add-classes').replaceWith(createClass)
+
+
+        // document.querySelector('.add-classes').replaceWith(createClass)
+
+        const classContainer = document.querySelector('.class-container');
+        classContainer.appendChild(createClass);
 
         let classTitle = document.querySelector('#class-title').value;
         localStorage.setItem('classTitle', classTitle)
 
-        // localStorage.setItem('disciplines', selectedValues)
+        let menuActionButton = document.querySelector('.menu-action');
+        let popOverMenu = document.querySelector('.pop-over-menu');
+
+
+        // createClass.addEventListener('click', function(event) {
+        //     if (event.target.classList.contains('menu-action')) {
+        //         menuActionButton.addEventListener('click', () => {
+        //             popOverMenu.classList.toggle('show');
+        //         })
+        //     }
+        //
+        // //     const classBlock = event.currentTarget;
+        // //
+        // //     // Удалить блок-класс
+        // //     classBlock.remove();
+        // // console.log('Кнопка была нажата');
+        // });
+
+
+
+        menuActionButton.addEventListener('click', () => {
+            popOverMenu.classList.toggle('show');
+        })
+
+        const deleteButton = document.querySelector('.delete-class-btn');
+        const modalOverlay = document.querySelector('.modal-delete-overlay');
+        const cancelButton = document.querySelector('.cancel-button');
+        const deleteConfirmButton = document.querySelector('.delete-button');
+
+        deleteButton.addEventListener('click', function() {
+            modalOverlay.style.display = 'flex';
+        });
+
+        cancelButton.addEventListener('click', function() {
+            modalOverlay.style.display = 'none';
+        });
+
+        deleteConfirmButton.addEventListener('click', function() {
+           createClass.remove();
+
+        });
+
+
+
 
     }
 
@@ -388,7 +368,6 @@ addClassBtn.addEventListener('click', () => {
 
 
 })
-
 
 
 

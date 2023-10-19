@@ -1,9 +1,9 @@
 async function postChangeProfessionalDetails() {
     const url = 'http://localhost:7280/api/edituser/professional-info';
     const data = {
-        Languages: [document.querySelector('#output-languages').value],
-        Disciplines: [selectedValuesDiv],
-        Grades: [selectedGradesDiv],
+        Languages: localStorage.getItem('editedLanguages').split(','),
+        Disciplines: localStorage.getItem('editedLessons').split(','),
+        Grades: localStorage.getItem('editedGrades').split(','),
     };
 
     console.log(JSON.stringify(data));

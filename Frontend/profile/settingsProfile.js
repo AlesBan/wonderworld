@@ -12,18 +12,6 @@ filters.forEach(filter => {
     });
 });
 
-// let editFirstName = document.querySelector('#editFirstName').value;
-// localStorage.setItem('updatedFirstName', editFirstName);
-//
-// let editLastName = document.querySelector('#editLastName').value;
-// localStorage.setItem('updatedLastName', editLastName);
-//
-// let editLocation = document.querySelector('#editLocation').value;
-// localStorage.setItem('updatedLocation', editLocation);
-//
-// let description = document.querySelector('#description').value;
-// localStorage.setItem('description', description);
-
 
 /* dropdowns professional details */
 
@@ -74,6 +62,8 @@ function generateItems(items) {
                 }
             }
             selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
+
+            localStorage.setItem('editedLessons', selectedValues)
         });
 
     })
@@ -131,6 +121,8 @@ function generateGrades(items) {
                 }
             }
             selectedGradesDiv.innerHTML = selectedGrades.map(value => `<span>${value}</span>`).join(", ");
+
+            localStorage.setItem('editedGrades', selectedGrades)
         });
 
     })
@@ -186,6 +178,8 @@ function generateLanguages(items) {
                 }
             }
             selectedLanguageDiv.innerHTML = selectedLanguage.map(value => `<span>${value}</span>`).join(", ");
+
+            localStorage.setItem('editedLanguages', selectedLanguage)
         });
 
     })
@@ -227,6 +221,7 @@ function renderInstitution(items) {
         item.addEventListener('click', () => {
             const selectedValue = item.querySelector('.item-text').textContent;
             document.querySelector('#changeInstitution').value = selectedValue;
+
             localStorage.setItem('selectedValue', selectedValue);
         });
     });

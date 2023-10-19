@@ -24,10 +24,10 @@ async function postCreateAccount() {
     const url = 'http://localhost:7280/api/user/create-account';
     const apiData = await fetchOrg(localStorage.getItem('selectedValue'));
     const establishmentFields = apiData.features[0].properties;
-    let biology = ["Biology"];
+    const disciplines = localStorage.getItem('areasOfWork').split(',')
     let types = ["School"];
     let location = localStorage.getItem('location')
-    let languages = localStorage.getItem('languages')
+    let languages = localStorage.getItem('languages').split(',');
     const data = {
         FirstName: localStorage.getItem('firstName'),
         LastName: localStorage.getItem('lastName'),
@@ -35,13 +35,13 @@ async function postCreateAccount() {
         IsAnExpert: false,
         CityLocation: location.split(' ')[0],
         CountryLocation: location.split(' ')[1],
-        Languages: languages.split(' '),
+        Languages: languages,
         InstitutionDto: {
             Types: types,
             Address: establishmentFields.description,
             Title: establishmentFields.name,
         },
-        Disciplines: biology,
+        Disciplines: disciplines,
         PhotoUrl: "dede"
     };
 
