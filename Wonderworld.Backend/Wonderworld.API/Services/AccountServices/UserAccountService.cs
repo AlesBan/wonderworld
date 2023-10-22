@@ -153,9 +153,9 @@ public class UserAccountService : IUserAccountService
         return Task.FromResult(userProfileDto);
     }
 
-    private static Task<List<ClassProfileDto>> GetClassProfileDtos(List<Class> classes)
+    private static async Task<List<ClassProfileDto>> GetClassProfileDtos(List<Class> classes)
     {
-        return classes.Select(c => new ClassProfileDto
+        return classes.Select(c => new ClassProfileDto()
             {
                 ClassId = c.ClassId,
                 Title = c.Title,
@@ -166,8 +166,7 @@ public class UserAccountService : IUserAccountService
                 Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
                 PhotoUrl = c.PhotoUrl!
             })
-            .ToList());
-        return classList;
+            .ToList();
     }
 
     public async Task<IActionResult> DeleteUser(Guid userId, IMediator mediator)
