@@ -141,52 +141,52 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            DisciplineId = new Guid("0fa5be51-007e-4678-8c03-a73aefa881c0"),
+                            DisciplineId = new Guid("1e4cba5a-2a3c-423f-bbbf-588ac89d0c64"),
                             Title = "Biology"
                         },
                         new
                         {
-                            DisciplineId = new Guid("c35fa09a-d61b-4eed-ae82-bf0a62de7299"),
+                            DisciplineId = new Guid("e0831997-4c7b-4448-acb7-20c78cb57509"),
                             Title = "Chemistry"
                         },
                         new
                         {
-                            DisciplineId = new Guid("93adbe2d-6806-4695-8963-2971b57dea49"),
+                            DisciplineId = new Guid("e6be4e25-7a89-4dc6-a520-7a057a0eb162"),
                             Title = "Physics"
                         },
                         new
                         {
-                            DisciplineId = new Guid("da8786e5-b34b-464f-a98c-76a48e2616bf"),
+                            DisciplineId = new Guid("90c19e05-fa08-40d1-9c43-e257c4d15002"),
                             Title = "Mathematics"
                         },
                         new
                         {
-                            DisciplineId = new Guid("cfa08343-3f0a-4b4c-8d23-17bf69d4d33a"),
+                            DisciplineId = new Guid("4a0f9e0e-de47-42f7-af4e-4aee2c63dc74"),
                             Title = "Literature"
                         },
                         new
                         {
-                            DisciplineId = new Guid("39369a89-bea0-460d-a961-9639872625e5"),
+                            DisciplineId = new Guid("a1602d97-b1db-4337-9ac8-1c26b93a89b3"),
                             Title = "ComputerScience"
                         },
                         new
                         {
-                            DisciplineId = new Guid("9292bf1e-e236-4a70-9f0d-5cda5dd14a79"),
+                            DisciplineId = new Guid("b3fd22c1-580d-4951-9b8f-68f4193172df"),
                             Title = "Geography"
                         },
                         new
                         {
-                            DisciplineId = new Guid("d3eb6a20-6102-459c-9478-7e55b6d94b99"),
+                            DisciplineId = new Guid("44a95f19-a69e-4ae4-8b14-8e46afe880e2"),
                             Title = "History"
                         },
                         new
                         {
-                            DisciplineId = new Guid("32c9bd6b-6ee3-4ba6-949a-c4eb5179e2ed"),
+                            DisciplineId = new Guid("be431851-b41c-402d-8e26-55eaf0c73ad4"),
                             Title = "Music"
                         },
                         new
                         {
-                            DisciplineId = new Guid("743f7f57-7fbd-4299-b298-0d9d4f381467"),
+                            DisciplineId = new Guid("44f870e6-c2b7-4e92-8699-a0c487da0bf2"),
                             Title = "Art"
                         });
                 });
@@ -212,62 +212,62 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            GradeId = new Guid("fcdb16e4-74a3-4827-bee5-11d7189980f8"),
+                            GradeId = new Guid("0e90d415-7726-4708-bfcc-f7dcd61a2167"),
                             GradeNumber = 1
                         },
                         new
                         {
-                            GradeId = new Guid("d7986ffe-0510-4a14-8d91-a2dd95fa50de"),
+                            GradeId = new Guid("c4b92de1-08eb-4950-9cc0-844abc3eb8a1"),
                             GradeNumber = 2
                         },
                         new
                         {
-                            GradeId = new Guid("1708cbbd-2d0a-4be2-8cf8-715683342d98"),
+                            GradeId = new Guid("f1b3d96f-0bfe-469f-a096-9104eb3fcc41"),
                             GradeNumber = 3
                         },
                         new
                         {
-                            GradeId = new Guid("24d4d6b8-bf01-4820-bb10-72b62ea209b7"),
+                            GradeId = new Guid("3f38f7c1-828f-45c4-8ad5-f6f7ee222923"),
                             GradeNumber = 4
                         },
                         new
                         {
-                            GradeId = new Guid("eeb65c3a-323c-4cee-9358-0a4278149206"),
+                            GradeId = new Guid("ee458858-8322-4073-8855-bea3206b6f8b"),
                             GradeNumber = 5
                         },
                         new
                         {
-                            GradeId = new Guid("8bbc2ae0-107c-48fc-8930-704ef2155ad8"),
+                            GradeId = new Guid("73a7c4a2-090d-4be2-a8cd-bfadb442a90c"),
                             GradeNumber = 6
                         },
                         new
                         {
-                            GradeId = new Guid("6c305ded-b2f6-442e-9393-5005bf9d8be3"),
+                            GradeId = new Guid("f6aa3694-5a41-4223-bba3-e8cef78524e8"),
                             GradeNumber = 7
                         },
                         new
                         {
-                            GradeId = new Guid("ee03965d-63ff-444a-a80b-13ae358eb681"),
+                            GradeId = new Guid("85025902-f450-47a8-824c-0ca8887fddc6"),
                             GradeNumber = 8
                         },
                         new
                         {
-                            GradeId = new Guid("90818e6c-88af-40b9-8036-a8832169630f"),
+                            GradeId = new Guid("ace37783-84f3-4565-97a4-162a61491023"),
                             GradeNumber = 9
                         },
                         new
                         {
-                            GradeId = new Guid("0a916a2d-9f07-4520-a2bb-0469b76aa975"),
+                            GradeId = new Guid("6c403314-4bae-48a8-83b6-c871b8ad7b4a"),
                             GradeNumber = 10
                         },
                         new
                         {
-                            GradeId = new Guid("f92160e5-d98f-4d75-9d9d-ab7bce9d1e58"),
+                            GradeId = new Guid("b1cc3dc1-f80b-4dc8-af74-503c03a82260"),
                             GradeNumber = 11
                         },
                         new
                         {
-                            GradeId = new Guid("a7e9e658-57e1-417a-9fe7-f240488301c2"),
+                            GradeId = new Guid("812e6705-494a-4ed8-ab47-9b5322429dea"),
                             GradeNumber = 12
                         });
                 });
@@ -294,87 +294,87 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            LanguageId = new Guid("507130b0-cada-4f1e-9f6a-efefe95038f5"),
+                            LanguageId = new Guid("306d8172-4808-47a8-9e8a-b182b5936ded"),
                             Title = "Russian"
                         },
                         new
                         {
-                            LanguageId = new Guid("892c9fc8-460b-40c1-ae30-b9a4047dc889"),
+                            LanguageId = new Guid("2dfee94c-2348-4726-af39-95ff304c4dbb"),
                             Title = "English"
                         },
                         new
                         {
-                            LanguageId = new Guid("54c6ee34-8c8c-46fe-a135-d34d5413ba67"),
+                            LanguageId = new Guid("4a9a9e3b-78ac-4004-990e-c1ec0f9936df"),
                             Title = "German"
                         },
                         new
                         {
-                            LanguageId = new Guid("ee52141f-ddcc-45d8-9091-d34b1d880e77"),
+                            LanguageId = new Guid("88008077-410c-4e45-94c7-ce7b03c52edd"),
                             Title = "Italian"
                         },
                         new
                         {
-                            LanguageId = new Guid("a2092fff-b29d-48ac-ab7e-182f90553bdd"),
+                            LanguageId = new Guid("a1157f33-48da-4cff-8ac9-be935cb3df6b"),
                             Title = "Spanish"
                         },
                         new
                         {
-                            LanguageId = new Guid("d9e29edf-419d-43d9-85e7-b6d179492ad4"),
+                            LanguageId = new Guid("2a56cac3-b907-421a-a3a0-60083b0e3acf"),
                             Title = "French"
                         },
                         new
                         {
-                            LanguageId = new Guid("2bd11604-91b3-49ad-9677-41fe120f949a"),
+                            LanguageId = new Guid("da7ef1f7-afca-443c-80db-05fac27fe834"),
                             Title = "Hungarian"
                         },
                         new
                         {
-                            LanguageId = new Guid("bb0ffdba-172b-4b7a-a378-46f0eaf234e5"),
+                            LanguageId = new Guid("96fcf592-932a-4ffa-a439-ead28a5d98be"),
                             Title = "Portuguese"
                         },
                         new
                         {
-                            LanguageId = new Guid("66b48e6e-0607-42b2-b8cd-3b11b25c184c"),
+                            LanguageId = new Guid("602cfb27-e9de-4188-9469-4f7215d336e1"),
                             Title = "Belarusian"
                         },
                         new
                         {
-                            LanguageId = new Guid("e0680e53-889d-4467-aace-ea7ed46f3a6f"),
+                            LanguageId = new Guid("9c9bcad0-5481-4669-876c-2f68dd1d8305"),
                             Title = "Ukrainian"
                         },
                         new
                         {
-                            LanguageId = new Guid("b3688ebe-86cc-4ee1-b3bb-fa6256eab882"),
+                            LanguageId = new Guid("d693b269-03da-42ff-aebc-f4d661f185c0"),
                             Title = "Armenian"
                         },
                         new
                         {
-                            LanguageId = new Guid("56329cc7-dfbb-4be6-86c2-8b8b48b6c8ab"),
+                            LanguageId = new Guid("8aa44629-5260-45a8-81a7-13686a20f842"),
                             Title = "Georgian"
                         },
                         new
                         {
-                            LanguageId = new Guid("06d305df-f3dd-4108-a346-e860f6363808"),
+                            LanguageId = new Guid("7ac7a506-e6e0-4774-aac4-680004eabc80"),
                             Title = "Azerbaijani"
                         },
                         new
                         {
-                            LanguageId = new Guid("c9b8c229-a4a6-406e-ba89-d645c3c7685f"),
+                            LanguageId = new Guid("fa00c63c-a45d-4aac-aa79-9996bbfc5bfb"),
                             Title = "Kazakh"
                         },
                         new
                         {
-                            LanguageId = new Guid("d78779ac-7e48-4cbf-af0a-e0ecac0aca9e"),
+                            LanguageId = new Guid("cae062fe-0960-4224-9a48-e9cdf1bdd0e8"),
                             Title = "Kyrgyz"
                         },
                         new
                         {
-                            LanguageId = new Guid("1851ca4a-869c-4359-8a2c-d20e4547cff9"),
+                            LanguageId = new Guid("812c384f-76c7-45e5-911e-95213534ce4a"),
                             Title = "Tajik"
                         },
                         new
                         {
-                            LanguageId = new Guid("73e81559-ac9a-44e7-b3a5-f88b70885aa7"),
+                            LanguageId = new Guid("93566f49-da8d-45fe-ad92-13ea68d5be51"),
                             Title = "Uzbek"
                         });
                 });
@@ -431,22 +431,22 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            InstitutionTypeId = new Guid("0ecca45e-ef4f-4405-96d5-cf75ec20bce7"),
+                            InstitutionTypeId = new Guid("55175335-7d1f-4e92-b6a8-8f16d3376ffa"),
                             Title = "School"
                         },
                         new
                         {
-                            InstitutionTypeId = new Guid("1a41e762-0757-43dc-a0b7-298b10faea44"),
+                            InstitutionTypeId = new Guid("c2bc8299-caa9-456a-87b6-3178edaeb245"),
                             Title = "Gymnasium"
                         },
                         new
                         {
-                            InstitutionTypeId = new Guid("781f0a5a-dca3-434e-a165-5bd1ab2b347a"),
+                            InstitutionTypeId = new Guid("be9feec1-7aa9-4781-bc00-a27d51089540"),
                             Title = "Lyceum"
                         },
                         new
                         {
-                            InstitutionTypeId = new Guid("e370360f-3daa-435d-8f29-8eaf1d48cd62"),
+                            InstitutionTypeId = new Guid("028530ef-5e5a-4878-ba6d-131905fd1571"),
                             Title = "College"
                         });
                 });
@@ -559,17 +559,17 @@ namespace Wonderworld.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            RoleId = new Guid("c4c11307-0235-484f-b0e9-2628ac5241eb"),
+                            RoleId = new Guid("0c00f577-4c0a-42be-a5cc-898fbcd2e17f"),
                             Title = "Admin"
                         },
                         new
                         {
-                            RoleId = new Guid("b7dc629b-e908-4ca6-9daa-bb51f5e5aad2"),
+                            RoleId = new Guid("e7b93b2f-75a0-43e0-87b0-453d82325cad"),
                             Title = "User"
                         },
                         new
                         {
-                            RoleId = new Guid("321de9b5-9a65-41e6-bbba-bdc7e98d592d"),
+                            RoleId = new Guid("e7236228-b6c5-4577-b453-05523013f8cd"),
                             Title = "Manager"
                         });
                 });

@@ -63,9 +63,6 @@ public static class UserHelper
         {
             throw new InvalidInputCredentialsException("Wrong password provided");
         }
-        
-        user.IsVerified = true;
-        user.VerifiedAt = DateTime.Now;
     }
 
     public static void CheckUserCreateAccountAbility(User user)

@@ -37,6 +37,8 @@ public class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery, U
             .Include(u => u.Classes)
             .ThenInclude(c => c.ClassDisciplines)
             .ThenInclude(cd => cd.Discipline)
+            .Include(u => u.Classes)
+            .ThenInclude(cg => cg.Grade)
             .Include(u => u.UserDisciplines)
             .ThenInclude(ud => ud.Discipline)
             .Include(u => u.UserLanguages)

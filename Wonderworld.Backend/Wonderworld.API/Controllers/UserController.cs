@@ -22,53 +22,25 @@ public class UserController : BaseController
         _userAccountService = userAccountService;
     }
 
-    /// <summary>
-    /// Gets all users
-    /// </summary>
-    /// <remarks>
-    ///GET /api/user/all-users
-    /// </remarks>
-    /// <returns>
-    ///Returns List of User
-    /// </returns>
-    /// <response code="200">Returns List of User</response>
     [HttpGet("all-users")]
     public async Task<IActionResult> GetAllUsers()
     {
         return Ok(await _sharedLessonDbContext.Users.ToListAsync());
     }
-
-    /// <summary>
-    /// Register` user
-    /// </summary>
-    /// <remarks>
-    /// POST /api/user/register
-    /// </remarks>
-    /// <param name="requestUserDto">UserRegisterRequestDto object</param>
-    /// <returns>
-    /// AuthResult object
-    /// /// </returns>
-    /// <response code="200">Returns AuthResult object</response>
-    /// <response code="400">Returns BadRequest object</response> 
+    
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
     {
         return await _userAccountService.RegisterUser(requestUserDto, Mediator);
     }
 
-    [CheckUserVerified]
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
     {
         var result = await _userAccountService.LoginUser(requestUserDto, Mediator);
         return result;
     }
-
-    /// <summary>
-    /// Verify email
-    /// </summary>
-    /// <param name="token"></param>
-    /// <returns></returns>
+    
     [HttpGet("verify-email")]
     public async Task<IActionResult> VerifyEmail(string token)
     {
@@ -82,7 +54,6 @@ public class UserController : BaseController
     }
 
     [Authorize]
-    [CheckUserVerified]
     [CheckUserCreateAccountAbility]
     [HttpPost("create-account")]
     public async Task<IActionResult> CreateAccount([FromBody] CreateUserAccountRequestDto requestUserDto)
@@ -91,18 +62,7 @@ public class UserController : BaseController
         return result;
     }
 
-    /// <summary>
-    /// Get user profile
-    /// </summary>
-    /// <remarks>
-    /// GET /api/user/get-userprofile
-    /// </remarks>
-    /// <returns>
-    /// Returns UserProfileDto
-    /// </returns>
-    /// <response code="200">Returns UserProfileDto</response>
-    /// <response code="400">Returns ResponseResult object</response>
-    /// <response code="401">Returns Unauthorized object</response>
+
     [Authorize]
     [CheckUserCreateAccount]
     [HttpGet("get-userprofile")]
