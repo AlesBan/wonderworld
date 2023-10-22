@@ -21,18 +21,7 @@ public class SearchController : BaseController
         _searchService = searchService;
     }
 
-    /// <summary>
-    /// Get Teachers and Classes depending on search request
-    /// </summary>
-    /// <remarks>
-    /// GET /api/search-request
-    /// </remarks>
-    /// <param name="searchRequest"></param>
-    /// <returns>
-    /// Returns SearchResponse
-    /// </returns>
-    /// <response code="200">Returns SearchResponse</response>
-    /// <response code="400">Returns ResponseResult</response>
+
     [HttpGet("search-request")]
     public async Task<SearchResponseDto> GetTeachersAndClassesDependingOnSearchRequest(
         [FromBody] SearchRequestDto searchRequest)

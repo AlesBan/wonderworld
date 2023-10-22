@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
-using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UserDtos;
@@ -154,9 +153,9 @@ public class UserAccountService : IUserAccountService
         return Task.FromResult(userProfileDto);
     }
 
-    private static async Task<List<ClassProfileDto>> GetClassProfileDtos(List<Class> classes)
+    private static Task<List<ClassProfileDto>> GetClassProfileDtos(List<Class> classes)
     {
-        var classList = classes.Select(c => new ClassProfileDto
+        return classes.Select(c => new ClassProfileDto
             {
                 ClassId = c.ClassId,
                 Title = c.Title,
@@ -167,7 +166,7 @@ public class UserAccountService : IUserAccountService
                 Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
                 PhotoUrl = c.PhotoUrl!
             })
-            .ToList();
+            .ToList());
         return classList;
     }
 
