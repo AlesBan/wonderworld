@@ -9,7 +9,7 @@ public class UserRoleConfiguration: IEntityTypeConfiguration<UserRole>
     public void Configure(EntityTypeBuilder<UserRole> builder)
     {
         builder.HasKey(ur => new { ur.UserId, ur.RoleId });
-        builder.HasIndex(ur => ur.RoleId).IsUnique();
+        builder.HasIndex(ur => new { ur.UserId, ur.RoleId }).IsUnique();
         
         builder.HasOne(ur=>ur.User)
             .WithMany(u=>u.UserRoles)

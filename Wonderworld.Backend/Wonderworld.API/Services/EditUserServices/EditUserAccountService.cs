@@ -75,7 +75,7 @@ public class EditUserAccountService : IEditUserAccountService
         userProfileDto.DisciplineTitles = disciplineTitles;
 
         userProfileDto.Institution = _mapper.Map<InstitutionDto>(institution);
-        
+
         userProfileDto.GradeNumbers = updatedUser.UserGrades
             .Select(ug => ug.Grade.GradeNumber).ToList();
 
@@ -116,21 +116,23 @@ public class EditUserAccountService : IEditUserAccountService
                     CountryTitle = personalInfoRequestDto.CountryTitle,
                     Description = personalInfoRequestDto.Description
                 }),
-            UpdateProfessionalInfoRequestDto professionalInfoRequestDto => await mediator.Send(
-                new UpdateProfessionalInfoCommand
+            UpdateProfessionalInfoRequestDto professionalInfoRequestDto =>
+                await mediator.Send(
+                    new UpdateProfessionalInfoCommand
+                    {
+                        UserId = user.UserId,
+                        LanguageTitles = professionalInfoRequestDto.Languages,
+                        DisciplineTitles = professionalInfoRequestDto.Disciplines,
+                        GradeNumbers = professionalInfoRequestDto.Grades
+                    }),
+            UpdateInstitutionRequestDto institutionRequestDto =>
+                await mediator.Send(new UpdateUserInstitutionCommand
                 {
                     UserId = user.UserId,
-                    LanguageTitles = professionalInfoRequestDto.Languages,
-                    DisciplineTitles = professionalInfoRequestDto.Disciplines,
-                    GradeNumbers = professionalInfoRequestDto.Grades
+                    InstitutionTitle = institutionRequestDto.InstitutionTitle,
+                    Address = institutionRequestDto.Address,
+                    Types = institutionRequestDto.Types,
                 }),
-            UpdateInstitutionRequestDto institutionRequestDto => await mediator.Send(new UpdateUserInstitutionCommand
-            {
-                UserId = user.UserId,
-                InstitutionTitle = institutionRequestDto.InstitutionTitle,
-                Address = institutionRequestDto.Address,
-                Types = institutionRequestDto.Types,
-            }),
             UpdateUserEmailRequestDto emailRequestDto => await mediator.Send(new UpdateUserEmailCommand
             {
                 UserId = user.UserId,
