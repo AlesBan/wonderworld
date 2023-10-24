@@ -60,6 +60,8 @@ public class UpdatePersonalInfoCommandHandler : IRequestHandler<UpdatePersonalIn
             .Include(u => u.Classes)
             .ThenInclude(c => c.ClassDisciplines)
             .ThenInclude(cd => cd.Discipline)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.Grade)
             .Include(u => u.UserDisciplines)
             .ThenInclude(ud => ud.Discipline)
             .Include(u => u.UserLanguages)
@@ -68,6 +70,7 @@ public class UpdatePersonalInfoCommandHandler : IRequestHandler<UpdatePersonalIn
             .ThenInclude(ug => ug.Grade)
             .FirstOrDefault(u =>
                 u.UserId == request.UserId);
+        
         return user;
     }
 }

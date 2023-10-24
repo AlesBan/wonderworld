@@ -78,6 +78,8 @@ public class UpdateProfessionalInfoCommandHandler : IRequestHandler<UpdateProfes
             .Include(u => u.Classes)
             .ThenInclude(c => c.ClassDisciplines)
             .ThenInclude(cd => cd.Discipline)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.Grade)
             .Include(u => u.UserDisciplines)
             .ThenInclude(ud => ud.Discipline)
             .Include(u => u.UserLanguages)

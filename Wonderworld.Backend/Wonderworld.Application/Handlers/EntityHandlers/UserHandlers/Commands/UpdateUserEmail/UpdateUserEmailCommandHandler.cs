@@ -19,14 +19,6 @@ public class UpdateUserEmailCommandHandler : IRequestHandler<UpdateUserEmailComm
     public async Task<User> Handle(UpdateUserEmailCommand request, CancellationToken cancellationToken)
     {
         var user = _context.Users
-            .Include(u => u.City)
-            .Include(u => u.Country)
-            .Include(u => u.Institution)
-            .Include(u => u.Classes)
-            .Include(u => u.UserDisciplines)
-            .ThenInclude(ud => ud.Discipline)
-            .Include(u => u.UserLanguages)
-            .ThenInclude(ul => ul.Language)
             .FirstOrDefault(u =>
                 u.UserId == request.UserId);
         
@@ -51,6 +43,8 @@ public class UpdateUserEmailCommandHandler : IRequestHandler<UpdateUserEmailComm
             .Include(u => u.Classes)
             .ThenInclude(c => c.ClassDisciplines)
             .ThenInclude(cd => cd.Discipline)
+            .Include(u => u.Classes)
+            .ThenInclude(c => c.Grade)
             .Include(u => u.UserDisciplines)
             .ThenInclude(ud => ud.Discipline)
             .Include(u => u.UserLanguages)
