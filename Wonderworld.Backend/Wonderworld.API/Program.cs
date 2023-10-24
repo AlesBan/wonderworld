@@ -141,10 +141,6 @@ app.UseCors("AlloyAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-    
-});
+app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 
 app.Run();
