@@ -74,13 +74,13 @@ public class UserAccountService : IUserAccountService
 
         UserHelper.CheckUserVerification(user);
         UserHelper.VerifyPasswordHash(user, requestUserDto.Password);
-
+        
         var userProfileDto = await MapUserToUserProfileDto(user);
 
         userProfileDto.ClasseDtos = await GetClassProfileDtos(user.Classes.ToList());
-
+        
         var newToken = JwtHelper.CreateToken(user, _configuration);
-
+        
         userProfileDto.VerificationToken = newToken;
 
         await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
@@ -91,8 +91,8 @@ public class UserAccountService : IUserAccountService
     public async Task<IActionResult> VerifyEmail(string token, IMediator mediator)
     {
         var user = await UserHelper.GetUserByToken(token, mediator);
-
-        var verifiedUser = await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
+        
+       var verifiedUser =  await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
 
         var newToken = JwtHelper.CreateToken(verifiedUser, _configuration);
 
@@ -121,11 +121,11 @@ public class UserAccountService : IUserAccountService
         UserHelper.CheckUserCreateAccountAbility(user);
 
         var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
-
+       
         var newToken = JwtHelper.CreateToken(userWithAccount, _configuration);
 
         var userWithNewToken = await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
-
+        
         var userProfileDto = await MapUserToUserProfileDto(userWithNewToken);
 
         userProfileDto.ClasseDtos = await GetClassProfileDtos(userWithAccount.Classes.ToList());
@@ -153,9 +153,9 @@ public class UserAccountService : IUserAccountService
         return Task.FromResult(userProfileDto);
     }
 
-    private static async Task<List<ClassProfileDto>> GetClassProfileDtos(List<Class> classes)
+    private static Task<List<ClassProfileDto>> GetClassProfileDtos(List<Class> classes)
     {
-        return classes.Select(c => new ClassProfileDto()
+        return Task.FromResult(classes.Select(c => new ClassProfileDto
             {
                 ClassId = c.ClassId,
                 Title = c.Title,
@@ -166,7 +166,7 @@ public class UserAccountService : IUserAccountService
                 Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
                 PhotoUrl = c.PhotoUrl!
             })
-            .ToList();
+            .ToList());
     }
 
     public async Task<IActionResult> DeleteUser(Guid userId, IMediator mediator)

@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Helpers;
+using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UserDtos;

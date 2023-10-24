@@ -2,7 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 
-namespace Wonderworld.API.Services.EditUserServices;
+namespace Wonderworld.API.Services.EditUserData;
 
 public interface IEditUserAccountService
 {
