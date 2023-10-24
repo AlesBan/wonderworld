@@ -6,7 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +22,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/JetBrains/Shared/vAny/SourcesCache/575c31ecc35a636b6f962cb71d53992552941a18982aae1c8e6c16305cc3761b/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2194f61e2ea7415786eda6b9772bf3b31cbb20/0a/744303bd/OkObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/377b61b613ea444f826f377d9474ffca3c9a8/14/ffe050be/ExecutionTimer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/54d33cdcdbf84c7db420fc3a50117b18a24aa0/15/d8a70458/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -51,8 +53,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6ad457575d35dcbff26c9a5e3fb1d92f1d3c55f25ef6ebf475367b5d8/List.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/cde0291933299f1e732d9436b8558e21577bcdf64c6d8ac7c6a0abeac6c6d/RuntimeMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d5f92893b4e362502fc4e02cf758f9ed02fdab36fa5d36b75d31416bdb3596/ControllerEndpointRouteBuilderExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/Wonderworld.API/Controllers/EditUserController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/Wonderworld.API/Services/EditUserServices/EditUserAccountService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Прога/Projects/WonderWorld/wonderworld/Wonderworld.Backend/Wonderworld.API/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/CreateAccountDtos/CreateUserAccountRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/CityHandlers/Queries/GetCity/GetCityQuery.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -64,15 +65,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="add secrets">
+      <created>1698173720303</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698173720303</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
