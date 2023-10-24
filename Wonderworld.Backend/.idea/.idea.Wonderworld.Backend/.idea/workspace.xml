@@ -5,25 +5,11 @@
     <projectFile profileName="Wonderworld.API">Wonderworld.API/Wonderworld.API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="update whole main" />
+    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="tsconfig.json" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$/.." value="DevelopBackend" />
-      </map>
-    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2194f61e2ea7415786eda6b9772bf3b31cbb20/0a/744303bd/OkObjectResult.cs" root0="SKIP_HIGHLIGHTING" />
@@ -61,260 +47,13 @@
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/CreateAccountDtos/CreateUserAccountRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/CityHandlers/Queries/GetCity/GetCityQuery.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2TUPGhEHDXWwwnqMxs3oEGqieVe" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;,
-      &quot;postgresql&quot;
-    ],
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;yaml&quot;
-    ]
-  }
-}</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Wonderworld.API">
-    <configuration name="Wonderworld.API" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
-      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" />
-      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="Wonderworld.API" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
-      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
-      <option name="SEND_DEBUG_REQUEST" value="1" />
-      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
-      <method v="2">
-        <option name="Build" />
-      </method>
-    </configuration>
-    <configuration name="Wonderworld.API: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
-      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" />
-      <option name="LAUNCH_PROFILE_TFM" value="net6.0" />
-      <option name="LAUNCH_PROFILE_NAME" value="IIS Express" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
-      <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
-      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
-      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
-      <option name="SEND_DEBUG_REQUEST" value="1" />
-      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
-      <method v="2">
-        <option name="Build" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue=".NET Launch Settings Profile.Wonderworld.API" />
-      <item itemvalue=".NET Launch Settings Profile.Wonderworld.API: IIS Express" />
-    </list>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="" />
-      <created>1691094599434</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1691094599434</updated>
-      <workItem from="1691094614155" duration="1600000" />
-      <workItem from="1691154706938" duration="2660000" />
-      <workItem from="1691159100060" duration="1021000" />
-      <workItem from="1691176595632" duration="58000" />
-      <workItem from="1691227654002" duration="578000" />
-      <workItem from="1691229434581" duration="4575000" />
-      <workItem from="1691234510430" duration="2042000" />
-      <workItem from="1691237091583" duration="545000" />
-      <workItem from="1691239174729" duration="3677000" />
-      <workItem from="1691243930517" duration="3433000" />
-      <workItem from="1691254036959" duration="6653000" />
-      <workItem from="1691266336165" duration="2543000" />
-      <workItem from="1691268949506" duration="371000" />
-      <workItem from="1691316562185" duration="2635000" />
-      <workItem from="1691320718625" duration="11753000" />
-      <workItem from="1691426657174" duration="16318000" />
-      <workItem from="1691447616202" duration="829000" />
-      <workItem from="1691494573261" duration="984000" />
-      <workItem from="1691496813724" duration="7862000" />
-      <workItem from="1691511710599" duration="456000" />
-      <workItem from="1691512200172" duration="5040000" />
-      <workItem from="1691517562099" duration="372000" />
-      <workItem from="1691583998886" duration="3605000" />
-      <workItem from="1691591413396" duration="5583000" />
-      <workItem from="1691941735615" duration="6190000" />
-      <workItem from="1691959062214" duration="934000" />
-      <workItem from="1691961244461" duration="290000" />
-      <workItem from="1692029311314" duration="61000" />
-      <workItem from="1692211688043" duration="24000" />
-      <workItem from="1692212530375" duration="2019000" />
-      <workItem from="1692215839098" duration="23000" />
-      <workItem from="1697199743074" duration="278000" />
-      <workItem from="1697734345732" duration="1965000" />
-      <workItem from="1697815118491" duration="1901000" />
-    </task>
-    <task id="LOCAL-00001" summary="user register + login">
-      <created>1691322374733</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1691322374733</updated>
-    </task>
-    <task id="LOCAL-00002" summary="getuser + getuserprofile queries">
-      <created>1691435877587</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1691435877588</updated>
-    </task>
-    <task id="LOCAL-00003" summary="update diagram">
-      <created>1691436241468</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1691436241468</updated>
-    </task>
-    <task id="LOCAL-00004" summary="class + ClassProfile query">
-      <created>1691446517602</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1691446517602</updated>
-    </task>
-    <task id="LOCAL-00005" summary="new">
-      <created>1697132595445</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1697132595445</updated>
-    </task>
-    <task id="LOCAL-00006" summary="del xlm conf">
-      <created>1697132874150</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1697132874150</updated>
-    </task>
-    <task id="LOCAL-00007" summary="del sec">
-      <created>1697133296948</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1697133296948</updated>
-    </task>
-    <task id="LOCAL-00008" summary="bugs main">
-      <created>1697478953768</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1697478953768</updated>
-    </task>
-    <task id="LOCAL-00009" summary="update whole main">
-      <created>1698170440071</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1698170440071</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="user register + login" />
-    <MESSAGE value="getuser + getuserprofile queries" />
-    <MESSAGE value="update diagram" />
-    <MESSAGE value="class + ClassProfile query" />
-    <MESSAGE value="new" />
-    <MESSAGE value="del xlm conf" />
-    <MESSAGE value="del sec" />
-    <MESSAGE value="bugs main" />
-    <MESSAGE value="update whole main" />
-    <option name="LAST_COMMIT_MESSAGE" value="update whole main" />
-  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/API.UnitTests/Services/Auth/AuthServiceTests.cs</url>
-          <line>43</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\API.UnitTests\Services\Auth\AuthServiceTests.cs" initialLine="42" containingFunctionPresentation="lambda expression inside method 'SetToken_ShouldSetToken'" />
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetProfileUser/GetUserProfileCommandHandler.cs</url>
-          <line>18</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.Application\Handlers\EntityHandlers\UserHandlers\Queries\GetProfileUser\GetProfileUserCommandHandler.cs" initialLine="18" containingFunctionPresentation="method 'Handle'" />
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
-          <line>80</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="80" containingFunctionPresentation="method 'Register'" />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
-          <line>92</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="92" containingFunctionPresentation="method 'Register'" />
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
-          <line>107</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="107" containingFunctionPresentation="method 'Register'" />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
-          <line>82</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="82" containingFunctionPresentation="method 'Register'" />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
-          <line>95</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="95" containingFunctionPresentation="method 'Register'" />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Wonderworld.API/Controllers/AuthenticationController.cs</url>
-          <line>97</line>
-          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Controllers\AuthenticationController.cs" initialLine="97" containingFunctionPresentation="method 'Register'" />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#Wonderworld.Domain.EntityConnections.InstitutionTypeInstitution" memberName="InstitutionType" />
@@ -324,10 +63,5 @@
         <PinnedItemInfo parentTag="Type#Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity.GetCityQuery" memberName="Country" />
       </pinned-members>
     </pin-to-top-manager>
-    <watches-manager>
-      <configuration name="RiderUnitTests">
-        <watch expression="Context" language="C#" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

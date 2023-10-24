@@ -4,6 +4,7 @@ using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.API.Services.EditUserData;
+using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 
 namespace Wonderworld.API.Controllers;

@@ -5,6 +5,7 @@ using Wonderworld.API.Helpers;
 using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
+using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdatePersonalInfo;
