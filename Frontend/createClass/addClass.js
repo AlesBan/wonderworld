@@ -79,6 +79,10 @@ addClassBtn.addEventListener('click', () => {
 
     `
 
+    let cancelButton = document.querySelector('.cancel-btn');
+    cancelButton.addEventListener('click', () => {
+        closeModal();
+    })
 
 
     const inputDescription = document.querySelector('#class-description');
@@ -264,7 +268,9 @@ addClassBtn.addEventListener('click', () => {
         createClass();
         closeModal()
         postCreateClass();
-    } )
+
+    } );
+
 
     function createClass() {
 
@@ -336,93 +342,23 @@ addClassBtn.addEventListener('click', () => {
 
         /* редактирование класса */
 
+
         const editButton = classBlock.querySelector('.edit-class-btn');
+
         editButton.addEventListener('click', () => {
-            editClass()
+            console.log('hi')
+
         })
-
-
     }
+
+
 
 
     /* редактирование класса */
 
-    function editClass() {
-        let editClass = document.createElement('div');
-        document.body.append(editClass)
-        editClass.innerHTML = `
-    <div class="modal" id="modal">
-    <div class="modal-top">
-        <div class="createClass">Create class</div>
-        <div class=""><img src="../images/Cross.svg" alt=""></div>
-    </div>
-    <div class="modal-bar">
-        <div class="modal-bar-section">
-            <div class="class-photo-header">Class photo (required)</div>
-        </div>
-        <div class="modal-bar-column">
-            <div class="class-title">
-                <div class="input-title">Title</div>
-                <div class="">
-                    <label><input name="institution-name" class="class-title-input" type="text"
-                                id="class-title"  placeholder="Class title"></label>
-                </div>
-            </div>
-            <div class="class-grade-and-age">
-                <div class="grade-title">
-                    <div class="input-title">Grade</div>
-                    <div class="select-btn" id="select-grades">
-                        <span class="btn-text" id="output-grades">Select grade</span>
-                        <span class="arrow-dwn">
-        <img src="../images/chevron-down.svg" alt="">
-    </span>
-                    </div>
-                    <ul class="list-items" id="list-grades">
 
-                    </ul>
-                </div>
-                <div class=age-title">
-                    <div class="input-title">Age</div>
-                    <div class="select-btn" id="select-ages">
-                        <span class="btn-text" id="output-ages">Select age</span>
-                        <span class="arrow-dwn">
-        <img src="../images/chevron-down.svg" alt="">
-    </span>
-                    </div>
-                    <ul class="list-items" id="list-ages">
 
-                    </ul>
-                </div>
-            </div>
-            <div class="class-subjects">
-                <div class="input-title">Subjects</div>
-                <div class="select-btn" id="select-subjects">
-                    <span class="btn-text" id="output-subjects">Select subjects</span>
-                    <span class="arrow-dwn">
-        <img src="../images/chevron-down.svg" alt="">
-    </span>
-                </div>
-                <ul class="list-items" id="list-subjects">
 
-                </ul>
-            </div>
-            <div class="class-description">
-                <div class="input-title">Description</div>
-                <div class="">
-                    <label><input name="institution-name" class="class-title-input" type="text"
-                                  placeholder="Class description" id="class-description"></label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-bottom">
-        <div class="cancel-btn">cancel</div>
-        <div class="update-btn" id="create-btn">create</div>
-    </div>
-</div>
-
-    `
-    }
 
     function closeModal() {
         let modal = document.querySelector('.modal');
