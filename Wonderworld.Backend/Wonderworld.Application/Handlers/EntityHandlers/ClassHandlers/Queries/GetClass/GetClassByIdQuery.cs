@@ -3,11 +3,11 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClass;
 
-public class GetClassCommand : IRequest<Class>
+public class GetClassByIdQuery : IRequest<Class>
 {
     public Guid ClassId { get; set; }
 
-    public GetClassCommand(Guid classId)
+    public GetClassByIdQuery(Guid classId)
     {
         ClassId = classId;
     }

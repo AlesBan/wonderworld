@@ -4,7 +4,7 @@ using Wonderworld.Domain.Entities.Communication;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.InvitationHandlers.Commands.CreateInvitation;
 
-public class CreateInvitationCommandHandler : IRequestHandler<CreateInvitationCommand, Guid>
+public class CreateInvitationCommandHandler : IRequestHandler<CreateInvitationCommand, Unit>
 {
     private readonly ISharedLessonDbContext _context;
 
@@ -13,14 +13,14 @@ public class CreateInvitationCommandHandler : IRequestHandler<CreateInvitationCo
         _context = context;
     }
 
-    public async Task<Guid> Handle(CreateInvitationCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(CreateInvitationCommand request, CancellationToken cancellationToken)
     {
-        var invitation = new Invitation()
+        var invitation = new Invitation
         {
-            UserSender = request.UserSender,
-            UserRecipient = request.UserRecipient,
-            ClassSender = request.ClassSender,
-            ClassRecipient = request.ClassRecipient,
+            UserSenderId = request.UserSenderId,
+            UserReceiverId = request.UserReceiverId,
+            ClassSenderId = request.ClassSenderId,
+            ClassReceiverId = request.ClassReceiverId,
             DateOfInvitation = request.DateOfInvitation,
             InvitationText = request.InvitationText,
             Status = request.Status
@@ -28,7 +28,7 @@ public class CreateInvitationCommandHandler : IRequestHandler<CreateInvitationCo
 
         await _context.Invitations.AddAsync(invitation, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
-        
-        return invitation.InvitationId;
+
+        return Unit.Value;
     }
 }

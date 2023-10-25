@@ -29,7 +29,7 @@ public class CreateClassCommandHandler : IRequestHandler<CreateClassCommand, Cla
         await SeedClassLanguages(newClass, request);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return await _mediator.Send(new GetClassCommand(newClass.ClassId), cancellationToken);
+        return await _mediator.Send(new GetClassByIdQuery(newClass.ClassId), cancellationToken);
     }
 
     private async Task SeedClassLanguages(Class newClass, CreateClassCommand request)

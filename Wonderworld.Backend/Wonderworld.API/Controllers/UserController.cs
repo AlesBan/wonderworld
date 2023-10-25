@@ -41,10 +41,10 @@ public class UserController : BaseController
         return result;
     }
     
-    [HttpGet("verify-email")]
-    public async Task<IActionResult> VerifyEmail(string token)
+    [HttpGet("confirm-email")]
+    public async Task<IActionResult> ConfirmEmail(string token)
     {
-        return Ok(await _userAccountService.VerifyEmail(token, Mediator));
+        return Ok(await _userAccountService.ConfirmEmail(token, Mediator));
     }
 
     [HttpPost("forgot-password")]

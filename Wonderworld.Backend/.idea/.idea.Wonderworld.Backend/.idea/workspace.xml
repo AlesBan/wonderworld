@@ -6,7 +6,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Wonderworld.API/Constants/EmailConstants.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/InvitationController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wonderworld.API/Services/InvitationServices/IInvitationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wonderworld.API/Services/InvitationServices/InvitationService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/InvitationDtos/CreateInvitationRequestDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetUserByClass/GetUserIdByClassIdQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetUserByClass/GetUserIdByClassIdQueryHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wonderworld.Backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Common/SharedLessonDbContextFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Common/SharedLessonDbContextFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassCommandHandlerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/ClassHandlers/Queries/GetClassCommandHandlerTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitationCommandHandlerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitationCommandHandlerTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Helpers/UserHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Helpers/UserHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/AccountServices/IUserAccountService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Services/AccountServices/IUserAccountService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/AccountServices/UserAccountService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Services/AccountServices/UserAccountService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/ClassServices/ClassService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Services/ClassServices/ClassService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Commands/CreateClass/CreateClassCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Commands/CreateClass/CreateClassCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Commands/UpdateClass/UpdateClassCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Commands/UpdateClass/UpdateClassCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClass/GetClassCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClass/GetClassByIdQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClass/GetClassCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/ClassHandlers/Queries/GetClass/GetClassByIdQueryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommandHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Domain/Entities/Communication/Invitation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Domain/Entities/Communication/Invitation.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/EntityConfiguration/Communication/InvitationConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/EntityConfiguration/Communication/InvitationConfiguration.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +80,9 @@
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/CreateAccountDtos/CreateUserAccountRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/CityHandlers/Queries/GetCity/GetCityQuery.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2XDkMzRKBCAMvo82vKuHc1r4MUk" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -63,13 +91,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "settings.editor.selected.configurable": "editor.preferences.appearance"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="add secrets">
@@ -93,6 +122,8 @@
       <option name="presentableId" value="Default" />
       <updated>1698224668477</updated>
       <workItem from="1698224669753" duration="108000" />
+      <workItem from="1698230302842" duration="4105000" />
+      <workItem from="1698249805757" duration="794000" />
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />

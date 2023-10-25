@@ -8,16 +8,16 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClass;
 
-public class GetClassCommandHandler : IRequestHandler<GetClassCommand, Class>
+public class GetClassByIdQueryHandler : IRequestHandler<GetClassByIdQuery, Class>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public GetClassCommandHandler(ISharedLessonDbContext context)
+    public GetClassByIdQueryHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<Class> Handle(GetClassCommand request, CancellationToken cancellationToken)
+    public async Task<Class> Handle(GetClassByIdQuery request, CancellationToken cancellationToken)
     {
         var @class = await _context.Classes
             .Include(c => c.User)

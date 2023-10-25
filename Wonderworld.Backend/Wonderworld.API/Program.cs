@@ -8,6 +8,7 @@ using Wonderworld.API.Services.AccountServices;
 using Wonderworld.API.Services.ClassServices;
 using Wonderworld.API.Services.EditUserData;
 using Wonderworld.API.Services.EditUserServices;
+using Wonderworld.API.Services.InvitationServices;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Application.Interfaces;
@@ -109,6 +110,7 @@ builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService>();
 builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
 builder.Services.AddScoped<IEmailHandlerService, EmailHandlerService>();
+builder.Services.AddScoped<IInvitationService, InvitationService>();
 
 
 var app = builder.Build();

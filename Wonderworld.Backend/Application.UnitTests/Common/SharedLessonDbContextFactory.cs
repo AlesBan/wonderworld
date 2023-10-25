@@ -203,11 +203,11 @@ public class SharedLessonDbContextFactory
                 InvitationId = InvitationAId,
                 UserSender = context.Users.FirstOrDefault(u =>
                     u.UserId == UserBId)!,
-                UserRecipient = context.Users.FirstOrDefault(u =>
+                UserReceiver = context.Users.FirstOrDefault(u =>
                     u.UserId == UserAId)!,
                 ClassSender = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassBId)!,
-                ClassRecipient = context.Classes.FirstOrDefault(c =>
+                ClassReceiver = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassAId)!,
                 DateOfInvitation = DateTime.Today,
                 Status = InvitationStatus.Pending.ToString()
@@ -217,11 +217,11 @@ public class SharedLessonDbContextFactory
                 InvitationId = InvitationBId,
                 UserSender = context.Users.FirstOrDefault(u =>
                     u.UserId == UserBId)!,
-                UserRecipient = context.Users.FirstOrDefault(u =>
+                UserReceiver = context.Users.FirstOrDefault(u =>
                     u.UserId == UserAId)!,
                 ClassSender = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassBId)!,
-                ClassRecipient = context.Classes.FirstOrDefault(c =>
+                ClassReceiver = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassAId)!,
                 DateOfInvitation = DateTime.Today,
                 Status = InvitationStatus.Pending.ToString()
@@ -231,11 +231,11 @@ public class SharedLessonDbContextFactory
                 InvitationId = InvitationForDeleteId,
                 UserSender = context.Users.FirstOrDefault(u =>
                     u.UserId == UserAId)!,
-                UserRecipient = context.Users.FirstOrDefault(u =>
+                UserReceiver = context.Users.FirstOrDefault(u =>
                     u.UserId == UserBId)!,
                 ClassSender = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassAId)!,
-                ClassRecipient = context.Classes.FirstOrDefault(c =>
+                ClassReceiver = context.Classes.FirstOrDefault(c =>
                     c.ClassId == ClassBId)!,
                 DateOfInvitation = DateTime.Today,
                 Status = InvitationStatus.Pending.ToString()

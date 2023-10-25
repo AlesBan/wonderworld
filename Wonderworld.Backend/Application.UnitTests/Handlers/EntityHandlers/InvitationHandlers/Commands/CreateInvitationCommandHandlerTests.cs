@@ -26,12 +26,12 @@ public class CreateInvitationCommandHandlerTests : TestCommonBase
         var handler = new CreateInvitationCommandHandler(Context);
 
         // Act
-        var invitationId = await handler.Handle(new CreateInvitationCommand
+        await handler.Handle(new CreateInvitationCommand
         {
-            UserSender = userSender!,
-            UserRecipient = userRecipient!,
-            ClassSender = classSender!,
-            ClassRecipient = classRecipient!,
+            UserSenderId = userSender!.UserId,
+            UserReceiverId = userRecipient!.UserId,
+            ClassSenderId = classSender!.ClassId,
+            ClassReceiverId = classRecipient!.ClassId,
             InvitationText = invitationText,
             DateOfInvitation = invitationDate,
             Status = InvitationStatus.Pending.ToString()
@@ -39,11 +39,10 @@ public class CreateInvitationCommandHandlerTests : TestCommonBase
         
         // Assert
         Assert.NotNull(await Context.Invitations.SingleOrDefaultAsync(i =>
-            i.InvitationId == invitationId &&
             i.UserSender == userSender &&
-            i.UserRecipient == userRecipient &&
+            i.UserReceiver == userRecipient &&
             i.ClassSender == classSender &&
-            i.ClassRecipient == classRecipient &&
+            i.ClassReceiver == classRecipient &&
             i.DateOfInvitation == invitationDate &&
             i.Status == InvitationStatus.Pending.ToString() &&
             i.InvitationText == invitationText));
