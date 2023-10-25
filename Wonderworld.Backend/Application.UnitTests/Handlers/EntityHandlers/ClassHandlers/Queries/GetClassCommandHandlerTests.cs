@@ -16,10 +16,10 @@ public class GetClassCommandHandlerTests : TestCommonBase
     {
         // Arrange
         var classId = SharedLessonDbContextFactory.ClassAId;
-        var handler = new GetClassCommandHandler(Context);
+        var handler = new GetClassByIdQueryHandler(Context);
 
         // Act
-        var result = await handler.Handle(new GetClassCommand(classId), CancellationToken.None);
+        var result = await handler.Handle(new GetClassByIdQuery(classId), CancellationToken.None);
 
         // Assert
         result.ShouldBeOfType<Class>();
@@ -32,10 +32,10 @@ public class GetClassCommandHandlerTests : TestCommonBase
     {
         // Arrange
         var classId = Guid.NewGuid();
-        var handler = new GetClassCommandHandler(Context);
+        var handler = new GetClassByIdQueryHandler(Context);
 
         // Act
         await Should.ThrowAsync<NotFoundException>(async () =>
-            await handler.Handle(new GetClassCommand(classId), CancellationToken.None));
+            await handler.Handle(new GetClassByIdQuery(classId), CancellationToken.None));
     }
 }

@@ -11,8 +11,6 @@ COPY ["Wonderworld.Infrastructure/Wonderworld.Infrastructure.csproj", "Wonderwor
 COPY ["Wonderworld.Domain/Wonderworld.Domain.csproj", "Wonderworld.Domain/"]
 COPY ["Wonderworld.Application/Wonderworld.Application.csproj", "Wonderworld.Application/"]
 COPY ["Wonderworld.Persistence/Wonderworld.Persistence.csproj", "Wonderworld.Persistence/"]
-COPY secrets.json /app/secrets.json
-RUN dotnet restore "Wonderworld.API/Wonderworld.API.csproj"
 COPY . .
 WORKDIR "/src/Wonderworld.API"
 RUN dotnet build "Wonderworld.API.csproj" -c Release -o /app/build

@@ -53,7 +53,7 @@ public class ClassService : IClassService
 
     public async Task<IActionResult> GetClassProfile(Guid classId, IMediator mediator)
     {
-        var command = new GetClassCommand(classId);
+        var command = new GetClassByIdQuery(classId);
 
         var @class = await mediator.Send(command);
 

@@ -3,12 +3,12 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.InvitationHandlers.Commands.CreateInvitation;
 
-public class CreateInvitationCommand : IRequest<Guid>
+public class CreateInvitationCommand : IRequest<Unit>
 {
-    public User UserSender { get; set; }
-    public User UserRecipient { get; set; }
-    public Class ClassSender { get; set; }
-    public Class ClassRecipient { get; set; }
+    public Guid UserSenderId { get; set; }
+    public Guid UserReceiverId { get; set; }
+    public Guid ClassSenderId { get; set; }
+    public Guid ClassReceiverId { get; set; }
     public DateTime DateOfInvitation { get; set; }
     public string Status { get; set; }
     public string? InvitationText { get; set; }

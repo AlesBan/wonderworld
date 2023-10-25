@@ -21,9 +21,9 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
 
-        builder.HasOne(i => i.UserRecipient)
+        builder.HasOne(i => i.UserReceiver)
             .WithMany(ur => ur.ReceivedInvitations)
-            .HasForeignKey(i => i.UserRecipientId)
+            .HasForeignKey(i => i.UserReceiverId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
 
@@ -33,9 +33,9 @@ public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
 
-        builder.HasOne(i => i.ClassRecipient)
+        builder.HasOne(i => i.ClassReceiver)
             .WithMany(cl => cl.ReceivedInvitations)
-            .HasForeignKey(i => i.ClassRecipientId)
+            .HasForeignKey(i => i.ClassReceiverId)
             .OnDelete(DeleteBehavior.ClientSetNull)
             .IsRequired();
         

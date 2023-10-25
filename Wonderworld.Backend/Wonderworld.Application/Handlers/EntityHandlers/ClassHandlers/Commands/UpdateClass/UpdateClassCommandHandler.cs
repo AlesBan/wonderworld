@@ -68,7 +68,7 @@ public class UpdateClassCommandHandler : IRequestHandler<UpdateClassCommand, Cla
         _context.Classes.Attach(@class).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 
-        return await _mediator.Send(new GetClassCommand(@class.ClassId), cancellationToken);
+        return await _mediator.Send(new GetClassByIdQuery(@class.ClassId), cancellationToken);
     }
 
     private async Task<List<Language>> GetLanguages(IEnumerable<string> languageTitles,

@@ -2,6 +2,7 @@ using MediatR;
 using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Common.Exceptions.User.Forbidden;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByClass;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByEmail;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByToken;
@@ -42,6 +43,15 @@ public static class UserHelper
         {
             throw new InvalidTokenProvidedException(token);
         }
+    }
+    
+    public static async Task<Guid> GetUserIdByClassId(Guid classId, IMediator mediator)
+    {
+        var command = new GetUserIdByClassIdQuery(classId);
+        
+        var userId = await mediator.Send(command);
+        
+        return userId;
     }
 
     public static void SetUserPasswordHash(User user, string password)

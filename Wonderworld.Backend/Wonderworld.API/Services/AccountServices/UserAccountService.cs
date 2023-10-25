@@ -1,6 +1,7 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Wonderworld.API.Constants;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.Application.Dtos.ClassDtos;
@@ -61,9 +62,9 @@ public class UserAccountService : IUserAccountService
             throw new Exception();
         }
 
-        var message = @"Click this link to verify your email: http://localhost:7280/api/user/verify-email?token=" +
-                      registeredUser.VerificationToken;
-        await _emailHandlerService.SendAsync(_configuration, user.Email, "Wonderworld", message);
+        var message = EmailConstants.EmailConfirmationMessage + registeredUser.VerificationToken;
+        await _emailHandlerService.SendAsync(_configuration, user.Email, EmailConstants.EmailConfirmationSubject,
+            message);
 
         return ResponseHelper.GetAuthResultOk(registeredUser.VerificationToken);
     }
@@ -74,13 +75,13 @@ public class UserAccountService : IUserAccountService
 
         UserHelper.CheckUserVerification(user);
         UserHelper.VerifyPasswordHash(user, requestUserDto.Password);
-        
+
         var userProfileDto = await MapUserToUserProfileDto(user);
 
         userProfileDto.ClasseDtos = await GetClassProfileDtos(user.Classes.ToList());
-        
+
         var newToken = JwtHelper.CreateToken(user, _configuration);
-        
+
         userProfileDto.VerificationToken = newToken;
 
         await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
@@ -88,11 +89,11 @@ public class UserAccountService : IUserAccountService
         return ResponseHelper.GetOkResult(userProfileDto);
     }
 
-    public async Task<IActionResult> VerifyEmail(string token, IMediator mediator)
+    public async Task<IActionResult> ConfirmEmail(string token, IMediator mediator)
     {
         var user = await UserHelper.GetUserByToken(token, mediator);
-        
-       var verifiedUser =  await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
+
+        var verifiedUser = await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
 
         var newToken = JwtHelper.CreateToken(verifiedUser, _configuration);
 
@@ -121,11 +122,11 @@ public class UserAccountService : IUserAccountService
         UserHelper.CheckUserCreateAccountAbility(user);
 
         var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
-       
+
         var newToken = JwtHelper.CreateToken(userWithAccount, _configuration);
 
         var userWithNewToken = await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
-        
+
         var userProfileDto = await MapUserToUserProfileDto(userWithNewToken);
 
         userProfileDto.ClasseDtos = await GetClassProfileDtos(userWithAccount.Classes.ToList());
