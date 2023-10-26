@@ -309,6 +309,10 @@ addClassBtn.addEventListener('click', () => {
     </div>
   `;
 
+        const emptyClassContainer = document.querySelector('.add-classes');
+        emptyClassContainer.style.display = 'none';
+
+
         const classContainer = document.querySelector('.class-container');
         classContainer.appendChild(classBlock);
 

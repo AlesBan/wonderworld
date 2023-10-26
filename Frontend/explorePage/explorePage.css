@@ -328,3 +328,64 @@
     line-height: 28px;
     color: #0C0F12;
 }
+
+/* Стили для раскрытого блока "class-preview" */
+.class-preview.expanded {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Стили для содержимого раскрытого блока "class-preview" */
+.class-preview.expanded .class-preview-content {
+    max-width: 800px;
+    max-height: 600px;
+    overflow: auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Стили для закрытия раскрытого блока "class-preview" */
+.class-preview-close {
+    display: flex;
+    justify-content: flex-end;
+    color: black;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Стили для анимации раскрытия и приближения блока "class-preview" */
+.class-preview {
+    transition: transform 0.3s ease;
+}
+
+.class-preview.expanded {
+    transform: scale(1.2);
+}
+
+
+.invite-class-btn {
+    display: flex;
+    padding: 12px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+    background: #216C5E;
+    font-family: 'Inter', serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+    border: none;
+    color: white;
+
+}
