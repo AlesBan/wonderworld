@@ -32,7 +32,10 @@ classPreviews.forEach((classPreview) => {
                 closeExpandedClassPreview(classPreview);
             });
 
-            inviteClassButton.addEventListener('click')
+            inviteClassButton.addEventListener('click', ()=> {
+                closeExpandedClassPreview(classPreview);
+                inviteClass()
+            })
 
             // Добавляем слушатель события клика на весь документ
             document.addEventListener('click', (event) => {
@@ -40,6 +43,8 @@ classPreviews.forEach((classPreview) => {
                     closeExpandedClassPreview(classPreview);
                 }
             });
+
+
         }
     });
 });
