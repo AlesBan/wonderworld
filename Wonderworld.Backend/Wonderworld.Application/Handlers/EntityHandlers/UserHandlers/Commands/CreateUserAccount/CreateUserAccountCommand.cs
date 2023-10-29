@@ -11,8 +11,8 @@ public class CreateUserAccountCommand : IRequest<User>
     public Guid UserId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public bool? IsATeacher { get; set; }
-    public bool? IsAnExpert { get; set; }
+    public bool IsATeacher { get; set; }
+    public bool IsAnExpert { get; set; }
     public Guid CityId { get; set; }
     public Guid CountryId { get; set; }
     public Guid InstitutionId { get; set; }

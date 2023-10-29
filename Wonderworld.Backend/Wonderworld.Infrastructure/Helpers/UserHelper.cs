@@ -1,31 +1,36 @@
+using AutoMapper;
 using MediatR;
-using Wonderworld.Application.Common.Exceptions;
-using Wonderworld.Application.Common.Exceptions.Common;
 using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Common.Exceptions.User.Forbidden;
-using Wonderworld.Application.Dtos.SearchDtos;
+using Wonderworld.Application.Dtos.ClassDtos;
+using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByClass;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByEmail;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserByToken;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListByDefaultSearchRequest;
-using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListBySearchRequest;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Infrastructure.Helpers;
 
-public static class UserHelper
+public class UserHelper : IUserHelper
 {
-    public static async Task<User> GetUserById(Guid userId, IMediator mediator)
+    private readonly IMapper _mapper;
+
+    public UserHelper(IMapper mapper)
+    {
+        _mapper = mapper;
+    }
+
+    public async Task<User> GetUserById(Guid userId, IMediator mediator)
     {
         var user = await mediator.Send(new GetUserByIdQuery(userId));
 
         return user;
     }
 
-    public static async Task<User> GetUserByEmail(string email, IMediator mediator)
+    public async Task<User> GetUserByEmail(string email, IMediator mediator)
     {
         try
         {
@@ -38,7 +43,7 @@ public static class UserHelper
         }
     }
 
-    public static async Task<User> GetUserByToken(string token, IMediator mediator)
+    public async Task<User> GetUserByToken(string token, IMediator mediator)
     {
         try
         {
@@ -51,7 +56,7 @@ public static class UserHelper
         }
     }
 
-    public static async Task<Guid> GetUserIdByClassId(Guid classId, IMediator mediator)
+    public async Task<Guid> GetUserIdByClassId(Guid classId, IMediator mediator)
     {
         var command = new GetUserIdByClassIdQuery(classId);
 
@@ -60,48 +65,39 @@ public static class UserHelper
         return userId;
     }
 
-    public static void CheckUserVerification(User user)
+    public void CheckUserVerification(User user)
     {
         if (!user.IsVerified)
         {
             throw new UserNotVerifiedException(user.UserId);
         }
     }
-    public static async Task<IEnumerable<UserProfileDto>> GetUserProfilesBySearchRequest(SearchRequestDto searchRequest,
-        IMediator mediator)
+
+
+    public async Task<UserProfileDto> MapUserToUserProfileDto(User user)
     {
-        var query = CreateGetUserProfileListBySearchQueryCommand(searchRequest);
-
-        var userProfileList = (await mediator.Send(query)).ToList();
-
-        return userProfileList;
-    }
-    
-    public static async Task<IEnumerable<UserProfileDto>> GetUserProfilesByDefaultSearchRequest(DefaultSearchRequestDto searchRequest,
-        IMediator mediator)
-    {
-        var query = new GetUserProfileListByDefaultSearchRequestCommand()
-        {
-            SearchRequest = searchRequest
-        };
-
-        var userProfileList = (await mediator.Send(query)).ToList();
-
-        return userProfileList;
-    }
-    
-    private static GetUserProfileListBySearchRequestCommand
-        CreateGetUserProfileListBySearchQueryCommand(
-            SearchRequestDto searchRequest)
-    {
-        return new GetUserProfileListBySearchRequestCommand()
-        {
-            SearchRequest = searchRequest
-        };
+        var userProfileDto = _mapper.Map<UserProfileDto>(user);
+        userProfileDto.LanguageTitles = user.UserLanguages.Select(ul => ul.Language.Title).ToList();
+        userProfileDto.DisciplineTitles = user.UserDisciplines.Select(ud => ud.Discipline.Title).ToList();
+        userProfileDto.Institution = _mapper.Map<InstitutionDto>(user.Institution);
+        userProfileDto.GradeNumbers = user.UserGrades.Select(ug => ug.Grade.GradeNumber).ToList();
+        userProfileDto.ClasseDtos = await GetClassProfileDtos(user.Classes.ToList());
+        return userProfileDto;
     }
 
-    private static GetUserByIdQuery CreateGetUserCommand(Guid userId)
+    private static Task<List<ClassProfileDto>> GetClassProfileDtos(IEnumerable<Class> classes)
     {
-        return new GetUserByIdQuery(userId);
+        return Task.FromResult(classes.Select(c => new ClassProfileDto
+            {
+                ClassId = c.ClassId,
+                Title = c.Title,
+                UserFullName = c.User.FullName,
+                UserRating = c.User.Rating,
+                Grade = c.Grade.GradeNumber,
+                Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
+                Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
+                PhotoUrl = c.PhotoUrl!
+            })
+            .ToList());
     }
 }

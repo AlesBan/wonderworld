@@ -1,13 +1,10 @@
 using AutoMapper;
 using MediatR;
-using Wonderworld.Application.Common.Exceptions;
-using Wonderworld.Application.Common.Exceptions.Common;
 using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Dtos.UserDtos;
-using Wonderworld.Domain.Entities.Education;
-using Wonderworld.Domain.Entities.Location;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListByDefaultSearchRequest;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Infrastructure.Helpers;
 
@@ -16,49 +13,82 @@ namespace Wonderworld.Infrastructure.Services.DefaultDataServices;
 public class DefaultSearchService : IDefaultSearchService
 {
     private readonly IMapper _mapper;
+    private readonly IUserHelper _userHelper;
 
-    public DefaultSearchService(IMapper mapper)
+    public DefaultSearchService(IMapper mapper, IUserHelper userHelper)
     {
         _mapper = mapper;
+        _userHelper = userHelper;
     }
 
     public async Task<DefaultSearchResponseDto> GetDefaultTeacherAndClassProfiles(Guid userId, IMediator mediator)
     {
-        var user = await UserHelper.GetUserById(userId, mediator);
+        var user = await _userHelper.GetUserById(userId, mediator);
 
         var searchRequest = CreateDefaultSearchRequestDto(user);
 
-        var userProfileList = (await UserHelper.GetUserProfilesByDefaultSearchRequest(searchRequest, mediator))
-            .ToList();
+        var userList = await GetUserListByDefaultSearchRequest(searchRequest, mediator);
 
-        var defaultSearchResponseDto = CreateDefaultSearchResponseDto(user, userProfileList);
+        var defaultSearchResponseDto = await GetDefaultSearchResponseDto(user, userList);
+
         return defaultSearchResponseDto;
+    }
+
+
+    private async Task<IEnumerable<User>> GetUserListByDefaultSearchRequest(
+        DefaultSearchRequestDto searchRequest,
+        IMediator mediator)
+    {
+        var query = new GetUserListByDefaultSearchRequestCommand()
+        {
+            SearchRequest = searchRequest
+        };
+
+        var userList = (await mediator.Send(query)).ToList();
+
+        return userList;
     }
 
     private static DefaultSearchRequestDto CreateDefaultSearchRequestDto(User user)
     {
-        var userDisciplines = GetUserDisciplines(user);
+        var userDisciplineIds = user.UserDisciplines
+            .Select(ud =>
+                ud.DisciplineId)
+            .ToList();
 
-        var userCountry = GetUserCountry(user);
+        var userCountryId = user.CountryId;
 
         return new DefaultSearchRequestDto
         {
-            Disciplines = userDisciplines,
-            Country = userCountry
+            DisciplineIds = userDisciplineIds,
+            CountryId = userCountryId
         };
     }
 
-    private DefaultSearchResponseDto CreateDefaultSearchResponseDto(User user,
-        IReadOnlyCollection<UserProfileDto> userProfileList)
+    private async Task<DefaultSearchResponseDto> GetDefaultSearchResponseDto(User user,
+        IEnumerable<User> userList)
     {
-        var userCountry = GetUserCountry(user);
-        var userDisciplines = GetUserDisciplines(user).ToList();
+        if (user.Country == null)
+        {
+            throw new UserPropertyNotFoundException(user.UserId, "Country");
+        }
 
-        var teacherProfilesByCountry = GetTeacherProfilesByCountry(userCountry, userProfileList).ToList();
-        var teacherProfilesByDisciplines = GetTeacherProfilesByDisciplines(userDisciplines, userProfileList).ToList();
+        var userCountryTitle = user.Country.Title;
 
-        var expertProfilesByCountry = GetExpertProfilesByCountry(userCountry, userProfileList).ToList();
-        var expertProfilesByDisciplines = GetExpertProfilesByDisciplines(userDisciplines, userProfileList).ToList();
+        var userDisciplineTitles = user.UserDisciplines
+            .Select(ud =>
+                ud.Discipline.Title)
+            .ToList();
+
+        var teacherProfilesByCountry = await
+            GetTeacherProfilesByCountry(userCountryTitle, userList);
+        var teacherProfilesByDisciplines = await
+            GetTeacherProfilesByDisciplines(userDisciplineTitles, userList);
+
+        var expertProfilesByCountry = await
+            GetExpertProfilesByCountry(userCountryTitle, userList);
+        var expertProfilesByDisciplines = await
+            GetExpertProfilesByDisciplines(userDisciplineTitles, userList);
 
         var classProfilesByCountry = GetClassProfiles(teacherProfilesByCountry).ToList();
         var classProfilesByDisciplines = GetClassProfiles(teacherProfilesByDisciplines).ToList();
@@ -76,85 +106,86 @@ public class DefaultSearchService : IDefaultSearchService
         return responseDto;
     }
 
-    private static IEnumerable<UserProfileDto> GetExpertProfilesByDisciplines(List<Discipline> userDisciplines,
-        IEnumerable<UserProfileDto> userProfileList)
+    private async Task<IEnumerable<UserProfileDto>> GetUserProfileList(IEnumerable<User> userList)
     {
-        var expertProfilesByDisciplines = userProfileList
+        var userProfileDtosTasks = userList.Select(async u =>
+            await _userHelper.MapUserToUserProfileDto(u));
+        var userProfileDtos = await Task.WhenAll(userProfileDtosTasks);
+
+        return userProfileDtos;
+    }
+
+    private async Task<IEnumerable<UserProfileDto>> GetExpertProfilesByDisciplines(
+        IEnumerable<string> userDisciplines,
+        IEnumerable<User> userList)
+    {
+        var expertByDisciplines = userList
             .Where(up => userDisciplines.Any(ud =>
-                             up.DisciplineTitles.Any(d =>
-                                 d == ud.Title)) &&
+                             up.UserDisciplines.Select(udd => udd.Discipline.Title)
+                                 .Any(d =>
+                                     d == ud)) &&
+                         up.IsAnExpert && !up.IsATeacher);
+        var expertProfiles = await GetUserProfileList(expertByDisciplines);
+
+        return expertProfiles;
+    }
+
+    private async Task<IEnumerable<UserProfileDto>> GetExpertProfilesByCountry(string userCountry,
+        IEnumerable<User> userProfileList)
+    {
+        var expertByCountry = userProfileList
+            .Where(up => up.Country.Title == userCountry &&
                          up.IsAnExpert && !up.IsATeacher);
 
-        return expertProfilesByDisciplines;
+        var expertProfiles = await GetUserProfileList(expertByCountry);
+
+
+        return expertProfiles;
     }
 
-    private static IEnumerable<UserProfileDto> GetExpertProfilesByCountry(Country userCountry,
-        IEnumerable<UserProfileDto> userProfileList)
+    private async Task<IEnumerable<UserProfileDto>> GetTeacherProfilesByDisciplines(
+        IEnumerable<string> userDisciplines, IEnumerable<User> userList)
     {
-        var expertProfilesByCountry = userProfileList
-            .Where(up => up.CountryTitle == userCountry.Title &&
-                         up.IsAnExpert && !up.IsATeacher);
-
-        return expertProfilesByCountry;
-    }
-
-    private static IEnumerable<UserProfileDto> GetTeacherProfilesByDisciplines(
-        IReadOnlyCollection<Discipline> userDisciplines, IEnumerable<UserProfileDto> userProfileList)
-    {
-        var teacherProfilesByDisciplines = userProfileList
+        var teachersByDisciplines = userList
             .Where(up => userDisciplines.Any(ud =>
-                             up.DisciplineTitles.Any(d =>
-                                 d == ud.Title)) &&
-                         up.IsATeacher);
+                up.UserDisciplines.Select(udd => udd.Discipline.Title)
+                    .Any(d =>
+                        d == ud)) && up.IsATeacher);
 
-        return teacherProfilesByDisciplines;
+        var teacherProfiles = await GetUserProfileList(teachersByDisciplines);
+
+        return teacherProfiles;
     }
 
-    private static IEnumerable<UserProfileDto> GetTeacherProfilesByCountry(Country country,
-        IEnumerable<UserProfileDto> userProfileList)
+    private async Task<IEnumerable<UserProfileDto>> GetTeacherProfilesByCountry(string userCountry,
+        IEnumerable<User> userProfileList)
     {
-        var teacherProfilesByCountry = userProfileList
+        var teacherByCountry = userProfileList
             .Where(up =>
-                up.CountryTitle == country.Title &&
+                up.Country.Title == userCountry &&
                 up.IsATeacher);
 
+        var teacherProfilesByCountry = await GetUserProfileList(teacherByCountry);
         return teacherProfilesByCountry;
-    }
-
-    private static Country GetUserCountry(User user)
-    {
-        var userCountry = user.Country;
-        if (userCountry == null)
-        {
-            throw new NotFoundException(nameof(Country), user.UserId);
-        }
-
-        return userCountry;
-    }
-
-    private static IEnumerable<Discipline> GetUserDisciplines(User user)
-    {
-        var userDisciplines = user.UserDisciplines
-            .Select(ud =>
-                ud.Discipline)
-            .ToList();
-        
-        if (userDisciplines == null)
-        {
-            throw new NotFoundException(nameof(Discipline), user.UserId);
-        }
-
-        return userDisciplines;
     }
 
     private IEnumerable<ClassProfileDto> GetClassProfiles(IEnumerable<UserProfileDto> userProfileList)
     {
-        var classList = userProfileList.Select(up => up.ClasseDtos).ToList();
+        var classList = userProfileList.SelectMany(up => up.ClasseDtos);
 
-        var classProfileList = classList.Select(cp =>
-                _mapper.Map<ClassProfileDto>(cp))
-            .ToList();
+        var classProfiles = classList.ToList().Select(c =>
+            new ClassProfileDto
+            {
+                ClassId = c.ClassId,
+                Title = c.Title,
+                UserFullName = c.UserFullName,
+                UserRating = c.UserRating,
+                Grade = c.Grade,
+                Languages = c.Languages,
+                Disciplines = c.Disciplines,
+                PhotoUrl = c.PhotoUrl!
+            }).ToList();
 
-        return classProfileList;
+        return classProfiles;
     }
 }

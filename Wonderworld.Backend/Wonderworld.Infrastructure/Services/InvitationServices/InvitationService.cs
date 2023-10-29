@@ -13,17 +13,19 @@ public class InvitationService : IInvitationService
 {
     private readonly IEmailHandlerService _emailHandlerService;
     private readonly IConfiguration _configuration;
+    private readonly IUserHelper _userHelper;
 
-    public InvitationService(IEmailHandlerService emailHandlerService, IConfiguration configuration)
+    public InvitationService(IEmailHandlerService emailHandlerService, IConfiguration configuration, IUserHelper userHelper)
     {
         _emailHandlerService = emailHandlerService;
         _configuration = configuration;
+        _userHelper = userHelper;
     }
 
     public async Task CreateInvitation(Guid userSenderId, IMediator mediator,
         CreateInvitationRequestDto requestInvitationDto)
     {
-        var userReceiverId = await UserHelper.GetUserIdByClassId(requestInvitationDto.ClassReceiverId, mediator);
+        var userReceiverId = await _userHelper.GetUserIdByClassId(requestInvitationDto.ClassReceiverId, mediator);
         var dateOfInvitation = DateTime.Parse(requestInvitationDto.DateOfInvitation);
         var command = new CreateInvitationCommand
         {
@@ -42,8 +44,8 @@ public class InvitationService : IInvitationService
 
     private async Task SendInvitationEmail(Guid userSenderId, Guid userReceiverId, DateTime dateOfInvitation, IMediator mediator)
     {
-        var userSender = await UserHelper.GetUserById(userSenderId, mediator);
-        var userReceiver = await UserHelper.GetUserById(userReceiverId, mediator);
+        var userSender = await _userHelper.GetUserById(userSenderId, mediator);
+        var userReceiver = await _userHelper.GetUserById(userReceiverId, mediator);
 
         await _emailHandlerService.SendAsync(_configuration, userSender.Email, EmailConstants.EmailInvitationSubject,
             EmailConstants.GetEmailSenderInvitationMessage(userReceiver.Email, dateOfInvitation));   

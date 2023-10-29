@@ -5,6 +5,6 @@ namespace Wonderworld.Application.Dtos.SearchDtos;
 
 public class DefaultSearchRequestDto
 {
-    public IEnumerable<Discipline> Disciplines { get; init; } = new List<Discipline>();
-    public Country Country { get; init; } = new();
+    public IEnumerable<Guid> DisciplineIds { get; init; } = new List<Guid>();
+    public Guid CountryId { get; init; } = new();
 }

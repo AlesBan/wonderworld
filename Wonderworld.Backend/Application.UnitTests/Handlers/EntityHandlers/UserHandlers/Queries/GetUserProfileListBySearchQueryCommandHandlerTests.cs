@@ -20,7 +20,7 @@ public class GetUserProfileListBySearchQueryCommandHandlerTests : TestCommonBase
             Disciplines = new List<string> { "Mathematics", "Chemistry" },
             Languages = new List<string> { "English", "Russian" }
         };
-        var command = new GetUserProfileListBySearchRequestCommand()
+        var command = new GetUserListBySearchRequestCommand()
         {
             SearchRequest = searchRequest
         };
@@ -30,7 +30,7 @@ public class GetUserProfileListBySearchQueryCommandHandlerTests : TestCommonBase
 
         var mapper = mapperConfiguration.CreateMapper();
 
-        var handler = new GetUserProfileListBySearchRequestCommandHandler(Context, mapper);
+        var handler = new GetUserListBySearchRequestCommandHandler(Context, mapper);
 
         // Act
         var result = await handler.Handle(command, cancellationToken);
