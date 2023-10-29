@@ -1,7 +1,7 @@
 using MediatR;
 using Wonderworld.Application.Dtos.SearchDtos;
 
-namespace Wonderworld.Application.Interfaces.Services.DefaultDataServices;
+namespace Wonderworld.Infrastructure.Services.DefaultDataServices;
 
 public interface IDefaultSearchService
 {

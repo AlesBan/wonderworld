@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Wonderworld.Domain.Entities.Communication;
 
-namespace Wonderworld.Persistence.EntityTypeConfiguration.Communication;
+namespace Wonderworld.Persistence.EntityConfiguration.Communication;
 
 public class InvitationConfiguration : IEntityTypeConfiguration<Invitation>
 {

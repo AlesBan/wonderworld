@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Interfaces.Services;
-using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Services.DefaultDataServices;
 
 namespace Wonderworld.API.Controllers;
 

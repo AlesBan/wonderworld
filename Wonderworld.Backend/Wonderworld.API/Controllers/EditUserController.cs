@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
-using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
+using Wonderworld.Infrastructure.Services.EditUserServices;
 
 namespace Wonderworld.API.Controllers;
 
@@ -37,7 +37,7 @@ public class EditUserController : BaseController
     public async Task<IActionResult> EditUserPersonalInfo([FromBody] UpdatePersonalInfoRequestDto requestUserDto)
     {
         var result = await _editUserAccountService.EditUserPersonalInfoAsync(UserId, requestUserDto, Mediator);
-        return result;
+        return ResponseHelper.GetOkResult(result);
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class EditUserController : BaseController
     public async Task<IActionResult> EditUserInstitution([FromBody] UpdateInstitutionRequestDto requestUserDto)
     {
         var result = await _editUserAccountService.EditUserInstitutionAsync(UserId, requestUserDto, Mediator);
-        return result;
+        return ResponseHelper.GetOkResult(result);
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public class EditUserController : BaseController
         [FromBody] UpdateProfessionalInfoRequestDto requestUserDto)
     {
         var result = await _editUserAccountService.EditUserProfessionalInfoAsync(UserId, requestUserDto, Mediator);
-        return result;
+        return ResponseHelper.GetOkResult(result);
     }
 
     /// <summary>
@@ -97,9 +97,8 @@ public class EditUserController : BaseController
     [HttpPut("email")]
     public async Task<IActionResult> EditUserEmail([FromBody] UpdateUserEmailRequestDto requestUserDto)
     {
-
         var result = await _editUserAccountService.EditUserEmailAsync(UserId, requestUserDto, Mediator);
-        return result;
+        return ResponseHelper.GetOkResult(result);
     }
 
     /// <summary>
@@ -119,6 +118,6 @@ public class EditUserController : BaseController
     public async Task<IActionResult> EditUserPassword([FromBody] UpdateUserPasswordHashRequestDto requestUserDto)
     {
         var result = await _editUserAccountService.EditUserPasswordAsync(UserId, requestUserDto, Mediator);
-        return result;
+        return ResponseHelper.GetOkResult(result);
     }
 }

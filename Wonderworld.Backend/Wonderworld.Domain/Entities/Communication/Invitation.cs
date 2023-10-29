@@ -9,10 +9,8 @@ public class Invitation
     public User UserSender { get; set; }
     public Guid UserReceiverId { get; set; }
     public User UserReceiver { get; set; }
-
     public Guid ClassSenderId { get; set; }
     public Class ClassSender { get; set; }
-
     public Guid ClassReceiverId { get; set; }
     public Class ClassReceiver { get; set; }
     public DateTime CreatedAt { get; set; }

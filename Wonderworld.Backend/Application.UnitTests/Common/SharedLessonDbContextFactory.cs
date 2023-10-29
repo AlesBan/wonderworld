@@ -201,28 +201,20 @@ public class SharedLessonDbContextFactory
             new Invitation()
             {
                 InvitationId = InvitationAId,
-                UserSender = context.Users.FirstOrDefault(u =>
-                    u.UserId == UserBId)!,
-                UserReceiver = context.Users.FirstOrDefault(u =>
-                    u.UserId == UserAId)!,
-                ClassSender = context.Classes.FirstOrDefault(c =>
-                    c.ClassId == ClassBId)!,
-                ClassReceiver = context.Classes.FirstOrDefault(c =>
-                    c.ClassId == ClassAId)!,
+                UserSenderId = UserBId,
+                UserReceiverId = UserAId,
+                ClassSenderId = ClassBId,
+                ClassReceiverId = ClassAId,
                 DateOfInvitation = DateTime.Today,
                 Status = InvitationStatus.Pending.ToString()
             },
             new Invitation()
             {
                 InvitationId = InvitationBId,
-                UserSender = context.Users.FirstOrDefault(u =>
-                    u.UserId == UserBId)!,
-                UserReceiver = context.Users.FirstOrDefault(u =>
-                    u.UserId == UserAId)!,
-                ClassSender = context.Classes.FirstOrDefault(c =>
-                    c.ClassId == ClassBId)!,
-                ClassReceiver = context.Classes.FirstOrDefault(c =>
-                    c.ClassId == ClassAId)!,
+                UserSenderId = UserBId,
+                UserReceiverId = UserAId!,
+                ClassSenderId = ClassBId,
+                ClassReceiverId = ClassAId!,
                 DateOfInvitation = DateTime.Today,
                 Status = InvitationStatus.Pending.ToString()
             },

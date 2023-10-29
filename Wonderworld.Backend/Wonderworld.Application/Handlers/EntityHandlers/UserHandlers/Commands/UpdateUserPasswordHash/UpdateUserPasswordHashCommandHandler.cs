@@ -1,6 +1,8 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions.Database;
+using Wonderworld.Application.Helpers;
+using Wonderworld.Application.Helpers.TokenHelper;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -26,9 +28,10 @@ public class UpdateUserPasswordHashCommandHandler : IRequestHandler<UpdateUserPa
             throw new UserNotFoundException(request.UserId);
         }
 
-        user.PasswordHash = request.PasswordHash;
-        user.PasswordSalt = request.PasswordSalt;
-        
+        PasswordHelper.CreatePasswordHash(request.Password, out var passwordHash, out var passwordSalt);
+        user.PasswordHash = passwordHash;
+        user.PasswordSalt = passwordSalt;
+
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 

@@ -1,9 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Wonderworld.API.Services.InvitationServices;
+using Wonderworld.API.Filters;
+using Wonderworld.API.Helpers;
 using Wonderworld.Application.Dtos.InvitationDtos;
+using Wonderworld.Infrastructure.Services.InvitationServices;
 
 namespace Wonderworld.API.Controllers;
 
+[Authorize]
+[CheckUserCreateAccount]
 public class InvitationController : BaseController
 {
     private readonly IInvitationService _invitationService;
@@ -13,9 +18,10 @@ public class InvitationController : BaseController
         _invitationService = invitationService;
     }
 
-    [HttpGet("create-invitation")]
-    public IActionResult CreateInvitation([FromBody] CreateInvitationRequestDto createInvitationRequestDto)
+    [HttpPost("create-invitation")]
+    public async Task<IActionResult> CreateInvitation([FromBody] CreateInvitationRequestDto createInvitationRequestDto)
     {
-        return Ok(_invitationService.CreateInvitation(UserId, Mediator, createInvitationRequestDto));
+        await _invitationService.CreateInvitation(UserId, Mediator, createInvitationRequestDto);
+        return ResponseHelper.GetOkResult();
     }
 }

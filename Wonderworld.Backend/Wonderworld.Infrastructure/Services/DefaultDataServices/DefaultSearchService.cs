@@ -6,7 +6,6 @@ using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Dtos.UserDtos;
-using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
