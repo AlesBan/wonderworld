@@ -7,16 +7,19 @@ using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserGradeHandlers.Commands.CreateUserGrade;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserLanguagesHandlers.Commands.CreateUserLanguages;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserToken;
+using Wonderworld.Application.Helpers.TokenHelper;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
 
 public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccountCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
-
-    public CreateUserAccountCommandHandler(ISharedLessonDbContext serviceDbContext)
+    private readonly ITokenHelper _tokenHelper;
+    public CreateUserAccountCommandHandler(ISharedLessonDbContext serviceDbContext, ITokenHelper tokenHelper)
     {
         _context = serviceDbContext;
+        _tokenHelper = tokenHelper;
     }
 
     public async Task<User> Handle(CreateUserAccountCommand request, CancellationToken cancellationToken)
@@ -44,6 +47,10 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
 
         user.IsCreatedAccount = true;
         user.CreatedAt = DateTime.UtcNow;
+        
+        var newToken = _tokenHelper.CreateToken(user);
+
+        user.VerificationToken = newToken;
 
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
@@ -54,7 +61,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        user = _context
+        var userWithAccount = _context
             .Users
             .Include(u => u.Country)
             .Include(u => u.City)
@@ -67,7 +74,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
             .ThenInclude(ug => ug.Grade)
             .FirstOrDefault(u => u.UserId == request.UserId);
 
-        return user;
+        return userWithAccount;
     }
 
     private async Task SeedUserLanguages(Guid userId, CreateUserAccountCommand request,

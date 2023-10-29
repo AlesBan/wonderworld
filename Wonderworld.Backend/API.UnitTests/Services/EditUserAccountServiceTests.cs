@@ -3,7 +3,6 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Wonderworld.API.Services.EditUserServices;
 using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UpdateDtos;
@@ -30,6 +29,7 @@ using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums.EntityTypes;
+using Wonderworld.Infrastructure.Services.EditUserServices;
 using Xunit;
 
 namespace API.UnitTests.Services;

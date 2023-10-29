@@ -1,8 +1,5 @@
 using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Wonderworld.API.Helpers;
-using Wonderworld.API.Services.EditUserData;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UpdateDtos;
@@ -14,8 +11,9 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPasswordHash;
 using Wonderworld.Domain.Entities.Main;
+using Wonderworld.Infrastructure.Helpers;
 
-namespace Wonderworld.API.Services.EditUserServices;
+namespace Wonderworld.Infrastructure.Services.EditUserServices;
 
 public class EditUserAccountService : IEditUserAccountService
 {
@@ -26,37 +24,40 @@ public class EditUserAccountService : IEditUserAccountService
         _mapper = mapper;
     }
 
-    public async Task<IActionResult> EditUserPersonalInfoAsync(Guid userId, UpdatePersonalInfoRequestDto requestUserDto,
+    public async Task<UserProfileDto> EditUserPersonalInfoAsync(Guid userId,
+        UpdatePersonalInfoRequestDto requestUserDto,
         IMediator mediator)
     {
         return await GetResultOfUpdatingUserAsync(userId, requestUserDto, mediator);
     }
 
-    public async Task<IActionResult> EditUserInstitutionAsync(Guid userId, UpdateInstitutionRequestDto requestUserDto,
+    public async Task<UserProfileDto> EditUserInstitutionAsync(Guid userId, UpdateInstitutionRequestDto requestUserDto,
         IMediator mediator)
     {
         return await GetResultOfUpdatingUserAsync(userId, requestUserDto, mediator);
     }
 
-    public async Task<IActionResult> EditUserEmailAsync(Guid userId, UpdateUserEmailRequestDto requestUserDto,
+    public async Task<UserProfileDto> EditUserEmailAsync(Guid userId, UpdateUserEmailRequestDto requestUserDto,
         IMediator mediator)
     {
         return await GetResultOfUpdatingUserAsync(userId, requestUserDto, mediator);
     }
 
-    public async Task<IActionResult> EditUserProfessionalInfoAsync(Guid userId,
+    public async Task<UserProfileDto> EditUserProfessionalInfoAsync(Guid userId,
         UpdateProfessionalInfoRequestDto requestUserDto, IMediator mediator)
     {
         return await GetResultOfUpdatingUserAsync(userId, requestUserDto, mediator);
     }
 
-    public async Task<IActionResult> EditUserPasswordAsync(Guid userId, UpdateUserPasswordHashRequestDto requestUserDto,
+    public async Task<UserProfileDto> EditUserPasswordAsync(Guid userId,
+        UpdateUserPasswordHashRequestDto requestUserDto,
         IMediator mediator)
     {
         return await GetResultOfUpdatingUserAsync(userId, requestUserDto, mediator);
     }
 
-    private async Task<IActionResult> GetResultOfUpdatingUserAsync<TRequestDto>(Guid userId, TRequestDto requestUserDto,
+    private async Task<UserProfileDto> GetResultOfUpdatingUserAsync<TRequestDto>(Guid userId,
+        TRequestDto requestUserDto,
         IMediator mediator)
     {
         var user = await UserHelper.GetUserById(userId, mediator);
@@ -95,8 +96,7 @@ public class EditUserAccountService : IEditUserAccountService
 
         userProfileDto.ClasseDtos = classProfileDtos;
 
-
-        return new OkObjectResult(userProfileDto);
+        return userProfileDto;
     }
 
     private static async Task<User> GetUpdatedUserAsync<TRequestDto>(User user, TRequestDto requestUserDto,
@@ -138,23 +138,13 @@ public class EditUserAccountService : IEditUserAccountService
                 UserId = user.UserId,
                 Email = emailRequestDto.Email
             }),
-            UpdateUserPasswordHashRequestDto passwordRequestDto =>
-                await GetUserUpdatedPassword(user.UserId, passwordRequestDto, mediator),
+            UpdateUserPasswordHashRequestDto passwordRequestDto => await mediator
+                .Send(new UpdateUserPasswordHashCommand
+                {
+                    UserId = user.UserId,
+                    Password = passwordRequestDto.Password
+                }),
             _ => throw new Exception("Something went wrong")
         };
-    }
-
-    private static async Task<User> GetUserUpdatedPassword(Guid userId, UpdateUserPasswordHashRequestDto requestUserDto,
-        IMediator mediator)
-    {
-        UserHelper.CreatePasswordHash(requestUserDto.Password, out var passwordHash, out var passwordSalt);
-        var user = await mediator.Send(new UpdateUserPasswordHashCommand
-        {
-            UserId = userId,
-            PasswordHash = passwordHash,
-            PasswordSalt = passwordSalt
-        });
-
-        return user;
     }
 }

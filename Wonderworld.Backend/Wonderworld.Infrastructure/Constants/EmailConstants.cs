@@ -16,7 +16,7 @@ public static class EmailConstants
         return $"You've sent a call invitation to a user with {emailReceiver} email.\n" +
                $"Time of invitation: {invitationTime.ToString(CultureInfo.InvariantCulture)}";
     }
-
+    
     public static string GetEmailReceiverInvitationMessage(string emailSender, DateTime invitationTime)
     {
         return $"You've been sent a call invitation by a user with {emailSender} email.\n" +

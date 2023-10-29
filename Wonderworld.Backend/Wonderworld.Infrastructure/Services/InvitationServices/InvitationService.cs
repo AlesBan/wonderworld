@@ -1,15 +1,13 @@
-using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Wonderworld.API.Constants;
-using Wonderworld.API.Helpers;
 using Wonderworld.Application.Dtos.InvitationDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.InvitationHandlers.Commands.CreateInvitation;
 using Wonderworld.Domain.Enums;
+using Wonderworld.Infrastructure.Helpers;
 using Wonderworld.Infrastructure.Services.EmailHandlerService;
-using UserHelper = Wonderworld.API.Helpers.UserHelper;
 
-namespace Wonderworld.API.Services.InvitationServices;
+namespace Wonderworld.Infrastructure.Services.InvitationServices;
 
 public class InvitationService : IInvitationService
 {
@@ -22,7 +20,7 @@ public class InvitationService : IInvitationService
         _configuration = configuration;
     }
 
-    public async Task<IActionResult> CreateInvitation(Guid userSenderId, IMediator mediator,
+    public async Task CreateInvitation(Guid userSenderId, IMediator mediator,
         CreateInvitationRequestDto requestInvitationDto)
     {
         var userReceiverId = await UserHelper.GetUserIdByClassId(requestInvitationDto.ClassReceiverId, mediator);
@@ -37,10 +35,9 @@ public class InvitationService : IInvitationService
             Status = InvitationStatus.Pending.ToString(),
             InvitationText = requestInvitationDto.InvitationText
         };
-        var result = await mediator.Send(command);
+        await mediator.Send(command);
         
         await SendInvitationEmail(userSenderId, userReceiverId, dateOfInvitation, mediator);
-        return ResponseHelper.GetOkResult(result);
     }
 
     private async Task SendInvitationEmail(Guid userSenderId, Guid userReceiverId, DateTime dateOfInvitation, IMediator mediator)

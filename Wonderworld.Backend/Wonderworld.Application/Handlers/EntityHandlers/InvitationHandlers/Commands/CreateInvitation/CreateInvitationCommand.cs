@@ -1,9 +1,10 @@
 using MediatR;
+using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.InvitationHandlers.Commands.CreateInvitation;
 
-public class CreateInvitationCommand : IRequest<Unit>
+public class CreateInvitationCommand : IRequest<Invitation>
 {
     public Guid UserSenderId { get; set; }
     public Guid UserReceiverId { get; set; }

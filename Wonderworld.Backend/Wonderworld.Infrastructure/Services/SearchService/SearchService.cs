@@ -6,7 +6,7 @@ using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Infrastructure.Helpers;
 
-namespace Wonderworld.Infrastructure.Services;
+namespace Wonderworld.Infrastructure.Services.SearchService;
 
 public class SearchService : ISearchService
 {

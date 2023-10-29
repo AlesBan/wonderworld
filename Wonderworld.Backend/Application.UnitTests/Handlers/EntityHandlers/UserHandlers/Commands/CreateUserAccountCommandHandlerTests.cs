@@ -1,6 +1,8 @@
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.CreateUserAccount;
+using Wonderworld.Application.Helpers.TokenHelper;
 using Xunit;
 
 namespace Application.UnitTests.Handlers.EntityHandlers.UserHandlers.Commands;
@@ -40,9 +42,11 @@ public class CreateUserAccountCommandHandlerTests : TestCommonBase
             PhotoUrl = photoUrl
         };
 
+        var mockTokenHelper = new Mock<ITokenHelper>();
+
 
         // Act
-        var handler = new CreateUserAccountCommandHandler(Context);
+        var handler = new CreateUserAccountCommandHandler(Context, mockTokenHelper.Object);
         await handler.Handle(createUserAccountCommand,
             CancellationToken.None);
 

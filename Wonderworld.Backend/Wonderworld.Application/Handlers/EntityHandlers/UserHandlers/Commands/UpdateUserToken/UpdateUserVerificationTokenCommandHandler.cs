@@ -25,10 +25,9 @@ public class UpdateUserVerificationTokenCommandHandler : IRequestHandler<UpdateU
 
         user.VerificationToken = request.VerificationToken;
 
-        _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 
-        user = _context
+        var verifiedUser = _context
             .Users
             .Include(u => u.Country)
             .Include(u => u.City)
@@ -41,6 +40,6 @@ public class UpdateUserVerificationTokenCommandHandler : IRequestHandler<UpdateU
             .ThenInclude(ug => ug.Grade)
             .FirstOrDefault(u => u.UserId == request.UserId);
         
-        return user;
+        return verifiedUser!;
     }
 }

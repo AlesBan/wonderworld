@@ -15,7 +15,16 @@ public static class ResponseHelper
             Errors = new List<string> { message },
         });
     }
-    
+
+    public static OkObjectResult GetOkResult()
+    {
+        return new OkObjectResult(new ResponseResult
+        {
+            Result = true,
+            Value = null
+        });
+    }
+
     public static OkObjectResult GetOkResult(object value)
     {
         return new OkObjectResult(new ResponseResult
@@ -42,5 +51,4 @@ public static class ResponseHelper
             Token = token
         });
     }
-    
 }

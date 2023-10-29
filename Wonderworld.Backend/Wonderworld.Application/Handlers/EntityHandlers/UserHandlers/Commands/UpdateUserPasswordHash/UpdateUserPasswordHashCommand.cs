@@ -6,6 +6,5 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.
 public class UpdateUserPasswordHashCommand : IRequest<User>
 {
     public Guid UserId { get; set; }
-    public byte[] PasswordHash { get; set; }
-    public byte[] PasswordSalt { get; set; }
+    public string Password { get; set; }
 }

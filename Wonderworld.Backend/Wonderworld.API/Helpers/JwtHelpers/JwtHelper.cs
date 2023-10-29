@@ -11,31 +11,7 @@ namespace Wonderworld.API.Helpers.JwtHelpers;
 
 public static class JwtHelper
 {
-    public static string CreateToken(User user, IConfiguration configuration)
-    {
-        var signingKey = new SymmetricSecurityKey(Encoding.UTF8
-            .GetBytes(configuration
-                .GetValue<string>("JwtSettings:IssuerSigningKey")));
 
-        var jwtClaims = GetClaims(user);
-        var expiresTime = AuthConstants.TokenLifeTime;
-        var credentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(jwtClaims),
-            Expires = expiresTime,
-            Issuer = configuration.GetValue<string>("JwtSettings:ValidIssuer"),
-            Audience = configuration.GetValue<string>("JwtSettings:ValidAudience"),
-            SigningCredentials = credentials
-        };
-
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        var signedToken = tokenHandler.WriteToken(token);
-
-        return signedToken;
-    }
 
     public static Guid GetUserIdFromClaims(HttpContext httpContext)
     {
@@ -108,23 +84,6 @@ public static class JwtHelper
         {
             throw new InvalidTokenProvidedException();
         }
-    }
-
-    private static IEnumerable<Claim> GetClaims(User user)
-    {
-        var claims = new List<Claim>
-        {
-            new(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-            new(ClaimTypes.Email, user.Email),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUniversalTime().ToString()),
-            new("isVerified", user.IsVerified.ToString()),
-            new("isCreatedAccount", user.IsCreatedAccount.ToString())
-        };
-
-        // claims.SetRoleClaims(user);
-
-        return claims;
     }
 
     private static void SetRoleClaims(this ICollection<Claim> claims, User user)

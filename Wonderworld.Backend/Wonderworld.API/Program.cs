@@ -4,21 +4,21 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Wonderworld.API.Services.AccountServices;
-using Wonderworld.API.Services.ClassServices;
-using Wonderworld.API.Services.EditUserData;
-using Wonderworld.API.Services.EditUserServices;
-using Wonderworld.API.Services.InvitationServices;
 using Wonderworld.Application;
 using Wonderworld.Application.Common.Mappings;
+using Wonderworld.Application.Helpers.TokenHelper;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Application.Interfaces.Services;
-using Wonderworld.Application.Interfaces.Services.DefaultDataServices;
 using Wonderworld.Application.Interfaces.Services.ExternalServices;
 using Wonderworld.Infrastructure.Services;
+using Wonderworld.Infrastructure.Services.AccountServices;
+using Wonderworld.Infrastructure.Services.ClassServices;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Services.EditUserServices;
 using Wonderworld.Infrastructure.Services.EmailHandlerService;
 using Wonderworld.Infrastructure.Services.ExternalServices;
+using Wonderworld.Infrastructure.Services.InvitationServices;
+using Wonderworld.Infrastructure.Services.SearchService;
 using Wonderworld.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -101,7 +101,7 @@ builder.Services.AddHttpClient<IOrganizationSearchService, OrganizationSearchSer
     c.BaseAddress = new Uri("https://search-maps.yandex.ru/v1/");
 });
 
-builder.Services.AddTransient<ISharedLessonDbContext, SharedLessonDbContext>();
+builder.Services.AddScoped<ISharedLessonDbContext, SharedLessonDbContext>();
 builder.Services.AddScoped<IDefaultSearchService, DefaultSearchService>();
 builder.Services.AddScoped<IUserAccountService, UserAccountService>();
 builder.Services.AddScoped<IEditUserAccountService, EditUserAccountService>();
@@ -112,6 +112,7 @@ builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
 builder.Services.AddScoped<IEmailHandlerService, EmailHandlerService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
 
+builder.Services.AddScoped<ITokenHelper, TokenHelper>();
 
 var app = builder.Build();
 
