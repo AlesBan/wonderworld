@@ -131,7 +131,6 @@ public class UserAccountService : IUserAccountService
 
         var userProfileDto = await MapUserToUserProfileDto(userWithAccount);
 
-
         userProfileDto.ClasseDtos = await GetClassProfileDtos(userWithAccount.Classes.ToList());
 
         return userProfileDto;

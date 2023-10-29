@@ -5,65 +5,7 @@
     <projectFile profileName="Wonderworld.API">Wonderworld.API/Wonderworld.API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="Invitation bugs + optimization services">
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Common/AuthConstants.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetAllUsers/GetAllUsersQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Queries/GetAllUsers/GetAllUsersQueryHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Helpers/PasswordHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Helpers/TokenHelper/ITokenHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Application/Helpers/TokenHelper/TokenHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/AccountServices/IUserAccountService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/ClassServices/IClassService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/EditUserServices/IEditUserAccountService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/InvitationServices/IInvitationService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/InvitationServices/InvitationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.UnitTests/API.UnitTests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/API.UnitTests/API.UnitTests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.UnitTests/Common/TestSetup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.UnitTests/Common/TestSetup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.UnitTests/Helpers/JwtHelperTests.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.UnitTests/Services/EditUserAccountServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.UnitTests/Services/EditUserAccountServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Common/SharedLessonDbContextFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Common/SharedLessonDbContextFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitationCommandHandlerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitationCommandHandlerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/UserHandlers/Commands/CreateUserAccountCommandHandlerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/UserHandlers/Commands/CreateUserAccountCommandHandlerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Constants/AuthConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Constants/AuthConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Constants/EmailConstants.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/ClassController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/ClassController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/EditUserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/EditUserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/InvitationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/InvitationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/SearchController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/SearchController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Controllers/UserController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Helpers/JwtHelpers/JwtHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Helpers/JwtHelpers/JwtHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Helpers/ResponseHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Helpers/ResponseHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Helpers/UserHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Helpers/UserHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Models/ResponseResult.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Models/ResponseResult.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/AccountServices/IUserAccountService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Services/AccountServices/IUserAccountService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/AccountServices/UserAccountService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/ClassServices/ClassService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/ClassServices/ClassService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/ClassServices/IClassService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/EditUserServices/EditUserAccountService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/EditUserServices/EditUserAccountService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Services/EditUserServices/IEditUserAccountService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.API/Wonderworld.API.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Dtos/InvitationDtos/CreateInvitationRequestDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Dtos/InvitationDtos/CreateInvitationRequestDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitation/CreateInvitationCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/CreateUserAccount/CreateUserAccountCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/CreateUserAccount/CreateUserAccountCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/RegisterUser/RegisterUserCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/RegisterUser/RegisterUserCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/RegisterUser/RegisterUserCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/RegisterUser/RegisterUserCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/UpdateUserPasswordHash/UpdateUserPasswordHashCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/UpdateUserPasswordHash/UpdateUserPasswordHashCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/UpdateUserPasswordHash/UpdateUserPasswordHashCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/UpdateUserPasswordHash/UpdateUserPasswordHashCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/UpdateUserToken/UpdateUserVerificationTokenCommandHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/UserHandlers/Commands/UpdateUserToken/UpdateUserVerificationTokenCommandHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Interfaces/Services/DefaultDataServices/IDefaultSearchDataService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/DefaultDataServices/IDefaultSearchDataService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Interfaces/Services/ISearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/SearchService/ISearchService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Application/Wonderworld.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Application/Wonderworld.Application.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Domain/Entities/Communication/Invitation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Domain/Entities/Communication/Invitation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Infrastructure/Constants/EmailConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Constants/EmailConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Infrastructure/Helpers/UserHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Helpers/UserHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/AccountServices/UserAccountService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/AccountServices/UserAccountService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/DefaultDataServices/DefaultSearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/DefaultDataServices/DefaultSearchService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/SearchService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Infrastructure/Services/SearchService/SearchService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/EntityConfiguration/Communication/InvitationConfiguration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/EntityConfiguration/Communication/InvitationConfiguration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wonderworld.Persistence/ModelBuilderExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wonderworld.Persistence/ModelBuilderExtensions.cs" afterDir="false" />
-    </list>
+    <list default="true" id="ab37b340-cbca-4baa-ac2f-be09272e078a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +14,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="DevelopBackend" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
       </map>
     </option>
   </component>
@@ -116,74 +58,67 @@
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Dtos/UserDtos/CreateAccountDtos/CreateUserAccountRequestDto.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Wonderworld.Application/Handlers/EntityHandlers/CityHandlers/Queries/GetCity/GetCityQuery.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2XDkMzRKBCAMvo82vKuHc1r4MUk" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
-  }
-}</component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task id="LOCAL-00001" summary="add secrets">
-      <created>1698173720303</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1698173720303</updated>
-    </task>
-    <task id="LOCAL-00002" summary="update docker file">
-      <created>1698176271414</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1698176271414</updated>
-    </task>
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="3ba1f068-2adf-4c7c-97b2-45e6894d5f7c" name="Changes" comment="" />
-      <created>1698224668477</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1698224668477</updated>
-      <workItem from="1698224669753" duration="108000" />
-      <workItem from="1698230302842" duration="4105000" />
-      <workItem from="1698249805757" duration="794000" />
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="update docker file" />
-    <option name="LAST_COMMIT_MESSAGE" value="update docker file" />
-  </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.API/Filters/ExceptionFilterAttribute.cs</url>
+          <line>28</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Filters\ExceptionFilterAttribute.cs" initialLine="28" containingFunctionPresentation="method 'OnExceptionAsync'">
+            <startOffsets>
+              <option value="1095" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1188" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Application.UnitTests/Handlers/EntityHandlers/InvitationHandlers/Commands/CreateInvitationCommandHandlerTests.cs</url>
+          <line>38</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Application.UnitTests\Handlers\EntityHandlers\InvitationHandlers\Commands\CreateInvitationCommandHandlerTests.cs" initialLine="37" containingFunctionPresentation="method 'CreateInvitationCommandHandler_Handle_ShouldCreateInvitation'">
+            <startOffsets>
+              <option value="1457" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1962" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.Infrastructure/Constants/EmailConstants.cs</url>
+          <line>15</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Constants\EmailConstants.cs" initialLine="15" containingFunctionPresentation="method 'GetEmailSenderInvitationMessage'" />
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.Infrastructure/Constants/EmailConstants.cs</url>
+          <line>21</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Constants\EmailConstants.cs" initialLine="21" containingFunctionPresentation="method 'GetEmailReceiverInvitationMessage'" />
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.Infrastructure/Services/InvitationServices/InvitationService.cs</url>
+          <line>49</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Services\InvitationServices\InvitationService.cs" initialLine="48" containingFunctionPresentation="method 'SendInvitationEmail'" />
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Wonderworld.Infrastructure/Services/InvitationServices/InvitationService.cs</url>
+          <line>51</line>
+          <properties documentPath="D:\Прога\Projects\WonderWorld\wonderworld\Wonderworld.Backend\Wonderworld.API\Services\InvitationServices\InvitationService.cs" initialLine="50" containingFunctionPresentation="method 'SendInvitationEmail'" />
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Type#Wonderworld.Domain.EntityConnections.InstitutionTypeInstitution" memberName="InstitutionType" />
@@ -193,5 +128,10 @@
         <PinnedItemInfo parentTag="Type#Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity.GetCityQuery" memberName="Country" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="RiderUnitTests">
+        <watch expression="Context" language="C#" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
