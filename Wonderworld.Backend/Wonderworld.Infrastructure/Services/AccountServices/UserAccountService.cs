@@ -39,21 +39,23 @@ public class UserAccountService : IUserAccountService
     private readonly IMapper _mapper;
     private readonly IEmailHandlerService _emailHandlerService;
     private readonly ITokenHelper _tokenHelper;
+    private readonly IUserHelper _userHelper;
 
     public UserAccountService(IConfiguration configuration, IMapper mapper, IEmailHandlerService emailHandlerService,
-        ITokenHelper tokenHelper)
+        ITokenHelper tokenHelper, IUserHelper userHelper)
     {
         _configuration = configuration;
         _mapper = mapper;
         _emailHandlerService = emailHandlerService;
         _tokenHelper = tokenHelper;
+        _userHelper = userHelper;
     }
 
     public async Task<IEnumerable<UserProfileDto>> GetAllUsers(IMediator mediator)
     {
         var users = await mediator.Send(new GetAllUsersQuery());
         var userProfileDtosTasks = users.Select(async u =>
-            await MapUserToUserProfileDto(u));
+            await _userHelper.MapUserToUserProfileDto(u));
 
         var userProfileDtos = await Task.WhenAll(userProfileDtosTasks);
         return userProfileDtos;
@@ -78,14 +80,12 @@ public class UserAccountService : IUserAccountService
 
     public async Task<UserProfileDto> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator)
     {
-        var user = await UserHelper.GetUserByEmail(requestUserDto.Email, mediator);
+        var user = await _userHelper.GetUserByEmail(requestUserDto.Email, mediator);
 
-        UserHelper.CheckUserVerification(user);
+        _userHelper.CheckUserVerification(user);
         PasswordHelper.VerifyPasswordHash(user, requestUserDto.Password);
 
-        var userProfileDto = await MapUserToUserProfileDto(user);
-
-        userProfileDto.ClasseDtos = await GetClassProfileDtos(user.Classes.ToList());
+        var userProfileDto = await _userHelper.MapUserToUserProfileDto(user);
 
         var newToken = _tokenHelper.CreateToken(user);
 
@@ -98,7 +98,7 @@ public class UserAccountService : IUserAccountService
 
     public async Task<string> ConfirmEmail(string token, IMediator mediator)
     {
-        var user = await UserHelper.GetUserByToken(token, mediator);
+        var user = await _userHelper.GetUserByToken(token, mediator);
 
         var verifiedUser = await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
 
@@ -111,7 +111,7 @@ public class UserAccountService : IUserAccountService
 
     public async Task<string> ForgotPassword(string userEmail, IMediator mediator)
     {
-        var user = await UserHelper.GetUserByEmail(userEmail, mediator);
+        var user = await _userHelper.GetUserByEmail(userEmail, mediator);
 
         var resetToken = _tokenHelper.CreateToken(user);
 
@@ -124,14 +124,12 @@ public class UserAccountService : IUserAccountService
         CreateUserAccountRequestDto requestUserDto,
         IMediator mediator)
     {
-        var user = await UserHelper.GetUserById(userId, mediator);
+        var user = await _userHelper.GetUserById(userId, mediator);
 
-        UserHelper.CheckUserVerification(user);
+        _userHelper.CheckUserVerification(user);
         var userWithAccount = await GetUserWithAccount(userId, requestUserDto, mediator);
 
-        var userProfileDto = await MapUserToUserProfileDto(userWithAccount);
-
-        userProfileDto.ClasseDtos = await GetClassProfileDtos(userWithAccount.Classes.ToList());
+        var userProfileDto = await _userHelper.MapUserToUserProfileDto(userWithAccount);
 
         return userProfileDto;
     }
@@ -139,7 +137,7 @@ public class UserAccountService : IUserAccountService
     public async Task<UserProfileDto> GetUserProfile(Guid userId, IMediator mediator)
     {
         var user = await mediator.Send(new GetUserByIdQuery(userId));
-        var userProfileDto = await MapUserToUserProfileDto(user);
+        var userProfileDto = await _userHelper.MapUserToUserProfileDto(user);
         return userProfileDto;
     }
 
@@ -243,32 +241,5 @@ public class UserAccountService : IUserAccountService
     {
         var query = new GetGradesQuery(grades);
         return await mediator.Send(query);
-    }
-
-    private async Task<UserProfileDto> MapUserToUserProfileDto(User user)
-    {
-        var userProfileDto = _mapper.Map<UserProfileDto>(user);
-        userProfileDto.LanguageTitles = user.UserLanguages.Select(ul => ul.Language.Title).ToList();
-        userProfileDto.DisciplineTitles = user.UserDisciplines.Select(ud => ud.Discipline.Title).ToList();
-        userProfileDto.Institution = _mapper.Map<InstitutionDto>(user.Institution);
-        userProfileDto.GradeNumbers = user.UserGrades.Select(ug => ug.Grade.GradeNumber).ToList();
-        userProfileDto.ClasseDtos = await GetClassProfileDtos(user.Classes.ToList());
-        return userProfileDto;
-    }
-
-    private static Task<List<ClassProfileDto>> GetClassProfileDtos(IEnumerable<Class> classes)
-    {
-        return Task.FromResult(classes.Select(c => new ClassProfileDto
-            {
-                ClassId = c.ClassId,
-                Title = c.Title,
-                UserFullName = c.User.FullName,
-                UserRating = c.User.Rating,
-                Grade = c.Grade.GradeNumber,
-                Languages = c.ClassLanguages.Select(cl => cl.Language.Title).ToList(),
-                Disciplines = c.ClassDisciplines.Select(cd => cd.Discipline.Title).ToList(),
-                PhotoUrl = c.PhotoUrl!
-            })
-            .ToList());
     }
 }

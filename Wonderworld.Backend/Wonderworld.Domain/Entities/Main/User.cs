@@ -20,14 +20,14 @@ public class User
     public bool IsInstitutionVerified { get; set; }
     public string? FirstName { get; set; } = string.Empty;
     public string? LastName { get; set; } = string.Empty;
-    public bool? IsATeacher { get; set; }
-    public bool? IsAnExpert { get; set; }
+    public bool IsATeacher { get; set; }
+    public bool IsAnExpert { get; set; }
     public ICollection<Class> Classes { get; set; } = new List<Class>();
     public Guid? InstitutionId { get; set; }
     public Institution? Institution { get; set; }
-    public Guid? CityId { get; set; }
+    public Guid CityId { get; set; }
     public City? City { get; set; }
-    public Guid? CountryId { get; set; }
+    public Guid CountryId { get; set; }
     public Country? Country { get; set; }
     public ICollection<UserLanguage> UserLanguages { get; set; } = new List<UserLanguage>();
     public ICollection<UserDiscipline> UserDisciplines { get; set; } = new List<UserDiscipline>();

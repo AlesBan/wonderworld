@@ -18,10 +18,12 @@ namespace Wonderworld.Infrastructure.Services.EditUserServices;
 public class EditUserAccountService : IEditUserAccountService
 {
     private readonly IMapper _mapper;
+    private readonly IUserHelper _userHelper;
 
-    public EditUserAccountService(IMapper mapper)
+    public EditUserAccountService(IMapper mapper, IUserHelper userHelper)
     {
         _mapper = mapper;
+        _userHelper = userHelper;
     }
 
     public async Task<UserProfileDto> EditUserPersonalInfoAsync(Guid userId,
@@ -60,7 +62,7 @@ public class EditUserAccountService : IEditUserAccountService
         TRequestDto requestUserDto,
         IMediator mediator)
     {
-        var user = await UserHelper.GetUserById(userId, mediator);
+        var user = await _userHelper.GetUserById(userId, mediator);
         var updatedUser = await GetUpdatedUserAsync(user, requestUserDto, mediator);
 
         var userProfileDto = _mapper.Map<UserProfileDto>(updatedUser);

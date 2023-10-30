@@ -10,6 +10,7 @@ using Wonderworld.Application.Helpers.TokenHelper;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Application.Interfaces.Services.ExternalServices;
+using Wonderworld.Infrastructure.Helpers;
 using Wonderworld.Infrastructure.Services;
 using Wonderworld.Infrastructure.Services.AccountServices;
 using Wonderworld.Infrastructure.Services.ClassServices;
@@ -113,6 +114,8 @@ builder.Services.AddScoped<IEmailHandlerService, EmailHandlerService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
 
 builder.Services.AddScoped<ITokenHelper, TokenHelper>();
+builder.Services.AddScoped<IUserHelper, UserHelper>();
+
 
 var app = builder.Build();
 

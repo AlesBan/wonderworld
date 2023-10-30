@@ -22,12 +22,12 @@ public class GetUserProfileListByDefaultSearchQueryCommandHandlerTests : TestCom
 
         var searchRequest = new DefaultSearchRequestDto
         {
-            Disciplines = new List<Discipline> { discipline1, discipline2 },
-            Country = Context.Countries.SingleAsync(c => c
-                .Title == "CountryA").Result
+            DisciplineIds = new List<Guid> { discipline1.DisciplineId, discipline2.DisciplineId },
+            CountryId = Context.Countries.SingleAsync(c => c
+                .Title == "CountryA").Result.CountryId
         };
 
-        var command = new GetUserProfileListByDefaultSearchRequestCommand
+        var command = new GetUserListByDefaultSearchRequestCommand
         {
             SearchRequest = searchRequest
         };
@@ -38,7 +38,7 @@ public class GetUserProfileListByDefaultSearchQueryCommandHandlerTests : TestCom
 
         var mapper = mapperConfiguration.CreateMapper();
 
-        var handler = new GetUserProfileListByDefaultSearchRequestCommandHandler(Context, mapper);
+        var handler = new GetUserListByDefaultSearchRequestCommandHandler(Context, mapper);
 
         // Act
         var result = await handler.Handle(command, cancellationToken);

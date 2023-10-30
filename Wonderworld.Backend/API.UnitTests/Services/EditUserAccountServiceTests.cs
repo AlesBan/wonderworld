@@ -29,6 +29,7 @@ using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums.EntityTypes;
+using Wonderworld.Infrastructure.Helpers;
 using Wonderworld.Infrastructure.Services.EditUserServices;
 using Xunit;
 
@@ -41,6 +42,7 @@ public class EditUserAccountServiceTests : TestCommonBase
     {
         // Arrange
         var mediatorMock = new Mock<IMediator>();
+        var userHelperMock = new Mock<IUserHelper>();
 
         var userId = SharedLessonDbContextFactory.UserAId;
         var user = Context.Users.FirstOrDefault(u =>
@@ -88,7 +90,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper);
+        var service = new EditUserAccountService(mapper, userHelperMock.Object);
 
         // Act
         var result = await service.EditUserPersonalInfoAsync(userId, requestUserDto, mediatorMock.Object);
@@ -109,6 +111,7 @@ public class EditUserAccountServiceTests : TestCommonBase
     {
         // Arrange
         var mediatorMock = new Mock<IMediator>();
+        var userHelperMock = new Mock<IUserHelper>();
 
         var userId = Guid.NewGuid();
         var user = new User()
@@ -160,11 +163,12 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper);
+        var service = new EditUserAccountService(mapper, userHelperMock.Object);
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<UserNotFoundException>(async () => await service.EditUserPersonalInfoAsync(userId, requestUserDto, mediatorMock.Object));
+        await Assert.ThrowsAsync<UserNotFoundException>(async () =>
+            await service.EditUserPersonalInfoAsync(userId, requestUserDto, mediatorMock.Object));
     }
 
     [Fact]
@@ -172,6 +176,7 @@ public class EditUserAccountServiceTests : TestCommonBase
     {
         // Arrange
         var mediatorMock = new Mock<IMediator>();
+        var userHelperMock = new Mock<IUserHelper>();
 
         const string newInstitutionTitle = "NewInstitutionTitle";
         const string newAddress = "NewAddress";
@@ -233,7 +238,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper);
+        var service = new EditUserAccountService(mapper, userHelperMock.Object);
 
         // Act
         var result = await service.EditUserInstitutionAsync(userId, requestUserDto, mediatorMock.Object);
@@ -251,6 +256,7 @@ public class EditUserAccountServiceTests : TestCommonBase
     {
         // Arrange
         var mediatorMock = new Mock<IMediator>();
+        var userHelperMock = new Mock<IUserHelper>();
 
         const string newEmail = "NewEmail@gmail.com";
 
@@ -284,7 +290,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper);
+        var service = new EditUserAccountService(mapper, userHelperMock.Object);
 
         // Act
         var result = await service.EditUserEmailAsync(userId, requestUserDto, mediatorMock.Object);
@@ -302,6 +308,7 @@ public class EditUserAccountServiceTests : TestCommonBase
     {
         // Arrange
         var mediatorMock = new Mock<IMediator>();
+        var userHelperMock = new Mock<IUserHelper>();
 
         const string newPassword = "NewPassword";
 
@@ -335,7 +342,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper);
+        var service = new EditUserAccountService(mapper, userHelperMock.Object);
 
         // Act
         var result = await service.EditUserPasswordAsync(userId, requestUserDto, mediatorMock.Object);
@@ -352,7 +359,7 @@ public class EditUserAccountServiceTests : TestCommonBase
     {
         // Arrange
         var mediatorMock = new Mock<IMediator>();
-
+        var userHelperMock = new Mock<IUserHelper>();
         var languageTitles = new List<string>()
         {
             LanguageType.English.ToString(),
@@ -391,31 +398,31 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var getGradesQuery = new GetGradesQuery(gradeNList);
         var getGradesHandler = new GetGradesQueryHandler(Context);
-        
+
 
         var languages = await getLanguagesHandler
             .Handle(getLanguagesQuery, CancellationToken.None);
-        
+
         var disciplines = await getDisciplinesHandler
             .Handle(getDisciplinesQuery, CancellationToken.None);
-        
+
         var grades = await getGradesHandler
             .Handle(getGradesQuery, CancellationToken.None);
-        
+
         var createUserLanguagesCommand = new CreateUserLanguagesCommand()
         {
             UserId = user.UserId,
             LanguageIds = languages.Select(l => l.LanguageId).ToList()
         };
         var createUserLanguagesHandler = new CreateUserLanguagesCommandHandler(Context);
-        
+
         var createUserDisciplinesCommand = new CreateUserDisciplinesCommand()
         {
             UserId = user.UserId,
             DisciplineIds = disciplines.Select(d => d.DisciplineId).ToList()
         };
         var createUserDisciplinesHandler = new CreateUserDisciplinesCommandHandler(Context);
-        
+
         var createUserGradesCommand = new CreateUserGradesCommand()
         {
             UserId = user.UserId,
@@ -423,13 +430,17 @@ public class EditUserAccountServiceTests : TestCommonBase
         };
         var createUserGradesHandler = new CreateUserGradesCommandHandler(Context);
 
-        mediatorMock.Setup(m=>m.Send(It.IsAny<CreateUserLanguagesCommand>(),
-            It.IsAny<CancellationToken>())).ReturnsAsync(await createUserLanguagesHandler.Handle(createUserLanguagesCommand, CancellationToken.None));
+        mediatorMock.Setup(m => m.Send(It.IsAny<CreateUserLanguagesCommand>(),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(await createUserLanguagesHandler.Handle(createUserLanguagesCommand, CancellationToken.None));
         mediatorMock.Setup(m => m.Send(It.IsAny<CreateUserDisciplinesCommand>(),
-            It.IsAny<CancellationToken>())).ReturnsAsync(await createUserDisciplinesHandler.Handle(createUserDisciplinesCommand, CancellationToken.None));
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(
+                await createUserDisciplinesHandler.Handle(createUserDisciplinesCommand, CancellationToken.None));
         mediatorMock.Setup(m => m.Send(It.IsAny<CreateUserGradesCommand>(),
-            It.IsAny<CancellationToken>())).ReturnsAsync(await createUserGradesHandler.Handle(createUserGradesCommand, CancellationToken.None));
-        
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(await createUserGradesHandler.Handle(createUserGradesCommand, CancellationToken.None));
+
         var updateUserLanguagesCommand = new UpdateUserLanguagesCommand
         {
             UserId = user.UserId,
@@ -443,40 +454,40 @@ public class EditUserAccountServiceTests : TestCommonBase
             NewDisciplineIds = disciplines.Select(d => d.DisciplineId).ToList()
         };
         var updateUserDisciplinesHandler = new UpdateUserDisciplinesCommandHandler(Context, mediatorMock.Object);
-        
+
         var updateUserGradesCommand = new UpdateUserGradesCommand
         {
             UserId = user.UserId,
             NewGradeIds = grades.Select(g => g.GradeId).ToList()
         };
         var updateUserGradesHandler = new UpdateUserGradesCommandHandler(Context, mediatorMock.Object);
-            
-        mediatorMock.Setup(m=>m.Send(It.IsAny<GetLanguagesByTitlesQuery>(),
+
+        mediatorMock.Setup(m => m.Send(It.IsAny<GetLanguagesByTitlesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(languages);
         mediatorMock.Setup(m => m.Send(It.IsAny<GetDisciplinesByTitlesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(disciplines);
         mediatorMock.Setup(m => m.Send(It.IsAny<GetGradesQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(grades);
-        
+
         mediatorMock.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(user);
         mediatorMock.Setup(m => m.Send(It.IsAny<UpdateProfessionalInfoCommand>(),
-            It.IsAny<CancellationToken>()))
+                It.IsAny<CancellationToken>()))
             .ReturnsAsync(await updateProfessionalInfoHandler
                 .Handle(updateProfessionalInfoCommand, CancellationToken.None));
 
         mediatorMock.Setup(m => m.Send(It.IsAny<UpdateUserLanguagesCommand>(),
-            It.IsAny<CancellationToken>()))
+                It.IsAny<CancellationToken>()))
             .ReturnsAsync(await updateUserLanguagesHandler
                 .Handle(updateUserLanguagesCommand, CancellationToken.None));
-        
+
         mediatorMock.Setup(m => m.Send(It.IsAny<UpdateUserDisciplinesCommand>(),
-            It.IsAny<CancellationToken>()))
+                It.IsAny<CancellationToken>()))
             .ReturnsAsync(await updateUserDisciplinesHandler
                 .Handle(updateUserDisciplinesCommand, CancellationToken.None));
-        
+
         mediatorMock.Setup(m => m.Send(It.IsAny<UpdateUserGradesCommand>(),
-            It.IsAny<CancellationToken>()))
+                It.IsAny<CancellationToken>()))
             .ReturnsAsync(await updateUserGradesHandler
                 .Handle(updateUserGradesCommand, CancellationToken.None));
 
@@ -496,7 +507,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper);
+        var service = new EditUserAccountService(mapper, userHelperMock.Object);
 
         // Act
         var result = await service.EditUserProfessionalInfoAsync(userId, requestUserDto, mediatorMock.Object);
@@ -506,14 +517,13 @@ public class EditUserAccountServiceTests : TestCommonBase
         var userProfileDto = Assert.IsType<UserProfileDto>(okResult.Value);
 
         Assert.NotNull(userProfileDto);
-        
+
         Assert.Equal(languageTitles.Count, userProfileDto.LanguageTitles.Count);
         Assert.Equal(disciplineTitles.Count, userProfileDto.DisciplineTitles.Count);
-        
+
         Assert.True(languageTitles.OrderBy(x => x)
             .SequenceEqual(userProfileDto.LanguageTitles.OrderBy(x => x)));
         Assert.True(disciplineTitles.OrderBy(x => x)
             .SequenceEqual(userProfileDto.DisciplineTitles.OrderBy(x => x)));
     }
 }
-
