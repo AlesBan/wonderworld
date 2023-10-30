@@ -61,7 +61,7 @@ public class DefaultSearchService : IDefaultSearchService
         return new DefaultSearchRequestDto
         {
             DisciplineIds = userDisciplineIds,
-            CountryId = userCountryId
+            CountryId = userCountryId ?? Guid.Empty
         };
     }
 
@@ -121,10 +121,11 @@ public class DefaultSearchService : IDefaultSearchService
     {
         var expertByDisciplines = userList
             .Where(up => userDisciplines.Any(ud =>
-                             up.UserDisciplines.Select(udd => udd.Discipline.Title)
-                                 .Any(d =>
-                                     d == ud)) &&
-                         up.IsAnExpert && !up.IsATeacher);
+                up.UserDisciplines.Any(udd =>
+                    udd.Discipline.Title == ud) &&
+                up.IsAnExpert.HasValue && up.IsAnExpert.Value &&
+                up.IsATeacher.HasValue && !up.IsATeacher.Value));
+        
         var expertProfiles = await GetUserProfileList(expertByDisciplines);
 
         return expertProfiles;
@@ -135,7 +136,8 @@ public class DefaultSearchService : IDefaultSearchService
     {
         var expertByCountry = userProfileList
             .Where(up => up.Country.Title == userCountry &&
-                         up.IsAnExpert && !up.IsATeacher);
+                         up.IsAnExpert.HasValue && up.IsAnExpert.Value &&
+                         up.IsATeacher.HasValue && !up.IsATeacher.Value);
 
         var expertProfiles = await GetUserProfileList(expertByCountry);
 
@@ -150,7 +152,7 @@ public class DefaultSearchService : IDefaultSearchService
             .Where(up => userDisciplines.Any(ud =>
                 up.UserDisciplines.Select(udd => udd.Discipline.Title)
                     .Any(d =>
-                        d == ud)) && up.IsATeacher);
+                        d == ud)) && up.IsATeacher.HasValue && up.IsATeacher.Value);
 
         var teacherProfiles = await GetUserProfileList(teachersByDisciplines);
 
@@ -163,7 +165,7 @@ public class DefaultSearchService : IDefaultSearchService
         var teacherByCountry = userProfileList
             .Where(up =>
                 up.Country.Title == userCountry &&
-                up.IsATeacher);
+                up.IsATeacher.HasValue && up.IsATeacher.Value);
 
         var teacherProfilesByCountry = await GetUserProfileList(teacherByCountry);
         return teacherProfilesByCountry;
