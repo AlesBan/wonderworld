@@ -4,6 +4,7 @@ using Wonderworld.API.Filters;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Services.SearchService;
 
 namespace Wonderworld.API.Controllers;
 
@@ -24,22 +25,11 @@ public class SearchController : BaseController
 
     [HttpGet("search-request")]
     public async Task<SearchResponseDto> GetTeachersAndClassesDependingOnSearchRequest(
-        [FromBody] SearchRequestDto searchRequest)
+        [FromQuery] SearchRequestDto searchRequest)
     {
-        return await _searchService.GetTeacherAndClassProfilesDependingOnSearchRequest(searchRequest, Mediator);
+        return await _searchService.GetTeacherAndClassProfiles(searchRequest, Mediator);
     }
 
-    /// <summary>
-    /// Get Teachers and Classes depending on default search request
-    /// </summary>
-    /// <remarks>
-    /// GET /api/default-search-request
-    /// </remarks>
-    /// <returns>
-    /// Returns DefaultSearchResponse
-    /// </returns>
-    /// <response code="200">Returns DefaultSearchResponse</response>
-    /// <response code="400">Returns ResponseResult</response>
     [HttpGet("default-search-request")]
     public async Task<DefaultSearchResponseDto> GetTeachersAndClassesDependingOnDefaultSearchRequest()
     {

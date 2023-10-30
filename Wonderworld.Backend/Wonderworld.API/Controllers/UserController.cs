@@ -30,7 +30,7 @@ public class UserController : BaseController
     public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
     {
         var result = await _userAccountService.RegisterUser(requestUserDto, Mediator);
-        return ResponseHelper.GetOkResult(result);
+        return ResponseHelper.GetAuthResultOk(result);
     }
 
     [HttpPost("login")]
@@ -44,14 +44,14 @@ public class UserController : BaseController
     public async Task<IActionResult> ConfirmEmail(string token)
     {
         var result = await _userAccountService.ConfirmEmail(token, Mediator);
-        return ResponseHelper.GetOkResult(result);
+        return ResponseHelper.GetAuthResultOk(result);
     }
 
     [HttpPost("forgot-password")]
     public async Task<IActionResult> ForgotPassword(string email)
     {
         var result = await _userAccountService.ForgotPassword(email, Mediator);
-        return ResponseHelper.GetOkResult(result);
+        return ResponseHelper.GetAuthResultOk(result);
     }
 
     [Authorize]

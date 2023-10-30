@@ -1,8 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
-using Wonderworld.API.Constants;
 using Wonderworld.Application.Common.Exceptions.Authentication;
 using Wonderworld.Domain.Entities.Main;
 using static System.Boolean;
@@ -11,8 +8,6 @@ namespace Wonderworld.API.Helpers.JwtHelpers;
 
 public static class JwtHelper
 {
-
-
     public static Guid GetUserIdFromClaims(HttpContext httpContext)
     {
         var decodedToken = GetTokenFromHeader(httpContext);

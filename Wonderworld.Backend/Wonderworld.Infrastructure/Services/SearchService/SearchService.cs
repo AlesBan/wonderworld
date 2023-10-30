@@ -1,10 +1,8 @@
-using AutoMapper;
 using MediatR;
 using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListBySearchRequest;
-using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Infrastructure.Helpers;
 
@@ -12,44 +10,24 @@ namespace Wonderworld.Infrastructure.Services.SearchService;
 
 public class SearchService : ISearchService
 {
-    private readonly IMapper _mapper;
     private readonly IUserHelper _userHelper;
 
-    public SearchService(IMapper mapper, IUserHelper userHelper)
+    public SearchService(IUserHelper userHelper)
     {
-        _mapper = mapper;
         _userHelper = userHelper;
     }
 
-    public async Task<SearchResponseDto> GetTeacherAndClassProfilesDependingOnSearchRequest(
-        SearchRequestDto searchRequest, IMediator mediator)
-    {
-        var userProfileList = (await GetUserProfilesBySearchRequest(searchRequest, mediator)).ToList();
-
-        var classProfileList = (await GetClassProfiles(userProfileList)).ToList();
-
-        var responseDto = CreateSearchResponseDto(userProfileList, classProfileList);
-
-        return responseDto;
-    }
-
-    private async Task<IEnumerable<UserProfileDto>> GetUserProfilesBySearchRequest(
-        SearchRequestDto searchRequest,
-        IMediator mediator)
+    public async Task<SearchResponseDto> GetTeacherAndClassProfiles(SearchRequestDto searchRequest, IMediator mediator)
     {
         var userList = await GetUserListBySearchRequest(searchRequest, mediator);
-
-        var userProfileDtosTasks = userList.Select(async u =>
-            await _userHelper.MapUserToUserProfileDto(u));
-
-        var userProfileDtos = await Task.WhenAll(userProfileDtosTasks);
-        return userProfileDtos;
+        var searchResponseDto = await GetSearchResponseDto(userList, searchRequest.Disciplines);
+        return searchResponseDto;
     }
 
-    private async Task<IEnumerable<User>> GetUserListBySearchRequest(
-        SearchRequestDto searchRequest, IMediator mediator)
+    private static async Task<IEnumerable<User>> GetUserListBySearchRequest(SearchRequestDto searchRequest,
+        IMediator mediator)
     {
-        var query = new GetUserListBySearchRequestCommand()
+        var query = new GetUserListBySearchRequestCommand
         {
             SearchRequest = searchRequest
         };
@@ -59,32 +37,53 @@ public class SearchService : ISearchService
         return userList;
     }
 
-
-    private static SearchResponseDto CreateSearchResponseDto(IReadOnlyCollection<UserProfileDto> userProfileList,
-        IEnumerable<ClassProfileDto> classProfileList)
+    private async Task<SearchResponseDto> GetSearchResponseDto(IEnumerable<User> userList,
+        IEnumerable<string> languages)
     {
-        var responseDto = new SearchResponseDto
-        {
-            TeacherProfiles = userProfileList.Where(u =>
-                    u.IsATeacher)
-                .ToList(),
-            ExpertProfiles = userProfileList.Where(u =>
-                u.IsAnExpert &&
-                u.IsATeacher == false),
-            ClassProfiles = classProfileList
-        };
+        var userProfileList = await GetUserProfileList(userList);
+        var teacherProfiles = GetProfiles(userProfileList, isTeacher: true);
+        var expertProfiles = GetProfiles(userProfileList, isTeacher: false);
+        var classProfiles = GetClassProfiles(teacherProfiles, languages);
 
-        return responseDto;
+        return new SearchResponseDto
+        {
+            TeacherProfiles = teacherProfiles,
+            ExpertProfiles = expertProfiles,
+            ClassProfiles = classProfiles
+        };
     }
 
-    private Task<IEnumerable<ClassProfileDto>> GetClassProfiles(IEnumerable<UserProfileDto> userProfileList)
+    private async Task<IEnumerable<UserProfileDto>> GetUserProfileList(IEnumerable<User> userList)
     {
-        var classList = userProfileList.Select(up => up.ClasseDtos).ToList();
+        var userProfileDtos = await Task.WhenAll(userList
+            .Select(u =>
+                _userHelper.MapUserToUserProfileDto(u)));
+        return userProfileDtos;
+    }
 
-        var classProfileList = classList.Select(cp =>
-                _mapper.Map<ClassProfileDto>(cp))
-            .ToList();
+    private static IEnumerable<UserProfileDto> GetProfiles(IEnumerable<UserProfileDto> userProfileList, bool isTeacher)
+    {
+        return userProfileList
+            .Where(up => up.IsATeacher == isTeacher);
+    }
 
-        return Task.FromResult<IEnumerable<ClassProfileDto>>(classProfileList);
+    private static IEnumerable<ClassProfileDto> GetClassProfiles(IEnumerable<UserProfileDto> teacherProfiles,
+        IEnumerable<string> disciplines)
+    {
+        return teacherProfiles
+            .SelectMany(tp => tp.ClasseDtos)
+            .Where(c => c.Disciplines.Intersect(disciplines,
+                StringComparer.OrdinalIgnoreCase).Any())
+            .Select(c => new ClassProfileDto
+            {
+                ClassId = c.ClassId,
+                Title = c.Title,
+                UserFullName = c.UserFullName,
+                UserRating = c.UserRating,
+                Grade = c.Grade,
+                Languages = c.Languages,
+                Disciplines = c.Disciplines,
+                PhotoUrl = c.PhotoUrl!
+            });
     }
 }
