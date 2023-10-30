@@ -3,7 +3,7 @@
 async function postCreateClass() {
     const url = 'http://localhost:7280/api/class/create-class';
     const disciplines = localStorage.getItem('disciplines').split(',');
-    const grades = localStorage.getItem('grades');
+    const grades = localStorage.getItem('grades').split(',').map(str => parseInt(str));
     const data = {
         Title: localStorage.getItem('classTitle'),
         GradeNumber: grades,
@@ -24,7 +24,7 @@ async function postCreateClass() {
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization':`Bearer ${localStorage.getItem('accessToken')}`
+            'Authorization':`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZTY4MDRiZi1lZGYzLTQ5ZTgtYTVjZS1jNDAyZjIxMDQwOTUiLCJlbWFpbCI6ImtsaW1wYXZsb3YyMDAyQGdtYWlsLmNvbSIsImp0aSI6ImY3MzAwYTRmLTY3MTEtNGYwOS05MzI5LTZiMmY0Zjg0NGM4MyIsImlhdCI6MTY5ODY2NzAyOCwiaXNWZXJpZmllZCI6IlRydWUiLCJpc0NyZWF0ZWRBY2NvdW50IjoiRmFsc2UiLCJuYmYiOjE2OTg2NjcwMjgsImV4cCI6MTY5ODc1MzE1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MjgwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo3MjgwIn0.ufqzCfvu--Rh54FMCFE6XoJ_O3S5swbuHckEDgFTlfs`
         },
         body: JSON.stringify(data)
     })

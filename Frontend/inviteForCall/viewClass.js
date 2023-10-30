@@ -35,6 +35,7 @@ classPreviews.forEach((classPreview) => {
             inviteClassButton.addEventListener('click', ()=> {
                 closeExpandedClassPreview(classPreview);
                 inviteClass()
+
             })
 
             // Добавляем слушатель события клика на весь документ

@@ -18,7 +18,7 @@ function chooseGrades() {
       <div class="first-name">
         <div class="input-title">Grades</div>
 <div class="select-btn">
-    <span class="btn-text-grades">Select..</span>
+    <span class="btn-text-grades" id="grades">Select..</span>
     <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
@@ -53,7 +53,7 @@ function chooseGrades() {
             return `
 
  <li class="item">
-        <span class="item-text">${grade.age}</span>
+        <span class="item-text">${grade.classNum}</span>
         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
     </li>
     `;
@@ -76,7 +76,10 @@ function chooseGrades() {
                         selectedValues.splice(index, 1);
                     }
                 }
-                selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(", ");
+                selectedValuesDiv.innerHTML = selectedValues.map(value => `<span>${value}</span>`).join(',');
+
+                localStorage.setItem('grades', selectedValues);
+
             });
 
         });

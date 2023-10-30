@@ -34,7 +34,7 @@ inviteForm.innerHTML = `
            
         </div>
     </div>
-    <div class="select-your-class">
+    <div class="select-your-class"> Select class
         <div class="class-preview">
                 <div class="class-preview-content">
                     <div class="class-preview-image"><img src="../images/class-preview-image.svg" alt=""></div>
@@ -56,6 +56,9 @@ inviteForm.innerHTML = `
                 </div>
             </div>
     </div>
+    <div class="invite-message"> Message
+        <input type="text" class="message-container" placeholder="Add a message">
+    </div>
     <div class="invite-form-bottom">
         <div class="username"></div>
         <div class="cancel-btn" id="cancel-invite-form">cancel</div>
@@ -67,11 +70,9 @@ inviteForm.innerHTML = `
 
 
 
-
-
-
 function inviteClass() {
     document.body.append(inviteForm)
+
 
     const selectBtn = document.querySelector('#select-subjects');
     const selectedValues = [];
@@ -132,21 +133,25 @@ function inviteClass() {
 
 
     closeInviteForm()
+    sendInvite()
+
 }
 
 function closeInviteForm() {
     const cancelInviteButton = document.querySelector('#cancel-invite-form');
     cancelInviteButton.addEventListener('click', () => {
         inviteForm.remove()
-
-
     })
-
-    document.removeEventListener('click', closeInviteForm);
-
-
 }
 
 
+function sendInvite() {
+    const sendInviteButton = document.querySelector('#send-invite-btn');
+    sendInviteButton.addEventListener('click', () => {
+        postInviteClass()
+        inviteForm.remove()
+
+    })
+}
 
 

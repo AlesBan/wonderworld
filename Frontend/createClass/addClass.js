@@ -79,10 +79,16 @@ addClassBtn.addEventListener('click', () => {
 
     `
 
+    const inputValueClassTitle = document.querySelector('#class-title').value;
+
+    localStorage.setItem('classTitle', inputValueClassTitle);
+
+
     let cancelButton = document.querySelector('.cancel-btn');
     cancelButton.addEventListener('click', () => {
         closeModal();
     })
+
 
 
     const inputDescription = document.querySelector('#class-description');
