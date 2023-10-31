@@ -1,7 +1,10 @@
-async function postInviteClass() {
-    const url = 'http://localhost:7280/api/edituser/email';
+ async function postInviteClass() {
+    const url = 'http://localhost:7280/api/Invitation/create-invitation';
     const data = {
-        Email: document.getElementById("new-email").value,
+        // ClassSenderId: ,
+        // ClassReceiverId: ,
+        // DateOfInvitation: ,
+        InvitationText: sessionStorage.getItem('inviteText')
     };
 
     console.log(JSON.stringify(data));
@@ -32,3 +35,5 @@ async function postInviteClass() {
             console.log(error);
         });
 }
+
+

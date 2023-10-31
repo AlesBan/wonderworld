@@ -26,6 +26,7 @@ classPreviews.forEach((classPreview) => {
             // Добавляем класс "expanded" к выбранному элементу
             classPreview.classList.add('expanded');
 
+
             // Добавляем слушатель события клика на крестик
             closeButton.addEventListener('click', (event) => {
                 event.stopPropagation();
@@ -35,6 +36,21 @@ classPreviews.forEach((classPreview) => {
             inviteClassButton.addEventListener('click', ()=> {
                 closeExpandedClassPreview(classPreview);
                 inviteClass()
+                const inviteFormContainer = document.createElement('div');
+                inviteFormContainer.classList.add('invite-form-container');
+
+                // Добавляем inviteForm в контейнер
+                inviteFormContainer.appendChild(inviteForm);
+
+                // Добавляем контейнер с inviteForm в body
+                document.body.appendChild(inviteFormContainer);
+
+                // Добавляем стили для ограничения прокрутки только внутри inviteForm
+                document.body.style.overflow = 'hidden';
+                inviteFormContainer.style.overflow = 'auto';
+
+                // Изменяем цвет фона страницы на серый
+                document.body.style.backgroundColor = '#ccc';
 
             })
 
@@ -58,6 +74,7 @@ function closeExpandedClassPreview(classPreview) {
     if (closeButton) {
         closeButton.remove();
         inviteClassButton.remove();
+
     }
 
     // Удаляем класс "expanded" у выбранного элемента

@@ -69,9 +69,11 @@ inviteForm.innerHTML = `
 `
 
 
-
 function inviteClass() {
     document.body.append(inviteForm)
+
+    const invitationText = document.querySelector('.message-container').value;
+    sessionStorage.setItem('inviteText', invitationText);
 
 
     const selectBtn = document.querySelector('#select-subjects');
@@ -141,6 +143,13 @@ function closeInviteForm() {
     const cancelInviteButton = document.querySelector('#cancel-invite-form');
     cancelInviteButton.addEventListener('click', () => {
         inviteForm.remove()
+        const inviteFormContainer = document.querySelector('.invite-form-container');
+        if (inviteFormContainer) {
+            inviteFormContainer.remove();
+        }
+        // Удаляем стили ограничения прокрутки и восстанавливаем цвет фона страницы
+        document.body.style.overflow = '';
+        document.body.style.backgroundColor = '';
     })
 }
 
@@ -148,10 +157,18 @@ function closeInviteForm() {
 function sendInvite() {
     const sendInviteButton = document.querySelector('#send-invite-btn');
     sendInviteButton.addEventListener('click', () => {
-        postInviteClass()
         inviteForm.remove()
-
+        const inviteFormContainer = document.querySelector('.invite-form-container');
+        if (inviteFormContainer) {
+            inviteFormContainer.remove();
+        }
+        // Удаляем стили ограничения прокрутки и восстанавливаем цвет фона страницы
+        document.body.style.overflow = '';
+        document.body.style.backgroundColor = '';
+        postInviteClass()
     })
 }
+
+
 
 
