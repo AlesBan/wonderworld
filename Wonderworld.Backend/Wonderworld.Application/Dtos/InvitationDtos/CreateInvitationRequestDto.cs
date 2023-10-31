@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+using Wonderworld.Application.Attributes;
+
 namespace Wonderworld.Application.Dtos.InvitationDtos;
 
 public class CreateInvitationRequestDto
 {
+    [Required]
+    [NotEqual(nameof(ClassReceiverId))]
     public Guid ClassSenderId { get; set; }
-    public Guid ClassReceiverId { get; set; }
-    public string DateOfInvitation { get; set; }
-    public string? InvitationText { get; set; } = string.Empty;
+    [Required] public Guid ClassReceiverId { get; set; }
+    [Required] public string DateOfInvitation { get; set; }
+    [Required] public string? InvitationText { get; set; } = string.Empty;
 }
