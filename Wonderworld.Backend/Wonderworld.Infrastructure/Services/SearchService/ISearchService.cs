@@ -1,7 +1,7 @@
 using MediatR;
 using Wonderworld.Application.Dtos.SearchDtos;
 
-namespace Wonderworld.Application.Interfaces.Services;
+namespace Wonderworld.Infrastructure.Services.SearchService;
 
 public interface ISearchService
 {
@@ -11,5 +11,5 @@ public interface ISearchService
     /// <param name="searchRequest"></param>
     /// <param name="mediator"></param>
     /// <returns></returns>
-    public Task<SearchResponseDto> GetTeacherAndClassProfilesDependingOnSearchRequest(SearchRequestDto searchRequest, IMediator mediator);
+    public Task<SearchResponseDto> GetTeacherAndClassProfiles(SearchRequestDto searchRequest, IMediator mediator);
 }

@@ -37,9 +37,9 @@ public class GetUserListBySearchRequestCommandHandler : IRequestHandler<
             .Include(u => u.UserLanguages).ThenInclude(ul => ul.Language)
             .Include(u => u.UserGrades).ThenInclude(ug => ug.Grade)
             .Where(u =>
-                u.Country != null && countryTitles.Contains(u.Country.Title) &&
-                u.UserGrades.Any(ug => gradeNumbers.Contains(ug.Grade.GradeNumber.ToString())) &&
-                u.UserDisciplines.Any(d => disciplineTitles.Contains(d.Discipline.Title)) &&
+                u.Country != null && countryTitles.Contains(u.Country.Title) ||
+                u.UserGrades.Any(ug => gradeNumbers.Contains(ug.Grade.GradeNumber.ToString())) ||
+                u.UserDisciplines.Any(d => disciplineTitles.Contains(d.Discipline.Title)) ||
                 u.UserLanguages.Any(l => languageTitles.Contains(l.Language.Title)));
 
         return users;
