@@ -22,7 +22,15 @@ public class GetUserProfileListBySearchQueryCommandHandlerTests : TestCommonBase
         };
         var command = new GetUserListBySearchRequestCommand()
         {
-            SearchRequest = searchRequest
+            SearchRequest = new SearchCommandDto()
+            {
+                UserId = SharedLessonDbContextFactory.UserAId,
+                Disciplines = searchRequest.Disciplines,
+                Grades = searchRequest.Grades,
+                Countries = searchRequest.Countries,
+                Languages = searchRequest.Languages
+                
+            }
         };
         var cancellationToken = new CancellationToken();
 

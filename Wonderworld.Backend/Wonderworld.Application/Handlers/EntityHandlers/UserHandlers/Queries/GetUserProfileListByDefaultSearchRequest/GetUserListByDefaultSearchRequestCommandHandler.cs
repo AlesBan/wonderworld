@@ -1,12 +1,6 @@
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Dtos.ClassDtos;
-using Wonderworld.Application.Dtos.InstitutionDtos;
-using Wonderworld.Application.Dtos.UserDtos;
-using Wonderworld.Application.Handlers.EntityHandlers.ClassHandlers.Queries.GetClasses;
-using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByIds;
-using Wonderworld.Application.Handlers.EntityHandlers.LanguageHandlers.Queries.GetLanguagesByIds;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -30,8 +24,9 @@ public class GetUserListByDefaultSearchRequestCommandHandler : IRequestHandler<
         var searchRequest = request.SearchRequest;
         var countryId = searchRequest.CountryId;
         var disciplineIds = searchRequest.DisciplineIds;
+        var userIdToExclude = searchRequest.UserId;
 
-        var users = _context.Users
+        var users = await _context.Users
             .Include(u => u.City)
             .Include(u => u.Country)
             .Include(u => u.Institution)
@@ -44,7 +39,8 @@ public class GetUserListByDefaultSearchRequestCommandHandler : IRequestHandler<
             .Where(u => u.Country != null && u.CountryId == countryId)
             .Where(u => u.UserDisciplines.Any(ud =>
                 disciplineIds.Contains(ud.Discipline.DisciplineId)))
-            .ToList();
+            .Where(u => u.UserId != userIdToExclude)
+            .ToListAsync(cancellationToken: cancellationToken);
 
         return users;
     }

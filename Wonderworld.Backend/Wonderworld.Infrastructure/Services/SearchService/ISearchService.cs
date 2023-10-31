@@ -11,5 +11,5 @@ public interface ISearchService
     /// <param name="searchRequest"></param>
     /// <param name="mediator"></param>
     /// <returns></returns>
-    public Task<SearchResponseDto> GetTeacherAndClassProfiles(SearchRequestDto searchRequest, IMediator mediator);
+    public Task<SearchResponseDto> GetTeacherAndClassProfiles(Guid userId, SearchRequestDto searchRequest, IMediator mediator);
 }

@@ -27,7 +27,7 @@ public class SearchController : BaseController
     public async Task<SearchResponseDto> GetTeachersAndClassesDependingOnSearchRequest(
         [FromQuery] SearchRequestDto searchRequest)
     {
-        return await _searchService.GetTeacherAndClassProfiles(searchRequest, Mediator);
+        return await _searchService.GetTeacherAndClassProfiles(UserId, searchRequest, Mediator);
     }
 
     [HttpGet("default-search-request")]

@@ -32,20 +32,21 @@ public class DefaultSearchService : IDefaultSearchService
         return await _userHelper.GetUserById(userId, mediator);
     }
 
-    private async Task<DefaultSearchRequestDto> CreateDefaultSearchRequestDto(User user)
+    private static Task<DefaultSearchCommandDto> CreateDefaultSearchRequestDto(User user)
     {
         var userDisciplineIds = user.UserDisciplines.Select(ud => ud.DisciplineId).ToList();
         var userCountryId = user.CountryId ?? Guid.Empty;
 
-        return new DefaultSearchRequestDto
+        return Task.FromResult(new DefaultSearchCommandDto
         {
+            UserId = user.UserId,
             DisciplineIds = userDisciplineIds,
             CountryId = userCountryId
-        };
+        });
     }
 
     private static async Task<IEnumerable<User>> GetUserListByDefaultSearchRequest(
-        DefaultSearchRequestDto searchRequest,
+        DefaultSearchCommandDto searchRequest,
         IMediator mediator)
     {
         var query = new GetUserListByDefaultSearchRequestCommand
