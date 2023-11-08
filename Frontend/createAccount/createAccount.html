@@ -7,7 +7,15 @@
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Georgia' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
+    <script>
+        // Получение значения параметра token из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        console.log(token)
+        // Использование значения token
+        localStorage.setItem('tokenAfterConfirmingEmail', token);
+        // Другие действия с использованием значения token
+    </script>
 </head>
 <body>
 <div class="header">

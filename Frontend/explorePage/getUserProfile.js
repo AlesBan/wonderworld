@@ -21,6 +21,19 @@ EstablishmentDtoOutput.textContent = getEstablishmentDto;
 
 
 
+const getSubjects = localStorage.getItem('disciplines');
+const subjectsOutput = document.querySelector('.tags');
+
+const subjectsArray = getSubjects.split(',');
+// Создайте элементы DOM для каждого элемента массива
+subjectsArray.forEach(subject => {
+    const tagElement = document.createElement('span');
+    tagElement.textContent = subject;
+    tagElement.className = 'tag';
+    subjectsOutput.appendChild(tagElement);
+});
+
+
 
     async function getUserProfile() {
         const url = 'http://localhost:7280/api/user/get-userprofile';
@@ -35,15 +48,17 @@ EstablishmentDtoOutput.textContent = getEstablishmentDto;
                 'Transfer-Encoding': 'chunked',
                 'Data': new Date().toLocaleString(),
                 'Server': "localhost",
-                'Authorization':`Bearer ${localStorage.getItem('accessToken')}`
+                'Authorization':`Bearer ${localStorage.getItem('verificationToken')}`
             },
         })
             .then(response => {
                 if (response.ok) {
                     return response.json();
-                } else {
+                }
+                else {
                     throw new Error('Произошла ошибка при выполнении запроса.');
                 }
+
             })
             .then(responseData => {
                 console.log(responseData);
@@ -52,8 +67,9 @@ EstablishmentDtoOutput.textContent = getEstablishmentDto;
             .catch(error => {
                 console.log(error);
             });
-        console.log(localStorage.getItem('accessToken'))
+        console.log(localStorage.getItem('verificationToken'))
   }
+
 
 
 

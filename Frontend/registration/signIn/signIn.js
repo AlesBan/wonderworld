@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-async function post() {
+async function postLoginData() {
 
-    const url = 'http://localhost:7280/api/authentication/login';
+    const url = 'http://localhost:7280/api/user/login';
     const data = {
-        Email: document.getElementById("email").value,
-        Password: document.getElementById("password").value
+        Email: document.getElementById("email-login").value,
+        Password: document.getElementById("password-login").value
     };
 
     console.log(JSON.stringify(data));
@@ -47,12 +47,19 @@ async function post() {
         .then(response => {
             if (response.ok) {
                 return response.json();
+            } else if (response.status === 401) {
+                window.location.href = "../../createAccount/createAccount.html"
             } else {
                 throw new Error('Произошла ошибка при выполнении запроса.');
             }
         })
         .then(responseData => {
             console.log(responseData);
+            localStorage.setItem('verificationToken', responseData.value.verificationToken);
+            console.log(responseData.value.verificationToken);
+            localStorage.setItem('classSenderId', responseData.value.userId);
+            console.log(responseData.value.userId);
+            window.location.href = "../../explorePage/explorePage.html";
         })
         .catch(error => {
             console.log(error);

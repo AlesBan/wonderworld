@@ -24,7 +24,7 @@ async function postCreateClass() {
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization':`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZTY4MDRiZi1lZGYzLTQ5ZTgtYTVjZS1jNDAyZjIxMDQwOTUiLCJlbWFpbCI6ImtsaW1wYXZsb3YyMDAyQGdtYWlsLmNvbSIsImp0aSI6ImY3MzAwYTRmLTY3MTEtNGYwOS05MzI5LTZiMmY0Zjg0NGM4MyIsImlhdCI6MTY5ODY2NzAyOCwiaXNWZXJpZmllZCI6IlRydWUiLCJpc0NyZWF0ZWRBY2NvdW50IjoiRmFsc2UiLCJuYmYiOjE2OTg2NjcwMjgsImV4cCI6MTY5ODc1MzE1NywiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MjgwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo3MjgwIn0.ufqzCfvu--Rh54FMCFE6XoJ_O3S5swbuHckEDgFTlfs`
+            'Authorization':`Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJkZTQ1ZmNkZi03N2VkLTQ4NjEtODI5My02NTNiYmFhNDU0YzciLCJlbWFpbCI6IktsaW1wYXVsYXVAaWNsb3VkLmNvbSIsImp0aSI6ImEzNDg0YTM1LTQ0NzUtNDkzMS1hMGNmLWQwMzYzMjg5ZTQyNiIsImlhdCI6MTY5ODg0ODM0NywiaXNWZXJpZmllZCI6IlRydWUiLCJpc0NyZWF0ZWRBY2NvdW50IjoiRmFsc2UiLCJuYmYiOjE2OTg4NDgzNDcsImV4cCI6MTY5ODkzNDYyMCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MjgwIiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDo3MjgwIn0.L1du5cvJ8ZUGQ6hZCi27R_h3aTXx6m7Q9j3rLzqeU08`
         },
         body: JSON.stringify(data)
     })

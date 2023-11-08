@@ -57,7 +57,7 @@ inviteForm.innerHTML = `
             </div>
     </div>
     <div class="invite-message"> Message
-        <input type="text" class="message-container" placeholder="Add a message">
+        <input type="text" class="message-container" id="invite-text" placeholder="Add a message">
     </div>
     <div class="invite-form-bottom">
         <div class="username"></div>
@@ -72,9 +72,11 @@ inviteForm.innerHTML = `
 function inviteClass() {
     document.body.append(inviteForm)
 
-    const invitationText = document.querySelector('.message-container').value;
-    sessionStorage.setItem('inviteText', invitationText);
+    const invitationText = document.querySelector('#invite-text').value;
+    localStorage.setItem('inviteText', invitationText);
 
+    const invitationDate = document.querySelector('#davaToday').value;
+    localStorage.setItem('inviteDate', invitationDate);
 
     const selectBtn = document.querySelector('#select-subjects');
     const selectedValues = [];
@@ -157,6 +159,7 @@ function closeInviteForm() {
 function sendInvite() {
     const sendInviteButton = document.querySelector('#send-invite-btn');
     sendInviteButton.addEventListener('click', () => {
+        postInviteClass()
         inviteForm.remove()
         const inviteFormContainer = document.querySelector('.invite-form-container');
         if (inviteFormContainer) {
@@ -165,7 +168,7 @@ function sendInvite() {
         // Удаляем стили ограничения прокрутки и восстанавливаем цвет фона страницы
         document.body.style.overflow = '';
         document.body.style.backgroundColor = '';
-        postInviteClass()
+
     })
 }
 

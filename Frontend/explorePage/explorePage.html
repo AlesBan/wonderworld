@@ -43,40 +43,93 @@
     </div>
     <div class="filters">
         <div class="main-filters">
-            <div class="select-btn" id="subject">
-                <span class="btn-text">Subject</span>
-                <span class="arrow-dwn">
+<!--            <div class="select-subject">-->
+<!--                <div class="select-btn" id="subject">-->
+<!--                    <span class="btn-text">Subject</span>-->
+<!--                    <span class="arrow-dwn">-->
+<!--        <img src="../images/chevron-down.svg" alt="">-->
+<!--    </span>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;            <div class="dropdown">&ndash;&gt;-->
+<!--                <div class="list-items" id="subject-items">-->
+
+<!--                </div>-->
+<!--                <div class="dropdown-buttons">-->
+<!--                    <button class="clearButton">Clear All</button>-->
+<!--                    <button class="applyButton">Apply</button>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="select-grade">-->
+<!--                <div class="select-btn" id="grade">-->
+<!--                    <span class="btn-text">Grade</span>-->
+<!--                    <span class="arrow-dwn">-->
+<!--        <img src="../images/chevron-down.svg" alt="">-->
+<!--    </span>-->
+<!--                </div>-->
+<!--                &lt;!&ndash;            <div class="dropdown">&ndash;&gt;-->
+<!--                <div class="list-items" id="grades-items">-->
+
+<!--                </div>-->
+<!--                &lt;!&ndash;                <div class="dropdown-buttons">&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <button class="clearButton">Clear All</button>&ndash;&gt;-->
+<!--                &lt;!&ndash;                    <button class="applyButton">Apply</button>&ndash;&gt;-->
+<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--                &lt;!&ndash;            </div>&ndash;&gt;-->
+<!--            </div>-->
+<!--                <div class="select-btn" id="review">-->
+<!--                    <span class="btn-text">Reviews</span>-->
+<!--                    <span class="arrow-dwn">-->
+<!--        <img src="../images/chevron-down.svg" alt="">-->
+<!--    </span>-->
+<!--                </div>-->
+<!--                <div class="select-btn" id="location">-->
+<!--                    <span class="btn-text">Location</span>-->
+<!--                    <span class="arrow-dwn">-->
+<!--        <img src="../images/chevron-down.svg" alt="">-->
+<!--    </span>-->
+<!--                </div>-->
+            <div class="dropdown">
+                <div class="input-title">Languages</div>
+                <div class="select-btn" id="select-languages">
+                    <span class="btn-text" id="output-languages">Select..</span>
+                    <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
+                </div>
+                <ul class="list-items" id="list-languages">
+
+                </ul>
             </div>
             <div class="dropdown">
-                <div class="list-items" id="subject-items">
-
+                <div class="input-title">Grades</div>
+                <div class="select-btn" id="select-grades">
+                    <span class="btn-text" id="output-grades">Select..</span>
+                    <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
                 </div>
+                <ul class="list-items" id="list-grades">
+
+                </ul>
+            </div>
+            <div class="dropdown">
+                <div class="input-title">Areas of work</div>
+                <div class="select-btn" id="select-subjects">
+                    <span class="btn-text" id="output-subjects">Select..</span>
+                    <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
+                </div>
+                <ul class="list-items" id="list-subjects">
+
+                </ul>
                 <div class="dropdown-buttons">
                     <button class="clearButton">Clear All</button>
                     <button class="applyButton">Apply</button>
                 </div>
             </div>
 
-            <div class="select-btn" id="grade">
-                <span class="btn-text">Grade</span>
-                <span class="arrow-dwn">
-        <img src="../images/chevron-down.svg" alt="">
-    </span>
-            </div>
-            <div class="select-btn" id="review">
-                <span class="btn-text">Reviews</span>
-                <span class="arrow-dwn">
-        <img src="../images/chevron-down.svg" alt="">
-    </span>
-            </div>
-            <div class="select-btn" id="location">
-                <span class="btn-text">Location</span>
-                <span class="arrow-dwn">
-        <img src="../images/chevron-down.svg" alt="">
-    </span>
-            </div>
         </div>
         <div class="show-specialists">
             <label class="switch">
@@ -85,6 +138,7 @@
             </label>
             <div class="available">Show-specialists</div>
         </div>
+
     </div>
     <div class="selected-values">
 
@@ -185,26 +239,25 @@
             </div>
         </div>
     </div>
-    <div id="like_button_container"></div>
+    <!--    <div id="like_button_container"></div>-->
 </main>
 <script>document.getElementById('davaToday').valueAsDate = new Date();</script>
 </body>
 
-<button onclick="getUserProfile()">get user profile</button>
 <script src="../createAccount/dataLessons.js"></script>
 <script src="../createAccount/dataGrades.js"></script>
+<script src="../createAccount/dataLanguages.js"></script>
 <script src="explorePage.js"></script>
-<script src="getUserProfile.js"></script>
 <script src="../createAccount/institution.js"></script>
 <script src="../createAccount/userStatus.js"></script>
 <script src="../inviteForCall/viewClass.js"></script>
 <script src="../inviteForCall/inviteClass.js"></script>
 <script src="../inviteForCall/postInviteClass.js"></script>
 
-<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<!--<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>-->
+<!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>-->
 
-<!-- Загрузим наш React-компонент. -->
-<script src="like_button.js"></script>
+<!--&lt;!&ndash; Загрузим наш React-компонент. &ndash;&gt;-->
+<!--<script src="like_button.js"></script>-->
 
 </html>
