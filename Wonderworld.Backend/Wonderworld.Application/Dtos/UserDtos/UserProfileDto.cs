@@ -16,6 +16,8 @@ public class UserProfileDto : IMapWith<User>
     public Guid UserId { get; set; }
     public string Email { get; set; } = string.Empty;
     public string VerificationToken { get; set; }
+    public bool IsVerified { get; set; }
+    public string IsCreateAccount { get; set; }
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
@@ -53,6 +55,10 @@ public class UserProfileDto : IMapWith<User>
                 opt => opt.MapFrom(u => u.Email))
             .ForMember(up => up.VerificationToken,
                 opt => opt.MapFrom(u => u.VerificationToken))
+            .ForMember(up => up.IsVerified,
+                opt => opt.MapFrom(u => u.IsVerified))
+            .ForMember(up => up.IsCreateAccount,
+                opt => opt.MapFrom(u => u.IsCreatedAccount))
             .ForMember(up => up.FirstName,
                 opt => opt.MapFrom(u => u.FirstName))
             .ForMember(up => up.LastName,

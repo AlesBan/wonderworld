@@ -52,13 +52,13 @@ public class TokenHelper : ITokenHelper
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUniversalTime().ToString()),
             new("isVerified", user.IsVerified.ToString()),
-            new("isCreatedAccount", user.IsCreatedAccount.ToString())
+            new("isCreatedAccount", user.IsCreatedAccount.ToString()),
+            new("isATeacher", user.IsATeacher.ToString() ?? ""),
+            new("isAExpert", user.IsAnExpert.ToString() ?? "")
         };
 
         // claims.SetRoleClaims(user);
 
         return claims;
     }
-    
-    
 }

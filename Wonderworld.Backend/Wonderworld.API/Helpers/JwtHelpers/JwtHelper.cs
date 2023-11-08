@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Wonderworld.Application.Common.Exceptions.Authentication;
+using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Domain.Entities.Main;
 using static System.Boolean;
 
@@ -25,25 +26,6 @@ public static class JwtHelper
         return Guid.Parse(nameIdentifier);
     }
 
-    public static bool GetIsVerifiedFromClaims(HttpContext httpContext)
-    {
-        var decodedToken = GetTokenFromHeader(httpContext);
-
-        try
-        {
-            TryParse(decodedToken.Claims
-                .FirstOrDefault(claim =>
-                    claim.Type == "isVerified")?
-                .Value, out var isVerified);
-
-            return isVerified;
-        }
-        catch
-        {
-            throw new InvalidTokenProvidedException();
-        }
-    }
-
     public static bool GetIsCreatedAccountFromClaims(HttpContext httpContext)
     {
         var decodedToken = GetTokenFromHeader(httpContext);
@@ -56,6 +38,34 @@ public static class JwtHelper
                 .Value, out var isCreatedAccount);
 
             return isCreatedAccount;
+        }
+        catch
+        {
+            throw new InvalidTokenProvidedException();
+        }
+    }
+
+    public static PositionInfoDto GetPositionInfoFromClaims(HttpContext httpContext)
+    {
+        var decodedToken = GetTokenFromHeader(httpContext);
+
+        try
+        {
+            TryParse(decodedToken.Claims
+                .FirstOrDefault(claim =>
+                    claim.Type == "isATeacher")?
+                .Value, out var isATeacher);
+            TryParse(decodedToken.Claims
+                .FirstOrDefault(claim =>
+                    claim.Type == "isATeacher")?
+                .Value, out var isAnExpert);
+            
+            var positionInfo = new PositionInfoDto
+            {
+                IsTeacher = isATeacher,
+                IsAnExpert = isAnExpert
+            };
+            return positionInfo;
         }
         catch
         {
