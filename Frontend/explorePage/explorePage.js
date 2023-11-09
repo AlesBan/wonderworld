@@ -1,25 +1,24 @@
-// const subjectBtnFilter = document.querySelector('.select-btn');
-//
-// const SubjectFilterValuesDiv = document.querySelector(".selected-values");
+// const subjectBtnFilter = document.querySelector('#select-subjects');
 // const subjectFilterValues = [];
-//
+// const subjectFilterValuesDiv = document.querySelector(".selected-values");
 //
 // subjectBtnFilter.addEventListener("click", () => {
 //     subjectBtnFilter.classList.toggle("open");
 // });
 //
-// const subjects = document.querySelector('#subject-items');
+//
+// const lessons = document.querySelector('#list-subjects');
 //
 // let filterFn = (lesson) => true;
-// generateSubjects(ALL_LESSONS);
+// generateItems(ALL_LESSONS);
 //
-// function generateSubjects(items) {
+// function generateItems(items) {
 //
 //     const html = items.filter(filterFn).map(lesson => {
 //         return `
 //
 //  <li class="item">
-//         <span class="item-text">${lesson.title}</span>
+//         <span class="item-text" id="item-lessons">${lesson.title}</span>
 //         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
 //     </li>
 //     `;
@@ -27,13 +26,14 @@
 //
 //         .join('');
 //
-//     subjects.innerHTML = html;
+//     lessons.innerHTML = html;
+//
 //
 //     items = document.querySelectorAll('.item');
 //     items.forEach(item => {
 //         item.addEventListener("click", () => {
 //             item.classList.toggle("checked");
-//             const itemText = item.querySelector(".item-text").textContent;
+//             const itemText = item.querySelector("#item-lessons").textContent;
 //             if (item.classList.contains("checked")) {
 //                 subjectFilterValues.push(itemText);
 //             } else {
@@ -42,10 +42,20 @@
 //                     subjectFilterValues.splice(index, 1);
 //                 }
 //             }
-//             console.log(subjectFilterValues);
+//             // selectedValuesDiv.innerHTML = subjectFilterValues.map(value => `<span>${value}</span>`).join(", ");
+//
+//             // localStorage.setItem('editedLessons', subjectFilterValues)
 //         });
 //
 //     })
+//
+//     const dropdownButtons = document.createElement('div');
+//     dropdownButtons.classList.add('dropdown-buttons');
+//     dropdownButtons.innerHTML = `
+//     <button class="clearButton">Clear All</button>
+//     <button class="applyButton">Apply</button>
+//   `;
+//     lessons.appendChild(dropdownButtons);
 //
 // }
 //
@@ -54,17 +64,18 @@
 //
 //
 //
-// const gradeBtnFilter = document.querySelector('#grade');
+// const gradesBtnFilter = document.querySelector('#select-grades');
+// const gradesFilterValues = [];
+// const gradesFilterValuesDiv = document.querySelector(".selected-values");
 //
-// // const selectedSubjectValuesDiv = document.querySelector(".selected-values");
-// const selectedGradeValues = [];
 //
-//
-// gradeBtnFilter.addEventListener("click", () => {
-//     gradeBtnFilter.classList.toggle("open");
+// gradesBtnFilter.addEventListener("click", () => {
+//     gradesBtnFilter.classList.toggle("open");
 // });
 //
-// const grades = document.querySelector('#grades-items');
+//
+// const grades = document.querySelector('#list-grades');
+//
 //
 // generateGrades(ALL_GRADES);
 //
@@ -74,7 +85,7 @@
 //         return `
 //
 //  <li class="item">
-//         <span class="item-text">${grade.title}</span>
+//         <span class="item-text" id="item-grades">${grade.classNum}</span>
 //         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
 //     </li>
 //     `;
@@ -84,212 +95,223 @@
 //
 //     grades.innerHTML = html;
 //
+//
 //     items = document.querySelectorAll('.item');
 //     items.forEach(item => {
 //         item.addEventListener("click", () => {
 //             item.classList.toggle("checked");
-//             const itemText = item.querySelector(".item-text").textContent;
+//             const itemText = item.querySelector("#item-grades").textContent;
 //             if (item.classList.contains("checked")) {
-//                 selectedGradeValues.push(itemText);
+//                 gradesFilterValues.push(itemText);
 //             } else {
-//                 const index = selectedGradeValues.indexOf(itemText);
+//                 const index = gradesFilterValues.indexOf(itemText);
 //                 if (index !== -1) {
-//                     selectedGradeValues.splice(index, 1);
+//                     gradesFilterValues.splice(index, 1);
 //                 }
 //             }
-//             console.log(selectedGradeValues);
+//             // gradesFilterValuesDiv.innerHTML = gradesFilterValues.map(value => `<span>${value}</span>`).join(", ");
+//
+//             // localStorage.setItem('editedGrades', gradesFilterValues)
 //         });
 //
 //     })
 //
+//     const dropdownButtons = document.createElement('div');
+//     dropdownButtons.classList.add('dropdown-buttons');
+//     dropdownButtons.innerHTML = `
+//     <button class="clearButton">Clear All</button>
+//     <button class="applyButton">Apply</button>
+//   `;
+//     grades.appendChild(dropdownButtons);
+//
 // }
+//
+//
+//
+//
+// const languageBtnFilter = document.querySelector('#select-languages');
+// const languageFilterValues = [];
+// const languageFilterValuesDiv = document.querySelector("#output-languages");
+//
+//
+// languageBtnFilter.addEventListener("click", () => {
+//     languageBtnFilter.classList.toggle("open");
+// });
+//
+//
+// const languages = document.querySelector('#list-languages');
+//
+//
+// generateLanguages(ALL_LANGUAGES);
+//
+// function generateLanguages(items) {
+//
+//     const html = items.filter(filterFn).map(language => {
+//         return `
+//
+//  <li class="item">
+//         <span class="item-text" id="item-ages">${language.title}</span>
+//         <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+//     </li>
+//     `;
+//     })
+//
+//         .join('');
+//
+//     languages.innerHTML = html;
+//
+//
+//     items = document.querySelectorAll('.item');
+//     items.forEach(item => {
+//         item.addEventListener("click", () => {
+//             item.classList.toggle("checked");
+//             const itemText = item.querySelector("#item-ages").textContent;
+//             if (item.classList.contains("checked")) {
+//                 languageFilterValues.push(itemText);
+//             } else {
+//                 const index = languageFilterValues.indexOf(itemText);
+//                 if (index !== -1) {
+//                     languageFilterValues.splice(index, 1);
+//                 }
+//             }
+//             // selectedLanguageDiv.innerHTML = languageFilterValues.map(value => `<span>${value}</span>`).join(", ");
+//             //
+//             // localStorage.setItem('editedLanguages', languageFilterValues)
+//         });
+//
+//     })
+//
+//     const dropdownButtons = document.createElement('div');
+//     dropdownButtons.classList.add('dropdown-buttons');
+//     dropdownButtons.innerHTML = `
+//     <button class="clearButton">Clear All</button>
+//     <button class="applyButton">Apply</button>
+//   `;
+//     languages.appendChild(dropdownButtons);
+//
+// }
+//
+//
+//
+//
+//
+//
+// const applyButton = document.querySelector(".applyButton");
+// applyButton.addEventListener("click", () => {
+//     console.log('apply')
+//     const selectedTags = subjectFilterValues.map(value => `<div class="tag">${value}</div>`).join("");
+//     subjectFilterValuesDiv.innerHTML = selectedTags;
+// });
+//
+//
+// const clearButton = document.querySelector('.clearButton');
+// clearButton.addEventListener("click", () => {
+//     subjectFilterValuesDiv.innerHTML = "";
+// })
+//
+//
 
 
-const subjectBtnFilter = document.querySelector('#select-subjects');
-const subjectFilterValues = [];
-const subjectFilterValuesDiv = document.querySelector(".selected-values");
 
-subjectBtnFilter.addEventListener("click", () => {
-    subjectBtnFilter.classList.toggle("open");
+const dropdowns = [
+    {
+        btnFilter: document.querySelector('#select-subjects'),
+        itemsContainer: document.querySelector('#list-subjects'),
+        filterValues: [],
+        items: ALL_LESSONS
+    },
+    {
+        btnFilter: document.querySelector('#select-grades'),
+        itemsContainer: document.querySelector('#list-grades'),
+        filterValues: [],
+        items: ALL_GRADES
+    },
+    {
+        btnFilter: document.querySelector('#select-languages'),
+        itemsContainer: document.querySelector('#list-languages'),
+        filterValues: [],
+        items: ALL_LANGUAGES
+    }
+];
+
+const filterValuesDiv = document.querySelector('.selected-values'); // Общий элемент для всех выбранных значений
+
+dropdowns.forEach(dropdown => {
+    const { btnFilter, itemsContainer, filterValues, items } = dropdown;
+
+    if (btnFilter) {
+        btnFilter.addEventListener('click', () => {
+            btnFilter.classList.toggle('open');
+        });
+    }
+
+    if (itemsContainer) {
+        generateItems(itemsContainer, items, filterValues);
+    }
 });
 
-
-const lessons = document.querySelector('#list-subjects');
-
-let filterFn = (lesson) => true;
-generateItems(ALL_LESSONS);
-
-function generateItems(items) {
-
-    const html = items.filter(filterFn).map(lesson => {
-        return `
-
- <li class="item">
-        <span class="item-text" id="item-lessons">${lesson.title}</span>
-        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
-    </li>
-    `;
-    })
-
-        .join('');
-
-    lessons.innerHTML = html;
-
-
-    items = document.querySelectorAll('.item');
+function generateItems(container, items, filterValues) {
+    container.innerHTML = '';
     items.forEach(item => {
-        item.addEventListener("click", () => {
-            item.classList.toggle("checked");
-            const itemText = item.querySelector("#item-lessons").textContent;
-            if (item.classList.contains("checked")) {
-                subjectFilterValues.push(itemText);
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('item');
+        itemElement.innerHTML = `
+      <span class="item-text">${item.title || item.classNum}</span>
+      <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
+    `;
+
+        itemElement.addEventListener('click', () => {
+            itemElement.classList.toggle('checked');
+            const itemText = item.title || item.classNum;
+
+            if (itemElement.classList.contains('checked')) {
+                filterValues.push(itemText);
             } else {
-                const index = subjectFilterValues.indexOf(itemText);
+                const index = filterValues.indexOf(itemText);
                 if (index !== -1) {
-                    subjectFilterValues.splice(index, 1);
+                    filterValues.splice(index, 1);
                 }
             }
-            // selectedValuesDiv.innerHTML = subjectFilterValues.map(value => `<span>${value}</span>`).join(", ");
-
-            // localStorage.setItem('editedLessons', subjectFilterValues)
         });
 
-    })
+        container.appendChild(itemElement);
+    });
 
+    const dropdownButtons = document.createElement('div');
+    dropdownButtons.classList.add('dropdown-buttons');
+    dropdownButtons.innerHTML = `
+    <button class="clearButton">Clear All</button>
+    <button class="applyButton">Apply</button>
+  `;
+    container.appendChild(dropdownButtons);
+
+    const clearButton = dropdownButtons.querySelector('.clearButton');
+    clearButton.addEventListener('click', () => {
+        filterValues.length = 0;
+        updateSelectedValues(); // Обновление выбранных значений
+    });
 }
 
-
-
-
-
-
-const gradesBtnFilter = document.querySelector('#select-grades');
-const gradesFilterValues = [];
-const gradesFilterValuesDiv = document.querySelector(".selected-values");
-
-
-gradesBtnFilter.addEventListener("click", () => {
-    gradesBtnFilter.classList.toggle("open");
-});
-
-
-const grades = document.querySelector('#list-grades');
-
-
-generateGrades(ALL_GRADES);
-
-function generateGrades(items) {
-
-    const html = items.filter(filterFn).map(grade => {
-        return `
-
- <li class="item">
-        <span class="item-text" id="item-grades">${grade.classNum}</span>
-        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
-    </li>
-    `;
-    })
-
-        .join('');
-
-    grades.innerHTML = html;
-
-
-    items = document.querySelectorAll('.item');
-    items.forEach(item => {
-        item.addEventListener("click", () => {
-            item.classList.toggle("checked");
-            const itemText = item.querySelector("#item-grades").textContent;
-            if (item.classList.contains("checked")) {
-                gradesFilterValues.push(itemText);
-            } else {
-                const index = gradesFilterValues.indexOf(itemText);
-                if (index !== -1) {
-                    gradesFilterValues.splice(index, 1);
-                }
-            }
-            // gradesFilterValuesDiv.innerHTML = gradesFilterValues.map(value => `<span>${value}</span>`).join(", ");
-
-            // localStorage.setItem('editedGrades', gradesFilterValues)
-        });
-
-    })
-
+function updateSelectedValues() {
+    const selectedTags = dropdowns.reduce((tags, dropdown) => {
+        return tags.concat(dropdown.filterValues.map(value => `<div class="tag">${value}</div>`));
+    }, []);
+    filterValuesDiv.innerHTML = selectedTags.join('');
 }
 
-
-
-
-const selectLanguageBtn = document.querySelector('#select-languages');
-const selectedLanguage = [];
-const selectedLanguageDiv = document.querySelector("#output-languages");
-
-
-selectLanguageBtn.addEventListener("click", () => {
-    selectLanguageBtn.classList.toggle("open");
+const applyButtons = document.querySelectorAll('.applyButton');
+applyButtons.forEach(applyButton => {
+    applyButton.addEventListener('click', () => {
+        updateSelectedValues();
+    });
 });
 
-
-const languages = document.querySelector('#list-languages');
-
-
-generateLanguages(ALL_LANGUAGES);
-
-function generateLanguages(items) {
-
-    const html = items.filter(filterFn).map(language => {
-        return `
-
- <li class="item">
-        <span class="item-text" id="item-ages">${language.title}</span>
-        <span class="checkbox"><i class="fa-solid fa-check check-icon"></i></span>
-    </li>
-    `;
-    })
-
-        .join('');
-
-    languages.innerHTML = html;
-
-
-    items = document.querySelectorAll('.item');
-    items.forEach(item => {
-        item.addEventListener("click", () => {
-            item.classList.toggle("checked");
-            const itemText = item.querySelector("#item-ages").textContent;
-            if (item.classList.contains("checked")) {
-                selectedLanguage.push(itemText);
-            } else {
-                const index = selectedLanguage.indexOf(itemText);
-                if (index !== -1) {
-                    selectedLanguage.splice(index, 1);
-                }
-            }
-            selectedLanguageDiv.innerHTML = selectedLanguage.map(value => `<span>${value}</span>`).join(", ");
-
-            localStorage.setItem('editedLanguages', selectedLanguage)
-        });
-
-    })
-
-}
-
-
-
-
-
-
-const applyButton = document.querySelector(".applyButton");
-applyButton.addEventListener("click", () => {
-    console.log('apply')
-    const selectedTags = subjectFilterValues.map(value => `<div class="tag">${value}</div>`).join("");
-    subjectFilterValuesDiv.innerHTML = selectedTags;
-});
-
-
-const clearButton = document.querySelector('.clearButton');
-clearButton.addEventListener("click", () => {
-    subjectFilterValuesDiv.innerHTML = "";
-})
-
-
+// const clearButtons = document.querySelectorAll('.clearButton');
+// clearButtons.forEach(clearButton => {
+//     clearButton.addEventListener('click', () => {
+//         const dropdownIndex = Array.from(clearButton.parentNode.parentNode.children).indexOf(clearButton.parentNode);
+//         const { filterValues } = dropdowns[dropdownIndex];
+//         filterValues.length = 0;
+//         updateSelectedValues();
+//     });
+// });

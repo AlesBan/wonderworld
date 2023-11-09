@@ -1,24 +1,10 @@
+async function defaultSearchRequest() {
+    const url = 'http://localhost:7280/api/search/default-search-request';
 
 
-async function postCreateClass() {
-    const url = 'http://localhost:7280/api/class/create-class';
-    const disciplines = localStorage.getItem('disciplines').split(',');
-    const grades = localStorage.getItem('grades').split(',').map(str => parseInt(str));
-    const data = {
-        // Title: localStorage.getItem('classTitle'),
-        Title: "koko",
-        GradeNumber: grades,
-        PhotoUrl: "photoUrl",
-        LanguageTitles:  [
-            localStorage.getItem('languages')
-        ],
-        DisciplineTitles: disciplines
-    };
-
-    console.log(JSON.stringify(data));
 
     fetch(url, {
-        method: 'POST',
+        method: 'GET',
         referrerPolicy: "origin-when-cross-origin",
         headers: {
             'content-type': 'application/json; charset=utf-8',
@@ -27,20 +13,22 @@ async function postCreateClass() {
             'Server': "localhost",
             'Authorization':`Bearer ${localStorage.getItem('verificationToken')}`
         },
-        body: JSON.stringify(data)
     })
         .then(response => {
             if (response.ok) {
                 return response.json();
-            } else {
+            }
+            else {
                 throw new Error('Произошла ошибка при выполнении запроса.');
             }
+
         })
         .then(responseData => {
             console.log(responseData);
+            localStorage.setItem('responseUserInfo', responseData)
         })
         .catch(error => {
             console.log(error);
         });
+    console.log(localStorage.getItem('verificationToken'))
 }
-

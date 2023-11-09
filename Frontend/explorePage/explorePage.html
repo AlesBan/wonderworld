@@ -43,68 +43,20 @@
     </div>
     <div class="filters">
         <div class="main-filters">
-<!--            <div class="select-subject">-->
-<!--                <div class="select-btn" id="subject">-->
-<!--                    <span class="btn-text">Subject</span>-->
-<!--                    <span class="arrow-dwn">-->
-<!--        <img src="../images/chevron-down.svg" alt="">-->
-<!--    </span>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;            <div class="dropdown">&ndash;&gt;-->
-<!--                <div class="list-items" id="subject-items">-->
-
-<!--                </div>-->
-<!--                <div class="dropdown-buttons">-->
-<!--                    <button class="clearButton">Clear All</button>-->
-<!--                    <button class="applyButton">Apply</button>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="select-grade">-->
-<!--                <div class="select-btn" id="grade">-->
-<!--                    <span class="btn-text">Grade</span>-->
-<!--                    <span class="arrow-dwn">-->
-<!--        <img src="../images/chevron-down.svg" alt="">-->
-<!--    </span>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;            <div class="dropdown">&ndash;&gt;-->
-<!--                <div class="list-items" id="grades-items">-->
-
-<!--                </div>-->
-<!--                &lt;!&ndash;                <div class="dropdown-buttons">&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <button class="clearButton">Clear All</button>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <button class="applyButton">Apply</button>&ndash;&gt;-->
-<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
-<!--                &lt;!&ndash;            </div>&ndash;&gt;-->
-<!--            </div>-->
-<!--                <div class="select-btn" id="review">-->
-<!--                    <span class="btn-text">Reviews</span>-->
-<!--                    <span class="arrow-dwn">-->
-<!--        <img src="../images/chevron-down.svg" alt="">-->
-<!--    </span>-->
-<!--                </div>-->
-<!--                <div class="select-btn" id="location">-->
-<!--                    <span class="btn-text">Location</span>-->
-<!--                    <span class="arrow-dwn">-->
-<!--        <img src="../images/chevron-down.svg" alt="">-->
-<!--    </span>-->
-<!--                </div>-->
-            <div class="dropdown">
-                <div class="input-title">Languages</div>
-                <div class="select-btn" id="select-languages">
-                    <span class="btn-text" id="output-languages">Select..</span>
+            <div class="dropdown" id="subject-dropdown">
+                <div class="select-btn" id="select-subjects">
+                    <span class="btn-text" id="output-subjects">Subject</span>
                     <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
                 </div>
-                <ul class="list-items" id="list-languages">
+                <ul class="list-items" id="list-subjects">
 
                 </ul>
             </div>
             <div class="dropdown">
-                <div class="input-title">Grades</div>
                 <div class="select-btn" id="select-grades">
-                    <span class="btn-text" id="output-grades">Select..</span>
+                    <span class="btn-text" id="output-grades">Grade</span>
                     <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
@@ -114,20 +66,26 @@
                 </ul>
             </div>
             <div class="dropdown">
-                <div class="input-title">Areas of work</div>
-                <div class="select-btn" id="select-subjects">
-                    <span class="btn-text" id="output-subjects">Select..</span>
+                <div class="select-btn" id="select-location">
+                    <span class="btn-text" id="output-location">Location</span>
                     <span class="arrow-dwn">
         <img src="../images/chevron-down.svg" alt="">
     </span>
                 </div>
-                <ul class="list-items" id="list-subjects">
+                <ul class="list-items" id="list-location">
 
                 </ul>
-                <div class="dropdown-buttons">
-                    <button class="clearButton">Clear All</button>
-                    <button class="applyButton">Apply</button>
+            </div>
+            <div class="dropdown">
+                <div class="select-btn" id="select-languages">
+                    <span class="btn-text" id="output-languages">Language</span>
+                    <span class="arrow-dwn">
+        <img src="../images/chevron-down.svg" alt="">
+    </span>
                 </div>
+                <ul class="list-items" id="list-languages">
+
+                </ul>
             </div>
 
         </div>
@@ -143,6 +101,7 @@
     <div class="selected-values">
 
     </div>
+    <button onclick="defaultSearchRequest()">Default search request</button>
     <div class="section">
         <div class="top-line">
             <div class="top-line-title">Most popular classes in Geography</div>
@@ -239,7 +198,6 @@
             </div>
         </div>
     </div>
-    <!--    <div id="like_button_container"></div>-->
 </main>
 <script>document.getElementById('davaToday').valueAsDate = new Date();</script>
 </body>
@@ -253,11 +211,5 @@
 <script src="../inviteForCall/viewClass.js"></script>
 <script src="../inviteForCall/inviteClass.js"></script>
 <script src="../inviteForCall/postInviteClass.js"></script>
-
-<!--<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>-->
-<!--<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>-->
-
-<!--&lt;!&ndash; Загрузим наш React-компонент. &ndash;&gt;-->
-<!--<script src="like_button.js"></script>-->
-
+<script src="defaultSearch.js"></script>
 </html>
