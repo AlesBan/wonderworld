@@ -1,13 +1,14 @@
 using System.Globalization;
 
-namespace Wonderworld.API.Constants;
+namespace Wonderworld.Infrastructure.Constants;
 
 public static class EmailConstants
 {
     public const string EmailConfirmationSubject = "HiClass Confirmation";
 
-    public const string EmailConfirmationMessage =
-        @"Click this link to verify your email: http://localhost:7280/api/user/verify-email?token=";
+    public const string EmailConfirmationMessage = "Thank you for joining our class! We are glad to have you on board. " +
+                                                   "Enter this code on the website page to confirm your email address." +
+                                                   "If you didn't sign up, please ignore this message.\n\n";
 
     public const string EmailInvitationSubject = "HiClass Invitation";
 

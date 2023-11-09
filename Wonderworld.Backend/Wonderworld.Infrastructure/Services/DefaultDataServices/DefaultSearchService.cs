@@ -4,8 +4,8 @@ using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListByDefaultSearchRequest;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Infrastructure.Helpers;
 
 namespace Wonderworld.Infrastructure.Services.DefaultDataServices;
 

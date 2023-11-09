@@ -1,9 +1,4 @@
-using AutoMapper;
 using MediatR;
-using Microsoft.Extensions.Configuration;
-using Wonderworld.API.Constants;
-using Wonderworld.Application.Dtos.ClassDtos;
-using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
@@ -24,31 +19,27 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetAl
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
 using Wonderworld.Application.Helpers;
 using Wonderworld.Application.Helpers.TokenHelper;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Infrastructure.Helpers;
 using Wonderworld.Infrastructure.Services.EmailHandlerService;
 
 namespace Wonderworld.Infrastructure.Services.AccountServices;
 
 public class UserAccountService : IUserAccountService
 {
-    private readonly IConfiguration _configuration;
-    private readonly IMapper _mapper;
-    private readonly IEmailHandlerService _emailHandlerService;
     private readonly ITokenHelper _tokenHelper;
     private readonly IUserHelper _userHelper;
+    private readonly IEmailHandlerService _emailHandlerService;
 
-    public UserAccountService(IConfiguration configuration, IMapper mapper, IEmailHandlerService emailHandlerService,
-        ITokenHelper tokenHelper, IUserHelper userHelper)
+    public UserAccountService(ITokenHelper tokenHelper, IUserHelper userHelper,
+        IEmailHandlerService emailHandlerService)
     {
-        _configuration = configuration;
-        _mapper = mapper;
-        _emailHandlerService = emailHandlerService;
         _tokenHelper = tokenHelper;
         _userHelper = userHelper;
+        _emailHandlerService = emailHandlerService;
     }
 
     public async Task<IEnumerable<UserProfileDto>> GetAllUsers(IMediator mediator)
@@ -63,19 +54,15 @@ public class UserAccountService : IUserAccountService
 
     public async Task<string> RegisterUser(UserRegisterRequestDto requestUserDto, IMediator mediator)
     {
-        var registeredUser = await mediator.Send(new RegisterUserCommand(requestUserDto));
-
-        if (registeredUser.VerificationToken == null)
+        var registeredUser = await mediator.Send(new RegisterUserCommand()
         {
-            throw new Exception();
-        }
+            Email = requestUserDto.Email,
+            Password = requestUserDto.Password,
+        });
 
-        var message = EmailConstants.EmailConfirmationMessage + registeredUser.VerificationToken;
-        await _emailHandlerService.SendAsync(_configuration, registeredUser.Email,
-            EmailConstants.EmailConfirmationSubject,
-            message);
+        await _emailHandlerService.SendVerificationEmail(registeredUser, registeredUser.VerificationCode);
 
-        return registeredUser.VerificationToken;
+        return registeredUser.AccessToken ?? string.Empty;
     }
 
     public async Task<UserProfileDto> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator)
@@ -89,24 +76,24 @@ public class UserAccountService : IUserAccountService
 
         var newToken = _tokenHelper.CreateToken(user);
 
-        userProfileDto.VerificationToken = newToken;
+        userProfileDto.AccessToken = newToken;
 
         await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
 
         return userProfileDto;
     }
 
-    public async Task<string> ConfirmEmail(string token, IMediator mediator)
+    public async Task<string> ConfirmEmail(Guid userId, string code, IMediator mediator)
     {
-        var user = await _userHelper.GetUserByToken(token, mediator);
+        var user = await _userHelper.GetUserById(userId, mediator);
 
-        var verifiedUser = await mediator.Send(new UpdateUserVerificationCommand(user.UserId));
+        var verifiedUser = await mediator.Send(new UpdateUserVerificationCommand
+        {
+            UserId = user.UserId,
+            VerificationCode = code
+        });
 
-        var newToken = _tokenHelper.CreateToken(verifiedUser);
-
-        await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
-
-        return newToken;
+        return verifiedUser.AccessToken;
     }
 
     public async Task<string> ForgotPassword(string userEmail, IMediator mediator)

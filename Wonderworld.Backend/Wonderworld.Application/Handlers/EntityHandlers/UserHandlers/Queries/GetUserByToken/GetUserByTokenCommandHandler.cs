@@ -19,7 +19,7 @@ public class GetUserByTokenCommandHandler : IRequestHandler<GetUserByTokenComman
     {
         var user = await _context.Users
             .FirstOrDefaultAsync(x =>
-                x.VerificationToken == request.Token, cancellationToken);
+                x.AccessToken == request.Token, cancellationToken);
 
         if (user == null)
         {

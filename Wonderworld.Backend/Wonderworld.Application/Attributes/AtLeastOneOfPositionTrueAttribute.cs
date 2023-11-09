@@ -22,9 +22,11 @@ public class AtLeastOneOfPositionTrueAttribute : ValidationAttribute
             property.PropertyType == typeof(bool) &&
             (bool)(property.GetValue(validationContext.ObjectInstance) ?? false));
 
-        return (!atLeastOneTrue
-                   ? throw new AtLeastOfPositionShouldBeTrueException()
-                   : ValidationResult.Success) ??
-               throw new InvalidOperationException();
+        if (atLeastOneTrue)
+        {
+            return ValidationResult.Success;
+        }
+
+        throw new AtLeastOfPositionShouldBeTrueException();
     }
 }

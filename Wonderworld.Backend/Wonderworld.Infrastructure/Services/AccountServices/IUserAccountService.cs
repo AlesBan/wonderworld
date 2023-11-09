@@ -11,7 +11,7 @@ public interface IUserAccountService
     public Task<IEnumerable<UserProfileDto>> GetAllUsers(IMediator mediator);
     public Task<string> RegisterUser(UserRegisterRequestDto requestUserDto, IMediator mediator);
     public Task<UserProfileDto> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator);
-    public Task<string> ConfirmEmail(string token, IMediator mediator);
+    public Task<string> ConfirmEmail(Guid userId, string token, IMediator mediator);
     public Task<string> ForgotPassword(string userEmail, IMediator mediator);
     public Task<UserProfileDto> CreateUserAccount(Guid userId, CreateUserAccountRequestDto requestUserDto, IMediator mediator);
     public Task DeleteUser(Guid userId, IMediator mediator);

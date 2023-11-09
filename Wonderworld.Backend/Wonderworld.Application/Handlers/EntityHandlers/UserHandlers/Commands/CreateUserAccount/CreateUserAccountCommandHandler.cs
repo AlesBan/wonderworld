@@ -50,7 +50,7 @@ public class CreateUserAccountCommandHandler : IRequestHandler<CreateUserAccount
         
         var newToken = _tokenHelper.CreateToken(user);
 
-        user.VerificationToken = newToken;
+        user.AccessToken = newToken;
 
         _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);

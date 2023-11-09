@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Wonderworld.Application.Common.Exceptions.User;
 using Wonderworld.Application.Helpers;
 using Wonderworld.Application.Helpers.TokenHelper;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -12,33 +13,38 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
 {
     private readonly ISharedLessonDbContext _context;
     private readonly ITokenHelper _tokenHelper;
+    private readonly IUserHelper _userHelper;
 
-    public RegisterUserCommandHandler(ISharedLessonDbContext context, ITokenHelper tokenHelper)
+    public RegisterUserCommandHandler(ISharedLessonDbContext context, ITokenHelper tokenHelper, IUserHelper userHelper)
     {
         _context = context;
         _tokenHelper = tokenHelper;
+        _userHelper = userHelper;
     }
 
     public async Task<User> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
-        var requestUserDto = request.RegisterRequestDto;
+        var userEmail = request.Email;
+        var userPassword = request.Password;
+
         var userExists = await _context.Users
-            .AnyAsync(x => x.Email == requestUserDto.Email, cancellationToken);
-        
+            .AnyAsync(x => x.Email == userEmail, cancellationToken);
+
         if (userExists)
         {
-            throw new UserAlreadyExistsException(requestUserDto.Email);
+            throw new UserAlreadyExistsException(userEmail);
         }
-        
-        var newUser = new User()
+
+        var newUser = new User
         {
-            Email = requestUserDto.Email
+            Email = userEmail
         };
 
-        PasswordHelper.SetUserPasswordHash(newUser, requestUserDto.Password);
+        PasswordHelper.SetUserPasswordHash(newUser, userPassword);
 
-        newUser.VerificationToken = _tokenHelper.CreateToken(newUser);
-        
+        newUser.AccessToken = _tokenHelper.CreateToken(newUser);
+        newUser.VerificationCode = _userHelper.CreateVerificationCode();
+
         await AddUserToDataBase(newUser, cancellationToken);
 
         return await Task.FromResult(newUser);
@@ -46,7 +52,8 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
 
     private async Task AddUserToDataBase(User user, CancellationToken cancellationToken)
     {
-        await _context.Users.AddAsync(user, cancellationToken);
+        await _context.Users
+            .AddAsync(user, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
     }
 }

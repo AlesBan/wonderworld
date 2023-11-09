@@ -10,8 +10,8 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPasswordHash;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Infrastructure.Helpers;
 
 namespace Wonderworld.Infrastructure.Services.EditUserServices;
 

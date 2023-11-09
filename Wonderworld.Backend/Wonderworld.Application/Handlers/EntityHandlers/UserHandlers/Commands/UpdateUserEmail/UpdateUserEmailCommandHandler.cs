@@ -27,7 +27,6 @@ public class UpdateUserEmailCommandHandler : IRequestHandler<UpdateUserEmailComm
             throw new UserNotFoundException(request.UserId);
         }
         
-        
         user.Email = request.Email;
         _context.Users.Attach(user).State = EntityState.Modified;
         

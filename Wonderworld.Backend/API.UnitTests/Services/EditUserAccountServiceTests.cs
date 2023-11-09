@@ -25,11 +25,11 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums.EntityTypes;
-using Wonderworld.Infrastructure.Helpers;
 using Wonderworld.Infrastructure.Services.EditUserServices;
 using Xunit;
 

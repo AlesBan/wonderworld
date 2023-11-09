@@ -6,9 +6,5 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.
 public class UpdateUserVerificationCommand : IRequest<User>
 {
     public Guid UserId { get; set; }
-
-    public UpdateUserVerificationCommand(Guid userId)
-    {
-        UserId = userId;
-    }
+    public string VerificationCode { get; set; }
 }

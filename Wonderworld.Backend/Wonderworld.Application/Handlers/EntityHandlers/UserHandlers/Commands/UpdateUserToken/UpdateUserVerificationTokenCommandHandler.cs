@@ -23,7 +23,7 @@ public class UpdateUserVerificationTokenCommandHandler : IRequestHandler<UpdateU
         if (user == null)
             throw new UserNotFoundException(request.UserId);
 
-        user.VerificationToken = request.VerificationToken;
+        user.AccessToken = request.VerificationToken;
 
         await _context.SaveChangesAsync(cancellationToken);
 

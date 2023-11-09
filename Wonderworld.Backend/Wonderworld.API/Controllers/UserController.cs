@@ -41,9 +41,9 @@ public class UserController : BaseController
     }
 
     [HttpGet("confirm-email")]
-    public async Task<IActionResult> ConfirmEmail(string token)
+    public async Task<IActionResult> ConfirmEmail(string verificationCode)
     {
-        var result = await _userAccountService.ConfirmEmail(token, Mediator);
+        var result = await _userAccountService.ConfirmEmail(UserId, verificationCode, Mediator);
         return ResponseHelper.GetAuthResultOk(result);
     }
 
