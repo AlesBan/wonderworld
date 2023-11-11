@@ -37,7 +37,7 @@ public class UserController : BaseController
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto requestUserDto)
     {
         var result = await _userAccountService.LoginUser(requestUserDto, Mediator);
-        return ResponseHelper.GetOkResult(result);
+        return ResponseHelper.GetAuthResultOk(result);
     }
 
     [HttpGet("confirm-email")]

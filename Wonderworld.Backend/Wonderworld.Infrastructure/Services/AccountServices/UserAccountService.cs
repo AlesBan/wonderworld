@@ -65,7 +65,7 @@ public class UserAccountService : IUserAccountService
         return registeredUser.AccessToken ?? string.Empty;
     }
 
-    public async Task<UserProfileDto> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator)
+    public async Task<string> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator)
     {
         var user = await _userHelper.GetUserByEmail(requestUserDto.Email, mediator);
 
@@ -80,7 +80,7 @@ public class UserAccountService : IUserAccountService
 
         await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
 
-        return userProfileDto;
+        return userProfileDto.AccessToken;
     }
 
     public async Task<string> ConfirmEmail(Guid userId, string code, IMediator mediator)
