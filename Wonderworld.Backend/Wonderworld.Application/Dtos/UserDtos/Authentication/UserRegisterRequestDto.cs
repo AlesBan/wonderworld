@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using AutoMapper;
 using Wonderworld.Application.Common.Mappings;
 using Wonderworld.Domain.Entities.Main;
 
-namespace Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
+namespace Wonderworld.Application.Dtos.UserDtos.Authentication;
 
 public class UserRegisterRequestDto : IMapWith<User>
 {

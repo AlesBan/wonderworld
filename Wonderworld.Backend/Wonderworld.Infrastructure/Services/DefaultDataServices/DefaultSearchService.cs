@@ -4,8 +4,8 @@ using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListByDefaultSearchRequest;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Infrastructure.Helpers;
 
 namespace Wonderworld.Infrastructure.Services.DefaultDataServices;
 
@@ -32,20 +32,21 @@ public class DefaultSearchService : IDefaultSearchService
         return await _userHelper.GetUserById(userId, mediator);
     }
 
-    private async Task<DefaultSearchRequestDto> CreateDefaultSearchRequestDto(User user)
+    private static Task<DefaultSearchCommandDto> CreateDefaultSearchRequestDto(User user)
     {
         var userDisciplineIds = user.UserDisciplines.Select(ud => ud.DisciplineId).ToList();
         var userCountryId = user.CountryId ?? Guid.Empty;
 
-        return new DefaultSearchRequestDto
+        return Task.FromResult(new DefaultSearchCommandDto
         {
+            UserId = user.UserId,
             DisciplineIds = userDisciplineIds,
             CountryId = userCountryId
-        };
+        });
     }
 
     private static async Task<IEnumerable<User>> GetUserListByDefaultSearchRequest(
-        DefaultSearchRequestDto searchRequest,
+        DefaultSearchCommandDto searchRequest,
         IMediator mediator)
     {
         var query = new GetUserListByDefaultSearchRequestCommand

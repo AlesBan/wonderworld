@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers;
-using Wonderworld.API.Helpers.JwtHelpers;
 using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 using Wonderworld.Infrastructure.Services.EditUserServices;

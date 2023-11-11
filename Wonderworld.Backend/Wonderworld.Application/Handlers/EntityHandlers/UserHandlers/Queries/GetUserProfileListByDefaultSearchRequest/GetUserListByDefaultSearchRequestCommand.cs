@@ -7,5 +7,5 @@ namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.G
 
 public class GetUserListByDefaultSearchRequestCommand : IRequest<IEnumerable<User>>
 {
-    public DefaultSearchRequestDto SearchRequest { get; set; }
+    public DefaultSearchCommandDto SearchRequest { get; set; }
 }

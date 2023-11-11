@@ -18,7 +18,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.IsCreatedAccount)
             .HasDefaultValue(false)
             .IsRequired();
-        
+
+        builder.Property(u => u.VerificationCode)
+            .HasMaxLength(10);
+
         builder.Property(u => u.IsVerified)
             .HasDefaultValue(false)
             .IsRequired();

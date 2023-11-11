@@ -1,4 +1,5 @@
 using MediatR;
+using Wonderworld.Application.Common.Exceptions.Class;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Communication;
 using static System.Threading.Tasks.Task;
@@ -27,10 +28,22 @@ public class CreateInvitationCommandHandler : IRequestHandler<CreateInvitationCo
             Status = request.Status
         };
 
-
+        ValidateClassReceiverId(request.UserSenderId, request.ClassReceiverId);
+        
         await _context.Invitations.AddAsync(invitation, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
         return invitation;
+    }
+
+    private void ValidateClassReceiverId(Guid userId, Guid classReceiverId)
+    {
+        var classReceiverIsUserClass = _context.Classes
+            .Any(c => c.UserId == userId);
+
+        if (!classReceiverIsUserClass)
+        {
+            throw new InvalidClassReceiverException();
+        }
     }
 }

@@ -79,7 +79,7 @@ namespace Wonderworld.API.Filters
             {
                 LogException(context, controllerName, actionName, contextType);
 
-                var result = ResponseHelper.GetBadRequest(context.Exception.Message);
+                var result = ResponseHelper.GetExceptionObjectResult(context.Exception.Message);
 
                 context.HttpContext.Response.StatusCode = 403;
                     

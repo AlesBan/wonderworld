@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers;
 using Wonderworld.API.Helpers.JwtHelpers;
-using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
-using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
+using Wonderworld.Application.Dtos.UserDtos.Authentication;
+using Wonderworld.Application.Dtos.UserDtos.CreateAccount;
+using Wonderworld.Application.Dtos.UserDtos.ResetPassword;
 using Wonderworld.Infrastructure.Services.AccountServices;
 
 namespace Wonderworld.API.Controllers;
@@ -30,7 +31,7 @@ public class UserController : BaseController
     public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto requestUserDto)
     {
         var result = await _userAccountService.RegisterUser(requestUserDto, Mediator);
-        return ResponseHelper.GetAuthResultOk(result);
+        return ResponseHelper.GetOkResult(result);
     }
 
     [HttpPost("login")]
@@ -41,16 +42,9 @@ public class UserController : BaseController
     }
 
     [HttpGet("confirm-email")]
-    public async Task<IActionResult> ConfirmEmail(string token)
+    public async Task<IActionResult> ConfirmEmail(string verificationCode)
     {
-        var result = await _userAccountService.ConfirmEmail(token, Mediator);
-        return ResponseHelper.GetAuthResultOk(result);
-    }
-
-    [HttpPost("forgot-password")]
-    public async Task<IActionResult> ForgotPassword(string email)
-    {
-        var result = await _userAccountService.ForgotPassword(email, Mediator);
+        var result = await _userAccountService.ConfirmEmail(UserId, verificationCode, Mediator);
         return ResponseHelper.GetAuthResultOk(result);
     }
 
@@ -63,6 +57,27 @@ public class UserController : BaseController
         return ResponseHelper.GetOkResult(result);
     }
 
+    [HttpPost("forgot-password")]
+    public async Task<IActionResult> ForgotPassword(string email)
+    {
+        var result = await _userAccountService.ForgotPassword(email, Mediator);
+        return ResponseHelper.GetOkResult(result);
+    }
+
+    [HttpPost("check-reset-password-code")]
+    public async Task<IActionResult> CheckResetPasswordCode(string code)
+    {
+        await _userAccountService.CheckResetPasswordCode(UserId, code, Mediator);
+        return ResponseHelper.GetOkResult();
+    }
+
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequestDto requestDto)
+    {
+        var result = await _userAccountService
+            .ResetPassword(UserId, requestDto, Mediator);
+        return ResponseHelper.GetOkResult(result);
+    }
 
     [Authorize]
     [CheckUserCreateAccount]

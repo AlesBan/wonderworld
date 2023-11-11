@@ -20,7 +20,7 @@ public class GetUserProfileListByDefaultSearchQueryCommandHandlerTests : TestCom
         var discipline2 = Context.Disciplines.SingleAsync(d => d
             .Title == "Chemistry").Result;
 
-        var searchRequest = new DefaultSearchRequestDto
+        var searchRequest = new DefaultSearchCommandDto
         {
             DisciplineIds = new List<Guid> { discipline1.DisciplineId, discipline2.DisciplineId },
             CountryId = Context.Countries.SingleAsync(c => c

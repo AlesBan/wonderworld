@@ -25,11 +25,12 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Upda
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserEmail;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserInstitution;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserById;
+using Wonderworld.Application.Helpers.TokenHelper;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Location;
 using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Domain.Enums.EntityTypes;
-using Wonderworld.Infrastructure.Helpers;
 using Wonderworld.Infrastructure.Services.EditUserServices;
 using Xunit;
 
@@ -43,6 +44,7 @@ public class EditUserAccountServiceTests : TestCommonBase
         // Arrange
         var mediatorMock = new Mock<IMediator>();
         var userHelperMock = new Mock<IUserHelper>();
+        var tokenHelperMock = new Mock<ITokenHelper>();
 
         var userId = SharedLessonDbContextFactory.UserAId;
         var user = Context.Users.FirstOrDefault(u =>
@@ -90,7 +92,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper, userHelperMock.Object);
+        var service = new EditUserAccountService(userHelperMock.Object, tokenHelperMock.Object);
 
         // Act
         var result = await service.EditUserPersonalInfoAsync(userId, requestUserDto, mediatorMock.Object);
@@ -112,6 +114,8 @@ public class EditUserAccountServiceTests : TestCommonBase
         // Arrange
         var mediatorMock = new Mock<IMediator>();
         var userHelperMock = new Mock<IUserHelper>();
+        var tokenHelperMock = new Mock<ITokenHelper>();
+
 
         var userId = Guid.NewGuid();
         var user = new User()
@@ -163,7 +167,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper, userHelperMock.Object);
+        var service = new EditUserAccountService(userHelperMock.Object, tokenHelperMock.Object);
 
         // Act
         // Assert
@@ -177,6 +181,7 @@ public class EditUserAccountServiceTests : TestCommonBase
         // Arrange
         var mediatorMock = new Mock<IMediator>();
         var userHelperMock = new Mock<IUserHelper>();
+        var tokenHelperMock = new Mock<ITokenHelper>();
 
         const string newInstitutionTitle = "NewInstitutionTitle";
         const string newAddress = "NewAddress";
@@ -238,8 +243,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper, userHelperMock.Object);
-
+        var service = new EditUserAccountService(userHelperMock.Object, tokenHelperMock.Object);
         // Act
         var result = await service.EditUserInstitutionAsync(userId, requestUserDto, mediatorMock.Object);
 
@@ -257,21 +261,22 @@ public class EditUserAccountServiceTests : TestCommonBase
         // Arrange
         var mediatorMock = new Mock<IMediator>();
         var userHelperMock = new Mock<IUserHelper>();
+        var tokenHelperMock = new Mock<ITokenHelper>();
 
         const string newEmail = "NewEmail@gmail.com";
 
         var userId = SharedLessonDbContextFactory.UserAId;
         var user = Context.Users.FirstOrDefault(u =>
             u.UserId == userId);
-        var updateUserEmailCommand = new UpdateUserEmailCommand()
+        var updateUserEmailCommand = new UpdateUserEmailAndRemoveVerificationCommand()
         {
             UserId = user!.UserId,
             Email = newEmail
         };
-        var updateUserEmailHandler = new UpdateUserEmailCommandHandler(Context);
+        var updateUserEmailHandler = new UpdateUserEmailAndRemoveVerificationCommandHandler(Context);
         mediatorMock.Setup(m => m.Send(It.IsAny<GetUserByIdQuery>(),
             It.IsAny<CancellationToken>())).ReturnsAsync(user);
-        mediatorMock.Setup(m => m.Send(It.IsAny<UpdateUserEmailCommand>(),
+        mediatorMock.Setup(m => m.Send(It.IsAny<UpdateUserEmailAndRemoveVerificationCommand>(),
                 It.IsAny<CancellationToken>()))
             .ReturnsAsync(await updateUserEmailHandler
                 .Handle(updateUserEmailCommand, CancellationToken.None));
@@ -290,7 +295,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper, userHelperMock.Object);
+        var service = new EditUserAccountService(userHelperMock.Object, tokenHelperMock.Object);
 
         // Act
         var result = await service.EditUserEmailAsync(userId, requestUserDto, mediatorMock.Object);
@@ -309,6 +314,7 @@ public class EditUserAccountServiceTests : TestCommonBase
         // Arrange
         var mediatorMock = new Mock<IMediator>();
         var userHelperMock = new Mock<IUserHelper>();
+        var tokenHelperMock = new Mock<ITokenHelper>();
 
         const string newPassword = "NewPassword";
 
@@ -342,7 +348,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper, userHelperMock.Object);
+        var service = new EditUserAccountService(userHelperMock.Object, tokenHelperMock.Object);
 
         // Act
         var result = await service.EditUserPasswordAsync(userId, requestUserDto, mediatorMock.Object);
@@ -360,6 +366,8 @@ public class EditUserAccountServiceTests : TestCommonBase
         // Arrange
         var mediatorMock = new Mock<IMediator>();
         var userHelperMock = new Mock<IUserHelper>();
+        var tokenHelperMock = new Mock<ITokenHelper>();
+
         var languageTitles = new List<string>()
         {
             LanguageType.English.ToString(),
@@ -507,7 +515,7 @@ public class EditUserAccountServiceTests : TestCommonBase
 
         var mapper = confMapper.CreateMapper();
 
-        var service = new EditUserAccountService(mapper, userHelperMock.Object);
+        var service = new EditUserAccountService(userHelperMock.Object, tokenHelperMock.Object);
 
         // Act
         var result = await service.EditUserProfessionalInfoAsync(userId, requestUserDto, mediatorMock.Object);

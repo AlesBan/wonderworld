@@ -8,16 +8,16 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPasswordHash;
 
-public class UpdateUserPasswordHashCommandHandler : IRequestHandler<UpdateUserPasswordHashCommand, User>
+public class UpdateUserPasswordCommandHandler : IRequestHandler<UpdateUserPasswordCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public UpdateUserPasswordHashCommandHandler(ISharedLessonDbContext context)
+    public UpdateUserPasswordCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<User> Handle(UpdateUserPasswordHashCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(UpdateUserPasswordCommand request, CancellationToken cancellationToken)
     {
         var user = _context.Users
             .FirstOrDefault(u =>

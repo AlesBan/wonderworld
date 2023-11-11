@@ -24,6 +24,13 @@ public class ClassController : BaseController
         return ResponseHelper.GetOkResult(result);
     }
 
+    [HttpGet] 
+    public async Task<IActionResult> GetClassProfile(Guid classId)
+    {
+       var result = await _classService.GetClassProfile(classId, Mediator);
+       return ResponseHelper.GetOkResult(result);
+    }
+
     [HttpPut("update-class/{classId:guid}")]
     public async Task<IActionResult> UpdateClass([FromBody] UpdateClassRequestDto requestClassDto, Guid classId)
     {

@@ -3,8 +3,8 @@ using Wonderworld.Application.Dtos.ClassDtos;
 using Wonderworld.Application.Dtos.SearchDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Queries.GetUserProfileListBySearchRequest;
+using Wonderworld.Application.Helpers.UserHelper;
 using Wonderworld.Domain.Entities.Main;
-using Wonderworld.Infrastructure.Helpers;
 
 namespace Wonderworld.Infrastructure.Services.SearchService;
 
@@ -17,19 +17,27 @@ public class SearchService : ISearchService
         _userHelper = userHelper;
     }
 
-    public async Task<SearchResponseDto> GetTeacherAndClassProfiles(SearchRequestDto searchRequest, IMediator mediator)
+    public async Task<SearchResponseDto> GetTeacherAndClassProfiles(Guid userId, SearchRequestDto searchRequest,
+        IMediator mediator)
     {
-        var userList = await GetUserListBySearchRequest(searchRequest, mediator);
+        var userList = await GetUserListBySearchRequest(userId, searchRequest, mediator);
         var searchResponseDto = await GetSearchResponseDto(userList, searchRequest.Disciplines);
         return searchResponseDto;
     }
 
-    private static async Task<IEnumerable<User>> GetUserListBySearchRequest(SearchRequestDto searchRequest,
+    private static async Task<IEnumerable<User>> GetUserListBySearchRequest(Guid userId, SearchRequestDto searchRequest,
         IMediator mediator)
     {
         var query = new GetUserListBySearchRequestCommand
         {
-            SearchRequest = searchRequest
+            SearchRequest = new SearchCommandDto()
+            {
+                UserId = userId,
+                Disciplines = searchRequest.Disciplines,
+                Languages = searchRequest.Languages,
+                Grades = searchRequest.Grades,
+                Countries = searchRequest.Countries
+            }
         };
 
         var userList = (await mediator.Send(query)).ToList();
@@ -40,10 +48,10 @@ public class SearchService : ISearchService
     private async Task<SearchResponseDto> GetSearchResponseDto(IEnumerable<User> userList,
         IEnumerable<string> languages)
     {
-        var userProfileList = await GetUserProfileList(userList);
-        var teacherProfiles = GetProfiles(userProfileList, isTeacher: true);
-        var expertProfiles = GetProfiles(userProfileList, isTeacher: false);
-        var classProfiles = GetClassProfiles(teacherProfiles, languages);
+        var userProfileList = (await GetUserProfileList(userList)).ToList();
+        var teacherProfiles = GetProfiles(userProfileList, isTeacher: true).ToList();
+        var expertProfiles = GetProfiles(userProfileList, isTeacher: false).ToList();
+        var classProfiles = GetClassProfiles(teacherProfiles, languages).ToList();
 
         return new SearchResponseDto
         {
@@ -83,7 +91,7 @@ public class SearchService : ISearchService
                 Grade = c.Grade,
                 Languages = c.Languages,
                 Disciplines = c.Disciplines,
-                PhotoUrl = c.PhotoUrl!
+                PhotoUrl = c.PhotoUrl
             });
     }
 }
