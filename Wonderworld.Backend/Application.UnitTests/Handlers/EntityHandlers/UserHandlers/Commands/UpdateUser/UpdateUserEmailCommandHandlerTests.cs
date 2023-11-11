@@ -14,10 +14,10 @@ public class UpdateUserEmailCommandHandlerTests : TestCommonBase
         var userId = SharedLessonDbContextFactory.UserAId;
         const string newEmail = "NewEmail";
 
-        var handler = new UpdateUserEmailCommandHandler(Context);
+        var handler = new UpdateUserEmailAndRemoveVerificationCommandHandler(Context);
 
         // Act
-        await handler.Handle(new UpdateUserEmailCommand()
+        await handler.Handle(new UpdateUserEmailAndRemoveVerificationCommand()
         {
             UserId = userId,
             Email = newEmail

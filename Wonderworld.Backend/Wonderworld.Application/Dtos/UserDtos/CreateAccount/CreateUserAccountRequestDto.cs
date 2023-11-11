@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using Wonderworld.Application.Attributes;
-using Wonderworld.Application.Dtos.CreateAccountDtos;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 
-namespace Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
+namespace Wonderworld.Application.Dtos.UserDtos.CreateAccount;
 
 public class CreateUserAccountRequestDto
 {

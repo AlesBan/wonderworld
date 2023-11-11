@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Wonderworld.API.Helpers.JwtHelpers;
@@ -23,6 +24,8 @@ public class CheckUserCreateAccountAttribute : TypeFilterAttribute
             {
                 return next();
             }
+
+            context.Result = new StatusCodeResult((int)HttpStatusCode.MethodNotAllowed);
 
             var userId = JwtHelper.GetUserIdFromClaims(context.HttpContext);
             throw new UserHasNotAccountException(userId);

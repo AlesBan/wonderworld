@@ -1,7 +1,9 @@
 using MediatR;
 using Wonderworld.Application.Dtos.UserDtos;
-using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
-using Wonderworld.Application.Dtos.UserDtos.CreateAccountDtos;
+using Wonderworld.Application.Dtos.UserDtos.Authentication;
+using Wonderworld.Application.Dtos.UserDtos.CreateAccount;
+using Wonderworld.Application.Dtos.UserDtos.Login;
+using Wonderworld.Application.Dtos.UserDtos.ResetPassword;
 using Wonderworld.Application.Handlers.EntityHandlers.CityHandlers.Queries.GetCity;
 using Wonderworld.Application.Handlers.EntityHandlers.CountryHandlers.Queries.GetCountryByTitle;
 using Wonderworld.Application.Handlers.EntityHandlers.DisciplineHandlers.Queries.GetDisciplinesByTitles;
@@ -12,6 +14,7 @@ using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.Crea
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteAllUsers;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.DeleteUser;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.RegisterUser;
+using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserPasswordHash;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserResetToken;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserToken;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserVerification;
@@ -52,7 +55,7 @@ public class UserAccountService : IUserAccountService
         return userProfileDtos;
     }
 
-    public async Task<string> RegisterUser(UserRegisterRequestDto requestUserDto, IMediator mediator)
+    public async Task<LoginResponseDto> RegisterUser(UserRegisterRequestDto requestUserDto, IMediator mediator)
     {
         var registeredUser = await mediator.Send(new RegisterUserCommand()
         {
@@ -60,12 +63,17 @@ public class UserAccountService : IUserAccountService
             Password = requestUserDto.Password,
         });
 
-        await _emailHandlerService.SendVerificationEmail(registeredUser, registeredUser.VerificationCode);
+        await _emailHandlerService.SendVerificationEmail(registeredUser.Email, registeredUser.VerificationCode);
 
-        return registeredUser.AccessToken ?? string.Empty;
+        var loginResponseDto = new LoginResponseDto
+        {
+            AccessToken = registeredUser.AccessToken,
+            IsCreatedAccount = false
+        };
+        return loginResponseDto;
     }
 
-    public async Task<string> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator)
+    public async Task<LoginResponseDto> LoginUser(UserLoginRequestDto requestUserDto, IMediator mediator)
     {
         var user = await _userHelper.GetUserByEmail(requestUserDto.Email, mediator);
 
@@ -78,9 +86,14 @@ public class UserAccountService : IUserAccountService
 
         userProfileDto.AccessToken = newToken;
 
-        await mediator.Send(new UpdateUserVerificationTokenCommand(user.UserId, newToken));
+        await mediator.Send(new UpdateUserAccessTokenCommand(user.UserId, newToken));
 
-        return userProfileDto.AccessToken;
+        var loginResponseDto = new LoginResponseDto
+        {
+            AccessToken = userProfileDto.AccessToken,
+            IsCreatedAccount = userProfileDto.IsCreateAccount
+        };
+        return loginResponseDto;
     }
 
     public async Task<string> ConfirmEmail(Guid userId, string code, IMediator mediator)
@@ -100,11 +113,40 @@ public class UserAccountService : IUserAccountService
     {
         var user = await _userHelper.GetUserByEmail(userEmail, mediator);
 
-        var resetToken = _tokenHelper.CreateToken(user);
+        var updatedUser = await mediator.Send(new UpdateUserResetPasswordInfoCommand(user.UserId));
 
-        await mediator.Send(new UpdateUserResetTokenCommand());
+        await _emailHandlerService.SendResetPasswordEmail(user.Email, updatedUser.PasswordResetCode);
+        return updatedUser.PasswordResetToken;
+    }
 
-        return resetToken;
+    public async Task CheckResetPasswordCode(Guid userId, string code, IMediator mediator)
+    {
+        var user = await _userHelper.GetUserById(userId, mediator);
+        _userHelper.CheckResetTokenExpiration(user);
+        _userHelper.CheckResetPasswordCode(user, code);
+    }
+
+    public async Task<LoginResponseDto> ResetPassword(Guid userId, ResetPasswordRequestDto requestDto, IMediator mediator)
+    {
+        var user = await _userHelper.GetUserById(userId, mediator);
+        _userHelper.CheckResetTokenExpiration(user);
+        await mediator
+            .Send(new UpdateUserPasswordCommand
+            {
+                UserId = user.UserId,
+                Password = requestDto.Password
+            });
+        var newToken = _tokenHelper.CreateToken(user);
+
+        user.AccessToken = newToken;
+        await mediator.Send(new UpdateUserAccessTokenCommand(user.UserId, newToken));
+
+        var loginResponseDtoDto = new LoginResponseDto
+        {
+            AccessToken = newToken,
+            IsCreatedAccount = user.IsCreatedAccount
+        };
+        return loginResponseDtoDto;
     }
 
     public async Task<UserProfileDto> CreateUserAccount(Guid userId,

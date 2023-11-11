@@ -43,7 +43,7 @@ public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, U
         PasswordHelper.SetUserPasswordHash(newUser, userPassword);
 
         newUser.AccessToken = _tokenHelper.CreateToken(newUser);
-        newUser.VerificationCode = _userHelper.CreateVerificationCode();
+        newUser.VerificationCode = _userHelper.GenerateVerificationCode();
 
         await AddUserToDataBase(newUser, cancellationToken);
 

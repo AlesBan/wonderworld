@@ -14,6 +14,7 @@ public class User
     public string? AccessToken { get; set; } = string.Empty;
     public string? PasswordResetToken { get; set; } = string.Empty;
     public DateTime? ResetTokenExpires { get; set; }
+    public string? PasswordResetCode { get; set; } = string.Empty;
     public string? VerificationCode { get; set; } = string.Empty;
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     public bool IsCreatedAccount { get; set; }

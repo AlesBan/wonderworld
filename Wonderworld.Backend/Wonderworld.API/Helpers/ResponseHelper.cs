@@ -15,6 +15,15 @@ public static class ResponseHelper
             Errors = new List<string> { message },
         });
     }
+    
+    public static IActionResult GetExceptionObjectResult(string message)
+    {
+        return new ObjectResult(new ResponseResult
+        {
+            Result = false,
+            Errors = new List<string> { message },
+        });
+    }
 
     public static OkObjectResult GetOkResult()
     {
@@ -31,15 +40,6 @@ public static class ResponseHelper
         {
             Result = true,
             Value = value
-        });
-    }
-
-    public static BadRequestObjectResult GetAuthBadRequest(string message)
-    {
-        return new BadRequestObjectResult(new AuthResult
-        {
-            Result = false,
-            Errors = new List<string> { message }
         });
     }
 

@@ -44,6 +44,25 @@ public static class JwtHelper
             throw new InvalidTokenProvidedException();
         }
     }
+    
+    public static bool GetIsVerifiedFromClaims(HttpContext httpContext)
+    {
+        var decodedToken = GetTokenFromHeader(httpContext);
+
+        try
+        {
+            TryParse(decodedToken.Claims
+                .FirstOrDefault(claim =>
+                    claim.Type == "isVerified")?
+                .Value, out var isVerified);
+
+            return isVerified;
+        }
+        catch
+        {
+            throw new InvalidTokenProvidedException();
+        }
+    }
 
     public static PositionInfoDto GetPositionInfoFromClaims(HttpContext httpContext)
     {

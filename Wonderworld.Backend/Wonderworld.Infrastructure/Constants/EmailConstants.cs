@@ -23,4 +23,10 @@ public static class EmailConstants
         return $"You've been sent a call invitation by a user with {emailSender} email.\n" +
                $"Time of invitation: {invitationTime.ToString(CultureInfo.InvariantCulture)}";
     }
+    
+    public const string EmailResetPasswordSubject = "HiClass Reset Password";
+    
+    public const string EmailResetPasswordMessage = "You've requested to reset your password.\n" +
+                                                   "Enter this code on the website page to reset your password." +
+                                                   "If you didn't sign up, please ignore this message.\n\n";
 }

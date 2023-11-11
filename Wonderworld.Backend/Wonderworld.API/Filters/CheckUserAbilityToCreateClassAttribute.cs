@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Wonderworld.API.Helpers.JwtHelpers;
@@ -17,12 +18,14 @@ public class CheckUserAbilityToCreateClassImplementation : IAsyncActionFilter
     public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
         var positionInfo = JwtHelper.GetPositionInfoFromClaims(context.HttpContext);
-        
-        if (!positionInfo.IsTeacher)
+
+        if (positionInfo.IsTeacher)
         {
-            throw new UserUnableToCreateClassException();
+            return next();
         }
         
-        return next();
+        context.Result = new StatusCodeResult((int)HttpStatusCode.Forbidden);
+        throw new UserUnableToCreateClassException();
+
     }
 }

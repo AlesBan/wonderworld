@@ -1,5 +1,4 @@
 using Wonderworld.API.Constants;
-using Wonderworld.Application.Dtos.UserDtos.AuthenticationDtos;
 using Wonderworld.Infrastructure.Services.EmailHandlerService;
 
 namespace Wonderworld.API.Helpers.EmailHelper;

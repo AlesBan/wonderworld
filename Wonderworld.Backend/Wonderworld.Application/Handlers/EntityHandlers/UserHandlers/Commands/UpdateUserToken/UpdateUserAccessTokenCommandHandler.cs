@@ -6,16 +6,16 @@ using Wonderworld.Domain.Entities.Main;
 
 namespace Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateUserToken;
 
-public class UpdateUserVerificationTokenCommandHandler : IRequestHandler<UpdateUserVerificationTokenCommand, User>
+public class UpdateUserAccessTokenCommandHandler : IRequestHandler<UpdateUserAccessTokenCommand, User>
 {
     private readonly ISharedLessonDbContext _context;
 
-    public UpdateUserVerificationTokenCommandHandler(ISharedLessonDbContext context)
+    public UpdateUserAccessTokenCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<User> Handle(UpdateUserVerificationTokenCommand request, CancellationToken cancellationToken)
+    public async Task<User> Handle(UpdateUserAccessTokenCommand request, CancellationToken cancellationToken)
     {
         var user = await _context.Users
             .FirstOrDefaultAsync(u => u.UserId == request.UserId, cancellationToken);

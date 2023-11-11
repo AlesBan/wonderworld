@@ -72,17 +72,46 @@ public class UserHelper : IUserHelper
         return userProfileDto;
     }
 
-    public string CreateVerificationCode()
+    public string GenerateVerificationCode()
     {
         var random = new Random();
-        var verificationCode = string.Empty;
+        var verificationCodeBuilder = new StringBuilder();
 
-        for (int i = 0; i < 6; i++)
+        for (var i = 0; i < 6; i++)
         {
-            verificationCode += random.Next(0, 10); // Генерация случайной цифры от 0 до 9
+            verificationCodeBuilder.Append(random.Next(0, 10));
         }
 
-        return verificationCode;
+        return verificationCodeBuilder.ToString();
+    }
+
+    public void CheckResetTokenExpiration(User user)
+    {
+        if (user.ResetTokenExpires < DateTime.Now)
+        {
+            throw new ResetTokenHasExpiredException(user.UserId, user.PasswordResetToken ?? "");
+        }
+    }
+
+    public string GeneratePasswordResetCode()
+    {
+        var random = new Random();
+        var verificationCodeBuilder = new StringBuilder();
+
+        for (var i = 0; i < 6; i++)
+        {
+            verificationCodeBuilder.Append(random.Next(0, 10));
+        }
+
+        return verificationCodeBuilder.ToString();
+    }
+
+    public void CheckResetPasswordCode(User user, string code)
+    {
+        if (user.PasswordResetCode != code)
+        {
+            throw new InvalidResetPasswordCodeException();
+        }
     }
 
     private static Task<List<ClassProfileDto>> GetClassProfileDtos(IEnumerable<Class> classes)

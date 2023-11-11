@@ -1,8 +1,6 @@
 using MailKit.Security;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
-using Wonderworld.API.Constants;
-using Wonderworld.Domain.Entities.Main;
 using Wonderworld.Infrastructure.Constants;
 
 namespace Wonderworld.Infrastructure.Services.EmailHandlerService;
@@ -16,10 +14,10 @@ public class EmailHandlerService : IEmailHandlerService
         _configuration = configuration;
     }
 
-    public async Task SendVerificationEmail(User user, string verificationCode)
+    public async Task SendVerificationEmail(string userEmail, string verificationCode)
     {
         var message = EmailConstants.EmailConfirmationMessage + verificationCode;
-        await SendAsync(_configuration, user.Email,
+        await SendAsync(_configuration, userEmail,
             EmailConstants.EmailConfirmationSubject,
             message);
     }
@@ -42,5 +40,13 @@ public class EmailHandlerService : IEmailHandlerService
         await client.AuthenticateAsync(managerEmail, managerPassword);
         await client.SendAsync(email);
         await client.DisconnectAsync(true);
+    }
+
+    public async Task SendResetPasswordEmail(string userEmail, string resetPasswordCode)
+    {
+        var message = EmailConstants.EmailResetPasswordMessage + resetPasswordCode;
+        await SendAsync(_configuration, userEmail,
+            EmailConstants.EmailResetPasswordSubject,
+            message);
     }
 }
