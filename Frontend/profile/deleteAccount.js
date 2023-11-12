@@ -1,13 +1,8 @@
-async function postChangePassword() {
-    const url = 'http://localhost:7280/api/edituser/password';
-    const data = {
-        Password: document.getElementById("new-password").value,
-    };
-
-    console.log(JSON.stringify(data));
+async function deleteUser() {
+    const url = 'http://localhost:7280/api/user/delete-user';
 
     fetch(url, {
-        method: 'PUT',
+        method: 'DELETE',
         referrerPolicy: "origin-when-cross-origin",
         headers: {
             'content-type': 'application/json; charset=utf-8',
@@ -16,7 +11,6 @@ async function postChangePassword() {
             'Server': "localhost",
             'Authorization':`Bearer ${localStorage.getItem('verificationToken')}`
         },
-        body: JSON.stringify(data)
     })
         .then(response => {
             if (response.ok) {

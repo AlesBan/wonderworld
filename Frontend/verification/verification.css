@@ -1,0 +1,74 @@
+.verification-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title-and-subtle {
+    text-align: center;
+}
+
+.title {
+    font-family: 'Georgia', serif;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 44px;
+    color: #252E37;
+}
+
+.label-and-CTA {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+
+}
+
+.label {
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #0C0F12;
+    width: 384px;
+    margin-top: 12px;
+}
+
+
+.first-name-input{
+    font-family: 'Inter', serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8B949D;
+    width: 384px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #D8DBDE;
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.first-name-input:focus {
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #216C5E;
+    box-shadow: 0 0 0 4px #CBDFDC, 0 1px 2px 0 rgba(12, 15, 18, 0.05);
+}
+
+.primary-button {
+    margin: 24px 0 0 0;
+    width: 384px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid #FFFFFF;
+    line-height: 24px;
+    background-color: #216C5E;
+    font-family: 'Inter', serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
+    cursor: pointer;
+}

@@ -16,7 +16,7 @@ async function postChangeProfessionalDetails() {
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            'Authorization': `Bearer ${localStorage.getItem('verificationToken')}`
         },
         body: JSON.stringify(data)
     })

@@ -305,7 +305,7 @@ loginAndSecurityBtn.addEventListener("click",  () => {
                 <span>You will not be able to restore your account</span>
             </div>
             <div class="delete">
-                <span class="delete-btn">Delete account</span>
+                <button onclick="deleteUser()" class="delete-btn">Delete account</button>
             </div>
         </div>
         </div>

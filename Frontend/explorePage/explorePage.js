@@ -293,10 +293,32 @@ function generateItems(container, items, filterValues) {
 }
 
 function updateSelectedValues() {
-    const selectedTags = dropdowns.reduce((tags, dropdown) => {
-        return tags.concat(dropdown.filterValues.map(value => `<div class="tag">${value}</div>`));
-    }, []);
-    filterValuesDiv.innerHTML = selectedTags.join('');
+    filterValuesDiv.innerHTML = "";
+
+    dropdowns.forEach((dropdown) => {
+        const { filterValues } = dropdown;
+
+        filterValues.forEach((value) => {
+            const tagElement = document.createElement("div");
+            tagElement.classList.add("tag");
+            tagElement.textContent = value;
+
+            const deleteTag = document.createElement("span");
+            deleteTag.classList.add("delete-tag");
+            deleteTag.innerHTML = "&times;";
+
+            deleteTag.addEventListener("click", () => {
+                const index = filterValues.indexOf(value);
+                if (index !== -1) {
+                    filterValues.splice(index, 1);
+                    updateSelectedValues(); // Обновление выбранных значений
+                }
+            });
+
+            tagElement.appendChild(deleteTag);
+            filterValuesDiv.appendChild(tagElement);
+        });
+    });
 }
 
 const applyButtons = document.querySelectorAll('.applyButton');
@@ -306,12 +328,5 @@ applyButtons.forEach(applyButton => {
     });
 });
 
-// const clearButtons = document.querySelectorAll('.clearButton');
-// clearButtons.forEach(clearButton => {
-//     clearButton.addEventListener('click', () => {
-//         const dropdownIndex = Array.from(clearButton.parentNode.parentNode.children).indexOf(clearButton.parentNode);
-//         const { filterValues } = dropdowns[dropdownIndex];
-//         filterValues.length = 0;
-//         updateSelectedValues();
-//     });
-// });
+
+

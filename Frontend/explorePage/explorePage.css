@@ -209,7 +209,9 @@
     padding: 4px 10px;
     background-color: #ECEDEF;
     border-radius: 100px;
-
+    display: flex;
+    gap: 5px;
+;
 }
 
 .section {
