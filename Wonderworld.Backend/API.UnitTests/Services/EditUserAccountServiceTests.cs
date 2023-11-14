@@ -7,6 +7,7 @@ using Wonderworld.Application.Common.Exceptions.Database;
 using Wonderworld.Application.Dtos.InstitutionDtos;
 using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos;
+using Wonderworld.Application.Dtos.UserDtos.Update;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplineHandlers.Commands.UpdateUserDisciplines;
 using Wonderworld.Application.Handlers.EntityConnectionHandlers.UserDisciplinesHandlers.Commands.CreateUserDisciplines;

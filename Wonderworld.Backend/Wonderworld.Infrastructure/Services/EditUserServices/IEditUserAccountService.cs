@@ -1,6 +1,7 @@
 using MediatR;
 using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos;
+using Wonderworld.Application.Dtos.UserDtos.Update;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 
 namespace Wonderworld.Infrastructure.Services.EditUserServices;

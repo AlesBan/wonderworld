@@ -2,6 +2,7 @@ using MediatR;
 using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos;
+using Wonderworld.Application.Dtos.UserDtos.Update;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdatePersonalInfo;
 using Wonderworld.Application.Handlers.EntityHandlers.UserHandlers.Commands.UpdateProfessionalInfo;
