@@ -62,6 +62,8 @@ function validatePassword(password) {
 }
 
 async function postData() {
+    const emailForVerification =  document.getElementById("email").value;
+    localStorage.setItem('emailVerif', emailForVerification)
 
     const url = 'http://localhost:7280/api/user/register';
     const password = document.getElementById("password").value;
@@ -99,10 +101,11 @@ async function postData() {
         .then(responseData => {
             // const accessToken = responseData.token;
             // document.cookie = `accessToken=${accessToken}`;
-            localStorage.setItem('accessToken', responseData.token);
-            console.log(responseData.token);
+            localStorage.setItem('accessToken', responseData.value.accessToken);
+            console.log(responseData.value.accessToken);
+            console.log(responseData)
 
-            window.location.href = "../../createAccount/createAccount.html";
+            window.location.href = "../../verification/verification.html";
         })
         .catch(error => {
             console.log(error);

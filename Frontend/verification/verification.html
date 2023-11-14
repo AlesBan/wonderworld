@@ -10,7 +10,7 @@
 <div class="header">
     <div class="header-left">
         <div class="company-logo">
-            <img src="../images/CompanyLogo.svg" alt="">
+            <img src="../images/hiClass_logo.svg" alt="">
         </div>
         <div class="menu">
             <div class="menu-text">Discover</div>
@@ -31,20 +31,22 @@
     <div class="title-and-subtle">
         <div class="title">Verify your email address</div>
         <div class="label-and-CTA">
-            <div class="label">We’ve sent a verification code to ${lisa} ${@wonderworld.com}.</div>
+            <div class="label" id="emailLabel"></div>
         </div>
     </div>
     <div class="content-body">
         <div class="inputs">
             <div class="first-name">
                 <div class="">
-                    <label><input class="first-name-input" id="" type="text"
+                    <label><input class="first-name-input" id="verificationCode" type="text"
                                   placeholder="Enter your code from email"></label>
                 </div>
             </div>
         </div>
-        <button class="primary-button">Continue</button>
+        <button onclick="verifyEmail()" class="primary-button">Continue</button>
     </div>
 </div>
 </body>
+<script src="../registration/signUp/signUp.js"></script>
+<script src="verification.js"></script>
 </html>

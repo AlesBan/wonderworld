@@ -49,14 +49,17 @@ async function postLoginData() {
                 return response.json();
             } else if (response.status === 401) {
                 window.location.href = "../../createAccount/createAccount.html"
-            } else {
+            }
+            else if (response.status === 403) {
+                window.location.href = "../../verification/verification.html"
+            }else {
                 throw new Error('Произошла ошибка при выполнении запроса.');
             }
         })
         .then(responseData => {
             console.log(responseData);
-            localStorage.setItem('verificationToken', responseData.value.verificationToken);
-            console.log(responseData.value.verificationToken);
+            localStorage.setItem('accessToken', responseData.value.accessToken);
+            console.log(responseData.value.accessToken);
             localStorage.setItem('classSenderId', responseData.value.userId);
             console.log(responseData.value.userId);
             window.location.href = "../../explorePage/explorePage.html";

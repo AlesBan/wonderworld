@@ -47,7 +47,7 @@ async function getUserProfile() {
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization': `Bearer ${localStorage.getItem('verificationToken')}`
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         },
     });
 
@@ -62,6 +62,18 @@ async function getUserProfile() {
         document.querySelector(".language").textContent = `${responseData.value.languageTitles}`;
         document.querySelector(".location-text").textContent = `${responseData.value.cityTitle + ' ' + responseData.value.countryTitle}`;
         document.querySelector("#establishment").textContent = `${responseData.value.institution.title}`;
+
+        const isATeacher = responseData.value.isATeacher;
+        const statusText = document.querySelector(".status-text");
+
+        if (isATeacher === true) {
+            statusText.textContent = 'Teacher';
+        } else {
+            statusText.textContent = 'Expert';
+        }
+
+
+
 
         const getSubjects= `${responseData.value.disciplineTitles}`
         const subjectsOutput = document.querySelector('.tags');

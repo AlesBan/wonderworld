@@ -19,7 +19,7 @@ async function postChangeInstitution() {
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization': `Bearer ${localStorage.getItem('verificationToken')}`
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
         },
         body: JSON.stringify(data)
     })

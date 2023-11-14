@@ -10,7 +10,8 @@ async function postCreateClass() {
         GradeNumber: grades,
         PhotoUrl: "photoUrl",
         LanguageTitles:  [
-            localStorage.getItem('languages')
+            // localStorage.getItem('languages')
+            "English"
         ],
         DisciplineTitles: ["Geography"]
     };
@@ -25,7 +26,7 @@ async function postCreateClass() {
             'Transfer-Encoding': 'chunked',
             'Data': new Date().toLocaleString(),
             'Server': "localhost",
-            'Authorization':`Bearer ${localStorage.getItem('verificationToken')}`
+            'Authorization':`Bearer ${localStorage.getItem('accessToken')}`
         },
         body: JSON.stringify(data)
     })

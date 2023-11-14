@@ -1,8 +1,13 @@
 function chooseInstitution() {
-    const inputValueLocation = document.querySelector('#locationValue').value;
+    console.log(localStorage.getItem('teacher').replace(/"/g, ''))
+    console.log(localStorage.getItem('expert').replace(/"/g, ''))
+
+    const inputValueCountry = document.querySelector('#countryInput').value;
+    localStorage.setItem('locationCountry', inputValueCountry);
+    const inputValueCity = document.querySelector('#cityInput').value;
+    localStorage.setItem('locationCity', inputValueCity);
 
 
-    localStorage.setItem('location', inputValueLocation);
 
     let institution = document.createElement('div');
     document.body.append(institution)
