@@ -1,4 +1,5 @@
 using MediatR;
+using Wonderworld.Application.Common.Exceptions;
 using Wonderworld.Application.Dtos.UpdateDtos;
 using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
@@ -136,7 +137,7 @@ public class EditUserAccountService : IEditUserAccountService
                     UserId = user.UserId,
                     Password = passwordRequestDto.Password
                 }),
-            _ => throw new Exception("Something went wrong")
+            _ => throw new UnknownTypeException()
         };
     }
 }
