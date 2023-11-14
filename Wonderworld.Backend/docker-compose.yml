@@ -4,35 +4,35 @@ networks:
   dev:
     driver: bridge
 services:
-  wonderworld:
-    image: alesban/wonderworldbackend
-    container_name: wonderworldbackend
+  hiclass:
+    image: alesban/hiclassbackend
+    container_name: hiclassbackend
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "7280:80"
     depends_on:
-      - "wonderworld-db"
+      - "hiclass-db"
     networks:
       - dev
     restart: always
     environment:
-      - ConnectionStrings__DefaultConnection=Server=wonderworld-db;Port=5432;Database=wonderworld;User Id=postgres;Password=postgres123;Integrated Security=true;Pooling=true;
-  wonderworld-db:
+      - ConnectionStrings__DefaultConnection=Server=hiclass;Port=5432;Database=hiclass-db;User Id=hipost;Password=post!23Hi;Integrated Security=true;Pooling=true;
+  hiclass-db:
     image: postgres
-    container_name: wonderworld-db
+    container_name: hiclass-db
     restart: always
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres123
-      - POSTGRES_DB=wonderworld
+      - POSTGRES_USER=hipost
+      - POSTGRES_PASSWORD=post!23Hi
+      - POSTGRES_DB=hiclass-db
     networks:
       - dev
     volumes:
-      - wonderworld-data:/var/lib/postgresql/data
+      - hiclass-data:/var/lib/postgresql/data
 volumes:
-  wonderworld-data:
+  hiclass-data:
       
