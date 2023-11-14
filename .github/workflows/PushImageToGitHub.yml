@@ -20,4 +20,4 @@ jobs:
         with:
           context: Wonderworld.Backend/
           push: true
-          tags: alesban/wonderworldbackend:latest
+          tags: alesban/hiclassbackend:latest
