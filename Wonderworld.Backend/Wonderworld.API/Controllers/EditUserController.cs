@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
 using Wonderworld.API.Helpers;
 using Wonderworld.Application.Dtos.UpdateDtos;
+using Wonderworld.Application.Dtos.UserDtos.Update;
 using Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
 using Wonderworld.Infrastructure.Services.EditUserServices;
 

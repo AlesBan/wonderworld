@@ -1,4 +1,4 @@
-namespace Wonderworld.Application.Dtos.UserDtos.UpdateDtos;
+namespace Wonderworld.Application.Dtos.UserDtos.Update;
 
 public class UpdatePersonalInfoRequestDto
 {

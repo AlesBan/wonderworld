@@ -22,7 +22,6 @@ public class SearchController : BaseController
         _searchService = searchService;
     }
 
-
     [HttpGet("search-request")]
     public async Task<SearchResponseDto> GetTeachersAndClassesDependingOnSearchRequest(
         [FromQuery] SearchRequestDto searchRequest)

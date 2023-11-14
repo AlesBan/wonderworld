@@ -22,7 +22,6 @@ public class ClassService : IClassService
     public async Task<ClassProfileDto> CreateClass(Guid userId, CreateClassRequestDto requestClassDto,
         IMediator mediator)
     {
-        
         var disciplines = await mediator.Send(new GetDisciplinesByTitlesQuery(requestClassDto.DisciplineTitles),
             CancellationToken.None);
         var languages = await mediator.Send(new GetLanguagesByTitlesQuery(requestClassDto.LanguageTitles),

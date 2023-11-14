@@ -19,11 +19,6 @@ services:
     restart: always
     environment:
       - ConnectionStrings__DefaultConnection=Server=wonderworld-db;Port=5432;Database=wonderworld;User Id=postgres;Password=postgres123;Integrated Security=true;Pooling=true;
-    secrets:
-      - api-secrets
-    volumes:
-      - $APPDATA/Microsoft/UserSecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
-      - $HOME/.microsoft/usersecrets/$USER_SECRETS_ID:/root/.microsoft/usersecrets/$USER_SECRETS_ID
   wonderworld-db:
     image: postgres
     container_name: wonderworld-db
@@ -40,8 +35,4 @@ services:
       - wonderworld-data:/var/lib/postgresql/data
 volumes:
   wonderworld-data:
-    
-secrets:
-  api-secrets:
-    file: api-secrets.json
       
