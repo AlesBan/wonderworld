@@ -1,6 +1,6 @@
 namespace Wonderworld.Application.Dtos;
 
-public class CountryLocationsDto
+public class ExistingCountriesDto
 {
     public List<string> CoutryTitles { get; set; }
 }
