@@ -71,6 +71,7 @@ public class UserController : BaseController
         return ResponseHelper.GetOkResult();
     }
 
+    [Authorize]
     [HttpPost("reset-password")]
     public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequestDto requestDto)
     {

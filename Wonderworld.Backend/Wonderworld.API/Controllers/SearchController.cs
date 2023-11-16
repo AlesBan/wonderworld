@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
+using Wonderworld.Application.Dtos;
 using Wonderworld.Application.Dtos.SearchDtos;
-using Wonderworld.Application.Interfaces.Services;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
+using Wonderworld.Infrastructure.Services.SearchDataService;
 using Wonderworld.Infrastructure.Services.SearchService;
 
 namespace Wonderworld.API.Controllers;
@@ -15,11 +16,14 @@ public class SearchController : BaseController
 {
     private readonly IDefaultSearchService _defaultSearchDataService;
     private readonly ISearchService _searchService;
+    private readonly ISearchDataService _searchDataService;
 
-    public SearchController(IDefaultSearchService defaultSearchDataService, ISearchService searchService)
+    public SearchController(IDefaultSearchService defaultSearchDataService, ISearchService searchService,
+        ISearchDataService searchDataService)
     {
         _defaultSearchDataService = defaultSearchDataService;
         _searchService = searchService;
+        _searchDataService = searchDataService;
     }
 
     [HttpGet("search-request")]
@@ -33,5 +37,13 @@ public class SearchController : BaseController
     public async Task<DefaultSearchResponseDto> GetTeachersAndClassesDependingOnDefaultSearchRequest()
     {
         return await _defaultSearchDataService.GetDefaultTeacherAndClassProfiles(UserId, Mediator);
+    }
+
+    [HttpGet("all-country-locations")]
+    public async Task<ExistingCountriesDto> GetAllCountryLocations()
+    {
+        var result = await _searchDataService.GetAllCounties(Mediator);
+
+        return result;
     }
 }

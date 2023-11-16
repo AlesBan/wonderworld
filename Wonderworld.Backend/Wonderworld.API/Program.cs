@@ -18,6 +18,7 @@ using Wonderworld.Infrastructure.Services.EditUserServices;
 using Wonderworld.Infrastructure.Services.EmailHandlerService;
 using Wonderworld.Infrastructure.Services.ExternalServices;
 using Wonderworld.Infrastructure.Services.InvitationServices;
+using Wonderworld.Infrastructure.Services.SearchDataService;
 using Wonderworld.Infrastructure.Services.SearchService;
 using Wonderworld.Persistence;
 
@@ -111,6 +112,7 @@ builder.Services.AddScoped<IOrganizationSearchService, OrganizationSearchService
 builder.Services.AddScoped<IYandexAccountService, YandexAccountService>();
 builder.Services.AddScoped<IEmailHandlerService, EmailHandlerService>();
 builder.Services.AddScoped<IInvitationService, InvitationService>();
+builder.Services.AddScoped<ISearchDataService, SearchDataService>();
 
 builder.Services.AddScoped<ITokenHelper, TokenHelper>();
 builder.Services.AddScoped<IUserHelper, UserHelper>();
