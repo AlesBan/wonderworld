@@ -1,7 +1,5 @@
-using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Wonderworld.Application.Dtos.UserDtos;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Main;
 
@@ -12,12 +10,12 @@ public class GetUserListBySearchRequestCommandHandler : IRequestHandler<
 {
     private readonly ISharedLessonDbContext _context;
 
-    public GetUserListBySearchRequestCommandHandler(ISharedLessonDbContext context, IMapper mapper)
+    public GetUserListBySearchRequestCommandHandler(ISharedLessonDbContext context)
     {
         _context = context;
     }
 
-    public async Task<IEnumerable<User>> Handle(GetUserListBySearchRequestCommand request,
+    public Task<IEnumerable<User>> Handle(GetUserListBySearchRequestCommand request,
         CancellationToken cancellationToken)
     {
         var searchRequest = request.SearchRequest;
@@ -25,6 +23,7 @@ public class GetUserListBySearchRequestCommandHandler : IRequestHandler<
         var gradeNumbers = searchRequest.Grades;
         var disciplineTitles = searchRequest.Disciplines;
         var languageTitles = searchRequest.Languages;
+        var userIdToExclude = searchRequest.UserId;
 
         var users = _context.Users
             .Include(u => u.City)
@@ -37,11 +36,12 @@ public class GetUserListBySearchRequestCommandHandler : IRequestHandler<
             .Include(u => u.UserLanguages).ThenInclude(ul => ul.Language)
             .Include(u => u.UserGrades).ThenInclude(ug => ug.Grade)
             .Where(u =>
-                u.Country != null && countryTitles.Contains(u.Country.Title) ||
-                u.UserGrades.Any(ug => gradeNumbers.Contains(ug.Grade.GradeNumber.ToString())) ||
-                u.UserDisciplines.Any(d => disciplineTitles.Contains(d.Discipline.Title)) ||
-                u.UserLanguages.Any(l => languageTitles.Contains(l.Language.Title)));
+                u.UserId != userIdToExclude && (
+                    u.Country != null && countryTitles.Contains(u.Country.Title) ||
+                    u.UserGrades.Any(ug => gradeNumbers.Contains(ug.Grade.GradeNumber.ToString())) ||
+                    u.UserDisciplines.Any(d => disciplineTitles.Contains(d.Discipline.Title)) ||
+                    u.UserLanguages.Any(l => languageTitles.Contains(l.Language.Title))));
 
-        return users;
+        return Task.FromResult<IEnumerable<User>>(users);
     }
 }

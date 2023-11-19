@@ -25,6 +25,7 @@ public class UpdateUserAccessTokenCommandHandler : IRequestHandler<UpdateUserAcc
 
         user.AccessToken = request.VerificationToken;
 
+        _context.Users.Attach(user).State = EntityState.Modified;
         await _context.SaveChangesAsync(cancellationToken);
 
         var verifiedUser = _context
@@ -39,7 +40,7 @@ public class UpdateUserAccessTokenCommandHandler : IRequestHandler<UpdateUserAcc
             .Include(u => u.UserGrades)
             .ThenInclude(ug => ug.Grade)
             .FirstOrDefault(u => u.UserId == request.UserId);
-        
+
         return verifiedUser!;
     }
 }

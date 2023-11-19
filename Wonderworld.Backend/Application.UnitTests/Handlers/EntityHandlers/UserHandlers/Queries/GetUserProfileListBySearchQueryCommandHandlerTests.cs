@@ -38,7 +38,7 @@ public class GetUserProfileListBySearchQueryCommandHandlerTests : TestCommonBase
 
         var mapper = mapperConfiguration.CreateMapper();
 
-        var handler = new GetUserListBySearchRequestCommandHandler(Context, mapper);
+        var handler = new GetUserListBySearchRequestCommandHandler(Context);
 
         // Act
         var result = await handler.Handle(command, cancellationToken);
