@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Wonderworld.Application.Helpers;
 using Wonderworld.Domain.Entities.Education;
 using Wonderworld.Domain.Entities.Job;
 using Wonderworld.Domain.Entities.Main;
@@ -42,10 +44,10 @@ public static class ModelBuilderExtensions
         modelBuilder.ApplyConfiguration(new InstitutionTypeInstitutionConfiguration());
     }
 
-    public static void SeedingDefaultData(this ModelBuilder modelBuilder)
+    public static void SeedingDefaultData(this ModelBuilder modelBuilder, IConfiguration? configuration)
     {
         modelBuilder.SeedingGrades();
-        modelBuilder.SeedingDisciplines();
+        modelBuilder.SeedingDisciplines(configuration);
         modelBuilder.SeedingLanguages();
         modelBuilder.SeedingRoles();
         modelBuilder.SeedingEstablishmentTypes();
@@ -65,15 +67,17 @@ public static class ModelBuilderExtensions
             .HasData(grades);
     }
 
-    private static void SeedingDisciplines(this ModelBuilder modelBuilder)
+    private static void SeedingDisciplines(this ModelBuilder modelBuilder, IConfiguration configuration)
     {
-        modelBuilder.Entity<Discipline>().HasData(((DisciplineType[])
-            Enum.GetValues(typeof(DisciplineType))).Select(d =>
-            new Discipline
-            {
-                DisciplineId = Guid.NewGuid(),
-                Title = d.ToString()
-            }).ToList());
+        var filePath = configuration["DefaultData:DisciplinesFilePath"];
+        var disciplines = FileHelper.GetLines(filePath);
+        modelBuilder.Entity<Discipline>().HasData(disciplines
+            .Select(d =>
+                new Discipline
+                {
+                    DisciplineId = Guid.NewGuid(),
+                    Title = d.ToString()
+                }).ToList());
     }
 
     private static void SeedingLanguages(this ModelBuilder modelBuilder)

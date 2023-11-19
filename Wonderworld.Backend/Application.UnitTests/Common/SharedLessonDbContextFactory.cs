@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Job;
@@ -44,13 +45,20 @@ public class SharedLessonDbContextFactory
     public static readonly Guid ReviewBId = Guid.NewGuid();
     public static readonly Guid FeedbackForDeleteId = Guid.NewGuid();
 
+    private static IConfiguration? _configuration;
+
+    public SharedLessonDbContextFactory(IConfiguration? configuration)
+    {
+        _configuration = configuration;
+    }
+
     public static SharedLessonDbContext Create()
     {
         var options = new DbContextOptionsBuilder<SharedLessonDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
-
-        var context = new SharedLessonDbContext(options);
+        
+        var context = new SharedLessonDbContext(options, _configuration);
         context.Database.EnsureCreated();
 
         AppendCountries(context);

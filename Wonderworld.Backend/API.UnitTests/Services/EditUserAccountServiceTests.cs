@@ -376,9 +376,9 @@ public class EditUserAccountServiceTests : TestCommonBase
         };
         var disciplineTitles = new List<string>()
         {
-            DisciplineType.Chemistry.ToString(),
-            DisciplineType.Biology.ToString(),
-            DisciplineType.Physics.ToString()
+            "Chemistry",
+            "Biology",
+            "Physics"
         };
         var gradeNList = new List<int>()
         {
