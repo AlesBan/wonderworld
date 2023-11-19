@@ -22,7 +22,7 @@ public class DefaultSearchService : IDefaultSearchService
     {
         var user = await GetUserById(userId, mediator);
         var searchRequest = await CreateDefaultSearchRequestDto(user);
-        var userList = await GetUserListByDefaultSearchRequest(searchRequest, mediator);
+        var userList = await GetUserListByDefaultSearchResponse(searchRequest, mediator);
         var defaultSearchResponseDto = await GetDefaultSearchResponseDto(user, userList);
         return defaultSearchResponseDto;
     }
@@ -45,7 +45,7 @@ public class DefaultSearchService : IDefaultSearchService
         });
     }
 
-    private static async Task<IEnumerable<User>> GetUserListByDefaultSearchRequest(
+    private static async Task<IEnumerable<User>> GetUserListByDefaultSearchResponse(
         DefaultSearchCommandDto searchRequest,
         IMediator mediator)
     {
@@ -62,22 +62,31 @@ public class DefaultSearchService : IDefaultSearchService
     private async Task<DefaultSearchResponseDto> GetDefaultSearchResponseDto(User user, IEnumerable<User> userList)
     {
         var userProfileList = await GetUserProfileList(userList);
-        var teacherProfilesByCountry = GetProfilesByCountry(user.Country.Title, userProfileList, isTeacher: true);
-        var expertProfilesByCountry = GetProfilesByCountry(user.Country.Title, userProfileList, isTeacher: false);
+        var userDisciplineTitles = user.UserDisciplines
+            .Select(ud => ud.Discipline.Title).ToList();
+
+        var userProfileDtos = userProfileList.ToList();
+        
+        var teacherProfilesByCountry = GetProfilesByCountry(user.Country.Title, userProfileDtos, isTeacher: true);
+        var expertProfilesByCountry = GetProfilesByCountry(user.Country.Title, userProfileDtos, isTeacher: false);
         var teacherProfilesByDisciplines =
-            GetProfilesByDisciplines(user.UserDisciplines.Select(ud => ud.Discipline.Title), userProfileList,
+            GetProfilesByDisciplines(user.UserDisciplines.Select(ud => ud.Discipline.Title), userProfileDtos,
                 isTeacher: true);
         var expertProfilesByDisciplines =
-            GetProfilesByDisciplines(user.UserDisciplines.Select(ud => ud.Discipline.Title), userProfileList,
+            GetProfilesByDisciplines(user.UserDisciplines.Select(ud => ud.Discipline.Title), userProfileDtos,
                 isTeacher: false);
-        var classProfilesByCountry = GetClassProfiles(teacherProfilesByCountry).ToList();
-        var classProfilesByDisciplines = GetClassProfiles(teacherProfilesByDisciplines).ToList();
+        
+        var profilesByCountry = teacherProfilesByCountry.ToList();
+        var classProfilesByCountry = GetClassProfiles(profilesByCountry).ToList();
+        
+        var profilesByDisciplines = teacherProfilesByDisciplines.ToList();
+        var classProfilesByDisciplines = GetClassProfiles(profilesByDisciplines, userDisciplineTitles).ToList();
 
         return new DefaultSearchResponseDto
         {
-            TeacherProfilesByCountry = teacherProfilesByCountry,
+            TeacherProfilesByCountry = profilesByCountry,
             ExpertProfilesByCountry = expertProfilesByCountry,
-            TeacherProfilesByDisciplines = teacherProfilesByDisciplines,
+            TeacherProfilesByDisciplines = profilesByDisciplines,
             ExpertProfilesByDisciplines = expertProfilesByDisciplines,
             ClassProfilesByCountry = classProfilesByCountry,
             ClassProfilesByDisciplines = classProfilesByDisciplines
@@ -124,5 +133,26 @@ public class DefaultSearchService : IDefaultSearchService
                 Disciplines = c.Disciplines,
                 PhotoUrl = c.PhotoUrl!
             });
+    }
+    
+    private static IEnumerable<ClassProfileDto> GetClassProfiles(IEnumerable<UserProfileDto> userProfileList, 
+        IEnumerable<string> disciplineIds)
+    {
+        return userProfileList
+            .Select(c => c.ClasseDtos)
+            .SelectMany(cl => cl)
+            .Select(c => new ClassProfileDto
+            {
+                ClassId = c.ClassId,
+                Title = c.Title,
+                UserFullName = c.UserFullName,
+                UserRating = c.UserRating,
+                Grade = c.Grade,
+                Languages = c.Languages,
+                Disciplines = c.Disciplines,
+                PhotoUrl = c.PhotoUrl!
+            })
+            .Where(c=>
+                c.Disciplines.Any(disciplineIds.Contains));
     }
 }

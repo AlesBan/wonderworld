@@ -36,10 +36,11 @@ public class GetUserListByDefaultSearchRequestCommandHandler : IRequestHandler<
             .Include(u => u.UserDisciplines).ThenInclude(ud => ud.Discipline)
             .Include(u => u.UserLanguages).ThenInclude(ul => ul.Language)
             .Include(u => u.UserGrades).ThenInclude(ug => ug.Grade)
-            .Where(u => u.Country != null && u.CountryId == countryId)
-            .Where(u => u.UserDisciplines.Any(ud =>
-                disciplineIds.Contains(ud.Discipline.DisciplineId)))
-            .Where(u => u.UserId != userIdToExclude)
+            .Where(u =>
+                u.UserId != userIdToExclude && (
+                    u.Country != null && u.CountryId == countryId ||
+                    u.UserDisciplines.Any(ud =>
+                        disciplineIds.Contains(ud.Discipline.DisciplineId))))
             .ToListAsync(cancellationToken: cancellationToken);
 
         return users;

@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Wonderworld.API.Filters;
 using Wonderworld.Application.Dtos;
 using Wonderworld.Application.Dtos.SearchDtos;
+using Wonderworld.Infrastructure.Services.DataBaseDataService;
 using Wonderworld.Infrastructure.Services.DefaultDataServices;
-using Wonderworld.Infrastructure.Services.SearchDataService;
 using Wonderworld.Infrastructure.Services.SearchService;
 
 namespace Wonderworld.API.Controllers;
@@ -16,10 +16,10 @@ public class SearchController : BaseController
 {
     private readonly IDefaultSearchService _defaultSearchDataService;
     private readonly ISearchService _searchService;
-    private readonly ISearchDataService _searchDataService;
+    private readonly IDataBaseDataService _searchDataService;
 
     public SearchController(IDefaultSearchService defaultSearchDataService, ISearchService searchService,
-        ISearchDataService searchDataService)
+        IDataBaseDataService searchDataService)
     {
         _defaultSearchDataService = defaultSearchDataService;
         _searchService = searchService;

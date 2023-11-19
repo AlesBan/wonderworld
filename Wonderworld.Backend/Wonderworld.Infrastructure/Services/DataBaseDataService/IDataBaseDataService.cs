@@ -1,9 +1,9 @@
 using MediatR;
 using Wonderworld.Application.Dtos;
 
-namespace Wonderworld.Infrastructure.Services.SearchDataService;
+namespace Wonderworld.Infrastructure.Services.DataBaseDataService;
 
-public interface ISearchDataService
+public interface IDataBaseDataService
 {
     Task<ExistingCountriesDto> GetAllCounties(IMediator mediator);
 }
