@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Wonderworld.Application.Interfaces;
 using Wonderworld.Domain.Entities.Communication;
 using Wonderworld.Domain.Entities.Education;
@@ -11,10 +12,14 @@ namespace Wonderworld.Persistence;
 
 public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
 {
-    public SharedLessonDbContext(DbContextOptions options) :
+    private readonly IConfiguration _configuration;
+
+    public SharedLessonDbContext(DbContextOptions options, IConfiguration configuration) :
         base(options)
     {
+        _configuration = configuration;
     }
+
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
     public DbSet<Class> Classes { get; set; }
@@ -41,6 +46,6 @@ public class SharedLessonDbContext : DbContext, ISharedLessonDbContext
 
         modelBuilder.AppendConfigurations();
 
-        modelBuilder.SeedingDefaultData();
+        modelBuilder.SeedingDefaultData(_configuration);
     }
 }
