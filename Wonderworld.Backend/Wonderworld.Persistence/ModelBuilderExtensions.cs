@@ -44,14 +44,14 @@ public static class ModelBuilderExtensions
         modelBuilder.ApplyConfiguration(new InstitutionTypeInstitutionConfiguration());
     }
 
-    // public static void SeedingDefaultData(this ModelBuilder modelBuilder, IConfiguration? configuration)
-    // {
-    //     modelBuilder.SeedingGrades();
-    //     modelBuilder.SeedingDisciplines(configuration);
-    //     modelBuilder.SeedingLanguages();
-    //     modelBuilder.SeedingRoles();
-    //     modelBuilder.SeedingEstablishmentTypes();
-    // }
+    public static void SeedingDefaultData(this ModelBuilder modelBuilder, IConfiguration? configuration)
+    {
+        modelBuilder.SeedingGrades();
+        modelBuilder.SeedingDisciplines(configuration);
+        modelBuilder.SeedingLanguages();
+        modelBuilder.SeedingRoles();
+        modelBuilder.SeedingEstablishmentTypes();
+    }
 
     private static void SeedingGrades(this ModelBuilder modelBuilder)
     {
